@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WarungKu</string>
+    <string name="title_home">Hari Ini</string>
+    <string name="title_sell">Jual Barang</string>
+    <string name="title_stock">Stok Barang</string>
+    <string name="title_cash">Uang (Cash)</string>
+    <string name="title_shopping_list">Daftar Belanja</string>
+</resources>

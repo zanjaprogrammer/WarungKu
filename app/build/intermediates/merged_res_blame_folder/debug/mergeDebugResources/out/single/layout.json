@@ -1,0 +1,54 @@
+[
+    {
+        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/item_product_stock.xml",
+        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/item_product_stock.xml"
+    },
+    {
+        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/item_product_sell.xml",
+        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/item_product_sell.xml"
+    },
+    {
+        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/activity_shopping_list.xml",
+        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_shopping_list.xml"
+    },
+    {
+        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/layout_bottom_sheet_quantity.xml",
+        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/layout_bottom_sheet_quantity.xml"
+    },
+    {
+        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/item_history.xml",
+        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/item_history.xml"
+    },
+    {
+        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/item_shopping.xml",
+        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/item_shopping.xml"
+    },
+    {
+        "merged": "com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/activity_summary.xml",
+        "source": "com.zanjaprogrammer.warungku.app-main-33:/layout/activity_summary.xml"
+    },
+    {
+        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/activity_main.xml",
+        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/activity_history.xml",
+        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_history.xml"
+    },
+    {
+        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/activity_summary.xml",
+        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_summary.xml"
+    },
+    {
+        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/activity_add_product.xml",
+        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_add_product.xml"
+    },
+    {
+        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/activity_stock.xml",
+        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_stock.xml"
+    },
+    {
+        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-mergeDebugResources-30:/layout/activity_sell.xml",
+        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_sell.xml"
+    }
+]

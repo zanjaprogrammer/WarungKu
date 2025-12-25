@@ -1,0 +1,141 @@
+package com.zanjaprogrammer.warungku.viewmodel;
+
+import android.app.Application;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import com.zanjaprogrammer.warungku.data.DataRepository;
+import com.zanjaprogrammer.warungku.data.entity.CashFlow;
+import com.zanjaprogrammer.warungku.data.entity.Product;
+import androidx.lifecycle.MutableLiveData;
+import com.zanjaprogrammer.warungku.data.model.CartItem;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AppViewModel extends AndroidViewModel {
+    private final DataRepository repository;
+    private final LiveData<List<Product>> allProducts;
+    private final LiveData<List<CashFlow>> allHistory;
+
+    private final MutableLiveData<List<CartItem>> cartItems = new MutableLiveData<>(new ArrayList<>());
+    private final MutableLiveData<Double> cartTotal = new MutableLiveData<>(0.0);
+
+    public AppViewModel(Application application) {
+        super(application);
+        repository = new DataRepository(application);
+        allProducts = repository.getAllProducts();
+        allHistory = repository.getAllHistory();
+    }
+
+    public LiveData<List<CartItem>> getCartItems() {
+        return cartItems;
+    }
+
+    public LiveData<Double> getCartTotal() {
+        return cartTotal;
+    }
+
+    public void addToCart(Product product, int quantity) {
+        List<CartItem> current = cartItems.getValue();
+        if (current == null)
+            current = new ArrayList<>();
+
+        boolean found = false;
+        for (CartItem item : current) {
+            if (item.product.id == product.id) {
+                if (item.quantity + quantity <= product.currentStock) {
+                    item.quantity += quantity;
+                    found = true;
+                } else {
+                    // Logic handled by UI usually (show toast)
+                }
+                break;
+            }
+        }
+
+        if (!found) {
+            if (quantity <= product.currentStock) {
+                current.add(new CartItem(product, quantity));
+            }
+        }
+
+        cartItems.setValue(new ArrayList<>(current)); // Force notify
+        calculateTotal();
+    }
+
+    public void removeFromCart(CartItem item) {
+        List<CartItem> current = cartItems.getValue();
+        if (current != null) {
+            current.remove(item);
+            cartItems.setValue(new ArrayList<>(current));
+            calculateTotal();
+        }
+    }
+
+    public void clearCart() {
+        cartItems.setValue(new ArrayList<>());
+        cartTotal.setValue(0.0);
+    }
+
+    private void calculateTotal() {
+        double total = 0;
+        List<CartItem> current = cartItems.getValue();
+        if (current != null) {
+            for (CartItem item : current) {
+                total += item.getSubtotal();
+            }
+        }
+        cartTotal.setValue(total);
+    }
+
+    public void checkout() {
+        List<CartItem> items = cartItems.getValue();
+        if (items != null && !items.isEmpty()) {
+            repository.checkout(items);
+            clearCart();
+        }
+    }
+
+    public LiveData<List<Product>> getAllProducts() {
+        return allProducts;
+    }
+
+    public LiveData<List<CashFlow>> getAllHistory() {
+        return allHistory;
+    }
+
+    public LiveData<Double> getBalance() {
+        return repository.getCurrentBalance();
+    }
+
+    public LiveData<Double> getIncome() {
+        return repository.getTotalIncome();
+    }
+
+    public LiveData<Double> getExpense() {
+        return repository.getTotalExpense();
+    }
+
+    public LiveData<List<Product>> getShoppingList() {
+        return repository.getShoppingList();
+    }
+
+    public void insertProduct(Product product) {
+        repository.insertProduct(product);
+    }
+
+    public void insertCashFlow(CashFlow cashFlow) {
+        repository.insertCashFlow(cashFlow);
+    }
+
+    public void sellProduct(Product product, int quantity) {
+        repository.sellProduct(product, quantity);
+    }
+
+    public void addProductStock(Product product, int quantity) {
+        repository.addProductStock(product, quantity);
+    }
+
+    public void adjustProductStock(Product product, int newStock) {
+        repository.adjustProductStock(product, newStock);
+    }
+}

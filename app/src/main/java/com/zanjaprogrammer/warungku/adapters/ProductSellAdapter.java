@@ -1,0 +1,72 @@
+package com.zanjaprogrammer.warungku.adapters;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import com.zanjaprogrammer.warungku.data.entity.Product;
+import com.zanjaprogrammer.warungku.databinding.ItemProductSellBinding;
+
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+public class ProductSellAdapter extends RecyclerView.Adapter<ProductSellAdapter.ViewHolder> {
+
+    private List<Product> products = new ArrayList<>();
+    private final OnProductClickListener listener;
+    private final NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("id-ID"));
+
+    public interface OnProductClickListener {
+        void onProductClick(Product product);
+
+        void onProductLongClick(Product product);
+    }
+
+    public ProductSellAdapter(OnProductClickListener listener) {
+        this.listener = listener;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+        notifyDataSetChanged();
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemProductSellBinding binding = ItemProductSellBinding.inflate(
+                LayoutInflater.from(parent.getContext()), parent, false);
+        return new ViewHolder(binding);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Product product = products.get(position);
+        holder.binding.tvProductName.setText(product.name);
+        holder.binding.tvProductPrice.setText(formatter.format(product.sellPrice));
+        holder.binding.tvProductStock.setText("Stok: " + product.currentStock);
+
+        holder.itemView.setOnClickListener(v -> listener.onProductClick(product));
+        holder.itemView.setOnLongClickListener(v -> {
+            listener.onProductLongClick(product);
+            return true;
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return products.size();
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        ItemProductSellBinding binding;
+
+        ViewHolder(ItemProductSellBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+    }
+}

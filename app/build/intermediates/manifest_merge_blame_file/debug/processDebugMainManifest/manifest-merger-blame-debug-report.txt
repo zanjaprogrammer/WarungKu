@@ -1,0 +1,115 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.zanjaprogrammer.warungku"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <permission
+11-->[androidx.core:core:1.9.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/1cec98d0b2db29ee20807970971c8043/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
+12        android:name="com.zanjaprogrammer.warungku.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+12-->[androidx.core:core:1.9.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/1cec98d0b2db29ee20807970971c8043/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
+13        android:protectionLevel="signature" />
+13-->[androidx.core:core:1.9.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/1cec98d0b2db29ee20807970971c8043/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
+14
+15    <uses-permission android:name="com.zanjaprogrammer.warungku.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+15-->[androidx.core:core:1.9.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/1cec98d0b2db29ee20807970971c8043/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
+15-->[androidx.core:core:1.9.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/1cec98d0b2db29ee20807970971c8043/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
+16
+17    <application
+17-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:5:5-31:19
+18        android:allowBackup="true"
+18-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:6:9-35
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.9.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/1cec98d0b2db29ee20807970971c8043/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
+20        android:dataExtractionRules="@xml/data_extraction_rules"
+20-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:7:9-65
+21        android:debuggable="true"
+22        android:extractNativeLibs="false"
+23        android:fullBackupContent="@xml/backup_rules"
+23-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:8:9-54
+24        android:icon="@android:drawable/star_on"
+24-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:9:9-49
+25        android:label="@string/app_name"
+25-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:10:9-41
+26        android:roundIcon="@android:drawable/star_on"
+26-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:11:9-54
+27        android:supportsRtl="true"
+27-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:12:9-35
+28        android:theme="@style/Theme.WarungKu" >
+28-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:13:9-46
+29        <activity
+29-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:15:9-22:20
+30            android:name="com.zanjaprogrammer.warungku.MainActivity"
+30-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:16:13-41
+31            android:exported="true" >
+31-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:17:13-36
+32            <intent-filter>
+32-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:18:13-21:29
+33                <action android:name="android.intent.action.MAIN" />
+33-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:19:17-69
+33-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:19:25-66
+34
+35                <category android:name="android.intent.category.LAUNCHER" />
+35-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:20:17-77
+35-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:20:27-74
+36            </intent-filter>
+37        </activity>
+38        <activity android:name="com.zanjaprogrammer.warungku.SellActivity" />
+38-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:23:9-50
+38-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:23:19-47
+39        <activity android:name="com.zanjaprogrammer.warungku.StockActivity" />
+39-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:24:9-51
+39-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:24:19-48
+40        <activity android:name="com.zanjaprogrammer.warungku.AddProductActivity" />
+40-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:25:9-56
+40-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:25:19-53
+41        <activity android:name="com.zanjaprogrammer.warungku.HistoryActivity" />
+41-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:26:9-53
+41-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:26:19-50
+42        <activity android:name="com.zanjaprogrammer.warungku.ShoppingListActivity" />
+42-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:27:9-58
+42-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:27:19-55
+43        <activity
+43-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:28:9-30:39
+44            android:name="com.zanjaprogrammer.warungku.SummaryActivity"
+44-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:29:13-44
+45            android:exported="true" />
+45-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:30:13-36
+46
+47        <service
+47-->[androidx.room:room-runtime:2.5.2] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/c08994a5550ee4c9c0162f1b3dac7e4a/transformed/room-runtime-2.5.2/AndroidManifest.xml:24:9-28:63
+48            android:name="androidx.room.MultiInstanceInvalidationService"
+48-->[androidx.room:room-runtime:2.5.2] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/c08994a5550ee4c9c0162f1b3dac7e4a/transformed/room-runtime-2.5.2/AndroidManifest.xml:25:13-74
+49            android:directBootAware="true"
+49-->[androidx.room:room-runtime:2.5.2] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/c08994a5550ee4c9c0162f1b3dac7e4a/transformed/room-runtime-2.5.2/AndroidManifest.xml:26:13-43
+50            android:exported="false" />
+50-->[androidx.room:room-runtime:2.5.2] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/c08994a5550ee4c9c0162f1b3dac7e4a/transformed/room-runtime-2.5.2/AndroidManifest.xml:27:13-37
+51
+52        <provider
+52-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+53            android:name="androidx.startup.InitializationProvider"
+53-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+54            android:authorities="com.zanjaprogrammer.warungku.androidx-startup"
+54-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+55            android:exported="false" >
+55-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+56            <meta-data
+56-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+57                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+57-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+58                android:value="androidx.startup" />
+58-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+59            <meta-data
+59-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/df27701acf542fd150618e60febeea80/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+60                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+60-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/df27701acf542fd150618e60febeea80/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+61                android:value="androidx.startup" />
+61-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/df27701acf542fd150618e60febeea80/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+62        </provider>
+63    </application>
+64
+65</manifest>
