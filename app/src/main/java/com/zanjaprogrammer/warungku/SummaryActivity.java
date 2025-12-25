@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.text.InputType;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.zanjaprogrammer.warungku.data.DataRepository;
@@ -24,14 +26,15 @@ import java.util.Locale;
 
 public class SummaryActivity extends AppCompatActivity {
 
-    private TextView tvNetProfit, tvInitialCapital, tvTotalIncome, tvTotalExpense, tvRoiPercentage;
+    private TextView tvNetProfit, tvInitialCapital, tvTotalIncome, tvTotalExpense, tvRoiPercentage, tvTotalStockPurchase;
+    private MaterialCardView cardNoCapitalWarning;
     private DataRepository repository;
     private SharedPreferences prefs;
     private static final String PREF_NAME = "WarungKuPrefs";
     private static final String KEY_CAPITAL = "initial_capital";
 
     private long currentStart, currentEnd;
-    private LiveData<Double> incomeLive, expenseLive, profitLive;
+    private LiveData<Double> incomeLive, expenseLive, profitLive, stockPurchaseLive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +59,16 @@ public class SummaryActivity extends AppCompatActivity {
         tvTotalIncome = findViewById(R.id.tvTotalIncome);
         tvTotalExpense = findViewById(R.id.tvTotalExpense);
         tvRoiPercentage = findViewById(R.id.tvRoiPercentage);
+        tvTotalStockPurchase = findViewById(R.id.tvTotalStockPurchase);
+        cardNoCapitalWarning = findViewById(R.id.cardNoCapitalWarning);
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         // Toolbar back button removed per user request
 
         findViewById(R.id.btnSetCapital).setOnClickListener(v -> showCapitalDialog());
+        findViewById(R.id.btnSetCapitalFromWarning).setOnClickListener(v -> showCapitalDialog());
 
+        updateCapitalWarningVisibility();
         setupBottomNavigation();
     }
 
@@ -152,21 +159,27 @@ public class SummaryActivity extends AppCompatActivity {
             incomeLive.removeObservers(this);
             expenseLive.removeObservers(this);
             profitLive.removeObservers(this);
+            if (stockPurchaseLive != null) {
+                stockPurchaseLive.removeObservers(this);
+            }
         }
 
         incomeLive = repository.getIncomeInRange(currentStart, currentEnd);
         expenseLive = repository.getExpenseInRange(currentStart, currentEnd);
         profitLive = repository.getProfitInRange(currentStart, currentEnd);
+        stockPurchaseLive = repository.getTotalStockPurchaseInRange(currentStart, currentEnd);
 
         incomeLive.observe(this, this::updateCalculations);
         expenseLive.observe(this, this::updateCalculations);
         profitLive.observe(this, this::updateCalculations);
+        stockPurchaseLive.observe(this, this::updateCalculations);
     }
 
     private void updateCalculations(Double dummy) {
         double income = incomeLive.getValue() != null ? incomeLive.getValue() : 0.0;
         double expense = expenseLive.getValue() != null ? expenseLive.getValue() : 0.0;
         double profit = profitLive.getValue() != null ? profitLive.getValue() : 0.0;
+        double stockPurchase = stockPurchaseLive != null && stockPurchaseLive.getValue() != null ? stockPurchaseLive.getValue() : 0.0;
         double capital = getCapital();
 
         double netProfit = income - expense;
@@ -174,6 +187,7 @@ public class SummaryActivity extends AppCompatActivity {
         tvTotalIncome.setText(formatCurrency(income));
         tvTotalExpense.setText(formatCurrency(expense));
         tvNetProfit.setText(formatCurrency(netProfit));
+        tvTotalStockPurchase.setText(formatCurrency(stockPurchase));
 
         if (capital > 0) {
             double roi = (netProfit / capital) * 100;
@@ -185,6 +199,18 @@ public class SummaryActivity extends AppCompatActivity {
 
     private void loadInitialCapital() {
         tvInitialCapital.setText(formatCurrency(getCapital()));
+        updateCapitalWarningVisibility();
+    }
+
+    private void updateCapitalWarningVisibility() {
+        if (cardNoCapitalWarning != null) {
+            double capital = getCapital();
+            if (capital <= 0) {
+                cardNoCapitalWarning.setVisibility(View.VISIBLE);
+            } else {
+                cardNoCapitalWarning.setVisibility(View.GONE);
+            }
+        }
     }
 
     private double getCapital() {
@@ -205,6 +231,7 @@ public class SummaryActivity extends AppCompatActivity {
                 float capital = Float.parseFloat(input.getText().toString());
                 prefs.edit().putFloat(KEY_CAPITAL, capital).apply();
                 loadInitialCapital();
+                updateCapitalWarningVisibility();
                 updateCalculations(0.0);
             } catch (Exception e) {
                 Toast.makeText(this, "Input tidak valid", Toast.LENGTH_SHORT).show();

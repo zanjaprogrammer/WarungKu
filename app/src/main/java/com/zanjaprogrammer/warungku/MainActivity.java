@@ -115,6 +115,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // Ensure home icon is selected when returning to MainActivity
+        // Use post() to ensure the view is fully laid out
+        if (binding != null) {
+            binding.bottomNavigation.post(() -> {
+                binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
+            });
+        }
     }
 
     private void showExpenseDialog() {

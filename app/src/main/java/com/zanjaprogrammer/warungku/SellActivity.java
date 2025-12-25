@@ -48,6 +48,11 @@ public class SellActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 finish();
                 return true;
+            } else if (id == R.id.nav_summary) {
+                startActivity(new android.content.Intent(this, SummaryActivity.class));
+                overridePendingTransition(0, 0);
+                finish();
+                return true;
             }
             return true;
         });

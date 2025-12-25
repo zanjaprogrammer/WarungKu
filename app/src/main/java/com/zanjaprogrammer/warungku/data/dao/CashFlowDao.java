@@ -37,4 +37,11 @@ public interface CashFlowDao {
 
     @Query("SELECT SUM(profit) FROM cash_flow WHERE type = 'IN' AND timestamp BETWEEN :start AND :end")
     LiveData<Double> getProfitInRange(long start, long end);
+
+    // Total belanja stok: semua OUT yang terkait dengan produk (productId tidak null) atau description mengandung "Tambah Stok"
+    @Query("SELECT SUM(amount) FROM cash_flow WHERE type = 'OUT' AND (productId IS NOT NULL OR description LIKE 'Tambah Stok:%')")
+    LiveData<Double> getTotalStockPurchase();
+
+    @Query("SELECT SUM(amount) FROM cash_flow WHERE type = 'OUT' AND (productId IS NOT NULL OR description LIKE 'Tambah Stok:%') AND timestamp BETWEEN :start AND :end")
+    LiveData<Double> getTotalStockPurchaseInRange(long start, long end);
 }

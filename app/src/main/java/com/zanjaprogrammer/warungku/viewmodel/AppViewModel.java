@@ -131,8 +131,12 @@ public class AppViewModel extends AndroidViewModel {
         repository.sellProduct(product, quantity);
     }
 
-    public void addProductStock(Product product, int quantity) {
-        repository.addProductStock(product, quantity);
+    public void addProductStock(Product product, int quantity, double buyPrice) {
+        repository.addProductStock(product, quantity, buyPrice);
+    }
+
+    public void deleteProduct(Product product) {
+        repository.deleteProduct(product);
     }
 
     public void adjustProductStock(Product product, int newStock) {

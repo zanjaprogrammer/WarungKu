@@ -55,12 +55,32 @@ public class DataRepository {
         return cashFlowDao.getProfitInRange(start, end);
     }
 
+    public LiveData<Double> getTotalStockPurchase() {
+        return cashFlowDao.getTotalStockPurchase();
+    }
+
+    public LiveData<Double> getTotalStockPurchaseInRange(long start, long end) {
+        return cashFlowDao.getTotalStockPurchaseInRange(start, end);
+    }
+
     public LiveData<List<Product>> getShoppingList() {
         return productDao.getShoppingList();
     }
 
     public void insertProduct(Product product) {
-        AppDatabase.databaseWriteExecutor.execute(() -> productDao.insert(product));
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            long productId = productDao.insert(product);
+            
+            // Catat biaya pembelian jika ada stok awal dan buyPrice
+            if (product.currentStock > 0 && product.buyPrice != null) {
+                double cost = product.buyPrice * product.currentStock;
+                if (cost > 0) {
+                    CashFlow flow = new CashFlow("OUT", cost, "Tambah Stok: " + product.name + " (" + product.currentStock + ")",
+                            System.currentTimeMillis(), (int) productId, 0.0);
+                    cashFlowDao.insert(flow);
+                }
+            }
+        });
     }
 
     public void updateProduct(Product product) {
@@ -86,18 +106,26 @@ public class DataRepository {
         });
     }
 
-    public void addProductStock(Product product, int quantity) {
+    public void addProductStock(Product product, int quantity, double buyPrice) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             product.currentStock += quantity;
+            // Update buyPrice jika berbeda dari yang lama
+            if (product.buyPrice == null || product.buyPrice != buyPrice) {
+                product.buyPrice = buyPrice;
+            }
             productDao.update(product);
 
-            double cost = (product.buyPrice != null ? product.buyPrice : 0.0) * quantity;
+            double cost = buyPrice * quantity;
             if (cost > 0) {
                 CashFlow flow = new CashFlow("OUT", cost, "Tambah Stok: " + product.name + " (" + quantity + ")",
                         System.currentTimeMillis(), product.id, 0.0);
                 cashFlowDao.insert(flow);
             }
         });
+    }
+
+    public void deleteProduct(Product product) {
+        AppDatabase.databaseWriteExecutor.execute(() -> productDao.delete(product));
     }
 
     public void adjustProductStock(Product product, int newStock) {
