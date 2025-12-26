@@ -1,7 +1,69 @@
 # Panduan Testing Barcode Scanner
 
 ## 🎯 Tujuan
-Dokumen ini menjelaskan berbagai cara untuk testing fitur barcode scanner tanpa harus memiliki produk fisik dengan barcode.
+Dokumen ini menjelaskan berbagai cara untuk testing fitur barcode scanner tanpa harus memiliki produk fisik dengan barcode, termasuk cara testing di emulator Android.
+
+---
+
+## 🖥️ Testing di Emulator Android
+
+### Opsi 1: Setup Kamera di Emulator (Recommended untuk Development)
+**Cara:**
+1. **Enable Webcam di Emulator:**
+   - Buka AVD Manager
+   - Edit emulator yang digunakan
+   - Di bagian "Show Advanced Settings"
+   - Set "Camera" ke "Webcam0" (gunakan webcam laptop/komputer)
+   - Atau "VirtualScene" (simulated camera)
+
+2. **Test dengan Webcam:**
+   - Tampilkan barcode di layar komputer/laptop
+   - Arahkan webcam ke barcode
+   - Emulator akan menggunakan webcam sebagai input kamera
+
+**Keuntungan:**
+- ✅ Bisa test langsung di emulator
+- ✅ Tidak perlu device fisik
+- ✅ Bisa test dengan barcode di layar komputer
+
+**Kekurangan:**
+- ⚠️ Perlu setup webcam
+- ⚠️ Mungkin tidak seakurat device fisik
+
+---
+
+### Opsi 2: Mock/Test Mode untuk Development
+**Cara:**
+- Tambahkan "Test Mode" di aplikasi
+- Di test mode, skip kamera dan langsung input barcode
+- Atau gunakan button untuk simulate scan
+
+**Implementasi:**
+```java
+// Di development build, tambahkan:
+if (BuildConfig.DEBUG) {
+    // Show button "Test Scan" yang langsung return barcode test
+    // Atau input field untuk manual input barcode
+}
+```
+
+**Keuntungan:**
+- ✅ Bisa test logic tanpa kamera
+- ✅ Testing lebih cepat
+- ✅ Tidak perlu setup webcam
+
+---
+
+### Opsi 3: Test di Device Fisik (Recommended untuk Final Testing)
+**Cara:**
+- Install aplikasi di HP Android fisik
+- Test dengan kamera HP yang real
+- Lebih akurat dan realistis
+
+**Keuntungan:**
+- ✅ Testing yang paling realistis
+- ✅ Kamera HP biasanya lebih baik dari webcam
+- ✅ Bisa test di berbagai kondisi
 
 ---
 
@@ -296,16 +358,95 @@ implementation 'com.google.zxing:javase:3.5.2'
 
 ## ✅ Recommended Approach
 
-**Untuk Development & Testing:**
-1. **Barcode Generator Online** - Untuk quick testing
-2. **Generate Barcode di App** - Untuk testing yang lebih comprehensive
-3. **Produk Real** - Untuk final testing sebelum release
+### Untuk Development (Emulator):
+1. **Mock/Test Mode** - Untuk development cepat
+   - Skip kamera, langsung input barcode
+   - Atau button "Simulate Scan"
+   
+2. **Webcam di Emulator** - Untuk test kamera
+   - Setup webcam di emulator
+   - Tampilkan barcode di layar komputer
+   - Scan dengan webcam
+
+3. **Generate Barcode di App** - Untuk test generate & scan cycle
+
+### Untuk Final Testing (Device Fisik):
+1. **Install di HP Android** - Testing yang paling realistis
+2. **Test dengan produk real** - Final validation
+3. **Test dengan berbagai kondisi** - Lighting, angle, dll
 
 **Implementasi:**
 - Tambahkan fitur "Generate Test Barcode" di aplikasi
+- Tambahkan "Test Mode" untuk development (skip kamera)
 - Bisa di halaman Stock atau Settings
 - Generate barcode untuk produk yang sudah ada
 - Bisa scan barcode yang di-generate untuk test
+
+---
+
+## 🛠️ Setup Webcam di Emulator (Step by Step)
+
+### Cara 1: Via AVD Manager (GUI)
+1. Buka Android Studio
+2. Tools → Device Manager
+3. Klik edit (pencil icon) pada emulator yang digunakan
+4. Klik "Show Advanced Settings"
+5. Di bagian "Camera":
+   - Front Camera: pilih "Webcam0" atau "VirtualScene"
+   - Back Camera: pilih "Webcam0" atau "VirtualScene"
+6. Finish → Start emulator
+
+### Cara 2: Via Command Line
+```bash
+# List emulator
+emulator -list-avds
+
+# Start emulator dengan webcam
+emulator -avd Medium_Phone_API_36.0 -camera-back webcam0
+```
+
+### Cara 3: Test Kamera di Emulator
+1. Buka Camera app di emulator
+2. Cek apakah kamera berfungsi
+3. Jika tidak, coba restart emulator
+
+---
+
+## 💡 Tips untuk Development
+
+### 1. **Mock Scanner untuk Development**
+Tambahkan mode development yang skip kamera:
+```java
+// Di SellActivity atau StockActivity
+private void scanBarcode() {
+    if (BuildConfig.DEBUG) {
+        // Development mode: show dialog untuk input barcode manual
+        showBarcodeInputDialog();
+    } else {
+        // Production: buka camera scanner
+        openBarcodeScanner();
+    }
+}
+```
+
+### 2. **Test Button untuk Simulate Scan**
+Tambahkan button "Test Scan" di development build:
+```java
+if (BuildConfig.DEBUG) {
+    Button btnTestScan = findViewById(R.id.btnTestScan);
+    btnTestScan.setVisibility(View.VISIBLE);
+    btnTestScan.setOnClickListener(v -> {
+        // Simulate scan dengan barcode test
+        onBarcodeScanned("1234567890123");
+    });
+}
+```
+
+### 3. **Barcode Generator + Test Mode**
+- Generate barcode di app
+- Tampilkan barcode
+- Ada button "Test Scan This" yang langsung return barcode tersebut
+- Tidak perlu scan real, langsung test logic
 
 ---
 
