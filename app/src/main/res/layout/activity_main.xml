@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/background_off_white">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -22,9 +22,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardElevation="8dp"
+                app:cardElevation="4dp"
                 app:cardCornerRadius="20dp"
-                app:cardBackgroundColor="#1976D2">
+                app:cardBackgroundColor="@color/primary">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -37,7 +37,8 @@
                         android:text="UANG SEKARANG"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        android:textColor="#BBDEFB"/>
+                        android:textColor="@android:color/white"
+                        android:alpha="0.9"/>
                     <TextView
                         android:id="@+id/tvBalance"
                         android:layout_width="wrap_content"
@@ -45,7 +46,7 @@
                         android:text="Rp 1.500.000"
                         android:textSize="36sp"
                         android:textStyle="bold"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@android:color/white"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -69,7 +70,7 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp"
                 app:cornerRadius="16dp"
-                android:backgroundTint="#2E7D32"/>
+                android:backgroundTint="@color/primary"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -116,7 +117,9 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
-                    app:cardCornerRadius="12dp">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/background">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -127,7 +130,7 @@
                             android:layout_height="wrap_content"
                             android:text="Penjualan"
                             android:textSize="12sp"
-                            android:textColor="#757575"/>
+                            android:textColor="@color/text_secondary"/>
                         <TextView
                             android:id="@+id/tvIncome"
                             android:layout_width="wrap_content"
@@ -135,7 +138,7 @@
                             android:text="Rp 0"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#2E7D32"/>
+                            android:textColor="@color/primary"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -144,7 +147,9 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
-                    app:cardCornerRadius="12dp">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/background">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -155,7 +160,7 @@
                             android:layout_height="wrap_content"
                             android:text="Pengeluaran"
                             android:textSize="12sp"
-                            android:textColor="#757575"/>
+                            android:textColor="@color/text_secondary"/>
                         <TextView
                             android:id="@+id/tvExpense"
                             android:layout_width="wrap_content"
@@ -163,7 +168,7 @@
                             android:text="Rp 0"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#D32F2F"/>
+                            android:textColor="@color/error"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -173,7 +178,9 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
-                    app:cardCornerRadius="12dp">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/background">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -184,7 +191,7 @@
                             android:layout_height="wrap_content"
                             android:text="Stok Tipis"
                             android:textSize="12sp"
-                            android:textColor="#757575"/>
+                            android:textColor="@color/text_secondary"/>
                         <TextView
                             android:id="@+id/tvLowStock"
                             android:layout_width="wrap_content"
@@ -192,7 +199,7 @@
                             android:text="0 Barang"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="#F57C00"/>
+                            android:textColor="@color/warning"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -208,7 +215,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled" />
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/nav_icon_color"
+        app:itemTextColor="@color/nav_icon_color"
+        app:itemIconSize="24dp" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardCartSummary"
@@ -220,8 +230,8 @@
         android:layout_marginBottom="80dp"
         android:visibility="gone"
         app:cardCornerRadius="16dp"
-        app:cardElevation="12dp"
-        app:cardBackgroundColor="#2E7D32">
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/primary">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -256,8 +266,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="JUAL"
-                android:backgroundTint="#FFFFFF"
-                android:textColor="#2E7D32"
+                android:backgroundTint="@android:color/white"
+                android:textColor="@color/primary"
                 android:textStyle="bold"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

@@ -16,6 +16,22 @@
             android:layout_height="?attr/actionBarSize"
             app:title="Jual Barang" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cari barang..."
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:boxStrokeColor="@color/primary"
+            app:startIconDrawable="@android:drawable/ic_menu_search">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:imeOptions="actionSearch"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvProducts"
@@ -35,7 +51,22 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled" />
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/nav_icon_color"
+        app:itemTextColor="@color/nav_icon_color"
+        app:itemIconSize="24dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabScanBarcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="100dp"
+        android:src="@android:drawable/ic_menu_camera"
+        android:contentDescription="Scan Barcode"
+        app:tint="@android:color/white"
+        app:backgroundTint="@color/primary" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardCartSummary"
@@ -47,8 +78,8 @@
         android:layout_marginBottom="80dp"
         android:visibility="gone"
         app:cardCornerRadius="16dp"
-        app:cardElevation="12dp"
-        app:cardBackgroundColor="#2E7D32">
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/primary">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,8 +114,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="JUAL"
-                android:backgroundTint="#FFFFFF"
-                android:textColor="#2E7D32"
+                android:backgroundTint="@android:color/white"
+                android:textColor="@color/primary"
                 android:textStyle="bold"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

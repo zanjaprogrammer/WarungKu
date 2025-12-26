@@ -30,4 +30,7 @@ public interface ProductDao {
 
     @Query("SELECT * FROM products WHERE id = :id")
     Product getProductById(int id);
+
+    @Query("SELECT * FROM products WHERE barcode = :barcode LIMIT 1")
+    Product getProductByBarcode(String barcode);
 }

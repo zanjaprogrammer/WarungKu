@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppViewModel extends AndroidViewModel {
+    private static AppViewModel instance;
+    
     private final DataRepository repository;
     private final LiveData<List<Product>> allProducts;
     private final LiveData<List<CashFlow>> allHistory;
@@ -24,6 +26,18 @@ public class AppViewModel extends AndroidViewModel {
         repository = new DataRepository(application);
         allProducts = repository.getAllProducts();
         allHistory = repository.getAllHistory();
+        instance = this; // Set singleton instance
+    }
+    
+    /**
+     * Get singleton instance (untuk persist cart across activities)
+     * Jika belum ada instance, buat baru dengan Application context
+     */
+    public static AppViewModel getInstance(Application application) {
+        if (instance == null) {
+            instance = new AppViewModel(application);
+        }
+        return instance;
     }
 
     public LiveData<List<CartItem>> getCartItems() {
@@ -123,6 +137,10 @@ public class AppViewModel extends AndroidViewModel {
         repository.insertProduct(product);
     }
 
+    public void updateProduct(Product product) {
+        repository.updateProduct(product);
+    }
+
     public void insertCashFlow(CashFlow cashFlow) {
         repository.insertCashFlow(cashFlow);
     }
@@ -141,5 +159,9 @@ public class AppViewModel extends AndroidViewModel {
 
     public void adjustProductStock(Product product, int newStock) {
         repository.adjustProductStock(product, newStock);
+    }
+
+    public void getProductByBarcode(String barcode, DataRepository.ProductCallback callback) {
+        repository.getProductByBarcode(barcode, callback);
     }
 }

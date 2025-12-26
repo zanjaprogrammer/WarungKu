@@ -8,8 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        app:cardElevation="1dp"
-        app:cardCornerRadius="12dp">
+        app:cardElevation="2dp"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@color/background">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,7 +23,7 @@
                 android:id="@+id/checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="#1976D2"/>
+                app:buttonTint="@color/accent"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -36,14 +37,14 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_primary"
                     android:text="Nama Barang"/>
                 <TextView
                     android:id="@+id/tvStockInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
-                    android:textColor="#D32F2F"
+                    android:textColor="@color/error"
                     android:text="Sisa stok: 0"/>
             </LinearLayout>
 
@@ -52,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="#757575"
+                android:textColor="@color/text_secondary"
                 android:gravity="end"
                 android:text="Sering laku"/>
 

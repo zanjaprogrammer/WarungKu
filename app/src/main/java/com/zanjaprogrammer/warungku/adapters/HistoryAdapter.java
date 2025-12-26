@@ -4,7 +4,9 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import com.zanjaprogrammer.warungku.R;
 import com.zanjaprogrammer.warungku.data.entity.CashFlow;
 import com.zanjaprogrammer.warungku.databinding.ItemHistoryBinding;
 
@@ -42,10 +44,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         if ("IN".equals(item.type)) {
             holder.binding.tvAmount.setText("+ " + formatter.format(item.amount));
-            holder.binding.tvAmount.setTextColor(Color.parseColor("#2E7D32"));
+            holder.binding.tvAmount.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.primary));
         } else {
             holder.binding.tvAmount.setText("- " + formatter.format(item.amount));
-            holder.binding.tvAmount.setTextColor(Color.RED);
+            holder.binding.tvAmount.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.error));
         }
     }
 

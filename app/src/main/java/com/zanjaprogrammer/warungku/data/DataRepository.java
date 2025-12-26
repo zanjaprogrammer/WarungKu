@@ -95,6 +95,7 @@ public class DataRepository {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             product.currentStock -= quantity;
             product.salesCount += quantity;
+            product.lastSoldTimestamp = System.currentTimeMillis();
             productDao.update(product);
 
             double amount = product.sellPrice * quantity;
@@ -135,19 +136,37 @@ public class DataRepository {
         });
     }
 
+    public void getProductByBarcode(String barcode, ProductCallback callback) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            Product product = productDao.getProductByBarcode(barcode);
+            if (product != null) {
+                callback.onProductFound(product);
+            } else {
+                callback.onProductNotFound();
+            }
+        });
+    }
+    
+    public interface ProductCallback {
+        void onProductFound(Product product);
+        void onProductNotFound();
+    }
+
     public void checkout(List<com.zanjaprogrammer.warungku.data.model.CartItem> items) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             StringBuilder desc = new StringBuilder("Jual: ");
             double totalAmount = 0;
             double totalProfit = 0;
 
+            long currentTime = System.currentTimeMillis();
             for (com.zanjaprogrammer.warungku.data.model.CartItem item : items) {
                 Product product = item.product;
                 int quantity = item.quantity;
 
-                // Update stock
+                // Update stock, sales count, and last sold timestamp
                 product.currentStock -= quantity;
                 product.salesCount += quantity;
+                product.lastSoldTimestamp = currentTime;
                 productDao.update(product);
 
                 // Accumulate totals

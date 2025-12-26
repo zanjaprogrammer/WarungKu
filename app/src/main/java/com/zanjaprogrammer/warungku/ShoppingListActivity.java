@@ -20,7 +20,8 @@ public class ShoppingListActivity extends AppCompatActivity {
         binding = ActivityShoppingListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        viewModel = new ViewModelProvider(this).get(AppViewModel.class);
+        // Use singleton instance untuk persist cart across activities
+        viewModel = AppViewModel.getInstance(getApplication());
         setupRecyclerView();
 
         viewModel.getShoppingList().observe(this, products -> {

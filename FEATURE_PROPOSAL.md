@@ -14,18 +14,24 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 - ✅ Favorit & Sorting Produk
 - ✅ Search Barang
 - ✅ History Transaksi
+- ✅ Barcode Scanner (Scan untuk input produk & jual barang)
+- ✅ Filter Waktu di Ringkasan (Hari/Minggu/Bulan/Tahun)
+- ✅ Total Belanja Stok Tracking
+- ✅ Progress Bar Pengembalian Modal
+- ✅ Shopping Cart Persisten (terlihat di semua halaman)
 
 ---
 
 ## 🚀 Fitur Baru yang Diusulkan (Fokus Warung Kecil)
 
-### 1. **Barcode Scanner** 📷
-**Prioritas: TINGGI** | **Effort: SEDANG**
+### 1. **Barcode Scanner** 📷 ✅ **SUDAH DIIMPLEMENTASI**
+**Prioritas: TINGGI** | **Effort: SEDANG** | **Status: SELESAI**
 
 #### Fitur:
-- Scan barcode untuk input produk baru (tidak perlu ketik manual)
-- Scan barcode saat jual (langsung masuk ke keranjang)
-- Generate barcode untuk produk sendiri (opsional)
+- ✅ Scan barcode untuk input produk baru (tidak perlu ketik manual)
+- ✅ Scan barcode saat jual (langsung masuk ke keranjang dengan qty 1)
+- ✅ Integrasi dengan Open Food Facts API (auto-fill data produk)
+- ⏳ Generate barcode untuk produk sendiri (opsional - belum)
 
 #### Kenapa Penting:
 - Mempercepat proses input produk
@@ -33,9 +39,11 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 - Standar di aplikasi kasir modern
 
 #### Implementasi:
-- Gunakan library ZXing atau ML Kit
-- Camera permission
-- Simple UI untuk scan
+- ✅ Library ZXing (com.journeyapps:zxing-android-embedded)
+- ✅ Camera permission dengan Activity Result API
+- ✅ FloatingActionButton untuk scan di halaman jual
+- ✅ Auto-fill form dari API response
+- ✅ Hybrid approach: cek lokal dulu, lalu API
 
 ---
 
@@ -201,6 +209,17 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 - Simple UI untuk manage pelanggan
 
 ---
+
+### 10. **Pelacak Produk Terlaris** 
+
+### Fitur:
+ - Mencatat produk produk yg paling laris dan yg tidak
+ - Mencatat keuntungan produk tersebut berdasarkan waktu (hari/minggu/bulan/tahun)
+ - Mencatat total keuntungan dan persen
+ - Mencatat total kerugian dan persen
+
+### Lokasi:
+ - Fitur ini akan ditempatkan pada halaman ringkasan
 
 ## ❌ Fitur yang TIDAK Akan Dibuat (Terlalu Kompleks untuk Warung Kecil)
 
@@ -396,7 +415,46 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 **Dibuat oleh:** AI Assistant  
 **Tanggal:** 26 Desember 2024  
-**Versi:** 2.0 (Simplified untuk Warung Kecil)  
+**Versi:** 2.1 (Updated Progress - 27 Desember 2024)  
 **Target User:** Pemilik Warung/UMKM Kecil
+
+---
+
+## 📈 Progress Update (27 Desember 2024)
+
+### ✅ Fitur yang Baru Selesai:
+1. **Barcode Scanner** - Implementasi lengkap dengan:
+   - Scan untuk input produk baru
+   - Scan untuk jual barang (auto-add ke cart dengan qty 1)
+   - Integrasi Open Food Facts API untuk auto-fill data
+   - FloatingActionButton di halaman jual
+   - Camera permission handling
+
+2. **Filter Waktu di Ringkasan** - Implementasi lengkap dengan:
+   - Filter Hari Ini, Minggu Ini, Bulan Ini, Tahun Ini
+   - Generate Test Data untuk testing
+   - Update otomatis semua perhitungan sesuai periode
+
+3. **Total Belanja Stok Tracking** - Implementasi lengkap dengan:
+   - Tracking semua pengeluaran untuk beli stok
+   - Tampil di halaman ringkasan
+   - Membantu analisis profit vs modal
+
+4. **Progress Bar Pengembalian Modal** - Implementasi lengkap dengan:
+   - Progress bar visual untuk tracking ROI
+   - Announcement card saat mencapai 100% (balik modal)
+   - Update otomatis berdasarkan filter waktu
+
+5. **Shopping Cart Persisten** - Implementasi lengkap dengan:
+   - Cart terlihat di semua halaman (Home, Stock, Sell, History, Summary)
+   - Menampilkan total quantity (bukan jumlah tipe produk)
+   - Singleton ViewModel untuk persist cart state
+
+### 🔄 Fitur yang Sedang Dikembangkan:
+- Tidak ada
+
+### ⏳ Fitur Selanjutnya (Phase 1):
+- Offline Mode
+- Backup & Restore Data
 
 

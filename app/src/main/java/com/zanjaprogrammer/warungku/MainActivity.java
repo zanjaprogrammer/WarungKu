@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        viewModel = new ViewModelProvider(this).get(AppViewModel.class);
+        // Use singleton instance untuk persist cart across activities
+        viewModel = AppViewModel.getInstance(getApplication());
 
         observeData();
         setupListeners();
@@ -50,7 +51,12 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getCartItems().observe(this, items -> {
             if (items != null && !items.isEmpty()) {
                 binding.cardCartSummary.setVisibility(android.view.View.VISIBLE);
-                binding.tvCartCount.setText(items.size() + " Barang");
+                // Hitung total quantity (bukan jumlah tipe produk)
+                int totalQty = 0;
+                for (com.zanjaprogrammer.warungku.data.model.CartItem item : items) {
+                    totalQty += item.quantity;
+                }
+                binding.tvCartCount.setText(totalQty + " Barang");
             } else {
                 binding.cardCartSummary.setVisibility(android.view.View.GONE);
             }

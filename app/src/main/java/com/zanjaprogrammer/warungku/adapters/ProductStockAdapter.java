@@ -4,7 +4,9 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import com.zanjaprogrammer.warungku.R;
 import com.zanjaprogrammer.warungku.data.entity.Product;
 import com.zanjaprogrammer.warungku.databinding.ItemProductStockBinding;
 
@@ -47,8 +49,16 @@ public class ProductStockAdapter extends RecyclerView.Adapter<ProductStockAdapte
         holder.binding.tvPrice.setText(formatter.format(product.sellPrice));
         holder.binding.tvStock.setText(String.valueOf(product.currentStock));
 
-        if (product.currentStock <= product.minStock) {
+        if (product.currentStock == 0) {
+            // Stok habis - MERAH
             holder.binding.tvStatus.setVisibility(android.view.View.VISIBLE);
+            holder.binding.tvStatus.setText("Habis");
+            holder.binding.tvStatus.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.error));
+        } else if (product.currentStock <= product.minStock) {
+            // Stok hampir habis - ORANYE
+            holder.binding.tvStatus.setVisibility(android.view.View.VISIBLE);
+            holder.binding.tvStatus.setText("Hampir habis");
+            holder.binding.tvStatus.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.warning));
         } else {
             holder.binding.tvStatus.setVisibility(android.view.View.GONE);
         }

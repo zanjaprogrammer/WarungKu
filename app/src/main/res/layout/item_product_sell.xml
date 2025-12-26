@@ -5,7 +5,8 @@
     android:layout_height="120dp"
     android:layout_margin="8dp"
     app:cardElevation="2dp"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardBackgroundColor="@color/background"
     app:rippleColor="#20000000">
 
     <LinearLayout
@@ -16,24 +17,37 @@
         android:gravity="center"
         android:background="?attr/selectableItemBackground">
 
-        <TextView
-            android:id="@+id/tvProductName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:textColor="#333333"
-            android:text="Nama Barang"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:textColor="@color/text_primary"
+                android:text="Nama Barang"/>
+            <ImageView
+                android:id="@+id/ivFavorite"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:src="@android:drawable/btn_star_big_on"
+                android:visibility="gone"
+                android:tint="@color/warning"/>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tvProductPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:textColor="#666666"
+            android:textColor="@color/primary"
             android:layout_marginTop="4dp"
             android:text="Rp 0"/>
 
@@ -42,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="11sp"
-            android:textColor="#999999"
+            android:textColor="@color/text_hint"
             android:text="Stok: 0"/>
 
     </LinearLayout>

@@ -21,11 +21,38 @@ public class StockActivity extends AppCompatActivity {
         binding = ActivityStockBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        viewModel = new ViewModelProvider(this).get(AppViewModel.class);
+        // Use singleton instance untuk persist cart across activities
+        viewModel = AppViewModel.getInstance(getApplication());
         setupRecyclerView();
 
         viewModel.getAllProducts().observe(this, products -> {
             adapter.setProducts(products);
+        });
+
+        // Observe Cart
+        java.text.NumberFormat formatter = java.text.NumberFormat
+                .getCurrencyInstance(java.util.Locale.forLanguageTag("id-ID"));
+        viewModel.getCartItems().observe(this, items -> {
+            if (items != null && !items.isEmpty()) {
+                binding.cardCartSummary.setVisibility(android.view.View.VISIBLE);
+                // Hitung total quantity (bukan jumlah tipe produk)
+                int totalQty = 0;
+                for (com.zanjaprogrammer.warungku.data.model.CartItem item : items) {
+                    totalQty += item.quantity;
+                }
+                binding.tvCartCount.setText(totalQty + " Barang");
+            } else {
+                binding.cardCartSummary.setVisibility(android.view.View.GONE);
+            }
+        });
+
+        viewModel.getCartTotal().observe(this, total -> {
+            binding.tvCartTotal.setText(formatter.format(total != null ? total : 0));
+        });
+
+        binding.btnCheckout.setOnClickListener(v -> {
+            viewModel.checkout();
+            android.widget.Toast.makeText(this, "Transaksi Berhasil!", android.widget.Toast.LENGTH_SHORT).show();
         });
 
         binding.fabAdd.setOnClickListener(v -> {

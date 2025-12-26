@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/background_off_white">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -12,9 +12,10 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#FFFFFF"
+            android:background="@color/background"
             app:title="Ringkasan"
-            app:titleTextColor="#000000" />
+            app:titleTextColor="@color/text_primary"
+            app:menu="@menu/summary_toolbar_menu" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -78,7 +79,8 @@
                 android:visibility="gone"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="#FFF3E0">
+                app:cardBackgroundColor="@color/warning_light"
+                android:alpha="0.9">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -90,14 +92,14 @@
                         android:text="Keuntungan belum bisa dihitung"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:textColor="#E65100"
+                        android:textColor="@color/warning_dark"
                         android:layout_marginBottom="8dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Isi modal awal untuk melihat hasil"
                         android:textSize="14sp"
-                        android:textColor="#757575"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginBottom="12dp"/>
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnSetCapitalFromWarning"
@@ -105,8 +107,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ISI MODAL"
-                        android:textColor="#FFFFFF"
-                        app:backgroundTint="#FF9800"/>
+                        android:textColor="@android:color/white"
+                        app:backgroundTint="@color/warning"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -115,9 +117,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="4dp"
-                app:cardBackgroundColor="#2E7D32">
+                app:cardBackgroundColor="@color/primary">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -128,15 +130,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="LABA BERSIH"
-                        android:textColor="#BBDEFB"
+                        android:textColor="@android:color/white"
                         android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:alpha="0.9" />
                     <TextView
                         android:id="@+id/tvNetProfit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rp 0"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@android:color/white"
                         android:textSize="32sp"
                         android:textStyle="bold"
                         android:layout_marginTop="4dp" />
@@ -150,7 +153,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/background">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -167,14 +171,15 @@
                             android:layout_height="wrap_content"
                             android:text="Modal Awal"
                             android:textSize="12sp"
-                            android:textColor="#757575"/>
+                            android:textColor="@color/text_secondary"/>
                         <TextView
                             android:id="@+id/tvInitialCapital"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Rp 0"
                             android:textSize="18sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"/>
                     </LinearLayout>
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnSetCapital"
@@ -191,7 +196,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/background">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -202,7 +208,7 @@
                         android:layout_height="wrap_content"
                         android:text="Total Belanja Stok"
                         android:textSize="12sp"
-                        android:textColor="#757575"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginBottom="4dp"/>
                     <TextView
                         android:id="@+id/tvTotalStockPurchase"
@@ -210,13 +216,14 @@
                         android:layout_height="wrap_content"
                         android:text="Rp 0"
                         android:textSize="18sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Total uang yang dipakai untuk membeli barang dagangan"
                         android:textSize="11sp"
-                        android:textColor="#9E9E9E"
+                        android:textColor="@color/text_hint"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -233,7 +240,9 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
-                    app:cardCornerRadius="12dp">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/background">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -244,7 +253,7 @@
                             android:layout_height="wrap_content"
                             android:text="Total Pemasukan"
                             android:textSize="12sp"
-                            android:textColor="#757575"/>
+                            android:textColor="@color/text_secondary"/>
                         <TextView
                             android:id="@+id/tvTotalIncome"
                             android:layout_width="wrap_content"
@@ -252,7 +261,7 @@
                             android:text="Rp 0"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="#2E7D32"/>
+                            android:textColor="@color/primary"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -261,7 +270,9 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
-                    app:cardCornerRadius="12dp">
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/background">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -272,7 +283,7 @@
                             android:layout_height="wrap_content"
                             android:text="Total Pengeluaran"
                             android:textSize="12sp"
-                            android:textColor="#757575"/>
+                            android:textColor="@color/text_secondary"/>
                         <TextView
                             android:id="@+id/tvTotalExpense"
                             android:layout_width="wrap_content"
@@ -280,10 +291,44 @@
                             android:text="Rp 0"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="#D32F2F"/>
+                            android:textColor="@color/error"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </GridLayout>
+
+            <!-- Announcement Card: Balik Modal -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardBreakEvenAnnouncement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@color/primary">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎉 SELAMAT! 🎉"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:layout_marginBottom="8dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Anda telah balik modal!"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/white"
+                        android:alpha="0.95"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- ROI Section -->
             <com.google.android.material.card.MaterialCardView
@@ -291,7 +336,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/background">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -300,24 +346,53 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Perkembangan Modal (ROI)"
+                        android:text="Perkembangan Modal"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="8dp"/>
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="4dp"/>
                     <TextView
                         android:id="@+id/tvRoiPercentage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0%"
+                        android:text="Rp 0"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="#1976D2"/>
+                        android:textColor="@color/primary"
+                        android:layout_marginBottom="12dp"/>
+                    
+                    <!-- Progress Bar -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Persentase pengembalian modal berdasarkan transaksi saat ini."
+                        android:text="Progress Pengembalian Modal"
                         android:textSize="12sp"
-                        android:textColor="#757575"/>
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginBottom="8dp"/>
+                    <ProgressBar
+                        android:id="@+id/progressBarCapitalReturn"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressTint="@color/primary"
+                        android:layout_marginBottom="8dp"/>
+                    <TextView
+                        android:id="@+id/tvProgressPercentage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0%"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_gravity="end"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total keuntungan dari modal awal"
+                        android:textSize="11sp"
+                        android:textColor="@color/text_hint"
+                        android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -330,6 +405,61 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled" />
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/nav_icon_color"
+        app:itemTextColor="@color/nav_icon_color"
+        app:itemIconSize="24dp" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardCartSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="80dp"
+        android:visibility="gone"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/primary">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvCartCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 Barang"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/tvCartTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp 0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/btnCheckout"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JUAL"
+                android:backgroundTint="@android:color/white"
+                android:textColor="@color/primary"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

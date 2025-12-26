@@ -48,6 +48,11 @@ public class ProductSellAdapter extends RecyclerView.Adapter<ProductSellAdapter.
         holder.binding.tvProductName.setText(product.name);
         holder.binding.tvProductPrice.setText(formatter.format(product.sellPrice));
         holder.binding.tvProductStock.setText("Stok: " + product.currentStock);
+        
+        // Show/hide favorite icon
+        if (holder.binding.ivFavorite != null) {
+            holder.binding.ivFavorite.setVisibility(product.isFavorite ? android.view.View.VISIBLE : android.view.View.GONE);
+        }
 
         holder.itemView.setOnClickListener(v -> listener.onProductClick(product));
         holder.itemView.setOnLongClickListener(v -> {
