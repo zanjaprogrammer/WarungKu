@@ -3,12 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
+        android:clipToPadding="false"
         android:paddingBottom="80dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -20,15 +24,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/primary"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="20dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp"
-                android:gravity="center">
+                android:padding="24dp"
+                android:gravity="center"
+                android:background="@drawable/bg_card_hero_gradient"
+                android:minHeight="120dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,13 +57,15 @@
 
         <Button
             android:id="@+id/btnRecordExpense"
-            style="@style/Widget.Material3.Button.TonalButton"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:text="CATAT PENGELUARAN"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:cornerRadius="12dp"
+            android:background="@drawable/bg_button_tonal_gradient"
+            android:elevation="4dp"
+            android:stateListAnimator="@null"
+            android:textColor="@color/primary"
             android:layout_marginBottom="24dp"/>
 
         <TextView
@@ -71,11 +79,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHistory"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:minHeight="200dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -98,8 +107,12 @@
         android:layout_marginBottom="80dp"
         android:visibility="gone"
         app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/primary">
+        app:cardElevation="12dp"
+        app:cardBackgroundColor="@android:color/transparent">
+        <android.view.View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_card_hero_gradient"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,13 +143,16 @@
             </LinearLayout>
             <Button
                 android:id="@+id/btnCheckout"
-                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="JUAL"
-                android:backgroundTint="@android:color/white"
-                android:textColor="@color/primary"
-                android:textStyle="bold"/>
+                android:background="@drawable/bg_button_primary_gradient"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:elevation="8dp"
+                android:stateListAnimator="@null"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

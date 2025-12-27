@@ -67,6 +67,19 @@ public class DataRepository {
         return productDao.getShoppingList();
     }
 
+    // Methods untuk laporan
+    public LiveData<List<Product>> getTopSellingProducts(int limit) {
+        return productDao.getTopSellingProducts(limit);
+    }
+
+    public LiveData<List<Product>> getUnsoldProducts() {
+        return productDao.getUnsoldProducts();
+    }
+
+    public LiveData<List<CashFlow>> getCashFlowInRange(long start, long end) {
+        return cashFlowDao.getCashFlowInRange(start, end);
+    }
+
     public void insertProduct(Product product) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             long productId = productDao.insert(product);

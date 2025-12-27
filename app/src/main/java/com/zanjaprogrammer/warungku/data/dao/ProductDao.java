@@ -33,4 +33,12 @@ public interface ProductDao {
 
     @Query("SELECT * FROM products WHERE barcode = :barcode LIMIT 1")
     Product getProductByBarcode(String barcode);
+
+    // Query untuk laporan: Produk terlaris (top 10 berdasarkan salesCount)
+    @Query("SELECT * FROM products WHERE salesCount > 0 ORDER BY salesCount DESC LIMIT :limit")
+    LiveData<List<Product>> getTopSellingProducts(int limit);
+
+    // Query untuk laporan: Produk tidak laku (belum pernah dijual)
+    @Query("SELECT * FROM products WHERE salesCount = 0 OR salesCount IS NULL ORDER BY name ASC")
+    LiveData<List<Product>> getUnsoldProducts();
 }

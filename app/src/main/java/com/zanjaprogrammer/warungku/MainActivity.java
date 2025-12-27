@@ -8,6 +8,7 @@ import com.zanjaprogrammer.warungku.databinding.ActivityMainBinding;
 import com.zanjaprogrammer.warungku.viewmodel.AppViewModel;
 
 import java.text.NumberFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private AppViewModel viewModel;
     private final NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("id-ID"));
+    private androidx.lifecycle.LiveData<Double> dailyIncomeLive, dailyExpenseLive;
+    private int lastCheckedDay = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +31,15 @@ public class MainActivity extends AppCompatActivity {
 
         observeData();
         setupListeners();
+        checkAndRefreshDailyData();
     }
 
     private void observeData() {
-        viewModel.getIncome().observe(this, income -> {
-            binding.tvIncome.setText(formatter.format(income != null ? income : 0));
-        });
+        // Observe daily data (hari ini saja)
+        updateDailyDataObservers();
 
-        viewModel.getExpense().observe(this, expense -> {
-            binding.tvExpense.setText(formatter.format(expense != null ? expense : 0));
+        viewModel.getBalance().observe(this, balance -> {
+            binding.tvBalance.setText(formatter.format(balance != null ? balance : 0));
         });
 
         viewModel.getBalance().observe(this, balance -> {
@@ -113,8 +116,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.btnCheckout.setOnClickListener(v -> {
-            viewModel.checkout();
-            android.widget.Toast.makeText(this, "Transaksi Berhasil!", android.widget.Toast.LENGTH_SHORT).show();
+            showPaymentBottomSheet();
         });
     }
 
@@ -128,6 +130,53 @@ public class MainActivity extends AppCompatActivity {
                 binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
             });
         }
+        
+        // Check if day has changed and refresh data
+        checkAndRefreshDailyData();
+    }
+    
+    private void checkAndRefreshDailyData() {
+        Calendar cal = Calendar.getInstance();
+        int currentDay = cal.get(Calendar.DAY_OF_YEAR);
+        int currentYear = cal.get(Calendar.YEAR);
+        
+        // Check if day has changed (including year change)
+        if (lastCheckedDay != currentDay || lastCheckedDay == -1) {
+            lastCheckedDay = currentDay;
+            // Refresh daily data observers
+            updateDailyDataObservers();
+        }
+    }
+    
+    private void updateDailyDataObservers() {
+        // Remove old observers
+        if (dailyIncomeLive != null) {
+            dailyIncomeLive.removeObservers(this);
+        }
+        if (dailyExpenseLive != null) {
+            dailyExpenseLive.removeObservers(this);
+        }
+        
+        // Calculate today's range (00:00:00 to now)
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        long todayStart = cal.getTimeInMillis();
+        long todayEnd = System.currentTimeMillis();
+        
+        // Observe daily income and expense
+        dailyIncomeLive = viewModel.getIncomeInRange(todayStart, todayEnd);
+        dailyExpenseLive = viewModel.getExpenseInRange(todayStart, todayEnd);
+        
+        dailyIncomeLive.observe(this, income -> {
+            binding.tvIncome.setText(formatter.format(income != null ? income : 0));
+        });
+
+        dailyExpenseLive.observe(this, expense -> {
+            binding.tvExpense.setText(formatter.format(expense != null ? expense : 0));
+        });
     }
 
     private void showExpenseDialog() {
@@ -161,5 +210,173 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Batal", null)
                 .show();
+    }
+    
+    private void showPaymentBottomSheet() {
+        Double cartTotal = viewModel.getCartTotal().getValue();
+        if (cartTotal == null || cartTotal <= 0) {
+            android.widget.Toast.makeText(this, "Keranjang kosong", android.widget.Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        com.google.android.material.bottomsheet.BottomSheetDialog dialog = new com.google.android.material.bottomsheet.BottomSheetDialog(this);
+        android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_payment, null);
+        dialog.setContentView(view);
+        
+        java.text.NumberFormat formatter = java.text.NumberFormat.getCurrencyInstance(java.util.Locale.forLanguageTag("id-ID"));
+        
+        android.widget.TextView tvPaymentTotal = view.findViewById(R.id.tvPaymentTotal);
+        tvPaymentTotal.setText(formatter.format(cartTotal));
+        
+        // Metode pembayaran
+        com.google.android.material.button.MaterialButtonToggleGroup togglePaymentMethod = view.findViewById(R.id.togglePaymentMethod);
+        com.google.android.material.button.MaterialButton btnCash = view.findViewById(R.id.btnCash);
+        com.google.android.material.button.MaterialButton btnQRIS = view.findViewById(R.id.btnQRIS);
+        android.view.View layoutCashInput = view.findViewById(R.id.layoutCashInput);
+        
+        // Input uang bayar
+        com.google.android.material.textfield.TextInputEditText etPaymentAmount = view.findViewById(R.id.etPaymentAmount);
+        com.google.android.material.button.MaterialButton btnQuick5k = view.findViewById(R.id.btnQuick5k);
+        com.google.android.material.button.MaterialButton btnQuick10k = view.findViewById(R.id.btnQuick10k);
+        com.google.android.material.button.MaterialButton btnQuick100k = view.findViewById(R.id.btnQuick100k);
+        
+        // Display kembalian
+        android.widget.TextView tvChange = view.findViewById(R.id.tvChange);
+        com.google.android.material.card.MaterialCardView cardChange = view.findViewById(R.id.cardChange);
+        com.google.android.material.card.MaterialCardView cardInsufficient = view.findViewById(R.id.cardInsufficient);
+        android.widget.TextView tvShortage = view.findViewById(R.id.tvShortage);
+        com.google.android.material.button.MaterialButton btnConfirm = view.findViewById(R.id.btnConfirmPayment);
+        
+        // Default: Tunai
+        boolean[] isQRIS = {false};
+        
+        // Toggle metode pembayaran
+        togglePaymentMethod.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+            if (isChecked) {
+                if (checkedId == R.id.btnQRIS) {
+                    isQRIS[0] = true;
+                    layoutCashInput.setVisibility(android.view.View.GONE);
+                    cardChange.setVisibility(android.view.View.GONE);
+                    cardInsufficient.setVisibility(android.view.View.GONE);
+                    btnConfirm.setEnabled(true); // QRIS langsung bisa konfirmasi
+                } else {
+                    isQRIS[0] = false;
+                    layoutCashInput.setVisibility(android.view.View.VISIBLE);
+                    btnConfirm.setEnabled(false);
+                    etPaymentAmount.requestFocus();
+                    android.view.inputmethod.InputMethodManager imm = (android.view.inputmethod.InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        imm.showSoftInput(etPaymentAmount, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT);
+                    }
+                }
+            }
+        });
+        
+        // Tombol cepat
+        btnQuick5k.setOnClickListener(v -> {
+            etPaymentAmount.setText("5000");
+            etPaymentAmount.setSelection(etPaymentAmount.getText().length());
+        });
+        
+        btnQuick10k.setOnClickListener(v -> {
+            etPaymentAmount.setText("10000");
+            etPaymentAmount.setSelection(etPaymentAmount.getText().length());
+        });
+        
+        btnQuick100k.setOnClickListener(v -> {
+            etPaymentAmount.setText("100000");
+            etPaymentAmount.setSelection(etPaymentAmount.getText().length());
+        });
+        
+        // Real-time calculation untuk Tunai
+        android.text.TextWatcher paymentWatcher = new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isQRIS[0]) return; // Skip jika QRIS
+                
+                String amountStr = s.toString().trim();
+                if (amountStr.isEmpty()) {
+                    cardChange.setVisibility(android.view.View.GONE);
+                    cardInsufficient.setVisibility(android.view.View.GONE);
+                    btnConfirm.setEnabled(false);
+                    return;
+                }
+                
+                try {
+                    double paymentAmount = Double.parseDouble(amountStr);
+                    double change = paymentAmount - cartTotal;
+                    
+                    if (change >= 0) {
+                        cardChange.setVisibility(android.view.View.VISIBLE);
+                        cardInsufficient.setVisibility(android.view.View.GONE);
+                        tvChange.setText(formatter.format(change));
+                        btnConfirm.setEnabled(true);
+                    } else {
+                        cardChange.setVisibility(android.view.View.GONE);
+                        cardInsufficient.setVisibility(android.view.View.VISIBLE);
+                        tvShortage.setText(formatter.format(Math.abs(change)));
+                        btnConfirm.setEnabled(false);
+                    }
+                } catch (NumberFormatException e) {
+                    cardChange.setVisibility(android.view.View.GONE);
+                    cardInsufficient.setVisibility(android.view.View.GONE);
+                    btnConfirm.setEnabled(false);
+                }
+            }
+            
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        };
+        
+        etPaymentAmount.addTextChangedListener(paymentWatcher);
+        etPaymentAmount.requestFocus();
+        etPaymentAmount.post(() -> etPaymentAmount.selectAll());
+        
+        android.view.inputmethod.InputMethodManager imm = (android.view.inputmethod.InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(etPaymentAmount, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT);
+        }
+        
+        btnConfirm.setOnClickListener(v -> {
+            if (isQRIS[0]) {
+                // QRIS: langsung checkout tanpa perlu input uang
+                viewModel.checkout();
+                dialog.dismiss();
+                android.widget.Toast.makeText(this, "Transaksi Berhasil! (QRIS)", android.widget.Toast.LENGTH_SHORT).show();
+            } else {
+                // Tunai: perlu validasi uang bayar
+                String amountStr = etPaymentAmount.getText().toString().trim();
+                if (amountStr.isEmpty()) {
+                    android.widget.Toast.makeText(this, "Masukkan uang bayar", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                
+                try {
+                    double paymentAmount = Double.parseDouble(amountStr);
+                    double change = paymentAmount - cartTotal;
+                    
+                    if (change < 0) {
+                        android.widget.Toast.makeText(this, "Uang bayar kurang!", android.widget.Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    
+                    viewModel.checkout();
+                    dialog.dismiss();
+                    
+                    String message = "Transaksi Berhasil!";
+                    if (change > 0) {
+                        message += "\nKembalian: " + formatter.format(change);
+                    }
+                    android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show();
+                } catch (NumberFormatException e) {
+                    android.widget.Toast.makeText(this, "Input tidak valid", android.widget.Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        
+        dialog.show();
     }
 }

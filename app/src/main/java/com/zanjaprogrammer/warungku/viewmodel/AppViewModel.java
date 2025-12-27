@@ -136,9 +136,18 @@ public class AppViewModel extends AndroidViewModel {
     public void insertProduct(Product product) {
         repository.insertProduct(product);
     }
+    
+    public void addProduct(Product product) {
+        repository.insertProduct(product);
+    }
 
     public void updateProduct(Product product) {
         repository.updateProduct(product);
+    }
+    
+    public void refreshProducts() {
+        // Force refresh by re-observing (LiveData will automatically update)
+        // This is a no-op but can be used to trigger refresh if needed
     }
 
     public void insertCashFlow(CashFlow cashFlow) {
@@ -163,5 +172,30 @@ public class AppViewModel extends AndroidViewModel {
 
     public void getProductByBarcode(String barcode, DataRepository.ProductCallback callback) {
         repository.getProductByBarcode(barcode, callback);
+    }
+
+    // Methods untuk laporan
+    public LiveData<List<Product>> getTopSellingProducts(int limit) {
+        return repository.getTopSellingProducts(limit);
+    }
+
+    public LiveData<List<Product>> getUnsoldProducts() {
+        return repository.getUnsoldProducts();
+    }
+
+    public LiveData<List<CashFlow>> getCashFlowInRange(long start, long end) {
+        return repository.getCashFlowInRange(start, end);
+    }
+
+    public LiveData<Double> getIncomeInRange(long start, long end) {
+        return repository.getIncomeInRange(start, end);
+    }
+
+    public LiveData<Double> getExpenseInRange(long start, long end) {
+        return repository.getExpenseInRange(start, end);
+    }
+
+    public LiveData<Double> getProfitInRange(long start, long end) {
+        return repository.getProfitInRange(start, end);
     }
 }

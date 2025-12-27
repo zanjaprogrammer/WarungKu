@@ -19,6 +19,8 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 - ✅ Total Belanja Stok Tracking
 - ✅ Progress Bar Pengembalian Modal
 - ✅ Shopping Cart Persisten (terlihat di semua halaman)
+- ✅ Export/Import Produk (Excel)
+- ✅ Kalkulator Kembalian (Payment Calculator)
 
 ---
 
@@ -169,13 +171,15 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 ---
 
-### 8. **Export/Import Produk** 📤📥
-**Prioritas: RENDAH** | **Effort: SEDANG**
+### 8. **Export/Import Produk** 📤📥 ✅ **SUDAH DIIMPLEMENTASI**
+**Prioritas: RENDAH** | **Effort: SEDANG** | **Status: SELESAI**
 
 #### Fitur:
-- Export daftar produk ke Excel/CSV
-- Import produk dari Excel/CSV (untuk bulk input)
-- Template Excel untuk import
+- ✅ Export daftar produk ke Excel (.xlsx)
+- ✅ Import produk dari Excel (.xlsx) dengan update produk existing
+- ✅ Template Excel untuk import
+- ✅ Validasi data saat import (name & sell price required)
+- ✅ Graceful handling untuk kolom opsional yang kosong
 
 #### Kenapa Penting:
 - Memudahkan input banyak produk sekaligus
@@ -183,9 +187,10 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 - Cocok untuk warung yang punya banyak produk
 
 #### Implementasi:
-- Library untuk read/write Excel (Apache POI atau yang lebih ringan)
-- Simple UI untuk export/import
-- Validasi data saat import
+- ✅ Apache POI untuk read/write Excel
+- ✅ Menu di toolbar StockActivity (overflow menu)
+- ✅ FileProvider untuk secure file sharing
+- ✅ Intent.ACTION_SEND untuk share file
 
 ---
 
@@ -210,15 +215,40 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 ---
 
-### 10. **Pelacak Produk Terlaris** 
+### 10. **Kalkulator Kembalian** 💰 ✅ **SUDAH DIIMPLEMENTASI**
+**Prioritas: TINGGI** | **Effort: RENDAH** | **Status: SELESAI**
 
-### Fitur:
+#### Fitur:
+- ✅ Bottom sheet pembayaran saat checkout
+- ✅ Input uang bayar dengan validasi real-time
+- ✅ Kalkulator kembalian otomatis
+- ✅ Peringatan jika uang bayar kurang (dengan jumlah kekurangan)
+- ✅ Auto-focus dan keyboard otomatis muncul
+- ✅ Integrasi di semua halaman (Home, Sell, Stock, History, Summary)
+
+#### Kenapa Penting:
+- Mempercepat proses checkout
+- Mengurangi kesalahan hitung kembalian
+- Standar di aplikasi kasir modern
+- User experience yang lebih baik
+
+#### Implementasi:
+- ✅ BottomSheetDialog dengan layout khusus
+- ✅ TextWatcher untuk real-time calculation
+- ✅ Validasi input dan enable/disable tombol konfirmasi
+- ✅ Toast notification dengan informasi kembalian
+
+---
+
+### 11. **Pelacak Produk Terlaris** 
+
+#### Fitur:
  - Mencatat produk produk yg paling laris dan yg tidak
  - Mencatat keuntungan produk tersebut berdasarkan waktu (hari/minggu/bulan/tahun)
  - Mencatat total keuntungan dan persen
  - Mencatat total kerugian dan persen
 
-### Lokasi:
+#### Lokasi:
  - Fitur ini akan ditempatkan pada halaman ringkasan
 
 ## ❌ Fitur yang TIDAK Akan Dibuat (Terlalu Kompleks untuk Warung Kecil)
@@ -415,12 +445,12 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 **Dibuat oleh:** AI Assistant  
 **Tanggal:** 26 Desember 2024  
-**Versi:** 2.1 (Updated Progress - 27 Desember 2024)  
+**Versi:** 2.2 (Updated Progress - 28 Desember 2024)  
 **Target User:** Pemilik Warung/UMKM Kecil
 
 ---
 
-## 📈 Progress Update (27 Desember 2024)
+## 📈 Progress Update (28 Desember 2024)
 
 ### ✅ Fitur yang Baru Selesai:
 1. **Barcode Scanner** - Implementasi lengkap dengan:
@@ -449,6 +479,25 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
    - Cart terlihat di semua halaman (Home, Stock, Sell, History, Summary)
    - Menampilkan total quantity (bukan jumlah tipe produk)
    - Singleton ViewModel untuk persist cart state
+
+6. **Export/Import Produk** - Implementasi lengkap dengan:
+   - Export produk ke Excel (.xlsx) dengan semua field
+   - Import produk dari Excel dengan update produk existing
+   - Generate template Excel untuk import
+   - Validasi data (name & sell price required)
+   - Graceful handling untuk kolom opsional kosong
+   - Menu di toolbar StockActivity (overflow menu)
+   - FileProvider untuk secure file sharing
+
+7. **Kalkulator Kembalian** - Implementasi lengkap dengan:
+   - Bottom sheet pembayaran saat klik tombol "JUAL"
+   - Input uang bayar dengan validasi real-time
+   - Kalkulator kembalian otomatis (update saat user mengetik)
+   - Peringatan visual jika uang bayar kurang (dengan jumlah kekurangan)
+   - Auto-focus dan keyboard otomatis muncul
+   - Tombol konfirmasi hanya aktif jika uang cukup
+   - Toast notification dengan informasi kembalian setelah transaksi
+   - Integrasi di semua halaman yang memiliki cart (Home, Sell, Stock, History, Summary)
 
 ### 🔄 Fitur yang Sedang Dikembangkan:
 - Tidak ada

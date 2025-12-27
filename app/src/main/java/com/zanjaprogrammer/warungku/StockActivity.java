@@ -1,19 +1,32 @@
 package com.zanjaprogrammer.warungku;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.zanjaprogrammer.warungku.adapters.ProductStockAdapter;
 import com.zanjaprogrammer.warungku.databinding.ActivityStockBinding;
+import com.zanjaprogrammer.warungku.utils.ExcelExporter;
+import com.zanjaprogrammer.warungku.utils.ExcelImporter;
 import com.zanjaprogrammer.warungku.viewmodel.AppViewModel;
+
+import java.io.InputStream;
+import java.util.List;
 
 public class StockActivity extends AppCompatActivity {
 
     private ActivityStockBinding binding;
     private AppViewModel viewModel;
     private ProductStockAdapter adapter;
+    private List<com.zanjaprogrammer.warungku.data.entity.Product> allProducts;
+    private ActivityResultLauncher<String> filePickerLauncher;
+    private ActivityResultLauncher<String> fileSaverLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +37,11 @@ public class StockActivity extends AppCompatActivity {
         // Use singleton instance untuk persist cart across activities
         viewModel = AppViewModel.getInstance(getApplication());
         setupRecyclerView();
+        setupFilePickers();
+        setupToolbarMenu();
 
         viewModel.getAllProducts().observe(this, products -> {
+            allProducts = products;
             adapter.setProducts(products);
         });
 
@@ -51,8 +67,7 @@ public class StockActivity extends AppCompatActivity {
         });
 
         binding.btnCheckout.setOnClickListener(v -> {
-            viewModel.checkout();
-            android.widget.Toast.makeText(this, "Transaksi Berhasil!", android.widget.Toast.LENGTH_SHORT).show();
+            showPaymentBottomSheet();
         });
 
         binding.fabAdd.setOnClickListener(v -> {
@@ -99,6 +114,228 @@ public class StockActivity extends AppCompatActivity {
         });
         binding.rvStock.setLayoutManager(new LinearLayoutManager(this));
         binding.rvStock.setAdapter(adapter);
+    }
+    
+    private void setupFilePickers() {
+        // File picker for import
+        filePickerLauncher = registerForActivityResult(
+            new ActivityResultContracts.GetContent(),
+            uri -> {
+                if (uri != null) {
+                    importProductsFromUri(uri);
+                }
+            }
+        );
+        
+        // File saver for export
+        fileSaverLauncher = registerForActivityResult(
+            new ActivityResultContracts.CreateDocument("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
+            uri -> {
+                if (uri != null) {
+                    exportProductsToUri(uri);
+                }
+            }
+        );
+    }
+    
+    private void setupToolbarMenu() {
+        binding.toolbar.setOnMenuItemClickListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.menu_export) {
+                exportProducts();
+                return true;
+            } else if (id == R.id.menu_import) {
+                importProducts();
+                return true;
+            } else if (id == R.id.menu_template) {
+                generateTemplate();
+                return true;
+            }
+            return false;
+        });
+    }
+    
+    private void exportProducts() {
+        if (allProducts == null || allProducts.isEmpty()) {
+            Toast.makeText(this, "Tidak ada produk untuk diexport", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        // Show progress dialog
+        AlertDialog progressDialog = new AlertDialog.Builder(this)
+            .setMessage("Mengexport produk...")
+            .setCancelable(false)
+            .create();
+        progressDialog.show();
+        
+        // Run export in background
+        new Thread(() -> {
+            ExcelExporter.ExportResult result = ExcelExporter.exportProducts(this, allProducts);
+            
+            runOnUiThread(() -> {
+                progressDialog.dismiss();
+                
+                if (result.success) {
+                    // Share file using Intent
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+                    
+                    // Use FileProvider for secure file sharing
+                    android.net.Uri fileUri = androidx.core.content.FileProvider.getUriForFile(
+                        this,
+                        getPackageName() + ".fileprovider",
+                        new java.io.File(result.filePath)
+                    );
+                    
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Export Produk WarungKu");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, "File export produk dari aplikasi WarungKu");
+                    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    
+                    try {
+                        startActivity(Intent.createChooser(shareIntent, "Bagikan atau Buka File Excel"));
+                        Toast.makeText(this, "File tersimpan di Downloads", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        // Fallback: show file path
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setTitle("Export Berhasil");
+                        builder.setMessage("File tersimpan di:\n" + result.filePath);
+                        builder.setPositiveButton("OK", null);
+                        builder.show();
+                    }
+                } else {
+                    Toast.makeText(this, "Export gagal: " + result.errorMessage, Toast.LENGTH_LONG).show();
+                }
+            });
+        }).start();
+    }
+    
+    private void exportProductsToUri(Uri uri) {
+        if (allProducts == null || allProducts.isEmpty()) {
+            Toast.makeText(this, "Tidak ada produk untuk diexport", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        // For now, use the default export method
+        // In future, can implement direct write to URI
+        exportProducts();
+    }
+    
+    private void importProducts() {
+        filePickerLauncher.launch("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    }
+    
+    private void importProductsFromUri(Uri uri) {
+        AlertDialog progressDialog = new AlertDialog.Builder(this)
+            .setMessage("Mengimport produk...")
+            .setCancelable(false)
+            .create();
+        progressDialog.show();
+        
+        new Thread(() -> {
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+                ExcelImporter.ImportResult result = ExcelImporter.importProductsFromStream(this, inputStream, allProducts);
+                inputStream.close();
+                
+                runOnUiThread(() -> {
+                    progressDialog.dismiss();
+                    showImportResult(result);
+                });
+            } catch (Exception e) {
+                runOnUiThread(() -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(this, "Error membaca file: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                });
+            }
+        }).start();
+    }
+    
+    private void showImportResult(ExcelImporter.ImportResult result) {
+        // Save imported products to database
+        for (com.zanjaprogrammer.warungku.data.entity.Product product : result.importedProducts) {
+            // Check if product has ID (existing product to update)
+            if (product.id > 0) {
+                viewModel.updateProduct(product);
+            } else {
+                // New product
+                viewModel.addProduct(product);
+            }
+        }
+        
+        // Show result dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Import Selesai");
+        
+        StringBuilder message = new StringBuilder();
+        message.append("✅ Berhasil: ").append(result.successCount).append(" produk\n");
+        message.append("❌ Gagal: ").append(result.failCount).append(" produk\n\n");
+        
+        if (!result.errors.isEmpty()) {
+            message.append("Detail error:\n");
+            int maxErrors = Math.min(result.errors.size(), 10); // Show max 10 errors
+            for (int i = 0; i < maxErrors; i++) {
+                message.append("• ").append(result.errors.get(i)).append("\n");
+            }
+            if (result.errors.size() > 10) {
+                message.append("... dan ").append(result.errors.size() - 10).append(" error lainnya");
+            }
+        }
+        
+        builder.setMessage(message.toString());
+        builder.setPositiveButton("OK", null);
+        builder.show();
+        
+        // Refresh product list
+        viewModel.refreshProducts();
+    }
+    
+    private void generateTemplate() {
+        AlertDialog progressDialog = new AlertDialog.Builder(this)
+            .setMessage("Membuat template...")
+            .setCancelable(false)
+            .create();
+        progressDialog.show();
+        
+        new Thread(() -> {
+            ExcelExporter.ExportResult result = ExcelExporter.generateTemplate(this);
+            
+            runOnUiThread(() -> {
+                progressDialog.dismiss();
+                
+                if (result.success) {
+                    // Share file using Intent
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+                    
+                    // Use FileProvider for secure file sharing
+                    android.net.Uri fileUri = androidx.core.content.FileProvider.getUriForFile(
+                        this,
+                        getPackageName() + ".fileprovider",
+                        new java.io.File(result.filePath)
+                    );
+                    
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Template Import Produk WarungKu");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, "Template untuk import produk ke aplikasi WarungKu");
+                    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    
+                    try {
+                        startActivity(Intent.createChooser(shareIntent, "Bagikan atau Buka Template Excel"));
+                        Toast.makeText(this, "File template tersimpan di Downloads", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        // Fallback: show file path
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setTitle("Template Berhasil Dibuat");
+                        builder.setMessage("File template tersimpan di:\n" + result.filePath);
+                        builder.setPositiveButton("OK", null);
+                        builder.show();
+                    }
+                } else {
+                    Toast.makeText(this, "Gagal membuat template: " + result.errorMessage, Toast.LENGTH_LONG).show();
+                }
+            });
+        }).start();
     }
 
     private void showStockActionDialog(com.zanjaprogrammer.warungku.data.entity.Product product) {
@@ -310,5 +547,171 @@ public class StockActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Batal", null)
                 .show();
+    }
+    
+    private void showPaymentBottomSheet() {
+        Double cartTotal = viewModel.getCartTotal().getValue();
+        if (cartTotal == null || cartTotal <= 0) {
+            android.widget.Toast.makeText(this, "Keranjang kosong", android.widget.Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        com.google.android.material.bottomsheet.BottomSheetDialog dialog = new com.google.android.material.bottomsheet.BottomSheetDialog(this);
+        android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_payment, null);
+        dialog.setContentView(view);
+        
+        java.text.NumberFormat formatter = java.text.NumberFormat.getCurrencyInstance(java.util.Locale.forLanguageTag("id-ID"));
+        
+        android.widget.TextView tvPaymentTotal = view.findViewById(R.id.tvPaymentTotal);
+        tvPaymentTotal.setText(formatter.format(cartTotal));
+        
+        // Metode pembayaran
+        com.google.android.material.button.MaterialButtonToggleGroup togglePaymentMethod = view.findViewById(R.id.togglePaymentMethod);
+        android.view.View layoutCashInput = view.findViewById(R.id.layoutCashInput);
+        
+        // Input uang bayar
+        com.google.android.material.textfield.TextInputEditText etPaymentAmount = view.findViewById(R.id.etPaymentAmount);
+        com.google.android.material.button.MaterialButton btnQuick5k = view.findViewById(R.id.btnQuick5k);
+        com.google.android.material.button.MaterialButton btnQuick10k = view.findViewById(R.id.btnQuick10k);
+        com.google.android.material.button.MaterialButton btnQuick100k = view.findViewById(R.id.btnQuick100k);
+        
+        // Display kembalian
+        android.widget.TextView tvChange = view.findViewById(R.id.tvChange);
+        com.google.android.material.card.MaterialCardView cardChange = view.findViewById(R.id.cardChange);
+        com.google.android.material.card.MaterialCardView cardInsufficient = view.findViewById(R.id.cardInsufficient);
+        android.widget.TextView tvShortage = view.findViewById(R.id.tvShortage);
+        com.google.android.material.button.MaterialButton btnConfirm = view.findViewById(R.id.btnConfirmPayment);
+        
+        // Default: Tunai
+        boolean[] isQRIS = {false};
+        
+        // Toggle metode pembayaran
+        togglePaymentMethod.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+            if (isChecked) {
+                if (checkedId == R.id.btnQRIS) {
+                    isQRIS[0] = true;
+                    layoutCashInput.setVisibility(android.view.View.GONE);
+                    cardChange.setVisibility(android.view.View.GONE);
+                    cardInsufficient.setVisibility(android.view.View.GONE);
+                    btnConfirm.setEnabled(true); // QRIS langsung bisa konfirmasi
+                } else {
+                    isQRIS[0] = false;
+                    layoutCashInput.setVisibility(android.view.View.VISIBLE);
+                    btnConfirm.setEnabled(false);
+                    etPaymentAmount.requestFocus();
+                    android.view.inputmethod.InputMethodManager imm = (android.view.inputmethod.InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        imm.showSoftInput(etPaymentAmount, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT);
+                    }
+                }
+            }
+        });
+        
+        // Tombol cepat
+        btnQuick5k.setOnClickListener(v -> {
+            etPaymentAmount.setText("5000");
+            etPaymentAmount.setSelection(etPaymentAmount.getText().length());
+        });
+        
+        btnQuick10k.setOnClickListener(v -> {
+            etPaymentAmount.setText("10000");
+            etPaymentAmount.setSelection(etPaymentAmount.getText().length());
+        });
+        
+        btnQuick100k.setOnClickListener(v -> {
+            etPaymentAmount.setText("100000");
+            etPaymentAmount.setSelection(etPaymentAmount.getText().length());
+        });
+        
+        // Real-time calculation untuk Tunai
+        android.text.TextWatcher paymentWatcher = new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isQRIS[0]) return; // Skip jika QRIS
+                
+                String amountStr = s.toString().trim();
+                if (amountStr.isEmpty()) {
+                    cardChange.setVisibility(android.view.View.GONE);
+                    cardInsufficient.setVisibility(android.view.View.GONE);
+                    btnConfirm.setEnabled(false);
+                    return;
+                }
+                
+                try {
+                    double paymentAmount = Double.parseDouble(amountStr);
+                    double change = paymentAmount - cartTotal;
+                    
+                    if (change >= 0) {
+                        cardChange.setVisibility(android.view.View.VISIBLE);
+                        cardInsufficient.setVisibility(android.view.View.GONE);
+                        tvChange.setText(formatter.format(change));
+                        btnConfirm.setEnabled(true);
+                    } else {
+                        cardChange.setVisibility(android.view.View.GONE);
+                        cardInsufficient.setVisibility(android.view.View.VISIBLE);
+                        tvShortage.setText(formatter.format(Math.abs(change)));
+                        btnConfirm.setEnabled(false);
+                    }
+                } catch (NumberFormatException e) {
+                    cardChange.setVisibility(android.view.View.GONE);
+                    cardInsufficient.setVisibility(android.view.View.GONE);
+                    btnConfirm.setEnabled(false);
+                }
+            }
+            
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        };
+        
+        etPaymentAmount.addTextChangedListener(paymentWatcher);
+        etPaymentAmount.requestFocus();
+        etPaymentAmount.post(() -> etPaymentAmount.selectAll());
+        
+        android.view.inputmethod.InputMethodManager imm = (android.view.inputmethod.InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(etPaymentAmount, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT);
+        }
+        
+        btnConfirm.setOnClickListener(v -> {
+            if (isQRIS[0]) {
+                // QRIS: langsung checkout tanpa perlu input uang
+                viewModel.checkout();
+                dialog.dismiss();
+                android.widget.Toast.makeText(this, "Transaksi Berhasil! (QRIS)", android.widget.Toast.LENGTH_SHORT).show();
+            } else {
+                // Tunai: perlu validasi uang bayar
+                String amountStr = etPaymentAmount.getText().toString().trim();
+                if (amountStr.isEmpty()) {
+                    android.widget.Toast.makeText(this, "Masukkan uang bayar", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                
+                try {
+                    double paymentAmount = Double.parseDouble(amountStr);
+                    double change = paymentAmount - cartTotal;
+                    
+                    if (change < 0) {
+                        android.widget.Toast.makeText(this, "Uang bayar kurang!", android.widget.Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    
+                    viewModel.checkout();
+                    dialog.dismiss();
+                    
+                    String message = "Transaksi Berhasil!";
+                    if (change > 0) {
+                        message += "\nKembalian: " + formatter.format(change);
+                    }
+                    android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show();
+                } catch (NumberFormatException e) {
+                    android.widget.Toast.makeText(this, "Input tidak valid", android.widget.Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        
+        dialog.show();
     }
 }

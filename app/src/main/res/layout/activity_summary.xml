@@ -21,6 +21,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="80dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -28,7 +30,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp"
-            android:paddingBottom="80dp">
+            android:paddingBottom="20dp">
 
             <!-- Filter Chips -->
             <HorizontalScrollView
@@ -78,7 +80,7 @@
                 android:layout_marginBottom="16dp"
                 android:visibility="gone"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
+                app:cardElevation="4dp"
                 app:cardBackgroundColor="@color/warning_light"
                 android:alpha="0.9">
                 <LinearLayout
@@ -89,7 +91,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Keuntungan belum bisa dihitung"
+                        android:text="Tracking Pengembalian Modal (Opsional)"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="@color/warning_dark"
@@ -97,18 +99,32 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Isi modal awal untuk melihat hasil"
+                        android:text="Isi modal awal untuk melacak progress pengembalian modal Anda. Fitur ini opsional dan tidak wajib diisi."
                         android:textSize="14sp"
                         android:textColor="@color/text_secondary"
                         android:layout_marginBottom="12dp"/>
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnSetCapitalFromWarning"
-                        style="@style/Widget.Material3.Button"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ISI MODAL"
-                        android:textColor="@android:color/white"
-                        app:backgroundTint="@color/warning"/>
+                        android:orientation="horizontal"
+                        android:gravity="end">
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSkipCapitalWarning"
+                            style="@style/Widget.Material3.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lewati"
+                            android:textColor="@color/text_secondary"
+                            android:layout_marginEnd="8dp"/>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnSetCapitalFromWarning"
+                            style="@style/Widget.Material3.Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ISI MODAL"
+                            android:textColor="@android:color/white"
+                            app:backgroundTint="@color/warning"/>
+                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -118,8 +134,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@color/primary">
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@android:color/transparent">
+                <android.view.View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_card_hero_gradient"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -153,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
+                app:cardElevation="4dp"
                 app:cardBackgroundColor="@color/background">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -196,7 +216,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
+                app:cardElevation="4dp"
                 app:cardBackgroundColor="@color/background">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -241,7 +261,7 @@
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
+                    app:cardElevation="4dp"
                     app:cardBackgroundColor="@color/background">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -271,7 +291,7 @@
                     android:layout_columnWeight="1"
                     android:layout_margin="4dp"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="2dp"
+                    app:cardElevation="4dp"
                     app:cardBackgroundColor="@color/background">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -305,7 +325,11 @@
                 android:visibility="gone"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
-                app:cardBackgroundColor="@color/primary">
+                app:cardBackgroundColor="@android:color/transparent">
+                <android.view.View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_card_hero_gradient"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -326,17 +350,28 @@
                         android:text="Anda telah balik modal!"
                         android:textSize="16sp"
                         android:textColor="@android:color/white"
-                        android:alpha="0.95"/>
+                        android:alpha="0.95"
+                        android:layout_marginBottom="12dp"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnHideProgressBar"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sembunyikan Progress Bar"
+                        android:textColor="@android:color/white"
+                        app:strokeColor="@android:color/white"
+                        app:strokeWidth="1dp"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- ROI Section -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardRoiSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
+                app:cardElevation="4dp"
                 app:cardBackgroundColor="@color/background">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -376,6 +411,7 @@
                         android:layout_height="24dp"
                         android:max="100"
                         android:progress="0"
+                        android:progressDrawable="@drawable/bg_progress_gradient"
                         android:progressTint="@color/primary"
                         android:layout_marginBottom="8dp"/>
                     <TextView
@@ -393,6 +429,59 @@
                         android:textSize="11sp"
                         android:textColor="@color/text_hint"
                         android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card Tombol Laporan -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardReport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                app:cardBackgroundColor="@android:color/transparent">
+                <android.view.View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_card_hero_gradient"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    android:gravity="center_vertical">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📊 LAPORAN"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white"
+                            android:layout_marginBottom="4dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lihat laporan penjualan, produk terlaris, dan grafik trend"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/white"
+                            android:alpha="0.9"/>
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="→"
+                        android:textSize="32sp"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -420,8 +509,12 @@
         android:layout_marginBottom="80dp"
         android:visibility="gone"
         app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/primary">
+        app:cardElevation="12dp"
+        app:cardBackgroundColor="@android:color/transparent">
+        <android.view.View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_card_hero_gradient"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -452,13 +545,16 @@
             </LinearLayout>
             <Button
                 android:id="@+id/btnCheckout"
-                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="JUAL"
-                android:backgroundTint="@android:color/white"
-                android:textColor="@color/primary"
-                android:textStyle="bold"/>
+                android:background="@drawable/bg_button_primary_gradient"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:elevation="8dp"
+                android:stateListAnimator="@null"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

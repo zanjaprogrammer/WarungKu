@@ -44,4 +44,9 @@ public interface CashFlowDao {
 
     @Query("SELECT SUM(amount) FROM cash_flow WHERE type = 'OUT' AND (productId IS NOT NULL OR description LIKE 'Tambah Stok:%') AND timestamp BETWEEN :start AND :end")
     LiveData<Double> getTotalStockPurchaseInRange(long start, long end);
+
+    // Query untuk grafik: Data harian dalam periode tertentu (untuk trend)
+    // Mengembalikan semua cash flow dalam range, akan diproses di ViewModel
+    @Query("SELECT * FROM cash_flow WHERE timestamp BETWEEN :start AND :end ORDER BY timestamp ASC")
+    LiveData<List<CashFlow>> getCashFlowInRange(long start, long end);
 }

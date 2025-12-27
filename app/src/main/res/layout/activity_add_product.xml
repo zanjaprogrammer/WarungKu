@@ -97,7 +97,12 @@
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:text="SIMPAN BARANG"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@drawable/bg_button_primary_gradient"
+            android:textColor="@android:color/white"
+            android:elevation="8dp"
+            android:stateListAnimator="@null"/>
 
     </LinearLayout>
 </ScrollView>

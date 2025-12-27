@@ -28,9 +28,12 @@ public class HistoryActivity extends AppCompatActivity {
             adapter.setItems(history);
         });
 
+        // Format currency konsisten dengan MainActivity
+        java.text.NumberFormat balanceFormatter = java.text.NumberFormat
+                .getCurrencyInstance(java.util.Locale.forLanguageTag("id-ID"));
+        
         viewModel.getBalance().observe(this, balance -> {
-            binding.tvBalance.setText(java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("id", "ID"))
-                    .format(balance != null ? balance : 0));
+            binding.tvBalance.setText(balanceFormatter.format(balance != null ? balance : 0));
         });
 
         // Observe Cart
@@ -55,8 +58,7 @@ public class HistoryActivity extends AppCompatActivity {
         });
 
         binding.btnCheckout.setOnClickListener(v -> {
-            viewModel.checkout();
-            android.widget.Toast.makeText(this, "Transaksi Berhasil!", android.widget.Toast.LENGTH_SHORT).show();
+            showPaymentBottomSheet();
         });
 
         binding.bottomNavigation.setSelectedItemId(R.id.nav_money);
@@ -131,5 +133,171 @@ public class HistoryActivity extends AppCompatActivity {
         adapter = new HistoryAdapter();
         binding.rvHistory.setLayoutManager(new LinearLayoutManager(this));
         binding.rvHistory.setAdapter(adapter);
+    }
+    
+    private void showPaymentBottomSheet() {
+        Double cartTotal = viewModel.getCartTotal().getValue();
+        if (cartTotal == null || cartTotal <= 0) {
+            android.widget.Toast.makeText(this, "Keranjang kosong", android.widget.Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        com.google.android.material.bottomsheet.BottomSheetDialog dialog = new com.google.android.material.bottomsheet.BottomSheetDialog(this);
+        android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_payment, null);
+        dialog.setContentView(view);
+        
+        java.text.NumberFormat formatter = java.text.NumberFormat.getCurrencyInstance(java.util.Locale.forLanguageTag("id-ID"));
+        
+        android.widget.TextView tvPaymentTotal = view.findViewById(R.id.tvPaymentTotal);
+        tvPaymentTotal.setText(formatter.format(cartTotal));
+        
+        // Metode pembayaran
+        com.google.android.material.button.MaterialButtonToggleGroup togglePaymentMethod = view.findViewById(R.id.togglePaymentMethod);
+        android.view.View layoutCashInput = view.findViewById(R.id.layoutCashInput);
+        
+        // Input uang bayar
+        com.google.android.material.textfield.TextInputEditText etPaymentAmount = view.findViewById(R.id.etPaymentAmount);
+        com.google.android.material.button.MaterialButton btnQuick5k = view.findViewById(R.id.btnQuick5k);
+        com.google.android.material.button.MaterialButton btnQuick10k = view.findViewById(R.id.btnQuick10k);
+        com.google.android.material.button.MaterialButton btnQuick100k = view.findViewById(R.id.btnQuick100k);
+        
+        // Display kembalian
+        android.widget.TextView tvChange = view.findViewById(R.id.tvChange);
+        com.google.android.material.card.MaterialCardView cardChange = view.findViewById(R.id.cardChange);
+        com.google.android.material.card.MaterialCardView cardInsufficient = view.findViewById(R.id.cardInsufficient);
+        android.widget.TextView tvShortage = view.findViewById(R.id.tvShortage);
+        com.google.android.material.button.MaterialButton btnConfirm = view.findViewById(R.id.btnConfirmPayment);
+        
+        // Default: Tunai
+        boolean[] isQRIS = {false};
+        
+        // Toggle metode pembayaran
+        togglePaymentMethod.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+            if (isChecked) {
+                if (checkedId == R.id.btnQRIS) {
+                    isQRIS[0] = true;
+                    layoutCashInput.setVisibility(android.view.View.GONE);
+                    cardChange.setVisibility(android.view.View.GONE);
+                    cardInsufficient.setVisibility(android.view.View.GONE);
+                    btnConfirm.setEnabled(true); // QRIS langsung bisa konfirmasi
+                } else {
+                    isQRIS[0] = false;
+                    layoutCashInput.setVisibility(android.view.View.VISIBLE);
+                    btnConfirm.setEnabled(false);
+                    etPaymentAmount.requestFocus();
+                    android.view.inputmethod.InputMethodManager imm = (android.view.inputmethod.InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        imm.showSoftInput(etPaymentAmount, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT);
+                    }
+                }
+            }
+        });
+        
+        // Tombol cepat
+        btnQuick5k.setOnClickListener(v -> {
+            etPaymentAmount.setText("5000");
+            etPaymentAmount.setSelection(etPaymentAmount.getText().length());
+        });
+        
+        btnQuick10k.setOnClickListener(v -> {
+            etPaymentAmount.setText("10000");
+            etPaymentAmount.setSelection(etPaymentAmount.getText().length());
+        });
+        
+        btnQuick100k.setOnClickListener(v -> {
+            etPaymentAmount.setText("100000");
+            etPaymentAmount.setSelection(etPaymentAmount.getText().length());
+        });
+        
+        // Real-time calculation untuk Tunai
+        android.text.TextWatcher paymentWatcher = new android.text.TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isQRIS[0]) return; // Skip jika QRIS
+                
+                String amountStr = s.toString().trim();
+                if (amountStr.isEmpty()) {
+                    cardChange.setVisibility(android.view.View.GONE);
+                    cardInsufficient.setVisibility(android.view.View.GONE);
+                    btnConfirm.setEnabled(false);
+                    return;
+                }
+                
+                try {
+                    double paymentAmount = Double.parseDouble(amountStr);
+                    double change = paymentAmount - cartTotal;
+                    
+                    if (change >= 0) {
+                        cardChange.setVisibility(android.view.View.VISIBLE);
+                        cardInsufficient.setVisibility(android.view.View.GONE);
+                        tvChange.setText(formatter.format(change));
+                        btnConfirm.setEnabled(true);
+                    } else {
+                        cardChange.setVisibility(android.view.View.GONE);
+                        cardInsufficient.setVisibility(android.view.View.VISIBLE);
+                        tvShortage.setText(formatter.format(Math.abs(change)));
+                        btnConfirm.setEnabled(false);
+                    }
+                } catch (NumberFormatException e) {
+                    cardChange.setVisibility(android.view.View.GONE);
+                    cardInsufficient.setVisibility(android.view.View.GONE);
+                    btnConfirm.setEnabled(false);
+                }
+            }
+            
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        };
+        
+        etPaymentAmount.addTextChangedListener(paymentWatcher);
+        etPaymentAmount.requestFocus();
+        etPaymentAmount.post(() -> etPaymentAmount.selectAll());
+        
+        android.view.inputmethod.InputMethodManager imm = (android.view.inputmethod.InputMethodManager) getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(etPaymentAmount, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT);
+        }
+        
+        btnConfirm.setOnClickListener(v -> {
+            if (isQRIS[0]) {
+                // QRIS: langsung checkout tanpa perlu input uang
+                viewModel.checkout();
+                dialog.dismiss();
+                android.widget.Toast.makeText(this, "Transaksi Berhasil! (QRIS)", android.widget.Toast.LENGTH_SHORT).show();
+            } else {
+                // Tunai: perlu validasi uang bayar
+                String amountStr = etPaymentAmount.getText().toString().trim();
+                if (amountStr.isEmpty()) {
+                    android.widget.Toast.makeText(this, "Masukkan uang bayar", android.widget.Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                
+                try {
+                    double paymentAmount = Double.parseDouble(amountStr);
+                    double change = paymentAmount - cartTotal;
+                    
+                    if (change < 0) {
+                        android.widget.Toast.makeText(this, "Uang bayar kurang!", android.widget.Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    
+                    viewModel.checkout();
+                    dialog.dismiss();
+                    
+                    String message = "Transaksi Berhasil!";
+                    if (change > 0) {
+                        message += "\nKembalian: " + formatter.format(change);
+                    }
+                    android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show();
+                } catch (NumberFormatException e) {
+                    android.widget.Toast.makeText(this, "Input tidak valid", android.widget.Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        
+        dialog.show();
     }
 }

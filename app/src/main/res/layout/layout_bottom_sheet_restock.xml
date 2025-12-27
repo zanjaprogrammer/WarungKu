@@ -92,8 +92,10 @@
         android:text="SIMPAN"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:cornerRadius="16dp"
-        android:backgroundTint="@color/primary"/>
+        android:background="@drawable/bg_button_primary_gradient"
+        android:textColor="@android:color/white"
+        android:elevation="8dp"
+        android:stateListAnimator="@null"/>
 
 </LinearLayout>
 
