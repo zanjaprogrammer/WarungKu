@@ -21,6 +21,8 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 - ✅ Shopping Cart Persisten (terlihat di semua halaman)
 - ✅ Export/Import Produk (Excel)
 - ✅ Kalkulator Kembalian (Payment Calculator)
+- ✅ Laporan Sederhana (Penjualan, Produk Terlaris, Grafik Trend)
+- ✅ UI Improvements (Shadows, Gradients, Modern Design)
 
 ---
 
@@ -43,9 +45,10 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 #### Implementasi:
 - ✅ Library ZXing (com.journeyapps:zxing-android-embedded)
 - ✅ Camera permission dengan Activity Result API
-- ✅ FloatingActionButton untuk scan di halaman jual
+- ✅ Toolbar menu item untuk scan di halaman jual (pojok kanan atas)
 - ✅ Auto-fill form dari API response
 - ✅ Hybrid approach: cek lokal dulu, lalu API
+- ✅ Auto-add ke cart dengan qty 1 saat scan di halaman jual (tanpa konfirmasi)
 
 ---
 
@@ -89,14 +92,16 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 ---
 
-### 4. **Laporan Sederhana** 📊
-**Prioritas: SEDANG** | **Effort: SEDANG**
+### 4. **Laporan Sederhana** 📊 ✅ **SUDAH DIIMPLEMENTASI**
+**Prioritas: SEDANG** | **Effort: SEDANG** | **Status: SELESAI**
 
 #### Fitur:
-- Laporan penjualan harian/mingguan/bulanan
-- Produk terlaris (top 10)
-- Produk yang tidak laku (untuk evaluasi)
-- Grafik sederhana (line chart untuk trend penjualan)
+- ✅ Laporan penjualan harian/mingguan/bulanan dengan filter waktu
+- ✅ Produk terlaris (top 10) berdasarkan jumlah penjualan
+- ✅ Produk yang tidak laku (belum pernah dijual) untuk evaluasi
+- ✅ Grafik sederhana (line chart untuk trend penjualan menggunakan MPAndroidChart)
+- ✅ Ringkasan keuangan (total pemasukan, pengeluaran, laba)
+- ✅ Card besar di halaman ringkasan untuk akses cepat ke laporan
 
 #### Kenapa Penting:
 - Pemilik warung perlu tahu produk mana yang laku
@@ -104,9 +109,11 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 - Tidak perlu analytics kompleks, cukup yang praktis
 
 #### Implementasi:
-- Query dari database yang sudah ada
-- Library chart sederhana (MPAndroidChart)
-- Export ke PDF sederhana
+- ✅ Query dari database yang sudah ada (DataRepository)
+- ✅ Library chart sederhana (MPAndroidChart)
+- ✅ ReportActivity dengan filter waktu (Hari/Minggu/Bulan)
+- ✅ ProductReportAdapter untuk menampilkan produk terlaris dan tidak laku
+- ✅ Real-time data update
 
 ---
 
@@ -445,19 +452,19 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 **Dibuat oleh:** AI Assistant  
 **Tanggal:** 26 Desember 2024  
-**Versi:** 2.2 (Updated Progress - 28 Desember 2024)  
+**Versi:** 2.3 (Updated Progress - 29 Desember 2024)  
 **Target User:** Pemilik Warung/UMKM Kecil
 
 ---
 
-## 📈 Progress Update (28 Desember 2024)
+## 📈 Progress Update (29 Desember 2024)
 
 ### ✅ Fitur yang Baru Selesai:
 1. **Barcode Scanner** - Implementasi lengkap dengan:
    - Scan untuk input produk baru
    - Scan untuk jual barang (auto-add ke cart dengan qty 1)
    - Integrasi Open Food Facts API untuk auto-fill data
-   - FloatingActionButton di halaman jual
+   - Toolbar menu item di pojok kanan atas halaman jual (dengan tooltip jelas)
    - Camera permission handling
 
 2. **Filter Waktu di Ringkasan** - Implementasi lengkap dengan:
@@ -474,6 +481,8 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
    - Progress bar visual untuk tracking ROI
    - Announcement card saat mencapai 100% (balik modal)
    - Update otomatis berdasarkan filter waktu
+   - Opsi untuk hide progress bar setelah balik modal
+   - Menampilkan sisa modal yang dibutuhkan untuk balik modal
 
 5. **Shopping Cart Persisten** - Implementasi lengkap dengan:
    - Cart terlihat di semua halaman (Home, Stock, Sell, History, Summary)
@@ -498,6 +507,27 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
    - Tombol konfirmasi hanya aktif jika uang cukup
    - Toast notification dengan informasi kembalian setelah transaksi
    - Integrasi di semua halaman yang memiliki cart (Home, Sell, Stock, History, Summary)
+   - Metode pembayaran: Tunai dan QRIS
+   - Tombol cepat untuk input uang (5rb, 10rb, 100rb)
+
+8. **Laporan Sederhana** - Implementasi lengkap dengan:
+   - ReportActivity dengan filter waktu (Hari/Minggu/Bulan)
+   - Ringkasan keuangan (total pemasukan, pengeluaran, laba)
+   - Grafik trend penjualan (line chart menggunakan MPAndroidChart)
+   - Top 10 produk terlaris berdasarkan jumlah penjualan
+   - Daftar produk yang tidak laku (belum pernah dijual)
+   - Card besar di halaman ringkasan untuk akses cepat
+   - Real-time data update
+
+9. **UI Improvements** - Implementasi lengkap dengan:
+   - Custom drawable gradients untuk tombol utama (primary buttons)
+   - Custom drawable gradients untuk hero cards (Uang Sekarang, Laba Bersih, Laporan)
+   - Enhanced shadows dan elevation untuk depth
+   - Gradien untuk FAB (FloatingActionButton)
+   - Subtle gradients untuk tonal/outlined buttons
+   - Progress bar dengan gradien
+   - Konsistensi visual di seluruh aplikasi
+   - Modern, clean design dengan depth yang lebih baik
 
 ### 🔄 Fitur yang Sedang Dikembangkan:
 - Tidak ada
