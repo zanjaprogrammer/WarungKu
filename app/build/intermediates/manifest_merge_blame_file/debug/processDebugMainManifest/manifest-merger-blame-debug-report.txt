@@ -5,111 +5,423 @@
 5    android:versionName="1.0" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="24"
+8        android:minSdkVersion="26"
 9        android:targetSdkVersion="34" />
 10
-11    <permission
-11-->[androidx.core:core:1.9.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/1cec98d0b2db29ee20807970971c8043/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
-12        android:name="com.zanjaprogrammer.warungku.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-12-->[androidx.core:core:1.9.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/1cec98d0b2db29ee20807970971c8043/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
-13        android:protectionLevel="signature" />
-13-->[androidx.core:core:1.9.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/1cec98d0b2db29ee20807970971c8043/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
+11    <uses-permission android:name="android.permission.CAMERA" />
+11-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:5:5-65
+11-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:5:22-62
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:6:5-67
+12-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:6:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:7:5-79
+13-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:7:22-76
 14
-15    <uses-permission android:name="com.zanjaprogrammer.warungku.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-15-->[androidx.core:core:1.9.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/1cec98d0b2db29ee20807970971c8043/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
-15-->[androidx.core:core:1.9.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/1cec98d0b2db29ee20807970971c8043/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
-16
-17    <application
-17-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:5:5-31:19
-18        android:allowBackup="true"
-18-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:6:9-35
-19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-19-->[androidx.core:core:1.9.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/1cec98d0b2db29ee20807970971c8043/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
-20        android:dataExtractionRules="@xml/data_extraction_rules"
-20-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:7:9-65
-21        android:debuggable="true"
-22        android:extractNativeLibs="false"
-23        android:fullBackupContent="@xml/backup_rules"
-23-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:8:9-54
-24        android:icon="@android:drawable/star_on"
-24-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:9:9-49
-25        android:label="@string/app_name"
-25-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:10:9-41
-26        android:roundIcon="@android:drawable/star_on"
-26-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:11:9-54
-27        android:supportsRtl="true"
-27-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:12:9-35
-28        android:theme="@style/Theme.WarungKu" >
-28-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:13:9-46
-29        <activity
-29-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:15:9-22:20
-30            android:name="com.zanjaprogrammer.warungku.MainActivity"
-30-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:16:13-41
-31            android:exported="true" >
-31-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:17:13-36
-32            <intent-filter>
-32-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:18:13-21:29
-33                <action android:name="android.intent.action.MAIN" />
-33-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:19:17-69
-33-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:19:25-66
-34
-35                <category android:name="android.intent.category.LAUNCHER" />
-35-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:20:17-77
-35-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:20:27-74
-36            </intent-filter>
-37        </activity>
-38        <activity android:name="com.zanjaprogrammer.warungku.SellActivity" />
-38-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:23:9-50
-38-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:23:19-47
-39        <activity android:name="com.zanjaprogrammer.warungku.StockActivity" />
-39-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:24:9-51
-39-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:24:19-48
-40        <activity android:name="com.zanjaprogrammer.warungku.AddProductActivity" />
-40-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:25:9-56
-40-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:25:19-53
-41        <activity android:name="com.zanjaprogrammer.warungku.HistoryActivity" />
-41-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:26:9-53
-41-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:26:19-50
-42        <activity android:name="com.zanjaprogrammer.warungku.ShoppingListActivity" />
-42-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:27:9-58
-42-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:27:19-55
-43        <activity
-43-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:28:9-30:39
-44            android:name="com.zanjaprogrammer.warungku.SummaryActivity"
-44-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:29:13-44
-45            android:exported="true" />
-45-->/Users/alkahfzanjabiil/Dev/WarungKu/app/src/main/AndroidManifest.xml:30:13-36
-46
-47        <service
-47-->[androidx.room:room-runtime:2.5.2] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/c08994a5550ee4c9c0162f1b3dac7e4a/transformed/room-runtime-2.5.2/AndroidManifest.xml:24:9-28:63
-48            android:name="androidx.room.MultiInstanceInvalidationService"
-48-->[androidx.room:room-runtime:2.5.2] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/c08994a5550ee4c9c0162f1b3dac7e4a/transformed/room-runtime-2.5.2/AndroidManifest.xml:25:13-74
-49            android:directBootAware="true"
-49-->[androidx.room:room-runtime:2.5.2] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/c08994a5550ee4c9c0162f1b3dac7e4a/transformed/room-runtime-2.5.2/AndroidManifest.xml:26:13-43
-50            android:exported="false" />
-50-->[androidx.room:room-runtime:2.5.2] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/c08994a5550ee4c9c0162f1b3dac7e4a/transformed/room-runtime-2.5.2/AndroidManifest.xml:27:13-37
-51
-52        <provider
-52-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
-53            android:name="androidx.startup.InitializationProvider"
-53-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
-54            android:authorities="com.zanjaprogrammer.warungku.androidx-startup"
-54-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
-55            android:exported="false" >
-55-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
-56            <meta-data
-56-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
-57                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-57-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
-58                android:value="androidx.startup" />
-58-->[androidx.emoji2:emoji2:1.2.0] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/238a939edeeaf72ef085850f1b0bb61a/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
-59            <meta-data
-59-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/df27701acf542fd150618e60febeea80/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
-60                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-60-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/df27701acf542fd150618e60febeea80/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
-61                android:value="androidx.startup" />
-61-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/alkahfzanjabiil/.gradle/caches/transforms-4/df27701acf542fd150618e60febeea80/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
-62        </provider>
-63    </application>
-64
-65</manifest>
+15    <uses-feature
+15-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:8:5-85
+16        android:name="android.hardware.camera"
+16-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:8:19-57
+17        android:required="false" />
+17-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:8:58-82
+18    <uses-feature
+18-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:9:5-95
+19        android:name="android.hardware.camera.autofocus"
+19-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:9:19-67
+20        android:required="false" />
+20-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:9:68-92
+21    <uses-feature
+21-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:28:5-30:36
+22        android:name="android.hardware.camera.front"
+22-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:29:9-53
+23        android:required="false" />
+23-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:30:9-33
+24    <uses-feature
+24-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:36:5-38:36
+25        android:name="android.hardware.camera.flash"
+25-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:37:9-53
+26        android:required="false" />
+26-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:38:9-33
+27    <uses-feature
+27-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:39:5-41:36
+28        android:name="android.hardware.screen.landscape"
+28-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:40:9-57
+29        android:required="false" />
+29-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:41:9-33
+30    <uses-feature
+30-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:42:5-44:36
+31        android:name="android.hardware.wifi"
+31-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:43:9-45
+32        android:required="false" />
+32-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:44:9-33
+33
+34    <uses-permission android:name="android.permission.WAKE_LOCK" />
+34-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:24:5-68
+34-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:24:22-65
+35    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+35-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:25:5-79
+35-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:25:22-76
+36    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" />
+36-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:26:5-88
+36-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:26:22-85
+37    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" />
+37-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:27:5-82
+37-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:27:22-79
+38    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+38-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:26:5-110
+38-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:26:22-107
+39
+40    <permission
+40-->[androidx.core:core:1.9.0] /Users/ekowibowo/.gradle/caches/transforms-4/47092a4bbfc0210a76eea704f3ad3947/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
+41        android:name="com.zanjaprogrammer.warungku.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+41-->[androidx.core:core:1.9.0] /Users/ekowibowo/.gradle/caches/transforms-4/47092a4bbfc0210a76eea704f3ad3947/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
+42        android:protectionLevel="signature" />
+42-->[androidx.core:core:1.9.0] /Users/ekowibowo/.gradle/caches/transforms-4/47092a4bbfc0210a76eea704f3ad3947/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
+43
+44    <uses-permission android:name="com.zanjaprogrammer.warungku.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+44-->[androidx.core:core:1.9.0] /Users/ekowibowo/.gradle/caches/transforms-4/47092a4bbfc0210a76eea704f3ad3947/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
+44-->[androidx.core:core:1.9.0] /Users/ekowibowo/.gradle/caches/transforms-4/47092a4bbfc0210a76eea704f3ad3947/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
+45
+46    <application
+46-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:11:5-54:19
+47        android:allowBackup="true"
+47-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:12:9-35
+48        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+48-->[androidx.core:core:1.9.0] /Users/ekowibowo/.gradle/caches/transforms-4/47092a4bbfc0210a76eea704f3ad3947/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
+49        android:dataExtractionRules="@xml/data_extraction_rules"
+49-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:13:9-65
+50        android:debuggable="true"
+51        android:extractNativeLibs="false"
+52        android:fullBackupContent="@xml/backup_rules"
+52-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:14:9-54
+53        android:icon="@android:drawable/star_on"
+53-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:15:9-49
+54        android:label="@string/app_name"
+54-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:16:9-41
+55        android:roundIcon="@android:drawable/star_on"
+55-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:17:9-54
+56        android:supportsRtl="true"
+56-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:18:9-35
+57        android:theme="@style/Theme.WarungKu" >
+57-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:19:9-46
+58        <activity
+58-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:21:9-28:20
+59            android:name="com.zanjaprogrammer.warungku.LoginActivity"
+59-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:22:13-42
+60            android:exported="true" >
+60-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:23:13-36
+61            <intent-filter>
+61-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:24:13-27:29
+62                <action android:name="android.intent.action.MAIN" />
+62-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:25:17-69
+62-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:25:25-66
+63
+64                <category android:name="android.intent.category.LAUNCHER" />
+64-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:26:17-77
+64-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:26:27-74
+65            </intent-filter>
+66        </activity>
+67        <activity android:name="com.zanjaprogrammer.warungku.MainActivity" />
+67-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:29:9-50
+67-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:29:19-47
+68        <activity android:name="com.zanjaprogrammer.warungku.SellActivity" />
+68-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:30:9-50
+68-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:30:19-47
+69        <activity android:name="com.zanjaprogrammer.warungku.StockActivity" />
+69-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:31:9-51
+69-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:31:19-48
+70        <activity android:name="com.zanjaprogrammer.warungku.AddProductActivity" />
+70-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:32:9-56
+70-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:32:19-53
+71        <activity android:name="com.zanjaprogrammer.warungku.HistoryActivity" />
+71-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:33:9-53
+71-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:33:19-50
+72        <activity android:name="com.zanjaprogrammer.warungku.ShoppingListActivity" />
+72-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:34:9-58
+72-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:34:19-55
+73        <activity
+73-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:35:9-37:39
+74            android:name="com.zanjaprogrammer.warungku.SummaryActivity"
+74-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:36:13-44
+75            android:exported="true" />
+75-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:37:13-36
+76        <activity android:name="com.zanjaprogrammer.warungku.ReportActivity" />
+76-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:38:9-52
+76-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:38:19-49
+77        <activity android:name="com.zanjaprogrammer.warungku.ManageEmployeesActivity" />
+77-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:39:9-61
+77-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:39:19-58
+78
+79        <service
+79-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:41:9-43:40
+80            android:name="com.zanjaprogrammer.warungku.sync.FirestoreSyncService"
+80-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:42:13-54
+81            android:exported="false" />
+81-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:43:13-37
+82
+83        <provider
+84            android:name="androidx.core.content.FileProvider"
+84-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:46:13-62
+85            android:authorities="com.zanjaprogrammer.warungku.fileprovider"
+85-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:47:13-64
+86            android:exported="false"
+86-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:48:13-37
+87            android:grantUriPermissions="true" >
+87-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:49:13-47
+88            <meta-data
+88-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:50:13-52:54
+89                android:name="android.support.FILE_PROVIDER_PATHS"
+89-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:51:17-67
+90                android:resource="@xml/file_paths" />
+90-->/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/AndroidManifest.xml:52:17-51
+91        </provider>
+92
+93        <service
+93-->[androidx.room:room-runtime:2.5.2] /Users/ekowibowo/.gradle/caches/transforms-4/162fb719403043cc6073c84c0b75a9b5/transformed/room-runtime-2.5.2/AndroidManifest.xml:24:9-28:63
+94            android:name="androidx.room.MultiInstanceInvalidationService"
+94-->[androidx.room:room-runtime:2.5.2] /Users/ekowibowo/.gradle/caches/transforms-4/162fb719403043cc6073c84c0b75a9b5/transformed/room-runtime-2.5.2/AndroidManifest.xml:25:13-74
+95            android:directBootAware="true"
+95-->[androidx.room:room-runtime:2.5.2] /Users/ekowibowo/.gradle/caches/transforms-4/162fb719403043cc6073c84c0b75a9b5/transformed/room-runtime-2.5.2/AndroidManifest.xml:26:13-43
+96            android:exported="false" />
+96-->[androidx.room:room-runtime:2.5.2] /Users/ekowibowo/.gradle/caches/transforms-4/162fb719403043cc6073c84c0b75a9b5/transformed/room-runtime-2.5.2/AndroidManifest.xml:27:13-37
+97
+98        <activity
+98-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:47:9-53:63
+99            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+99-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:48:13-74
+100            android:clearTaskOnLaunch="true"
+100-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:49:13-45
+101            android:screenOrientation="sensorLandscape"
+101-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:50:13-56
+102            android:stateNotNeeded="true"
+102-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:51:13-42
+103            android:theme="@style/zxing_CaptureTheme"
+103-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:52:13-54
+104            android:windowSoftInputMode="stateAlwaysHidden" />
+104-->[com.journeyapps:zxing-android-embedded:4.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/ee68f6580e8515b41f059fccf8f31c22/transformed/jetified-zxing-android-embedded-4.3.0/AndroidManifest.xml:53:13-60
+105
+106        <service
+106-->[com.google.firebase:firebase-firestore:24.10.0] /Users/ekowibowo/.gradle/caches/transforms-4/51993528904e0e769e9a57f001c25178/transformed/jetified-firebase-firestore-24.10.0/AndroidManifest.xml:14:9-23:19
+107            android:name="com.google.firebase.components.ComponentDiscoveryService"
+107-->[com.google.firebase:firebase-firestore:24.10.0] /Users/ekowibowo/.gradle/caches/transforms-4/51993528904e0e769e9a57f001c25178/transformed/jetified-firebase-firestore-24.10.0/AndroidManifest.xml:15:13-84
+108            android:directBootAware="true"
+108-->[com.google.firebase:firebase-common:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/440e48bad075b99890c07695194e017d/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:32:13-43
+109            android:exported="false" >
+109-->[com.google.firebase:firebase-firestore:24.10.0] /Users/ekowibowo/.gradle/caches/transforms-4/51993528904e0e769e9a57f001c25178/transformed/jetified-firebase-firestore-24.10.0/AndroidManifest.xml:16:13-37
+110            <meta-data
+110-->[com.google.firebase:firebase-firestore:24.10.0] /Users/ekowibowo/.gradle/caches/transforms-4/51993528904e0e769e9a57f001c25178/transformed/jetified-firebase-firestore-24.10.0/AndroidManifest.xml:17:13-19:85
+111                android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar"
+111-->[com.google.firebase:firebase-firestore:24.10.0] /Users/ekowibowo/.gradle/caches/transforms-4/51993528904e0e769e9a57f001c25178/transformed/jetified-firebase-firestore-24.10.0/AndroidManifest.xml:18:17-122
+112                android:value="com.google.firebase.components.ComponentRegistrar" />
+112-->[com.google.firebase:firebase-firestore:24.10.0] /Users/ekowibowo/.gradle/caches/transforms-4/51993528904e0e769e9a57f001c25178/transformed/jetified-firebase-firestore-24.10.0/AndroidManifest.xml:19:17-82
+113            <meta-data
+113-->[com.google.firebase:firebase-firestore:24.10.0] /Users/ekowibowo/.gradle/caches/transforms-4/51993528904e0e769e9a57f001c25178/transformed/jetified-firebase-firestore-24.10.0/AndroidManifest.xml:20:13-22:85
+114                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+114-->[com.google.firebase:firebase-firestore:24.10.0] /Users/ekowibowo/.gradle/caches/transforms-4/51993528904e0e769e9a57f001c25178/transformed/jetified-firebase-firestore-24.10.0/AndroidManifest.xml:21:17-111
+115                android:value="com.google.firebase.components.ComponentRegistrar" />
+115-->[com.google.firebase:firebase-firestore:24.10.0] /Users/ekowibowo/.gradle/caches/transforms-4/51993528904e0e769e9a57f001c25178/transformed/jetified-firebase-firestore-24.10.0/AndroidManifest.xml:22:17-82
+116            <meta-data
+116-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:69:13-71:85
+117                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+117-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:70:17-109
+118                android:value="com.google.firebase.components.ComponentRegistrar" />
+118-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:71:17-82
+119            <meta-data
+119-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:37:13-39:85
+120                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+120-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:38:17-139
+121                android:value="com.google.firebase.components.ComponentRegistrar" />
+121-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:39:17-82
+122            <meta-data
+122-->[com.google.firebase:firebase-installations:17.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/3a4f29b3385b531ecd2e108461e827e9/transformed/jetified-firebase-installations-17.2.0/AndroidManifest.xml:15:13-17:85
+123                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+123-->[com.google.firebase:firebase-installations:17.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/3a4f29b3385b531ecd2e108461e827e9/transformed/jetified-firebase-installations-17.2.0/AndroidManifest.xml:16:17-130
+124                android:value="com.google.firebase.components.ComponentRegistrar" />
+124-->[com.google.firebase:firebase-installations:17.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/3a4f29b3385b531ecd2e108461e827e9/transformed/jetified-firebase-installations-17.2.0/AndroidManifest.xml:17:17-82
+125            <meta-data
+125-->[com.google.firebase:firebase-installations:17.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/3a4f29b3385b531ecd2e108461e827e9/transformed/jetified-firebase-installations-17.2.0/AndroidManifest.xml:18:13-20:85
+126                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+126-->[com.google.firebase:firebase-installations:17.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/3a4f29b3385b531ecd2e108461e827e9/transformed/jetified-firebase-installations-17.2.0/AndroidManifest.xml:19:17-127
+127                android:value="com.google.firebase.components.ComponentRegistrar" />
+127-->[com.google.firebase:firebase-installations:17.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/3a4f29b3385b531ecd2e108461e827e9/transformed/jetified-firebase-installations-17.2.0/AndroidManifest.xml:20:17-82
+128            <meta-data
+128-->[com.google.firebase:firebase-common-ktx:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/0ea0b264a0919e96a8a486fbc2e35d9d/transformed/jetified-firebase-common-ktx-20.4.2/AndroidManifest.xml:12:13-14:85
+129                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+129-->[com.google.firebase:firebase-common-ktx:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/0ea0b264a0919e96a8a486fbc2e35d9d/transformed/jetified-firebase-common-ktx-20.4.2/AndroidManifest.xml:13:17-116
+130                android:value="com.google.firebase.components.ComponentRegistrar" />
+130-->[com.google.firebase:firebase-common-ktx:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/0ea0b264a0919e96a8a486fbc2e35d9d/transformed/jetified-firebase-common-ktx-20.4.2/AndroidManifest.xml:14:17-82
+131            <meta-data
+131-->[com.google.firebase:firebase-common:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/440e48bad075b99890c07695194e017d/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:35:13-37:85
+132                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+132-->[com.google.firebase:firebase-common:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/440e48bad075b99890c07695194e017d/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:36:17-109
+133                android:value="com.google.firebase.components.ComponentRegistrar" />
+133-->[com.google.firebase:firebase-common:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/440e48bad075b99890c07695194e017d/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:37:17-82
+134        </service>
+135
+136        <activity
+136-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:29:9-46:20
+137            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+137-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:30:13-80
+138            android:excludeFromRecents="true"
+138-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:31:13-46
+139            android:exported="true"
+139-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:32:13-36
+140            android:launchMode="singleTask"
+140-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:33:13-44
+141            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+141-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:34:13-72
+142            <intent-filter>
+142-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:35:13-45:29
+143                <action android:name="android.intent.action.VIEW" />
+143-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:36:17-69
+143-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:36:25-66
+144
+145                <category android:name="android.intent.category.DEFAULT" />
+145-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:38:17-76
+145-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:38:27-73
+146                <category android:name="android.intent.category.BROWSABLE" />
+146-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:39:17-78
+146-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:39:27-75
+147
+148                <data
+148-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:41:17-44:51
+149                    android:host="firebase.auth"
+149-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:42:21-49
+150                    android:path="/"
+150-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:43:21-37
+151                    android:scheme="genericidp" />
+151-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:44:21-48
+152            </intent-filter>
+153        </activity>
+154        <activity
+154-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:47:9-64:20
+155            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+155-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:48:13-79
+156            android:excludeFromRecents="true"
+156-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:49:13-46
+157            android:exported="true"
+157-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:50:13-36
+158            android:launchMode="singleTask"
+158-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:51:13-44
+159            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+159-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:52:13-72
+160            <intent-filter>
+160-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:53:13-63:29
+161                <action android:name="android.intent.action.VIEW" />
+161-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:36:17-69
+161-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:36:25-66
+162
+163                <category android:name="android.intent.category.DEFAULT" />
+163-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:38:17-76
+163-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:38:27-73
+164                <category android:name="android.intent.category.BROWSABLE" />
+164-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:39:17-78
+164-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:39:27-75
+165
+166                <data
+166-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:41:17-44:51
+167                    android:host="firebase.auth"
+167-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:42:21-49
+168                    android:path="/"
+168-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:43:21-37
+169                    android:scheme="recaptcha" />
+169-->[com.google.firebase:firebase-auth:22.3.0] /Users/ekowibowo/.gradle/caches/transforms-4/54198adfce233adb6aedb7b0c007dd41/transformed/jetified-firebase-auth-22.3.0/AndroidManifest.xml:44:21-48
+170            </intent-filter>
+171        </activity>
+172
+173        <property
+173-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:30:9-32:61
+174            android:name="android.adservices.AD_SERVICES_CONFIG"
+174-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:31:13-65
+175            android:resource="@xml/ga_ad_services_config" />
+175-->[com.google.android.gms:play-services-measurement-api:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/52ccff4087a11ff526cd551048bfd67b/transformed/jetified-play-services-measurement-api-21.5.0/AndroidManifest.xml:32:13-58
+176
+177        <provider
+177-->[com.google.firebase:firebase-common:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/440e48bad075b99890c07695194e017d/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:23:9-28:39
+178            android:name="com.google.firebase.provider.FirebaseInitProvider"
+178-->[com.google.firebase:firebase-common:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/440e48bad075b99890c07695194e017d/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:24:13-77
+179            android:authorities="com.zanjaprogrammer.warungku.firebaseinitprovider"
+179-->[com.google.firebase:firebase-common:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/440e48bad075b99890c07695194e017d/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:25:13-72
+180            android:directBootAware="true"
+180-->[com.google.firebase:firebase-common:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/440e48bad075b99890c07695194e017d/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:26:13-43
+181            android:exported="false"
+181-->[com.google.firebase:firebase-common:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/440e48bad075b99890c07695194e017d/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:27:13-37
+182            android:initOrder="100" />
+182-->[com.google.firebase:firebase-common:20.4.2] /Users/ekowibowo/.gradle/caches/transforms-4/440e48bad075b99890c07695194e017d/transformed/jetified-firebase-common-20.4.2/AndroidManifest.xml:28:13-36
+183
+184        <receiver
+184-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:29:9-33:20
+185            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+185-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:30:13-85
+186            android:enabled="true"
+186-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:31:13-35
+187            android:exported="false" >
+187-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:32:13-37
+188        </receiver>
+189
+190        <service
+190-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:35:9-38:40
+191            android:name="com.google.android.gms.measurement.AppMeasurementService"
+191-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:36:13-84
+192            android:enabled="true"
+192-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:37:13-35
+193            android:exported="false" />
+193-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:38:13-37
+194        <service
+194-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:39:9-43:72
+195            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+195-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:40:13-87
+196            android:enabled="true"
+196-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:41:13-35
+197            android:exported="false"
+197-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:42:13-37
+198            android:permission="android.permission.BIND_JOB_SERVICE" />
+198-->[com.google.android.gms:play-services-measurement:21.5.0] /Users/ekowibowo/.gradle/caches/transforms-4/5ca26c19d17be4c8fb5ac03cde01051d/transformed/jetified-play-services-measurement-21.5.0/AndroidManifest.xml:43:13-69
+199
+200        <activity
+200-->[com.google.android.gms:play-services-base:18.0.1] /Users/ekowibowo/.gradle/caches/transforms-4/5201e7f9756255f4c6bd484e9706ed45/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+201            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+201-->[com.google.android.gms:play-services-base:18.0.1] /Users/ekowibowo/.gradle/caches/transforms-4/5201e7f9756255f4c6bd484e9706ed45/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+202            android:exported="false"
+202-->[com.google.android.gms:play-services-base:18.0.1] /Users/ekowibowo/.gradle/caches/transforms-4/5201e7f9756255f4c6bd484e9706ed45/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+203            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+203-->[com.google.android.gms:play-services-base:18.0.1] /Users/ekowibowo/.gradle/caches/transforms-4/5201e7f9756255f4c6bd484e9706ed45/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+204
+205        <uses-library
+205-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] /Users/ekowibowo/.gradle/caches/transforms-4/724f671be928ab9854cb4038ed0146eb/transformed/jetified-ads-adservices-1.0.0-beta05/AndroidManifest.xml:23:9-25:40
+206            android:name="android.ext.adservices"
+206-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] /Users/ekowibowo/.gradle/caches/transforms-4/724f671be928ab9854cb4038ed0146eb/transformed/jetified-ads-adservices-1.0.0-beta05/AndroidManifest.xml:24:13-50
+207            android:required="false" />
+207-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] /Users/ekowibowo/.gradle/caches/transforms-4/724f671be928ab9854cb4038ed0146eb/transformed/jetified-ads-adservices-1.0.0-beta05/AndroidManifest.xml:25:13-37
+208
+209        <meta-data
+209-->[com.google.android.gms:play-services-basement:18.1.0] /Users/ekowibowo/.gradle/caches/transforms-4/cb30f490ac65dd4b63ab2cdc1b877aa5/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
+210            android:name="com.google.android.gms.version"
+210-->[com.google.android.gms:play-services-basement:18.1.0] /Users/ekowibowo/.gradle/caches/transforms-4/cb30f490ac65dd4b63ab2cdc1b877aa5/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
+211            android:value="@integer/google_play_services_version" />
+211-->[com.google.android.gms:play-services-basement:18.1.0] /Users/ekowibowo/.gradle/caches/transforms-4/cb30f490ac65dd4b63ab2cdc1b877aa5/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+212
+213        <provider
+213-->[androidx.emoji2:emoji2:1.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/e6659823d6f27bd8bf4150b555188f0b/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+214            android:name="androidx.startup.InitializationProvider"
+214-->[androidx.emoji2:emoji2:1.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/e6659823d6f27bd8bf4150b555188f0b/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+215            android:authorities="com.zanjaprogrammer.warungku.androidx-startup"
+215-->[androidx.emoji2:emoji2:1.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/e6659823d6f27bd8bf4150b555188f0b/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+216            android:exported="false" >
+216-->[androidx.emoji2:emoji2:1.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/e6659823d6f27bd8bf4150b555188f0b/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+217            <meta-data
+217-->[androidx.emoji2:emoji2:1.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/e6659823d6f27bd8bf4150b555188f0b/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+218                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+218-->[androidx.emoji2:emoji2:1.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/e6659823d6f27bd8bf4150b555188f0b/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+219                android:value="androidx.startup" />
+219-->[androidx.emoji2:emoji2:1.2.0] /Users/ekowibowo/.gradle/caches/transforms-4/e6659823d6f27bd8bf4150b555188f0b/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+220            <meta-data
+220-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/ekowibowo/.gradle/caches/transforms-4/22c8f11e133da0ef89e1bcf84d52943a/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+221                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+221-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/ekowibowo/.gradle/caches/transforms-4/22c8f11e133da0ef89e1bcf84d52943a/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+222                android:value="androidx.startup" />
+222-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/ekowibowo/.gradle/caches/transforms-4/22c8f11e133da0ef89e1bcf84d52943a/transformed/jetified-lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+223        </provider>
+224    </application>
+225
+226</manifest>

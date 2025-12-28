@@ -1,0 +1,1016 @@
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SellActivity.java:305: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                currentSearchQuery = s.toString().toLowerCase().trim();
+                                                  ~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SellActivity.java:322: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+                if (product.name.toLowerCase().contains(currentSearchQuery)) {
+                                 ~~~~~~~~~~~
+
+   Explanation for issues of type "DefaultLocale":
+   Calling String#toLowerCase() or #toUpperCase() without specifying an
+   explicit locale is a common source of bugs. The reason for that is that
+   those methods will use the current locale on the user's device, and even
+   though the code appears to work correctly when you are developing the app,
+   it will fail in some locales. For example, in the Turkish locale, the
+   uppercase replacement for i is not I.
+
+   If you want the methods to just perform ASCII replacement, for example to
+   convert an enum name, call String#toUpperCase(Locale.ROOT) instead. If you
+   really want to use the current locale, call
+   String#toUpperCase(Locale.getDefault()) instead.
+
+   https://developer.android.com/reference/java/util/Locale.html#default_locale
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/build.gradle:13: Warning: Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details. [OldTargetApi]
+        targetSdk 34
+        ~~~~~~~~~~~~
+
+   Explanation for issues of type "OldTargetApi":
+   When your application runs on a version of Android that is more recent than
+   your targetSdkVersion specifies that it has been tested with, various
+   compatibility modes kick in. This ensures that your application continues
+   to work, but it may look out of place. For example, if the targetSdkVersion
+   is less than 14, your app may get an option button in the UI.
+
+   To fix this issue, set the targetSdkVersion to the highest available value.
+   Then test your app to make sure everything works correctly. You may want to
+   consult the compatibility notes to see what changes apply to each version
+   you are adding support for:
+   https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+   as well as follow this guide:
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.
+   html
+
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.html
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/HistoryActivity.java:200: Warning: Avoid passing null as the view root (needed to resolve layout parameters on the inflated layout's root element) [InflateParams]
+        android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_payment, null);
+                                                                                                   ~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/MainActivity.java:282: Warning: Avoid passing null as the view root (needed to resolve layout parameters on the inflated layout's root element) [InflateParams]
+        android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_payment, null);
+                                                                                                   ~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SellActivity.java:244: Warning: Avoid passing null as the view root (needed to resolve layout parameters on the inflated layout's root element) [InflateParams]
+            android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_quantity, null);
+                                                                                                        ~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SellActivity.java:539: Warning: Avoid passing null as the view root (needed to resolve layout parameters on the inflated layout's root element) [InflateParams]
+        android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_payment, null);
+                                                                                                   ~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:435: Warning: Avoid passing null as the view root (needed to resolve layout parameters on the inflated layout's root element) [InflateParams]
+        android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_stock_action, null);
+                                                                                                        ~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:461: Warning: Avoid passing null as the view root (needed to resolve layout parameters on the inflated layout's root element) [InflateParams]
+        android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_restock, null);
+                                                                                                   ~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:652: Warning: Avoid passing null as the view root (needed to resolve layout parameters on the inflated layout's root element) [InflateParams]
+        android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_payment, null);
+                                                                                                   ~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SummaryActivity.java:712: Warning: Avoid passing null as the view root (needed to resolve layout parameters on the inflated layout's root element) [InflateParams]
+        android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_payment, null);
+                                                                                                   ~~~~
+
+   Explanation for issues of type "InflateParams":
+   When inflating a layout, avoid passing in null as the parent view, since
+   otherwise any layout parameters on the root of the inflated layout will be
+   ignored.
+
+   https://www.bignerdranch.com/blog/understanding-androids-layoutinflater-inflate/
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/build.gradle:36: Warning: A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.1 [GradleDependency]
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/build.gradle:37: Warning: A newer version of com.google.android.material:material than 1.9.0 is available: 1.13.0 [GradleDependency]
+    implementation 'com.google.android.material:material:1.9.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/build.gradle:38: Warning: A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.1 [GradleDependency]
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/build.gradle:41: Warning: A newer version of androidx.room:room-runtime than 2.5.2 is available: 2.8.4 [GradleDependency]
+    implementation "androidx.room:room-runtime:2.5.2"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/build.gradle:42: Warning: A newer version of androidx.room:room-compiler than 2.5.2 is available: 2.8.4 [GradleDependency]
+    annotationProcessor "androidx.room:room-compiler:2.5.2"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/build.gradle:62: Warning: A newer version of com.google.firebase:firebase-bom than 32.7.0 is available: 34.7.0 [GradleDependency]
+    implementation platform('com.google.firebase:firebase-bom:32.7.0')
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/build.gradle:68: Warning: A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0 [GradleDependency]
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/build.gradle:69: Warning: A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0 [GradleDependency]
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_sell.xml:42: Error: Must use app:tint instead of android:tint [UseAppTint from androidx.appcompat]
+                android:tint="@color/warning"/>
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_quantity.xml:48: Error: Must use app:tint instead of android:tint [UseAppTint from androidx.appcompat]
+                android:tint="@color/primary"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_quantity.xml:75: Error: Must use app:tint instead of android:tint [UseAppTint from androidx.appcompat]
+                android:tint="@android:color/white"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_offline_indicator.xml:24: Error: Must use app:tint instead of android:tint [UseAppTint from androidx.appcompat]
+            android:tint="@android:color/white"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_offline_indicator.xml:42: Error: Must use app:tint instead of android:tint [UseAppTint from androidx.appcompat]
+            android:tint="@android:color/white"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UseAppTint":
+   ImageView or ImageButton uses android:tint instead of app:tint
+
+   Vendor: Android Open Source Project
+   Identifier: androidx.appcompat
+   Feedback: https://issuetracker.google.com/issues/new?component=460343
+
+/Users/ekowibowo/.gradle/caches/modules-2/files-2.1/org.apache.poi/poi-ooxml/5.2.3/2efd11c940adb18c03eb9ce7ad88fc40ee6a196/poi-ooxml-5.2.3.jar: Warning: checkClientTrusted is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers [TrustAllX509TrustManager]
+/Users/ekowibowo/.gradle/caches/modules-2/files-2.1/org.apache.poi/poi-ooxml/5.2.3/2efd11c940adb18c03eb9ce7ad88fc40ee6a196/poi-ooxml-5.2.3.jar: Warning: checkServerTrusted is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers [TrustAllX509TrustManager]
+
+   Explanation for issues of type "TrustAllX509TrustManager":
+   This check looks for X509TrustManager implementations whose
+   checkServerTrusted or checkClientTrusted methods do nothing (thus trusting
+   any certificate chain) which could result in insecure network traffic
+   caused by trusting arbitrary TLS/SSL certificates presented by peers.
+
+   https://goo.gle/TrustAllX509TrustManager
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/HistoryAdapter.java:28: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ProductReportAdapter.java:32: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ProductSellAdapter.java:34: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ProductStockAdapter.java:34: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ShoppingAdapter.java:19: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged();
+        ~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NotifyDataSetChanged":
+   The RecyclerView adapter's onNotifyDataSetChanged method does not specify
+   what about the data set has changed, forcing any observers to assume that
+   all existing items and structure may no longer be valid. `LayoutManager`s
+   will be forced to fully rebind and relayout all visible views.
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/utils/NetworkUtils.java:23: Warning: Unnecessary; SDK_INT is always >= 26 [ObsoleteSdkInt]
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/utils/NetworkUtils.java:49: Warning: Unnecessary; SDK_INT is always >= 26 [ObsoleteSdkInt]
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/utils/NetworkUtils.java:73: Warning: Unnecessary; SDK_INT is always >= 26 [ObsoleteSdkInt]
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "ObsoleteSdkInt":
+   This check flags version checks that are not necessary, because the
+   minSdkVersion (or surrounding known API level) is already at least as high
+   as the version checked for.
+
+   Similarly, it also looks for resources in -vNN folders, such as values-v14
+   where the version qualifier is less than or equal to the minSdkVersion,
+   where the contents should be merged into the best folder.
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:94: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+                    <LinearLayout
+                     ~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_stock.xml:11: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+    <LinearLayout
+     ~~~~~~~~~~~~
+
+   Explanation for issues of type "DisableBaselineAlignment":
+   When a LinearLayout is used to distribute the space proportionally between
+   nested layouts, the baseline alignment property should be turned off to
+   make the layout computation faster.
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_login.xml:6: Warning: Possible overdraw: Root element paints background @color/background_off_white with a theme that also paints a background (inferred theme is @style/Theme.WarungKu) [Overdraw]
+    android:background="@color/background_off_white">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:6: Warning: Possible overdraw: Root element paints background @color/background_off_white with a theme that also paints a background (inferred theme is @style/Theme.WarungKu) [Overdraw]
+    android:background="@color/background_off_white">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:6: Warning: Possible overdraw: Root element paints background @color/background_off_white with a theme that also paints a background (inferred theme is @style/Theme.WarungKu) [Overdraw]
+    android:background="@color/background_off_white">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:6: Warning: Possible overdraw: Root element paints background @color/background_off_white with a theme that also paints a background (inferred theme is @style/Theme.WarungKu) [Overdraw]
+    android:background="@color/background_off_white">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:8: Warning: Possible overdraw: Root element paints background @color/background with a theme that also paints a background (inferred theme is @style/Theme.WarungKu) [Overdraw]
+    android:background="@color/background">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "Overdraw":
+   If you set a background drawable on a root view, then you should use a
+   custom theme where the theme background is null. Otherwise, the theme
+   background will be painted first, only to have your custom background
+   completely cover it; this is called "overdraw".
+
+   NOTE: This detector relies on figuring out which layouts are associated
+   with which activities based on scanning the Java code, and it's currently
+   doing that using an inexact pattern matching algorithm. Therefore, it can
+   incorrectly conclude which activity the layout is associated with and then
+   wrongly complain that a background-theme is hidden.
+
+   If you want your custom background on multiple pages, then you should
+   consider making a custom theme with your custom background and just using
+   that theme instead of a root element background.
+
+   Of course it's possible that your custom drawable is translucent and you
+   want it to be mixed with the background. However, you will get better
+   performance if you pre-mix the background with your drawable and use that
+   resulting image or color as a custom theme background instead.
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/drawable/bg_button_icon_circle.xml:2: Warning: The resource R.drawable.bg_button_icon_circle appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/drawable/bg_sell_button.xml:2: Warning: The resource R.drawable.bg_sell_button appears to be unused [UnusedResources]
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/colors.xml:14: Warning: The resource R.color.error_dark appears to be unused [UnusedResources]
+    <color name="error_dark">#C62828</color>
+           ~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/colors.xml:23: Warning: The resource R.color.accent_light appears to be unused [UnusedResources]
+    <color name="accent_light">#90CAF9</color>
+           ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/colors.xml:24: Warning: The resource R.color.accent_dark appears to be unused [UnusedResources]
+    <color name="accent_dark">#42A5F5</color>
+           ~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/colors.xml:32: Warning: The resource R.color.black appears to be unused [UnusedResources]
+    <color name="black">#FF000000</color>
+           ~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/colors.xml:33: Warning: The resource R.color.white appears to be unused [UnusedResources]
+    <color name="white">#FFFFFFFF</color>
+           ~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/colors.xml:37: Warning: The resource R.color.purple_500 appears to be unused [UnusedResources]
+    <color name="purple_500">@color/primary</color>
+           ~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/colors.xml:38: Warning: The resource R.color.purple_700 appears to be unused [UnusedResources]
+    <color name="purple_700">@color/primary_dark</color>
+           ~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/colors.xml:39: Warning: The resource R.color.teal_200 appears to be unused [UnusedResources]
+    <color name="teal_200">@color/accent</color>
+           ~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/drawable/ic_sell_circle.xml:2: Warning: The resource R.drawable.ic_sell_circle appears to be unused [UnusedResources]
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+^
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/drawable/ic_sell_highlight.xml:1: Warning: The resource R.drawable.ic_sell_highlight appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/drawable/ic_sell_white.xml:1: Warning: The resource R.drawable.ic_sell_white appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/strings.xml:3: Warning: The resource R.string.title_home appears to be unused [UnusedResources]
+    <string name="title_home">Hari Ini</string>
+            ~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/strings.xml:4: Warning: The resource R.string.title_sell appears to be unused [UnusedResources]
+    <string name="title_sell">Jual Barang</string>
+            ~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/strings.xml:5: Warning: The resource R.string.title_stock appears to be unused [UnusedResources]
+    <string name="title_stock">Stok Barang</string>
+            ~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/strings.xml:6: Warning: The resource R.string.title_cash appears to be unused [UnusedResources]
+    <string name="title_cash">Uang (Cash)</string>
+            ~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/values/strings.xml:7: Warning: The resource R.string.title_shopping_list appears to be unused [UnusedResources]
+    <string name="title_shopping_list">Daftar Belanja</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:96: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                <Button
+                 ~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:107: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                <Button
+                 ~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:529: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                        <Button
+                         ~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:541: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+                        <Button
+                         ~~~~~~
+
+   Explanation for issues of type "ButtonStyle":
+   Button bars typically use a borderless style for the buttons. Set the
+   style="?android:attr/buttonBarButtonStyle" attribute on each of the
+   buttons, and set style="?android:attr/buttonBarStyle" on the parent layout
+
+   https://d.android.com/r/studio-ui/designer/material/dialogs
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_sell.xml:35: Warning: Missing contentDescription attribute on image [ContentDescription]
+            <ImageView
+             ~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_quantity.xml:44: Warning: Missing contentDescription attribute on image [ContentDescription]
+            <ImageView
+             ~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_quantity.xml:71: Warning: Missing contentDescription attribute on image [ContentDescription]
+            <ImageView
+             ~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_offline_indicator.xml:20: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageView
+         ~~~~~~~~~
+
+   Explanation for issues of type "ContentDescription":
+   Non-textual widgets like ImageViews and ImageButtons should use the
+   contentDescription attribute to specify a textual description of the widget
+   such that screen readers and other accessibility tools can adequately
+   describe the user interface.
+
+   Note that elements in application screens that are purely decorative and do
+   not provide any content or enable a user action should not have
+   accessibility content descriptions. In this case, set their descriptions to
+   @null. If your app's minSdkVersion is 16 or higher, you can instead set
+   these graphical elements' android:importantForAccessibility attributes to
+   no.
+
+   Note that for text fields, you should not set both the hint and the
+   contentDescription attributes since the hint will never be shown. Just set
+   the hint.
+
+   https://developer.android.com/guide/topics/ui/accessibility/apps#special-cases
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/AddProductActivity.java:288: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                    binding.etName.setText(brand + " " + productName);
+                                           ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/AddProductActivity.java:300: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                    binding.etName.setText(currentName + " " + quantity);
+                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/HistoryActivity.java:73: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                binding.tvCartCount.setText(totalQty + " Barang");
+                                            ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/HistoryActivity.java:73: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                binding.tvCartCount.setText(totalQty + " Barang");
+                                                       ~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/HistoryActivity.java:252: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("5000");
+                                    ~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/HistoryActivity.java:257: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("10000");
+                                    ~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/HistoryActivity.java:262: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("100000");
+                                    ~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/HistoryAdapter.java:46: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            holder.binding.tvAmount.setText("+ " + formatter.format(item.amount));
+                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/HistoryAdapter.java:49: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            holder.binding.tvAmount.setText("- " + formatter.format(item.amount));
+                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/MainActivity.java:135: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                binding.tvCartCount.setText(totalQty + " Barang");
+                                            ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/MainActivity.java:135: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                binding.tvCartCount.setText(totalQty + " Barang");
+                                                       ~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/MainActivity.java:336: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("5000");
+                                    ~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/MainActivity.java:341: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("10000");
+                                    ~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/MainActivity.java:346: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("100000");
+                                    ~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ProductReportAdapter.java:51: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            holder.tvInfo.setText("Terjual: " + product.salesCount + " unit");
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ProductReportAdapter.java:51: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            holder.tvInfo.setText("Terjual: " + product.salesCount + " unit");
+                                  ~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ProductReportAdapter.java:51: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            holder.tvInfo.setText("Terjual: " + product.salesCount + " unit");
+                                                                     ~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ProductReportAdapter.java:55: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            holder.tvInfo.setText("Stok: " + product.currentStock);
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ProductReportAdapter.java:55: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            holder.tvInfo.setText("Stok: " + product.currentStock);
+                                  ~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ProductSellAdapter.java:50: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        holder.binding.tvProductStock.setText("Stok: " + product.currentStock);
+                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ProductSellAdapter.java:50: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.binding.tvProductStock.setText("Stok: " + product.currentStock);
+                                              ~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ProductStockAdapter.java:55: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            holder.binding.tvStatus.setText("Habis");
+                                            ~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ProductStockAdapter.java:60: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            holder.binding.tvStatus.setText("Hampir habis");
+                                            ~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SellActivity.java:217: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                binding.tvCartCount.setText(totalQty + " Barang");
+                                            ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SellActivity.java:217: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                binding.tvCartCount.setText(totalQty + " Barang");
+                                                       ~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SellActivity.java:264: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            tvPrice.setText(formatter.format(product.sellPrice) + " (Stok: " + product.currentStock + ")");
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SellActivity.java:264: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            tvPrice.setText(formatter.format(product.sellPrice) + " (Stok: " + product.currentStock + ")");
+                                                                  ~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SellActivity.java:591: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("5000");
+                                    ~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SellActivity.java:596: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("10000");
+                                    ~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SellActivity.java:601: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("100000");
+                                    ~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ShoppingAdapter.java:34: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        holder.binding.tvStockInfo.setText("Sisa stok: " + product.currentStock);
+                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ShoppingAdapter.java:34: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.binding.tvStockInfo.setText("Sisa stok: " + product.currentStock);
+                                           ~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ShoppingAdapter.java:35: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        holder.binding.tvSalesCount.setText(product.salesCount + " kali terjual");
+                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/adapters/ShoppingAdapter.java:35: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.binding.tvSalesCount.setText(product.salesCount + " kali terjual");
+                                                                 ~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:87: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                binding.tvCartCount.setText(totalQty + " Barang");
+                                            ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:87: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                binding.tvCartCount.setText(totalQty + " Barang");
+                                                       ~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:465: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        tvProductName.setText("Restock: " + product.name);
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:465: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        tvProductName.setText("Restock: " + product.name);
+                              ~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:490: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        tvTotalPrice.setText("Total: Rp 0");
+                                             ~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:498: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                        tvTotalPrice.setText("Total: Rp 0");
+                                             ~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:509: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                    tvTotalPrice.setText("Total: " + formatter.format(total));
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:509: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    tvTotalPrice.setText("Total: " + formatter.format(total));
+                                         ~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:511: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                    tvTotalPrice.setText("Total: Rp 0");
+                                         ~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:704: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("5000");
+                                    ~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:709: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("10000");
+                                    ~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/StockActivity.java:714: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("100000");
+                                    ~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SummaryActivity.java:310: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                tvCartCount.setText(totalQty + " Barang");
+                                    ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SummaryActivity.java:310: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+                tvCartCount.setText(totalQty + " Barang");
+                                               ~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SummaryActivity.java:764: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("5000");
+                                    ~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SummaryActivity.java:769: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("10000");
+                                    ~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/java/com/zanjaprogrammer/warungku/SummaryActivity.java:774: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+            etPaymentAmount.setText("100000");
+                                    ~~~~~~~~
+
+   Explanation for issues of type "SetTextI18n":
+   When calling TextView#setText
+   * Never call Number#toString() to format numbers; it will not handle
+   fraction separators and locale-specific digits properly. Consider using
+   String#format with proper format specifications (%d or %f) instead.
+   * Do not pass a string literal (e.g. "Hello") to display text. Hardcoded
+   text can not be properly translated to other languages. Consider using
+   Android resource strings instead.
+   * Do not build messages by concatenating text chunks. Such messages can not
+   be properly translated.
+
+   https://developer.android.com/guide/topics/resources/localization.html
+
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_add_product.xml:23: Warning: Hardcoded string "Barcode (Opsional)", should use @string resource [HardcodedText]
+            android:hint="Barcode (Opsional)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_add_product.xml:39: Warning: Hardcoded string "Nama Barang", should use @string resource [HardcodedText]
+            android:hint="Nama Barang">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_add_product.xml:51: Warning: Hardcoded string "Harga Jual (Rp)", should use @string resource [HardcodedText]
+            android:hint="Harga Jual (Rp)">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_add_product.xml:63: Warning: Hardcoded string "Harga Beli (Opsional) (Rp)", should use @string resource [HardcodedText]
+            android:hint="Harga Beli (Opsional) (Rp)">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_add_product.xml:75: Warning: Hardcoded string "Stok Awal", should use @string resource [HardcodedText]
+            android:hint="Stok Awal">
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_add_product.xml:87: Warning: Hardcoded string "Minimum Stok (untuk alert)", should use @string resource [HardcodedText]
+            android:hint="Minimum Stok (untuk alert)">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_add_product.xml:99: Warning: Hardcoded string "SIMPAN BARANG", should use @string resource [HardcodedText]
+            android:text="SIMPAN BARANG"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_history.xml:50: Warning: Hardcoded string "SALDO KAS SAAT INI", should use @string resource [HardcodedText]
+                    android:text="SALDO KAS SAAT INI"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_history.xml:59: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                    android:text="Rp 0"
+                    ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_history.xml:71: Warning: Hardcoded string "CATAT PENGELUARAN", should use @string resource [HardcodedText]
+            android:text="CATAT PENGELUARAN"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_history.xml:83: Warning: Hardcoded string "Riwayat Transaksi", should use @string resource [HardcodedText]
+            android:text="Riwayat Transaksi"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_history.xml:137: Warning: Hardcoded string "0 Barang", should use @string resource [HardcodedText]
+                    android:text="0 Barang"
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_history.xml:145: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                    android:text="Rp 0"
+                    ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_history.xml:154: Warning: Hardcoded string "JUAL", should use @string resource [HardcodedText]
+                android:text="JUAL"
+                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_login.xml:24: Warning: Hardcoded string "WarungKu", should use @string resource [HardcodedText]
+                android:text="WarungKu"
+                ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_login.xml:35: Warning: Hardcoded string "Kelola warung Anda dengan mudah", should use @string resource [HardcodedText]
+                android:text="Kelola warung Anda dengan mudah"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_login.xml:58: Warning: Hardcoded string "Email", should use @string resource [HardcodedText]
+                        android:hint="Email"
+                        ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_login.xml:73: Warning: Hardcoded string "Password", should use @string resource [HardcodedText]
+                        android:hint="Password"
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_login.xml:90: Warning: Hardcoded string "Masuk", should use @string resource [HardcodedText]
+                        android:text="Masuk"
+                        ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_login.xml:102: Warning: Hardcoded string "Lupa password?", should use @string resource [HardcodedText]
+                        android:text="Lupa password?"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_login.xml:131: Warning: Hardcoded string "Belum punya akun?", should use @string resource [HardcodedText]
+                        android:text="Belum punya akun?"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_login.xml:140: Warning: Hardcoded string "Daftar sebagai Pemilik", should use @string resource [HardcodedText]
+                        android:text="Daftar sebagai Pemilik"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:52: Warning: Hardcoded string "UANG SEKARANG", should use @string resource [HardcodedText]
+                        android:text="UANG SEKARANG"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:61: Warning: Hardcoded string "Rp 1.500.000", should use @string resource [HardcodedText]
+                        android:text="Rp 1.500.000"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:74: Warning: Hardcoded string "Aksi Cepat", should use @string resource [HardcodedText]
+                android:text="Aksi Cepat"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:83: Warning: Hardcoded string "JUAL BARANG", should use @string resource [HardcodedText]
+                android:text="JUAL BARANG"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:101: Warning: Hardcoded string "Tambah Stok", should use @string resource [HardcodedText]
+                    android:text="Tambah Stok"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:112: Warning: Hardcoded string "Pengeluaran", should use @string resource [HardcodedText]
+                    android:text="Pengeluaran"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:124: Warning: Hardcoded string "Ringkasan Hari Ini", should use @string resource [HardcodedText]
+                android:text="Ringkasan Hari Ini"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:151: Warning: Hardcoded string "Penjualan", should use @string resource [HardcodedText]
+                            android:text="Penjualan"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:158: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                            android:text="Rp 0"
+                            ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:181: Warning: Hardcoded string "Pengeluaran", should use @string resource [HardcodedText]
+                            android:text="Pengeluaran"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:188: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                            android:text="Rp 0"
+                            ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:212: Warning: Hardcoded string "Stok Tipis", should use @string resource [HardcodedText]
+                            android:text="Stok Tipis"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:219: Warning: Hardcoded string "0 Barang", should use @string resource [HardcodedText]
+                            android:text="0 Barang"
+                            ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:271: Warning: Hardcoded string "0 Barang", should use @string resource [HardcodedText]
+                    android:text="0 Barang"
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:279: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                    android:text="Rp 0"
+                    ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_main.xml:288: Warning: Hardcoded string "JUAL", should use @string resource [HardcodedText]
+                android:text="JUAL"
+                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:51: Warning: Hardcoded string "Hari Ini", should use @string resource [HardcodedText]
+                        android:text="Hari Ini"
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:59: Warning: Hardcoded string "Minggu Ini", should use @string resource [HardcodedText]
+                        android:text="Minggu Ini"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:67: Warning: Hardcoded string "Bulan Ini", should use @string resource [HardcodedText]
+                        android:text="Bulan Ini"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:88: Warning: Hardcoded string "Ringkasan Keuangan", should use @string resource [HardcodedText]
+                        android:text="Ringkasan Keuangan"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:107: Warning: Hardcoded string "Pendapatan", should use @string resource [HardcodedText]
+                                android:text="Pendapatan"
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:114: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                                android:text="Rp 0"
+                                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:128: Warning: Hardcoded string "Pengeluaran", should use @string resource [HardcodedText]
+                                android:text="Pengeluaran"
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:135: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                                android:text="Rp 0"
+                                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:157: Warning: Hardcoded string "Keuntungan", should use @string resource [HardcodedText]
+                            android:text="Keuntungan"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:165: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                            android:text="Rp 0"
+                            ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:188: Warning: Hardcoded string "Trend Penjualan", should use @string resource [HardcodedText]
+                        android:text="Trend Penjualan"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:215: Warning: Hardcoded string "Produk Terlaris (Top 10)", should use @string resource [HardcodedText]
+                        android:text="Produk Terlaris (Top 10)"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_report.xml:242: Warning: Hardcoded string "Produk Tidak Laku", should use @string resource [HardcodedText]
+                        android:text="Produk Tidak Laku"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_sell.xml:32: Warning: Hardcoded string "Cari barang...", should use @string resource [HardcodedText]
+            android:hint="Cari barang..."
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_sell.xml:99: Warning: Hardcoded string "0 Barang", should use @string resource [HardcodedText]
+                    android:text="0 Barang"
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_sell.xml:107: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                    android:text="Rp 0"
+                    ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_sell.xml:116: Warning: Hardcoded string "JUAL", should use @string resource [HardcodedText]
+                android:text="JUAL"
+                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_shopping_list.xml:18: Warning: Hardcoded string "Berdasarkan barang yang paling laku", should use @string resource [HardcodedText]
+        android:text="Berdasarkan barang yang paling laku"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_stock.xml:50: Warning: Hardcoded string "Tambah Barang", should use @string resource [HardcodedText]
+        android:contentDescription="Tambah Barang" />
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_stock.xml:91: Warning: Hardcoded string "0 Barang", should use @string resource [HardcodedText]
+                    android:text="0 Barang"
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_stock.xml:99: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                    android:text="Rp 0"
+                    ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_stock.xml:108: Warning: Hardcoded string "JUAL", should use @string resource [HardcodedText]
+                android:text="JUAL"
+                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:61: Warning: Hardcoded string "Hari Ini", should use @string resource [HardcodedText]
+                        android:text="Hari Ini"
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:68: Warning: Hardcoded string "Minggu Ini", should use @string resource [HardcodedText]
+                        android:text="Minggu Ini"/>
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:74: Warning: Hardcoded string "Bulan Ini", should use @string resource [HardcodedText]
+                        android:text="Bulan Ini"/>
+                        ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:80: Warning: Hardcoded string "Tahun Ini", should use @string resource [HardcodedText]
+                        android:text="Tahun Ini"/>
+                        ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:103: Warning: Hardcoded string "Tracking Pengembalian Modal (Opsional)", should use @string resource [HardcodedText]
+                        android:text="Tracking Pengembalian Modal (Opsional)"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:111: Warning: Hardcoded string "Isi modal awal untuk melacak progress pengembalian modal Anda. Fitur ini opsional dan tidak wajib diisi.", should use @string resource [HardcodedText]
+                        android:text="Isi modal awal untuk melacak progress pengembalian modal Anda. Fitur ini opsional dan tidak wajib diisi."
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:125: Warning: Hardcoded string "Lewati", should use @string resource [HardcodedText]
+                            android:text="Lewati"
+                            ~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:133: Warning: Hardcoded string "ISI MODAL", should use @string resource [HardcodedText]
+                            android:text="ISI MODAL"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:161: Warning: Hardcoded string "LABA BERSIH", should use @string resource [HardcodedText]
+                        android:text="LABA BERSIH"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:170: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                        android:text="Rp 0"
+                        ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:201: Warning: Hardcoded string "Modal Awal", should use @string resource [HardcodedText]
+                            android:text="Modal Awal"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:208: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                            android:text="Rp 0"
+                            ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:218: Warning: Hardcoded string "Ubah", should use @string resource [HardcodedText]
+                        android:text="Ubah" />
+                        ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:238: Warning: Hardcoded string "Total Belanja Stok", should use @string resource [HardcodedText]
+                        android:text="Total Belanja Stok"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:246: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                        android:text="Rp 0"
+                        ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:253: Warning: Hardcoded string "Total uang yang dipakai untuk membeli barang dagangan", should use @string resource [HardcodedText]
+                        android:text="Total uang yang dipakai untuk membeli barang dagangan"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:283: Warning: Hardcoded string "Total Pemasukan", should use @string resource [HardcodedText]
+                            android:text="Total Pemasukan"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:290: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                            android:text="Rp 0"
+                            ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:313: Warning: Hardcoded string "Total Pengeluaran", should use @string resource [HardcodedText]
+                            android:text="Total Pengeluaran"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:320: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                            android:text="Rp 0"
+                            ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:351: Warning: Hardcoded string "🎉 SELAMAT! 🎉", should use @string resource [HardcodedText]
+                        android:text="🎉 SELAMAT! 🎉"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:359: Warning: Hardcoded string "Anda telah balik modal!", should use @string resource [HardcodedText]
+                        android:text="Anda telah balik modal!"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:369: Warning: Hardcoded string "Sembunyikan Progress Bar", should use @string resource [HardcodedText]
+                        android:text="Sembunyikan Progress Bar"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:393: Warning: Hardcoded string "Perkembangan Modal", should use @string resource [HardcodedText]
+                        android:text="Perkembangan Modal"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:402: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                        android:text="Rp 0"
+                        ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:412: Warning: Hardcoded string "Progress Pengembalian Modal", should use @string resource [HardcodedText]
+                        android:text="Progress Pengembalian Modal"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:430: Warning: Hardcoded string "0%", should use @string resource [HardcodedText]
+                        android:text="0%"
+                        ~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:437: Warning: Hardcoded string "Total keuntungan dari modal awal", should use @string resource [HardcodedText]
+                        android:text="Total keuntungan dari modal awal"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:474: Warning: Hardcoded string "📊 LAPORAN", should use @string resource [HardcodedText]
+                            android:text="📊 LAPORAN"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:482: Warning: Hardcoded string "Lihat laporan penjualan, produk terlaris, dan grafik trend", should use @string resource [HardcodedText]
+                            android:text="Lihat laporan penjualan, produk terlaris, dan grafik trend"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:490: Warning: Hardcoded string "→", should use @string resource [HardcodedText]
+                        android:text="→"
+                        ~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:513: Warning: Hardcoded string "💾 Backup & Restore Data", should use @string resource [HardcodedText]
+                        android:text="💾 Backup &amp; Restore Data"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:521: Warning: Hardcoded string "Backup data ke file untuk keamanan atau restore dari backup sebelumnya", should use @string resource [HardcodedText]
+                        android:text="Backup data ke file untuk keamanan atau restore dari backup sebelumnya"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:535: Warning: Hardcoded string "Backup Data", should use @string resource [HardcodedText]
+                            android:text="Backup Data"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:547: Warning: Hardcoded string "Restore Data", should use @string resource [HardcodedText]
+                            android:text="Restore Data"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:599: Warning: Hardcoded string "0 Barang", should use @string resource [HardcodedText]
+                    android:text="0 Barang"
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:607: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                    android:text="Rp 0"
+                    ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/activity_summary.xml:616: Warning: Hardcoded string "JUAL", should use @string resource [HardcodedText]
+                android:text="JUAL"
+                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/menu/bottom_nav_menu.xml:6: Warning: Hardcoded string "Home", should use @string resource [HardcodedText]
+        android:title="Home" />
+        ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/menu/bottom_nav_menu.xml:10: Warning: Hardcoded string "Stok", should use @string resource [HardcodedText]
+        android:title="Stok" />
+        ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/menu/bottom_nav_menu.xml:14: Warning: Hardcoded string "Jual", should use @string resource [HardcodedText]
+        android:title="Jual" />
+        ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/menu/bottom_nav_menu.xml:18: Warning: Hardcoded string "Uang", should use @string resource [HardcodedText]
+        android:title="Uang" />
+        ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/menu/bottom_nav_menu.xml:22: Warning: Hardcoded string "Ringkasan", should use @string resource [HardcodedText]
+        android:title="Ringkasan" />
+        ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_history.xml:29: Warning: Hardcoded string "Deskripsi", should use @string resource [HardcodedText]
+                android:text="Deskripsi"/>
+                ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_history.xml:36: Warning: Hardcoded string "Tanggal", should use @string resource [HardcodedText]
+                android:text="Tanggal"/>
+                ~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_history.xml:45: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+            android:text="Rp 0"/>
+            ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_report.xml:25: Warning: Hardcoded string "Nama Produk", should use @string resource [HardcodedText]
+            android:text="Nama Produk"/>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_report.xml:39: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                android:text="Rp 0"/>
+                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_report.xml:46: Warning: Hardcoded string "Info", should use @string resource [HardcodedText]
+                android:text="Info"/>
+                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_sell.xml:34: Warning: Hardcoded string "Nama Barang", should use @string resource [HardcodedText]
+                android:text="Nama Barang"/>
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_sell.xml:52: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+            android:text="Rp 0"/>
+            ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_sell.xml:60: Warning: Hardcoded string "Stok: 0", should use @string resource [HardcodedText]
+            android:text="Stok: 0"/>
+            ~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_stock.xml:30: Warning: Hardcoded string "Nama Barang", should use @string resource [HardcodedText]
+                android:text="Nama Barang"/>
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_stock.xml:37: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                android:text="Rp 0"/>
+                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_stock.xml:52: Warning: Hardcoded string "0", should use @string resource [HardcodedText]
+                android:text="0"/>
+                ~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_product_stock.xml:62: Warning: Hardcoded string "Hampir habis", should use @string resource [HardcodedText]
+                android:text="Hampir habis"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_shopping.xml:41: Warning: Hardcoded string "Nama Barang", should use @string resource [HardcodedText]
+                    android:text="Nama Barang"/>
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_shopping.xml:48: Warning: Hardcoded string "Sisa stok: 0", should use @string resource [HardcodedText]
+                    android:text="Sisa stok: 0"/>
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/item_shopping.xml:58: Warning: Hardcoded string "Sering laku", should use @string resource [HardcodedText]
+                android:text="Sering laku"/>
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:13: Warning: Hardcoded string "Pembayaran", should use @string resource [HardcodedText]
+        android:text="Pembayaran"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:36: Warning: Hardcoded string "Total Belanja", should use @string resource [HardcodedText]
+                android:text="Total Belanja"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:44: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                android:text="Rp 0"
+                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:56: Warning: Hardcoded string "Metode Pembayaran", should use @string resource [HardcodedText]
+        android:text="Metode Pembayaran"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:75: Warning: Hardcoded string "Tunai", should use @string resource [HardcodedText]
+            android:text="Tunai"
+            ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:83: Warning: Hardcoded string "QRIS", should use @string resource [HardcodedText]
+            android:text="QRIS"
+            ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:97: Warning: Hardcoded string "Uang Bayar", should use @string resource [HardcodedText]
+            android:text="Uang Bayar"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:115: Warning: Hardcoded string "5rb", should use @string resource [HardcodedText]
+                android:text="5rb"
+                ~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:125: Warning: Hardcoded string "10rb", should use @string resource [HardcodedText]
+                android:text="10rb"
+                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:134: Warning: Hardcoded string "100rb", should use @string resource [HardcodedText]
+                android:text="100rb"
+                ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:142: Warning: Hardcoded string "Masukkan Uang Bayar (Rp)", should use @string resource [HardcodedText]
+            android:hint="Masukkan Uang Bayar (Rp)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:176: Warning: Hardcoded string "Uang Kembalian", should use @string resource [HardcodedText]
+                android:text="Uang Kembalian"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:183: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                android:text="Rp 0"
+                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:211: Warning: Hardcoded string "Uang bayar kurang!", should use @string resource [HardcodedText]
+                android:text="Uang bayar kurang!"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:219: Warning: Hardcoded string "Rp 0", should use @string resource [HardcodedText]
+                android:text="Rp 0"
+                ~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_payment.xml:231: Warning: Hardcoded string "KONFIRMASI PEMBAYARAN", should use @string resource [HardcodedText]
+        android:text="KONFIRMASI PEMBAYARAN"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_quantity.xml:14: Warning: Hardcoded string "Nama Barang", should use @string resource [HardcodedText]
+        android:text="Nama Barang"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_quantity.xml:24: Warning: Hardcoded string "Rp 10.000", should use @string resource [HardcodedText]
+        android:text="Rp 10.000"
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_quantity.xml:56: Warning: Hardcoded string "1", should use @string resource [HardcodedText]
+            android:text="1"
+            ~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_quantity.xml:84: Warning: Hardcoded string "TAMBAH KE KERANJANG", should use @string resource [HardcodedText]
+        android:text="TAMBAH KE KERANJANG"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_restock.xml:14: Warning: Hardcoded string "Restock Barang", should use @string resource [HardcodedText]
+        android:text="Restock Barang"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_restock.xml:23: Warning: Hardcoded string "Jumlah (Qty)", should use @string resource [HardcodedText]
+        android:hint="Jumlah (Qty)"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_restock.xml:31: Warning: Hardcoded string "1", should use @string resource [HardcodedText]
+            android:text="1"/>
+            ~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_restock.xml:37: Warning: Hardcoded string "Tipe Harga:", should use @string resource [HardcodedText]
+        android:text="Tipe Harga:"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_restock.xml:53: Warning: Hardcoded string "Per Barang", should use @string resource [HardcodedText]
+            android:text="Per Barang"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_restock.xml:60: Warning: Hardcoded string "Total Harga", should use @string resource [HardcodedText]
+            android:text="Total Harga"/>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_restock.xml:67: Warning: Hardcoded string "Harga Beli Per Barang (Rp)", should use @string resource [HardcodedText]
+        android:hint="Harga Beli Per Barang (Rp)"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_restock.xml:82: Warning: Hardcoded string "Total: Rp 0", should use @string resource [HardcodedText]
+        android:text="Total: Rp 0"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_restock.xml:92: Warning: Hardcoded string "SIMPAN", should use @string resource [HardcodedText]
+        android:text="SIMPAN"
+        ~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_stock_action.xml:14: Warning: Hardcoded string "Nama Barang", should use @string resource [HardcodedText]
+        android:text="Nama Barang"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_stock_action.xml:24: Warning: Hardcoded string "Restock", should use @string resource [HardcodedText]
+        android:text="Restock"
+        ~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_stock_action.xml:42: Warning: Hardcoded string "Penyesuaian Stock (Override)", should use @string resource [HardcodedText]
+        android:text="Penyesuaian Stock (Override)"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_bottom_sheet_stock_action.xml:60: Warning: Hardcoded string "Hapus", should use @string resource [HardcodedText]
+        android:text="Hapus"
+        ~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_offline_indicator.xml:32: Warning: Hardcoded string "Mode Offline: Fitur pencarian produk eksternal tidak tersedia", should use @string resource [HardcodedText]
+            android:text="Mode Offline: Fitur pencarian produk eksternal tidak tersedia"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/layout/layout_offline_indicator.xml:44: Warning: Hardcoded string "Tutup", should use @string resource [HardcodedText]
+            android:contentDescription="Tutup"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/menu/sell_toolbar_menu.xml:7: Warning: Hardcoded string "Scan Barcode", should use @string resource [HardcodedText]
+        android:title="Scan Barcode"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/menu/sell_toolbar_menu.xml:8: Warning: Hardcoded string "Scan barcode untuk menambahkan produk ke keranjang", should use @string resource [HardcodedText]
+        android:contentDescription="Scan barcode untuk menambahkan produk ke keranjang"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/menu/stock_toolbar_menu.xml:6: Warning: Hardcoded string "Export Produk", should use @string resource [HardcodedText]
+        android:title="Export Produk"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/menu/stock_toolbar_menu.xml:11: Warning: Hardcoded string "Import Produk", should use @string resource [HardcodedText]
+        android:title="Import Produk"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/menu/stock_toolbar_menu.xml:16: Warning: Hardcoded string "Download Template", should use @string resource [HardcodedText]
+        android:title="Download Template"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/ekowibowo/KahfiDev/WarungKu/app/src/main/res/menu/summary_toolbar_menu.xml:6: Warning: Hardcoded string "Generate Test Data", should use @string resource [HardcodedText]
+        android:title="Generate Test Data"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+5 errors, 273 warnings

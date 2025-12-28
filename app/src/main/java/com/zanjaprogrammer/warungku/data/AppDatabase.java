@@ -16,7 +16,7 @@ import com.zanjaprogrammer.warungku.data.entity.Product;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = { Product.class, CashFlow.class }, version = 3, exportSchema = false)
+@Database(entities = { Product.class, CashFlow.class }, version = 4, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ProductDao productDao();
@@ -45,6 +45,22 @@ public abstract class AppDatabase extends RoomDatabase {
             database.execSQL("ALTER TABLE products ADD COLUMN barcode TEXT");
         }
     };
+    
+    // Migration from version 3 to 4: Add sync fields
+    static final Migration MIGRATION_3_4 = new Migration(3, 4) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            // Add sync fields to products
+            database.execSQL("ALTER TABLE products ADD COLUMN synced INTEGER NOT NULL DEFAULT 0");
+            database.execSQL("ALTER TABLE products ADD COLUMN lastSyncedAt INTEGER NOT NULL DEFAULT 0");
+            database.execSQL("ALTER TABLE products ADD COLUMN cloudId TEXT");
+            
+            // Add sync fields to cash_flow
+            database.execSQL("ALTER TABLE cash_flow ADD COLUMN synced INTEGER NOT NULL DEFAULT 0");
+            database.execSQL("ALTER TABLE cash_flow ADD COLUMN lastSyncedAt INTEGER NOT NULL DEFAULT 0");
+            database.execSQL("ALTER TABLE cash_flow ADD COLUMN cloudId TEXT");
+        }
+    };
 
     public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -52,7 +68,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "warungku_db")
-                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                             .fallbackToDestructiveMigration() // For development: drop and recreate if migration fails
                             .build();
                 }

@@ -19,9 +19,15 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.zanjaprogrammer.warungku.data.DataRepository;
+import com.zanjaprogrammer.warungku.data.AppDatabase;
 import com.zanjaprogrammer.warungku.viewmodel.AppViewModel;
+import com.zanjaprogrammer.warungku.utils.DatabaseBackupUtils;
+import com.zanjaprogrammer.warungku.utils.DatabaseRestoreUtils;
 import android.content.Intent;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
+import java.io.File;
 import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -44,10 +50,33 @@ public class SummaryActivity extends AppCompatActivity {
     private LiveData<Double> incomeLive, expenseLive, profitLive, stockPurchaseLive;
     private LiveData<Double> totalIncomeLive, totalExpenseLive; // Untuk progress bar (total semua waktu)
     private int lastCheckedDay = -1;
+    private ActivityResultLauncher<String> restoreFileLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // Check authentication
+        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
+            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        
+        if (!authManager.isLoggedIn()) {
+            authManager.loadUserFromCache();
+            if (!authManager.isLoggedIn()) {
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                return;
+            }
+        }
+        
+        // Check permission: canAccessSummary
+        String role = authManager.getCurrentUserRole();
+        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canAccessSummary(role)) {
+            Toast.makeText(this, "Anda tidak memiliki izin untuk mengakses halaman ini", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+        
         Log.d("WarungKu", "SummaryActivity onCreate started");
         setContentView(R.layout.activity_summary);
 
@@ -63,12 +92,42 @@ public class SummaryActivity extends AppCompatActivity {
         loadInitialCapital();
         setupCartObserver();
         updateProgressBarVisibility(); // Check visibility preference
+        setupOfflineIndicator();
 
         // Default filter: Today
         updateTimeRange(RangeType.DAY);
         
         // Check if day has changed
         checkAndRefreshDailyData();
+    }
+    
+    private void setupOfflineIndicator() {
+        boolean hideOfflineWarning = prefs.getBoolean("hide_offline_warning", false);
+        
+        if (hideOfflineWarning) {
+            return;
+        }
+        
+        android.view.View includeView = findViewById(R.id.offlineIndicator);
+        if (includeView == null) return;
+        
+        com.google.android.material.card.MaterialCardView cardOffline = (com.google.android.material.card.MaterialCardView) includeView;
+        
+        boolean isOnline = com.zanjaprogrammer.warungku.utils.NetworkUtils.isNetworkAvailable(this);
+        
+        if (!isOnline) {
+            cardOffline.setVisibility(android.view.View.VISIBLE);
+            
+            android.view.View btnClose = cardOffline.findViewById(R.id.btnCloseOfflineIndicator);
+            if (btnClose != null) {
+                btnClose.setOnClickListener(v -> {
+                    cardOffline.setVisibility(android.view.View.GONE);
+                    prefs.edit().putBoolean("hide_offline_warning", true).apply();
+                });
+            }
+        } else {
+            cardOffline.setVisibility(android.view.View.GONE);
+        }
     }
     
     private void checkAndRefreshDailyData() {
@@ -147,8 +206,108 @@ public class SummaryActivity extends AppCompatActivity {
             showPaymentBottomSheet();
         });
 
+        // Setup Backup & Restore
+        setupBackupRestore();
+
         updateCapitalWarningVisibility();
         setupBottomNavigation();
+    }
+    
+    private void setupBackupRestore() {
+        // Setup file picker launcher untuk restore
+        restoreFileLauncher = registerForActivityResult(
+            new ActivityResultContracts.GetContent(),
+            uri -> {
+                if (uri != null) {
+                    showRestoreConfirmationDialog(uri);
+                }
+            }
+        );
+        
+        // Backup button
+        findViewById(R.id.btnBackup).setOnClickListener(v -> performBackup());
+        
+        // Setup Manage Employees card (only for owner)
+        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
+            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        String role = authManager.getCurrentUserRole();
+        MaterialCardView cardManageEmployees = findViewById(R.id.cardManageEmployees);
+        if (com.zanjaprogrammer.warungku.auth.PermissionManager.canManageEmployees(role)) {
+            cardManageEmployees.setVisibility(View.VISIBLE);
+            findViewById(R.id.btnManageEmployees).setOnClickListener(v -> {
+                startActivity(new Intent(this, ManageEmployeesActivity.class));
+            });
+        } else {
+            cardManageEmployees.setVisibility(View.GONE);
+        }
+        
+        // Restore button
+        findViewById(R.id.btnRestore).setOnClickListener(v -> {
+            restoreFileLauncher.launch("application/octet-stream");
+        });
+    }
+    
+    private void performBackup() {
+        // Show loading
+        Toast.makeText(this, "Membuat backup...", Toast.LENGTH_SHORT).show();
+        
+        // Run backup di background thread
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            File backupFile = DatabaseBackupUtils.backupDatabase(this);
+            
+            runOnUiThread(() -> {
+                if (backupFile != null && backupFile.exists()) {
+                    // Offer to share
+                    Intent shareIntent = DatabaseBackupUtils.getShareIntent(this, backupFile);
+                    if (shareIntent != null) {
+                        startActivity(Intent.createChooser(shareIntent, "Bagikan Backup"));
+                    }
+                    Toast.makeText(this, 
+                        "Backup berhasil!\nFile: " + backupFile.getName(), 
+                        Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "Gagal membuat backup", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+    }
+    
+    private void showRestoreConfirmationDialog(android.net.Uri uri) {
+        new AlertDialog.Builder(this)
+            .setTitle("Konfirmasi Restore")
+            .setMessage("Ini akan mengganti semua data dengan data dari backup.\n\n" +
+                       "Backup otomatis akan dibuat sebelum restore.\n\n" +
+                       "Lanjutkan?")
+            .setPositiveButton("Ya, Restore", (dialog, which) -> {
+                performRestore(uri);
+            })
+            .setNegativeButton("Batal", null)
+            .show();
+    }
+    
+    private void performRestore(android.net.Uri uri) {
+        Toast.makeText(this, "Memulihkan data...", Toast.LENGTH_SHORT).show();
+        
+        // Run restore di background thread
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            boolean success = DatabaseRestoreUtils.restoreDatabaseFromUri(this, uri);
+            
+            runOnUiThread(() -> {
+                if (success) {
+                    Toast.makeText(this, 
+                        "Restore berhasil!\nAplikasi akan dimuat ulang.", 
+                        Toast.LENGTH_LONG).show();
+                    
+                    // Restart activity untuk reload data
+                    finish();
+                    startActivity(new Intent(this, SummaryActivity.class));
+                } else {
+                    Toast.makeText(this, 
+                        "Gagal restore. Pastikan file backup valid.", 
+                        Toast.LENGTH_LONG).show();
+                }
+            });
+        });
     }
     
     private void setupCartObserver() {
@@ -727,5 +886,7 @@ public class SummaryActivity extends AppCompatActivity {
         super.onResume();
         // Check if day has changed and refresh data
         checkAndRefreshDailyData();
+        // Check network status
+        setupOfflineIndicator();
     }
 }

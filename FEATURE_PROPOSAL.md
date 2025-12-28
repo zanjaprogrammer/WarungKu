@@ -52,13 +52,40 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 ---
 
-### 2. **Offline Mode** 📴
-**Prioritas: TINGGI** | **Effort: TINGGI**
+### 2. **Multi-User & Cloud Sync** 👥☁️
+**Prioritas: TINGGI** | **Effort: TINGGI** | **Status: PLANNING**
 
 #### Fitur:
-- Aplikasi tetap bisa dipakai tanpa internet
-- Semua fitur utama tetap berfungsi offline
-- Auto sync data saat online kembali
+- Login/Register untuk owner dan karyawan
+- Role-based access control (Owner, Manager, Cashier, Staff)
+- Invite karyawan via email/phone
+- Real-time data sync antar device
+- Activity tracking (siapa melakukan apa)
+- Offline-first dengan auto-sync saat online
+
+#### Kenapa Penting:
+- Pemilik warung sering punya beberapa karyawan
+- Perlu kontrol akses (karyawan tidak bisa edit harga/hapus data)
+- Data perlu tersinkronisasi antar device
+- Audit trail untuk transaksi penting
+
+#### Implementasi:
+- Firebase Authentication untuk login
+- Firebase Firestore untuk cloud database
+- Role-based permission checks
+- Sync service untuk local ↔ cloud
+- See detailed plan: `MULTI_USER_IMPLEMENTATION_PLAN.md`
+
+---
+
+### 3. **Offline Mode** 📴 ✅ **PARTIALLY IMPLEMENTED**
+**Prioritas: TINGGI** | **Effort: TINGGI** | **Status: IN PROGRESS**
+
+#### Fitur:
+- ✅ Aplikasi tetap bisa dipakai tanpa internet
+- ✅ Semua fitur utama tetap berfungsi offline
+- ✅ Offline indicator card
+- ⏳ Auto sync data saat online kembali (akan diimplementasikan dengan Multi-User)
 
 #### Kenapa Penting:
 - Banyak warung di area dengan sinyal internet tidak stabil
@@ -66,13 +93,14 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 - Reliability adalah kunci untuk aplikasi bisnis
 
 #### Implementasi:
-- Local database sudah ada (Room)
-- Tambahkan sync mechanism dengan Firebase/backend
-- Conflict resolution sederhana
+- ✅ Local database sudah ada (Room)
+- ✅ Offline detection dengan NetworkUtils
+- ✅ Offline indicator UI
+- ⏳ Sync mechanism akan diimplementasikan dengan Multi-User feature
 
 ---
 
-### 3. **Backup & Restore Data** ☁️
+### 4. **Backup & Restore Data** ☁️
 **Prioritas: TINGGI** | **Effort: SEDANG**
 
 #### Fitur:
@@ -92,7 +120,7 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 ---
 
-### 4. **Laporan Sederhana** 📊 ✅ **SUDAH DIIMPLEMENTASI**
+### 5. **Laporan Sederhana** 📊 ✅ **SUDAH DIIMPLEMENTASI**
 **Prioritas: SEDANG** | **Effort: SEDANG** | **Status: SELESAI**
 
 #### Fitur:
@@ -138,7 +166,7 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 ---
 
-### 6. **Notifikasi Stok** 🔔
+### 7. **Notifikasi Stok** 🔔
 **Prioritas: SEDANG** | **Effort: RENDAH**
 
 #### Fitur:
@@ -158,7 +186,7 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 ---
 
-### 7. **Kategori Produk** 📦
+### 8. **Kategori Produk** 📦
 **Prioritas: RENDAH** | **Effort: RENDAH**
 
 #### Fitur:
@@ -178,7 +206,7 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 ---
 
-### 8. **Export/Import Produk** 📤📥 ✅ **SUDAH DIIMPLEMENTASI**
+### 9. **Export/Import Produk** 📤📥 ✅ **SUDAH DIIMPLEMENTASI**
 **Prioritas: RENDAH** | **Effort: SEDANG** | **Status: SELESAI**
 
 #### Fitur:
@@ -201,7 +229,7 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 ---
 
-### 9. **Pelanggan Sederhana** 👥
+### 10. **Pelanggan Sederhana** 👥
 **Prioritas: RENDAH** | **Effort: SEDANG**
 
 #### Fitur:
@@ -222,7 +250,7 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 ---
 
-### 10. **Kalkulator Kembalian** 💰 ✅ **SUDAH DIIMPLEMENTASI**
+### 11. **Kalkulator Kembalian** 💰 ✅ **SUDAH DIIMPLEMENTASI**
 **Prioritas: TINGGI** | **Effort: RENDAH** | **Status: SELESAI**
 
 #### Fitur:
@@ -247,16 +275,6 @@ Menambahkan fitur-fitur **sederhana dan praktis** yang benar-benar dibutuhkan ol
 
 ---
 
-### 11. **Pelacak Produk Terlaris** 
-
-#### Fitur:
- - Mencatat produk produk yg paling laris dan yg tidak
- - Mencatat keuntungan produk tersebut berdasarkan waktu (hari/minggu/bulan/tahun)
- - Mencatat total keuntungan dan persen
- - Mencatat total kerugian dan persen
-
-#### Lokasi:
- - Fitur ini akan ditempatkan pada halaman ringkasan
 
 ## ❌ Fitur yang TIDAK Akan Dibuat (Terlalu Kompleks untuk Warung Kecil)
 

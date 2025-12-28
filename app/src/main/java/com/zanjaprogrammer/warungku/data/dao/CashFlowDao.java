@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.zanjaprogrammer.warungku.data.entity.CashFlow;
 
@@ -13,6 +14,9 @@ import java.util.List;
 public interface CashFlowDao {
     @Insert
     void insert(CashFlow cashFlow);
+    
+    @Update
+    void update(CashFlow cashFlow);
 
     @Query("SELECT * FROM cash_flow ORDER BY timestamp DESC")
     LiveData<List<CashFlow>> getAllHistory();
@@ -49,4 +53,8 @@ public interface CashFlowDao {
     // Mengembalikan semua cash flow dalam range, akan diproses di ViewModel
     @Query("SELECT * FROM cash_flow WHERE timestamp BETWEEN :start AND :end ORDER BY timestamp ASC")
     LiveData<List<CashFlow>> getCashFlowInRange(long start, long end);
+    
+    // Query untuk sync: Get unsynced cash flows
+    @Query("SELECT * FROM cash_flow WHERE synced = 0")
+    List<CashFlow> getUnsyncedCashFlows();
 }

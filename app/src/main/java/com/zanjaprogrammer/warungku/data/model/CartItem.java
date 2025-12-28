@@ -12,6 +12,9 @@ public class CartItem {
     }
 
     public double getSubtotal() {
+        if (product == null) {
+            return 0.0;
+        }
         return product.sellPrice * quantity;
     }
 }

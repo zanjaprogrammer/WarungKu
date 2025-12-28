@@ -19,13 +19,14 @@
         android:theme="@style/Theme.WarungKu"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".SellActivity" />
         <activity android:name=".StockActivity" />
         <activity android:name=".AddProductActivity" />
@@ -35,6 +36,11 @@
             android:name=".SummaryActivity"
             android:exported="true" />
         <activity android:name=".ReportActivity" />
+        <activity android:name=".ManageEmployeesActivity" />
+        
+        <service
+            android:name=".sync.FirestoreSyncService"
+            android:exported="false" />
         
         <provider
             android:name="androidx.core.content.FileProvider"

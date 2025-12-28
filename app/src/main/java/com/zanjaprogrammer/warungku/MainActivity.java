@@ -23,6 +23,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Check authentication
+        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
+            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        
+        if (!authManager.isLoggedIn()) {
+            // Try load from cache
+            authManager.loadUserFromCache();
+            if (!authManager.isLoggedIn()) {
+                // Not logged in, redirect to login
+                startActivity(new android.content.Intent(this, LoginActivity.class));
+                finish();
+                return;
+            }
+        }
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -32,6 +47,67 @@ public class MainActivity extends AppCompatActivity {
         observeData();
         setupListeners();
         checkAndRefreshDailyData();
+        setupOfflineIndicator();
+    }
+    
+    private void setupOfflineIndicator() {
+        android.content.SharedPreferences prefs = getSharedPreferences("WarungKuPrefs", MODE_PRIVATE);
+        boolean hideOfflineWarning = prefs.getBoolean("hide_offline_warning", false);
+        
+        if (hideOfflineWarning) {
+            return; // User sudah memilih untuk menyembunyikan
+        }
+        
+        // Find the include view
+        android.view.View includeView = findViewById(R.id.offlineIndicator);
+        if (includeView == null) {
+            android.util.Log.d("WarungKu", "offlineIndicator include view is null");
+            return;
+        }
+        
+        // The include view IS the MaterialCardView, so we can cast it directly
+        com.google.android.material.card.MaterialCardView cardOffline = (com.google.android.material.card.MaterialCardView) includeView;
+        
+        // Check network status
+        boolean isOnline = com.zanjaprogrammer.warungku.utils.NetworkUtils.isNetworkAvailable(this);
+        android.util.Log.d("WarungKu", "Network available: " + isOnline);
+        
+        if (!isOnline) {
+            cardOffline.setVisibility(android.view.View.VISIBLE);
+            
+            // Close button - find it within the card
+            android.view.View btnClose = cardOffline.findViewById(R.id.btnCloseOfflineIndicator);
+            if (btnClose != null) {
+                btnClose.setOnClickListener(v -> {
+                    cardOffline.setVisibility(android.view.View.GONE);
+                    // Save preference untuk tidak tampil lagi
+                    prefs.edit().putBoolean("hide_offline_warning", true).apply();
+                });
+            }
+        } else {
+            cardOffline.setVisibility(android.view.View.GONE);
+        }
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Check network status setiap kali resume
+        setupOfflineIndicator();
+        
+        // Ensure home icon is selected when returning to MainActivity
+        // Use post() to ensure the view is fully laid out
+        if (binding != null) {
+            binding.bottomNavigation.post(() -> {
+                binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
+            });
+        }
+        
+        // Check if day has changed and refresh data
+        checkAndRefreshDailyData();
+        
+        // Trigger sync if online
+        com.zanjaprogrammer.warungku.sync.SyncManager.triggerSync(this);
     }
 
     private void observeData() {
@@ -120,20 +196,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Ensure home icon is selected when returning to MainActivity
-        // Use post() to ensure the view is fully laid out
-        if (binding != null) {
-            binding.bottomNavigation.post(() -> {
-                binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
-            });
-        }
-        
-        // Check if day has changed and refresh data
-        checkAndRefreshDailyData();
-    }
     
     private void checkAndRefreshDailyData() {
         Calendar cal = Calendar.getInstance();

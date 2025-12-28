@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.zanjaprogrammer.warungku.app-mergeDebugResources-29:/values-xlarge-v4/values-xlarge-v4.xml",
+            "outputFile": "com.zanjaprogrammer.warungku.app-mergeDebugResources-38:/values-xlarge-v4/values-xlarge-v4.xml",
             "map": [
                 {
-                    "source": "/Users/alkahfzanjabiil/.gradle/caches/transforms-4/29ee19215e3abfa51250899ee8add668/transformed/appcompat-1.6.1/res/values-xlarge-v4/values-xlarge-v4.xml",
+                    "source": "/Users/ekowibowo/.gradle/caches/transforms-4/d82cc5032db147009a6597b3959eeb03/transformed/appcompat-1.6.1/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",

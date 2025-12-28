@@ -13,6 +13,7 @@ import com.zanjaprogrammer.warungku.data.entity.Product;
 import com.zanjaprogrammer.warungku.data.DataRepository;
 import com.zanjaprogrammer.warungku.databinding.ActivityAddProductBinding;
 import com.zanjaprogrammer.warungku.utils.BarcodeScannerHelper;
+import com.zanjaprogrammer.warungku.utils.NetworkUtils;
 import com.zanjaprogrammer.warungku.viewmodel.AppViewModel;
 import com.zanjaprogrammer.warungku.api.ProductApiClient;
 import com.zanjaprogrammer.warungku.api.ProductApiService;
@@ -30,6 +31,28 @@ public class AddProductActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // Check authentication
+        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
+            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        
+        if (!authManager.isLoggedIn()) {
+            authManager.loadUserFromCache();
+            if (!authManager.isLoggedIn()) {
+                startActivity(new android.content.Intent(this, LoginActivity.class));
+                finish();
+                return;
+            }
+        }
+        
+        // Check permission: canAddProduct
+        String role = authManager.getCurrentUserRole();
+        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canAddProduct(role)) {
+            android.widget.Toast.makeText(this, "Anda tidak memiliki izin untuk menambah produk", android.widget.Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+        
         binding = ActivityAddProductBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -154,6 +177,16 @@ public class AddProductActivity extends AppCompatActivity {
                         Toast.makeText(AddProductActivity.this, 
                             "Produk baru, silakan isi data manual", 
                             Toast.LENGTH_SHORT).show();
+                    });
+                    return;
+                }
+                
+                // Check network connectivity sebelum call API
+                if (!NetworkUtils.isNetworkAvailable(AddProductActivity.this)) {
+                    runOnUiThread(() -> {
+                        Toast.makeText(AddProductActivity.this, 
+                            "Tidak ada koneksi internet. Silakan isi data manual atau coba lagi nanti.", 
+                            Toast.LENGTH_LONG).show();
                     });
                     return;
                 }

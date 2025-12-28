@@ -6,6 +6,7 @@ import com.zanjaprogrammer.warungku.data.dao.CashFlowDao;
 import com.zanjaprogrammer.warungku.data.dao.ProductDao;
 import com.zanjaprogrammer.warungku.data.entity.CashFlow;
 import com.zanjaprogrammer.warungku.data.entity.Product;
+import com.zanjaprogrammer.warungku.sync.SyncManager;
 
 import java.util.List;
 
@@ -14,8 +15,10 @@ public class DataRepository {
     private final CashFlowDao cashFlowDao;
     private final LiveData<List<Product>> allProducts;
     private final LiveData<List<CashFlow>> allHistory;
+    private final Application application;
 
     public DataRepository(Application application) {
+        this.application = application;
         AppDatabase db = AppDatabase.getDatabase(application);
         productDao = db.productDao();
         cashFlowDao = db.cashFlowDao();
@@ -93,11 +96,31 @@ public class DataRepository {
                     cashFlowDao.insert(flow);
                 }
             }
+            
+            // Trigger sync
+            SyncManager.triggerSync(application);
         });
     }
 
     public void updateProduct(Product product) {
-        AppDatabase.databaseWriteExecutor.execute(() -> productDao.update(product));
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            productDao.update(product);
+            // Trigger sync
+            SyncManager.triggerSync(application);
+        });
+    }
+    
+    public void updateCashFlow(CashFlow cashFlow) {
+        AppDatabase.databaseWriteExecutor.execute(() -> cashFlowDao.update(cashFlow));
+    }
+    
+    // Sync methods
+    public List<Product> getUnsyncedProducts() {
+        return productDao.getUnsyncedProducts();
+    }
+    
+    public List<CashFlow> getUnsyncedCashFlows() {
+        return cashFlowDao.getUnsyncedCashFlows();
     }
 
     public void insertCashFlow(CashFlow cashFlow) {

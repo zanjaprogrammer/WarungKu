@@ -42,13 +42,13 @@ public final class AppDatabase_Impl extends AppDatabase {
 
   @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(4) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `products` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `sellPrice` REAL NOT NULL, `buyPrice` REAL, `currentStock` INTEGER NOT NULL, `minStock` INTEGER NOT NULL, `salesCount` INTEGER NOT NULL)");
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `cash_flow` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` TEXT, `amount` REAL NOT NULL, `description` TEXT, `timestamp` INTEGER NOT NULL, `productId` INTEGER, `profit` REAL)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `products` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `sellPrice` REAL NOT NULL, `buyPrice` REAL, `currentStock` INTEGER NOT NULL, `minStock` INTEGER NOT NULL, `salesCount` INTEGER NOT NULL, `isFavorite` INTEGER NOT NULL, `lastSoldTimestamp` INTEGER NOT NULL, `barcode` TEXT, `synced` INTEGER NOT NULL, `lastSyncedAt` INTEGER NOT NULL, `cloudId` TEXT)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `cash_flow` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` TEXT, `amount` REAL NOT NULL, `description` TEXT, `timestamp` INTEGER NOT NULL, `productId` INTEGER, `profit` REAL, `synced` INTEGER NOT NULL, `lastSyncedAt` INTEGER NOT NULL, `cloudId` TEXT)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '05a7f9e65521989ecd5a21571977c469')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9f9ee9f0ca61332e284534eaa8881a6b')");
       }
 
       @Override
@@ -93,7 +93,7 @@ public final class AppDatabase_Impl extends AppDatabase {
 
       @Override
       public RoomOpenHelper.ValidationResult onValidateSchema(SupportSQLiteDatabase _db) {
-        final HashMap<String, TableInfo.Column> _columnsProducts = new HashMap<String, TableInfo.Column>(7);
+        final HashMap<String, TableInfo.Column> _columnsProducts = new HashMap<String, TableInfo.Column>(13);
         _columnsProducts.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsProducts.put("name", new TableInfo.Column("name", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsProducts.put("sellPrice", new TableInfo.Column("sellPrice", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
@@ -101,6 +101,12 @@ public final class AppDatabase_Impl extends AppDatabase {
         _columnsProducts.put("currentStock", new TableInfo.Column("currentStock", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsProducts.put("minStock", new TableInfo.Column("minStock", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsProducts.put("salesCount", new TableInfo.Column("salesCount", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsProducts.put("isFavorite", new TableInfo.Column("isFavorite", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsProducts.put("lastSoldTimestamp", new TableInfo.Column("lastSoldTimestamp", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsProducts.put("barcode", new TableInfo.Column("barcode", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsProducts.put("synced", new TableInfo.Column("synced", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsProducts.put("lastSyncedAt", new TableInfo.Column("lastSyncedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsProducts.put("cloudId", new TableInfo.Column("cloudId", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysProducts = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesProducts = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoProducts = new TableInfo("products", _columnsProducts, _foreignKeysProducts, _indicesProducts);
@@ -110,7 +116,7 @@ public final class AppDatabase_Impl extends AppDatabase {
                   + " Expected:\n" + _infoProducts + "\n"
                   + " Found:\n" + _existingProducts);
         }
-        final HashMap<String, TableInfo.Column> _columnsCashFlow = new HashMap<String, TableInfo.Column>(7);
+        final HashMap<String, TableInfo.Column> _columnsCashFlow = new HashMap<String, TableInfo.Column>(10);
         _columnsCashFlow.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsCashFlow.put("type", new TableInfo.Column("type", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsCashFlow.put("amount", new TableInfo.Column("amount", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
@@ -118,6 +124,9 @@ public final class AppDatabase_Impl extends AppDatabase {
         _columnsCashFlow.put("timestamp", new TableInfo.Column("timestamp", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsCashFlow.put("productId", new TableInfo.Column("productId", "INTEGER", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsCashFlow.put("profit", new TableInfo.Column("profit", "REAL", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsCashFlow.put("synced", new TableInfo.Column("synced", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsCashFlow.put("lastSyncedAt", new TableInfo.Column("lastSyncedAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsCashFlow.put("cloudId", new TableInfo.Column("cloudId", "TEXT", false, 0, null, TableInfo.CREATED_FROM_ENTITY));
         final HashSet<TableInfo.ForeignKey> _foreignKeysCashFlow = new HashSet<TableInfo.ForeignKey>(0);
         final HashSet<TableInfo.Index> _indicesCashFlow = new HashSet<TableInfo.Index>(0);
         final TableInfo _infoCashFlow = new TableInfo("cash_flow", _columnsCashFlow, _foreignKeysCashFlow, _indicesCashFlow);
@@ -129,7 +138,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "05a7f9e65521989ecd5a21571977c469", "86b6de0cea763e2fa037fd2e32dc666b");
+    }, "9f9ee9f0ca61332e284534eaa8881a6b", "7b418bfbdbed1756afbdd7839e38a212");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)

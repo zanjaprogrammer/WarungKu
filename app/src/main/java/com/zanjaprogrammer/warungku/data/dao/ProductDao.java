@@ -41,4 +41,8 @@ public interface ProductDao {
     // Query untuk laporan: Produk tidak laku (belum pernah dijual)
     @Query("SELECT * FROM products WHERE salesCount = 0 OR salesCount IS NULL ORDER BY name ASC")
     LiveData<List<Product>> getUnsoldProducts();
+    
+    // Query untuk sync: Get unsynced products
+    @Query("SELECT * FROM products WHERE synced = 0")
+    List<Product> getUnsyncedProducts();
 }

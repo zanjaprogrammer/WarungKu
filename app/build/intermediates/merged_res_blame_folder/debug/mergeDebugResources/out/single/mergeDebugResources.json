@@ -1,74 +1,194 @@
 [
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/layout_item_history.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/item_history.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_activity_stock.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/activity_stock.xml"
     },
     {
-        "merged": "com.zanjaprogrammer.warungku.app-debug-31:/layout_activity_summary.xml.flat",
-        "source": "com.zanjaprogrammer.warungku.app-main-33:/layout/activity_summary.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_bg_button_icon_circle.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/bg_button_icon_circle.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/menu_bottom_nav_menu.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/menu/bottom_nav_menu.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/xml_file_paths.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/xml/file_paths.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/layout_activity_main.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_main.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_ic_sell_highlight.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/ic_sell_highlight.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/drawable_bg_bottom_sheet.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/drawable/bg_bottom_sheet.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_item_history.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/item_history.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/layout_activity_history.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_history.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_bg_bottom_sheet.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/bg_bottom_sheet.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/drawable_ic_minus.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/drawable/ic_minus.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_ic_money.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/ic_money.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/layout_layout_bottom_sheet_quantity.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/layout_bottom_sheet_quantity.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_bg_sell_button.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/bg_sell_button.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/layout_activity_sell.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_sell.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_activity_shopping_list.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/activity_shopping_list.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/layout_item_product_stock.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/item_product_stock.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_layout_offline_indicator.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/layout_offline_indicator.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/layout_activity_stock.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_stock.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_activity_main.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/activity_main.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/layout_activity_shopping_list.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_shopping_list.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_item_product_sell.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/item_product_sell.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/layout_activity_add_product.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_add_product.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_item_product_stock.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/item_product_stock.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/layout_item_shopping.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/item_shopping.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_ic_minus.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/ic_minus.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/xml_backup_rules.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/xml/backup_rules.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_layout_bottom_sheet_quantity.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/layout_bottom_sheet_quantity.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/layout_activity_summary.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/activity_summary.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_ic_home.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/ic_home.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/xml_data_extraction_rules.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/xml/data_extraction_rules.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_layout_bottom_sheet_restock.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/layout_bottom_sheet_restock.xml"
     },
     {
-        "merged": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-31:/layout_item_product_sell.xml.flat",
-        "source": "/Users/alkahfzanjabiil/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-33:/layout/item_product_sell.xml"
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_activity_summary.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/activity_summary.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/xml_backup_rules.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_bg_card_hero_gradient.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/bg_card_hero_gradient.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_item_employee.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/item_employee.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_layout_bottom_sheet_payment.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/layout_bottom_sheet_payment.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_item_shopping.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/item_shopping.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_ic_sell_white.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/ic_sell_white.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_dialog_invite_employee.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/dialog_invite_employee.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_activity_report.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/activity_report.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_ic_sell_circle.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/ic_sell_circle.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_item_product_report.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/item_product_report.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_ic_stock.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/ic_stock.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/menu_stock_toolbar_menu.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/menu/stock_toolbar_menu.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_bg_button_primary_gradient.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/bg_button_primary_gradient.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_bg_button_tonal_gradient.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/bg_button_tonal_gradient.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_activity_manage_employees.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/activity_manage_employees.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_layout_bottom_sheet_stock_action.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/layout_bottom_sheet_stock_action.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_bg_fab_gradient.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/bg_fab_gradient.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_ic_summary.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/ic_summary.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_activity_add_product.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/activity_add_product.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_activity_login.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/menu_bottom_nav_menu.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/color_nav_icon_color.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/color/nav_icon_color.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/menu_summary_toolbar_menu.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/menu/summary_toolbar_menu.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_bg_progress_gradient.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/bg_progress_gradient.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/menu_sell_toolbar_menu.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/menu/sell_toolbar_menu.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/xml_data_extraction_rules.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_activity_history.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/activity_history.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/drawable_ic_sell.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/drawable/ic_sell.xml"
+    },
+    {
+        "merged": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-debug-40:/layout_activity_sell.xml.flat",
+        "source": "/Users/ekowibowo/.gradle/daemon/8.6/com.zanjaprogrammer.warungku.app-main-42:/layout/activity_sell.xml"
+    },
+    {
+        "merged": "com.zanjaprogrammer.warungku.app-debug-40:/layout_dialog_invite_success.xml.flat",
+        "source": "com.zanjaprogrammer.warungku.app-main-42:/layout/dialog_invite_success.xml"
     }
 ]

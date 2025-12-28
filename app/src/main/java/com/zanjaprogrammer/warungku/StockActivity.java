@@ -31,14 +31,42 @@ public class StockActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // Check authentication
+        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
+            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        
+        if (!authManager.isLoggedIn()) {
+            authManager.loadUserFromCache();
+            if (!authManager.isLoggedIn()) {
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                return;
+            }
+        }
+        
+        // Check permission: canViewStock
+        String role = authManager.getCurrentUserRole();
+        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canViewStock(role)) {
+            Toast.makeText(this, "Anda tidak memiliki izin untuk mengakses halaman ini", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+        
         binding = ActivityStockBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Use singleton instance untuk persist cart across activities
         viewModel = AppViewModel.getInstance(getApplication());
+        
+        // Hide/Show FAB based on permission
+        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canAddProduct(role)) {
+            binding.fabAdd.setVisibility(android.view.View.GONE);
+        }
         setupRecyclerView();
         setupFilePickers();
         setupToolbarMenu();
+        setupOfflineIndicator();
 
         viewModel.getAllProducts().observe(this, products -> {
             allProducts = products;
@@ -71,8 +99,14 @@ public class StockActivity extends AppCompatActivity {
         });
 
         binding.fabAdd.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AddProductActivity.class);
-            startActivity(intent);
+            // Double check permission before opening AddProductActivity
+            String currentRole = authManager.getCurrentUserRole();
+            if (com.zanjaprogrammer.warungku.auth.PermissionManager.canAddProduct(currentRole)) {
+                Intent intent = new Intent(this, AddProductActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Anda tidak memiliki izin untuk menambah produk", Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.bottomNavigation.setSelectedItemId(R.id.nav_stock);
@@ -106,6 +140,37 @@ public class StockActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         binding.bottomNavigation.setSelectedItemId(R.id.nav_stock);
+        setupOfflineIndicator();
+    }
+    
+    private void setupOfflineIndicator() {
+        android.content.SharedPreferences prefs = getSharedPreferences("WarungKuPrefs", MODE_PRIVATE);
+        boolean hideOfflineWarning = prefs.getBoolean("hide_offline_warning", false);
+        
+        if (hideOfflineWarning) {
+            return;
+        }
+        
+        android.view.View includeView = findViewById(R.id.offlineIndicator);
+        if (includeView == null) return;
+        
+        com.google.android.material.card.MaterialCardView cardOffline = (com.google.android.material.card.MaterialCardView) includeView;
+        
+        boolean isOnline = com.zanjaprogrammer.warungku.utils.NetworkUtils.isNetworkAvailable(this);
+        
+        if (!isOnline) {
+            cardOffline.setVisibility(android.view.View.VISIBLE);
+            
+            android.view.View btnClose = cardOffline.findViewById(R.id.btnCloseOfflineIndicator);
+            if (btnClose != null) {
+                btnClose.setOnClickListener(v -> {
+                    cardOffline.setVisibility(android.view.View.GONE);
+                    prefs.edit().putBoolean("hide_offline_warning", true).apply();
+                });
+            }
+        } else {
+            cardOffline.setVisibility(android.view.View.GONE);
+        }
     }
 
     private void setupRecyclerView() {
@@ -139,16 +204,43 @@ public class StockActivity extends AppCompatActivity {
     }
     
     private void setupToolbarMenu() {
+        // Hide export/import menu if user doesn't have permission
+        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
+            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        String role = authManager.getCurrentUserRole();
+        
+        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canExportImport(role)) {
+            // Hide export/import menu items
+            binding.toolbar.getMenu().findItem(R.id.menu_export).setVisible(false);
+            binding.toolbar.getMenu().findItem(R.id.menu_import).setVisible(false);
+            binding.toolbar.getMenu().findItem(R.id.menu_template).setVisible(false);
+        }
+        
         binding.toolbar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menu_export) {
-                exportProducts();
+                // Double check permission
+                if (com.zanjaprogrammer.warungku.auth.PermissionManager.canExportImport(role)) {
+                    exportProducts();
+                } else {
+                    Toast.makeText(this, "Anda tidak memiliki izin untuk export produk", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             } else if (id == R.id.menu_import) {
-                importProducts();
+                // Double check permission
+                if (com.zanjaprogrammer.warungku.auth.PermissionManager.canExportImport(role)) {
+                    importProducts();
+                } else {
+                    Toast.makeText(this, "Anda tidak memiliki izin untuk import produk", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             } else if (id == R.id.menu_template) {
-                generateTemplate();
+                // Double check permission
+                if (com.zanjaprogrammer.warungku.auth.PermissionManager.canExportImport(role)) {
+                    generateTemplate();
+                } else {
+                    Toast.makeText(this, "Anda tidak memiliki izin untuk download template", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             }
             return false;

@@ -18,6 +18,7 @@ import com.zanjaprogrammer.warungku.adapters.ProductSellAdapter;
 import com.zanjaprogrammer.warungku.data.entity.Product;
 import com.zanjaprogrammer.warungku.databinding.ActivitySellBinding;
 import com.zanjaprogrammer.warungku.utils.BarcodeScannerHelper;
+import com.zanjaprogrammer.warungku.utils.NetworkUtils;
 import com.zanjaprogrammer.warungku.viewmodel.AppViewModel;
 import com.zanjaprogrammer.warungku.api.ProductApiClient;
 import com.zanjaprogrammer.warungku.api.ProductApiService;
@@ -44,6 +45,28 @@ public class SellActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // Check authentication
+        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
+            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        
+        if (!authManager.isLoggedIn()) {
+            authManager.loadUserFromCache();
+            if (!authManager.isLoggedIn()) {
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+                return;
+            }
+        }
+        
+        // Check permission: canSell
+        String role = authManager.getCurrentUserRole();
+        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canSell(role)) {
+            Toast.makeText(this, "Anda tidak memiliki izin untuk mengakses halaman ini", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+        
         binding = ActivitySellBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -76,6 +99,7 @@ public class SellActivity extends AppCompatActivity {
         setupRecyclerView();
         setupSearch();
         setupBarcodeScanner();
+        setupOfflineIndicator();
         
         // Setup toolbar menu
         binding.toolbar.setOnMenuItemClickListener(item -> {
@@ -122,6 +146,37 @@ public class SellActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         binding.bottomNavigation.setSelectedItemId(R.id.nav_sell);
+        setupOfflineIndicator();
+    }
+    
+    private void setupOfflineIndicator() {
+        android.content.SharedPreferences prefs = getSharedPreferences("WarungKuPrefs", MODE_PRIVATE);
+        boolean hideOfflineWarning = prefs.getBoolean("hide_offline_warning", false);
+        
+        if (hideOfflineWarning) {
+            return;
+        }
+        
+        android.view.View includeView = findViewById(R.id.offlineIndicator);
+        if (includeView == null) return;
+        
+        com.google.android.material.card.MaterialCardView cardOffline = (com.google.android.material.card.MaterialCardView) includeView;
+        
+        boolean isOnline = com.zanjaprogrammer.warungku.utils.NetworkUtils.isNetworkAvailable(this);
+        
+        if (!isOnline) {
+            cardOffline.setVisibility(android.view.View.VISIBLE);
+            
+            android.view.View btnClose = cardOffline.findViewById(R.id.btnCloseOfflineIndicator);
+            if (btnClose != null) {
+                btnClose.setOnClickListener(v -> {
+                    cardOffline.setVisibility(android.view.View.GONE);
+                    prefs.edit().putBoolean("hide_offline_warning", true).apply();
+                });
+            }
+        } else {
+            cardOffline.setVisibility(android.view.View.GONE);
+        }
     }
 
     private void setupRecyclerView() {
@@ -177,48 +232,67 @@ public class SellActivity extends AppCompatActivity {
     private int currentSheetQty = 1;
 
     private void showQuantityBottomSheet(Product product) {
+        if (product == null) {
+            Toast.makeText(this, "Produk tidak valid", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
         currentSheetQty = 1;
-        com.google.android.material.bottomsheet.BottomSheetDialog dialog = new com.google.android.material.bottomsheet.BottomSheetDialog(
-                this);
-        android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_quantity, null);
-        dialog.setContentView(view);
+        try {
+            com.google.android.material.bottomsheet.BottomSheetDialog dialog = new com.google.android.material.bottomsheet.BottomSheetDialog(
+                    this);
+            android.view.View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_quantity, null);
+            dialog.setContentView(view);
 
-        android.widget.TextView tvName = view.findViewById(R.id.tvSheetName);
-        android.widget.TextView tvPrice = view.findViewById(R.id.tvSheetPrice);
-        android.widget.TextView tvQty = view.findViewById(R.id.tvSheetQuantity);
-        android.view.View btnMinus = view.findViewById(R.id.btnSheetMinus);
-        android.view.View btnPlus = view.findViewById(R.id.btnSheetPlus);
-        android.widget.Button btnAdd = view.findViewById(R.id.btnSheetAdd);
+            android.widget.TextView tvName = view.findViewById(R.id.tvSheetName);
+            android.widget.TextView tvPrice = view.findViewById(R.id.tvSheetPrice);
+            android.widget.TextView tvQty = view.findViewById(R.id.tvSheetQuantity);
+            android.view.View btnMinus = view.findViewById(R.id.btnSheetMinus);
+            android.view.View btnPlus = view.findViewById(R.id.btnSheetPlus);
+            android.widget.Button btnAdd = view.findViewById(R.id.btnSheetAdd);
 
-        java.text.NumberFormat formatter = java.text.NumberFormat
-                .getCurrencyInstance(java.util.Locale.forLanguageTag("id-ID"));
-        tvName.setText(product.name);
-        tvPrice.setText(formatter.format(product.sellPrice) + " (Stok: " + product.currentStock + ")");
-        tvQty.setText(String.valueOf(currentSheetQty));
-
-        btnMinus.setOnClickListener(v -> {
-            if (currentSheetQty > 1) {
-                currentSheetQty--;
-                tvQty.setText(String.valueOf(currentSheetQty));
+            // Null checks untuk semua views
+            if (tvName == null || tvPrice == null || tvQty == null || 
+                btnMinus == null || btnPlus == null || btnAdd == null) {
+                Toast.makeText(this, "Error: Layout tidak lengkap", Toast.LENGTH_SHORT).show();
+                return;
             }
-        });
 
-        btnPlus.setOnClickListener(v -> {
-            if (currentSheetQty < product.currentStock) {
-                currentSheetQty++;
-                tvQty.setText(String.valueOf(currentSheetQty));
-            } else {
-                Toast.makeText(this, "Mencapai batas stok!", Toast.LENGTH_SHORT).show();
-            }
-        });
+            java.text.NumberFormat formatter = java.text.NumberFormat
+                    .getCurrencyInstance(java.util.Locale.forLanguageTag("id-ID"));
+            tvName.setText(product.name != null ? product.name : "Produk");
+            tvPrice.setText(formatter.format(product.sellPrice) + " (Stok: " + product.currentStock + ")");
+            tvQty.setText(String.valueOf(currentSheetQty));
 
-        btnAdd.setOnClickListener(v -> {
-            viewModel.addToCart(product, currentSheetQty);
-            Toast.makeText(this, "Berhasil masuk keranjang", Toast.LENGTH_SHORT).show();
-            dialog.dismiss();
-        });
+            btnMinus.setOnClickListener(v -> {
+                if (currentSheetQty > 1) {
+                    currentSheetQty--;
+                    tvQty.setText(String.valueOf(currentSheetQty));
+                }
+            });
 
-        dialog.show();
+            btnPlus.setOnClickListener(v -> {
+                if (currentSheetQty < product.currentStock) {
+                    currentSheetQty++;
+                    tvQty.setText(String.valueOf(currentSheetQty));
+                } else {
+                    Toast.makeText(this, "Mencapai batas stok!", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            btnAdd.setOnClickListener(v -> {
+                if (viewModel != null) {
+                    viewModel.addToCart(product, currentSheetQty);
+                    Toast.makeText(this, "Berhasil masuk keranjang", Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+            });
+
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void setupSearch() {
@@ -361,6 +435,14 @@ public class SellActivity extends AppCompatActivity {
      * Lookup produk dari API eksternal
      */
     private void lookupProductFromApi(String barcode) {
+        // Check network connectivity sebelum call API
+        if (!NetworkUtils.isNetworkAvailable(this)) {
+            Toast.makeText(this, 
+                "Tidak ada koneksi internet. Produk tidak ditemukan di database lokal.", 
+                Toast.LENGTH_LONG).show();
+            return;
+        }
+        
         Toast.makeText(this, "Mencari di database eksternal...", Toast.LENGTH_SHORT).show();
         
         ProductApiService apiService = ProductApiClient.getApiService();

@@ -17,12 +17,35 @@ public class HistoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // Check authentication
+        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
+            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        
+        if (!authManager.isLoggedIn()) {
+            authManager.loadUserFromCache();
+            if (!authManager.isLoggedIn()) {
+                startActivity(new android.content.Intent(this, LoginActivity.class));
+                finish();
+                return;
+            }
+        }
+        
+        // Check permission: canAccessMoney
+        String role = authManager.getCurrentUserRole();
+        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canAccessMoney(role)) {
+            android.widget.Toast.makeText(this, "Anda tidak memiliki izin untuk mengakses halaman ini", android.widget.Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+        
         binding = ActivityHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Use singleton instance untuk persist cart across activities
         viewModel = AppViewModel.getInstance(getApplication());
         setupRecyclerView();
+        setupOfflineIndicator();
 
         viewModel.getAllHistory().observe(this, history -> {
             adapter.setItems(history);
@@ -127,6 +150,37 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         binding.bottomNavigation.setSelectedItemId(R.id.nav_money);
+        setupOfflineIndicator();
+    }
+    
+    private void setupOfflineIndicator() {
+        android.content.SharedPreferences prefs = getSharedPreferences("WarungKuPrefs", MODE_PRIVATE);
+        boolean hideOfflineWarning = prefs.getBoolean("hide_offline_warning", false);
+        
+        if (hideOfflineWarning) {
+            return;
+        }
+        
+        android.view.View includeView = findViewById(R.id.offlineIndicator);
+        if (includeView == null) return;
+        
+        com.google.android.material.card.MaterialCardView cardOffline = (com.google.android.material.card.MaterialCardView) includeView;
+        
+        boolean isOnline = com.zanjaprogrammer.warungku.utils.NetworkUtils.isNetworkAvailable(this);
+        
+        if (!isOnline) {
+            cardOffline.setVisibility(android.view.View.VISIBLE);
+            
+            android.view.View btnClose = cardOffline.findViewById(R.id.btnCloseOfflineIndicator);
+            if (btnClose != null) {
+                btnClose.setOnClickListener(v -> {
+                    cardOffline.setVisibility(android.view.View.GONE);
+                    prefs.edit().putBoolean("hide_offline_warning", true).apply();
+                });
+            }
+        } else {
+            cardOffline.setVisibility(android.view.View.GONE);
+        }
     }
 
     private void setupRecyclerView() {

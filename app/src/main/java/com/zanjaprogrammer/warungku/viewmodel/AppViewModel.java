@@ -49,13 +49,17 @@ public class AppViewModel extends AndroidViewModel {
     }
 
     public void addToCart(Product product, int quantity) {
+        if (product == null) {
+            return; // Safety check
+        }
+        
         List<CartItem> current = cartItems.getValue();
         if (current == null)
             current = new ArrayList<>();
 
         boolean found = false;
         for (CartItem item : current) {
-            if (item.product.id == product.id) {
+            if (item != null && item.product != null && item.product.id == product.id) {
                 if (item.quantity + quantity <= product.currentStock) {
                     item.quantity += quantity;
                     found = true;
@@ -67,7 +71,7 @@ public class AppViewModel extends AndroidViewModel {
         }
 
         if (!found) {
-            if (quantity <= product.currentStock) {
+            if (quantity > 0 && quantity <= product.currentStock) {
                 current.add(new CartItem(product, quantity));
             }
         }
@@ -95,7 +99,9 @@ public class AppViewModel extends AndroidViewModel {
         List<CartItem> current = cartItems.getValue();
         if (current != null) {
             for (CartItem item : current) {
-                total += item.getSubtotal();
+                if (item != null && item.product != null) {
+                    total += item.getSubtotal();
+                }
             }
         }
         cartTotal.setValue(total);

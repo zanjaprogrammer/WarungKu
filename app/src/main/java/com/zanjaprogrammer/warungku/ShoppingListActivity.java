@@ -17,6 +17,28 @@ public class ShoppingListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // Check authentication
+        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
+            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        
+        if (!authManager.isLoggedIn()) {
+            authManager.loadUserFromCache();
+            if (!authManager.isLoggedIn()) {
+                startActivity(new android.content.Intent(this, LoginActivity.class));
+                finish();
+                return;
+            }
+        }
+        
+        // Check permission: canAccessShoppingList
+        String role = authManager.getCurrentUserRole();
+        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canAccessShoppingList(role)) {
+            android.widget.Toast.makeText(this, "Anda tidak memiliki izin untuk mengakses halaman ini", android.widget.Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+        
         binding = ActivityShoppingListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

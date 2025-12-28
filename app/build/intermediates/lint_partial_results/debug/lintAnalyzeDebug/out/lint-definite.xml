@@ -1,0 +1,3938 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.4.2" type="incidents">
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Barcode (Opsional)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_add_product.xml"
+            line="23"
+            column="13"
+            startOffset="922"
+            endLine="23"
+            endColumn="46"
+            endOffset="955"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Nama Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_add_product.xml"
+            line="39"
+            column="13"
+            startOffset="1711"
+            endLine="39"
+            endColumn="39"
+            endOffset="1737"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Harga Jual (Rp)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_add_product.xml"
+            line="51"
+            column="13"
+            startOffset="2281"
+            endLine="51"
+            endColumn="43"
+            endOffset="2311"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Harga Beli (Opsional) (Rp)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_add_product.xml"
+            line="63"
+            column="13"
+            startOffset="2869"
+            endLine="63"
+            endColumn="54"
+            endOffset="2910"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Stok Awal&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_add_product.xml"
+            line="75"
+            column="13"
+            startOffset="3467"
+            endLine="75"
+            endColumn="37"
+            endOffset="3491"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Minimum Stok (untuk alert)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_add_product.xml"
+            line="87"
+            column="13"
+            startOffset="4039"
+            endLine="87"
+            endColumn="54"
+            endOffset="4080"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;SIMPAN BARANG&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_add_product.xml"
+            line="99"
+            column="13"
+            startOffset="4567"
+            endLine="99"
+            endColumn="41"
+            endOffset="4595"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;SALDO KAS SAAT INI&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_history.xml"
+            line="50"
+            column="21"
+            startOffset="2097"
+            endLine="50"
+            endColumn="54"
+            endOffset="2130"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_history.xml"
+            line="59"
+            column="21"
+            startOffset="2530"
+            endLine="59"
+            endColumn="40"
+            endOffset="2549"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;CATAT PENGELUARAN&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_history.xml"
+            line="71"
+            column="13"
+            startOffset="3007"
+            endLine="71"
+            endColumn="45"
+            endOffset="3039"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Riwayat Transaksi&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_history.xml"
+            line="83"
+            column="13"
+            startOffset="3487"
+            endLine="83"
+            endColumn="45"
+            endOffset="3519"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;0 Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_history.xml"
+            line="137"
+            column="21"
+            startOffset="5734"
+            endLine="137"
+            endColumn="44"
+            endOffset="5757"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_history.xml"
+            line="145"
+            column="21"
+            startOffset="6106"
+            endLine="145"
+            endColumn="40"
+            endOffset="6125"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;JUAL&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_history.xml"
+            line="154"
+            column="17"
+            startOffset="6480"
+            endLine="154"
+            endColumn="36"
+            endOffset="6499"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;WarungKu&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="24"
+            column="17"
+            startOffset="933"
+            endLine="24"
+            endColumn="40"
+            endOffset="956"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Kelola warung Anda dengan mudah&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="35"
+            column="17"
+            startOffset="1393"
+            endLine="35"
+            endColumn="63"
+            endOffset="1439"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Email&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="58"
+            column="25"
+            startOffset="2447"
+            endLine="58"
+            endColumn="45"
+            endOffset="2467"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Password&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="73"
+            column="25"
+            startOffset="3368"
+            endLine="73"
+            endColumn="48"
+            endOffset="3391"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Masuk&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="90"
+            column="25"
+            startOffset="4391"
+            endLine="90"
+            endColumn="45"
+            endOffset="4411"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Lupa password?&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="102"
+            column="25"
+            startOffset="5000"
+            endLine="102"
+            endColumn="54"
+            endOffset="5029"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Belum punya akun?&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="131"
+            column="25"
+            startOffset="6257"
+            endLine="131"
+            endColumn="57"
+            endOffset="6289"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Daftar sebagai Pemilik&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="140"
+            column="25"
+            startOffset="6728"
+            endLine="140"
+            endColumn="62"
+            endOffset="6765"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;UANG SEKARANG&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="52"
+            column="25"
+            startOffset="2225"
+            endLine="52"
+            endColumn="53"
+            endOffset="2253"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 1.500.000&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="61"
+            column="25"
+            startOffset="2689"
+            endLine="61"
+            endColumn="52"
+            endOffset="2716"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Aksi Cepat&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="74"
+            column="17"
+            startOffset="3237"
+            endLine="74"
+            endColumn="42"
+            endOffset="3262"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;JUAL BARANG&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="83"
+            column="17"
+            startOffset="3578"
+            endLine="83"
+            endColumn="43"
+            endOffset="3604"/>
+    </incident>
+
+    <incident
+        id="ButtonStyle"
+        severity="warning"
+        message="Buttons in button bars should be borderless; use `style=&quot;?android:attr/buttonBarButtonStyle&quot;` (and `?android:attr/buttonBarStyle` on the parent)">
+        <fix-composite
+            description="Make borderless">
+            <fix-attribute
+                description="Set style=&quot;?android:attr/buttonBarStyle&quot;"
+                attribute="style"
+                value="?android:attr/buttonBarStyle">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+                    startOffset="3917"
+                    endOffset="5263"/>
+            </fix-attribute>
+            <fix-attribute
+                description="Set style=&quot;?android:attr/buttonBarButtonStyle&quot;"
+                attribute="style"
+                value="?android:attr/buttonBarButtonStyle">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+                    startOffset="4153"
+                    endOffset="4685"/>
+            </fix-attribute>
+            <fix-attribute
+                description="Set style=&quot;?android:attr/buttonBarButtonStyle&quot;"
+                attribute="style"
+                value="?android:attr/buttonBarButtonStyle">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+                    startOffset="4702"
+                    endOffset="5235"/>
+            </fix-attribute>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="96"
+            column="18"
+            startOffset="4154"
+            endLine="96"
+            endColumn="24"
+            endOffset="4160"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Tambah Stok&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="101"
+            column="21"
+            startOffset="4377"
+            endLine="101"
+            endColumn="47"
+            endOffset="4403"/>
+    </incident>
+
+    <incident
+        id="ButtonStyle"
+        severity="warning"
+        message="Buttons in button bars should be borderless; use `style=&quot;?android:attr/buttonBarButtonStyle&quot;` (and `?android:attr/buttonBarStyle` on the parent)">
+        <fix-composite
+            description="Make borderless">
+            <fix-attribute
+                description="Set style=&quot;?android:attr/buttonBarStyle&quot;"
+                attribute="style"
+                value="?android:attr/buttonBarStyle">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+                    startOffset="3917"
+                    endOffset="5263"/>
+            </fix-attribute>
+            <fix-attribute
+                description="Set style=&quot;?android:attr/buttonBarButtonStyle&quot;"
+                attribute="style"
+                value="?android:attr/buttonBarButtonStyle">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+                    startOffset="4153"
+                    endOffset="4685"/>
+            </fix-attribute>
+            <fix-attribute
+                description="Set style=&quot;?android:attr/buttonBarButtonStyle&quot;"
+                attribute="style"
+                value="?android:attr/buttonBarButtonStyle">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+                    startOffset="4702"
+                    endOffset="5235"/>
+            </fix-attribute>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="107"
+            column="18"
+            startOffset="4703"
+            endLine="107"
+            endColumn="24"
+            endOffset="4709"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Pengeluaran&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="112"
+            column="21"
+            startOffset="4925"
+            endLine="112"
+            endColumn="47"
+            endOffset="4951"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Ringkasan Hari Ini&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="124"
+            column="17"
+            startOffset="5456"
+            endLine="124"
+            endColumn="50"
+            endOffset="5489"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Penjualan&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="151"
+            column="29"
+            startOffset="6726"
+            endLine="151"
+            endColumn="53"
+            endOffset="6750"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="158"
+            column="29"
+            startOffset="7121"
+            endLine="158"
+            endColumn="48"
+            endOffset="7140"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Pengeluaran&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="181"
+            column="29"
+            startOffset="8294"
+            endLine="181"
+            endColumn="55"
+            endOffset="8320"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="188"
+            column="29"
+            startOffset="8692"
+            endLine="188"
+            endColumn="48"
+            endOffset="8711"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Stok Tipis&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="212"
+            column="29"
+            startOffset="9918"
+            endLine="212"
+            endColumn="54"
+            endOffset="9943"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;0 Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="219"
+            column="29"
+            startOffset="10316"
+            endLine="219"
+            endColumn="52"
+            endOffset="10339"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;0 Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="271"
+            column="21"
+            startOffset="12424"
+            endLine="271"
+            endColumn="44"
+            endOffset="12447"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="279"
+            column="21"
+            startOffset="12796"
+            endLine="279"
+            endColumn="40"
+            endOffset="12815"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;JUAL&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="288"
+            column="17"
+            startOffset="13170"
+            endLine="288"
+            endColumn="36"
+            endOffset="13189"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Hari Ini&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="51"
+            column="25"
+            startOffset="2325"
+            endLine="51"
+            endColumn="48"
+            endOffset="2348"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Minggu Ini&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="59"
+            column="25"
+            startOffset="2810"
+            endLine="59"
+            endColumn="50"
+            endOffset="2835"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Bulan Ini&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="67"
+            column="25"
+            startOffset="3298"
+            endLine="67"
+            endColumn="49"
+            endOffset="3322"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Ringkasan Keuangan&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="88"
+            column="25"
+            startOffset="4308"
+            endLine="88"
+            endColumn="58"
+            endOffset="4341"/>
+    </incident>
+
+    <incident
+        id="DisableBaselineAlignment"
+        severity="warning"
+        message="Set `android:baselineAligned=&quot;false&quot;` on this element for better performance">
+        <fix-attribute
+            description="Set baselineAligned=&quot;false&quot;"
+            robot="true"
+            independent="true"
+            namespace="http://schemas.android.com/apk/res/android"
+            attribute="baselineAligned"
+            value="false"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="94"
+            column="22"
+            startOffset="4586"
+            endLine="94"
+            endColumn="34"
+            endOffset="4598"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Pendapatan&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="107"
+            column="33"
+            startOffset="5315"
+            endLine="107"
+            endColumn="58"
+            endOffset="5340"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="114"
+            column="33"
+            startOffset="5739"
+            endLine="114"
+            endColumn="52"
+            endOffset="5758"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Pengeluaran&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="128"
+            column="33"
+            startOffset="6523"
+            endLine="128"
+            endColumn="59"
+            endOffset="6549"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="135"
+            column="33"
+            startOffset="6949"
+            endLine="135"
+            endColumn="52"
+            endOffset="6968"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Keuntungan&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="157"
+            column="29"
+            startOffset="7999"
+            endLine="157"
+            endColumn="54"
+            endOffset="8024"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="165"
+            column="29"
+            startOffset="8446"
+            endLine="165"
+            endColumn="48"
+            endOffset="8465"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Trend Penjualan&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="188"
+            column="25"
+            startOffset="9521"
+            endLine="188"
+            endColumn="55"
+            endOffset="9551"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Produk Terlaris (Top 10)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="215"
+            column="25"
+            startOffset="10863"
+            endLine="215"
+            endColumn="64"
+            endOffset="10902"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Produk Tidak Laku&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="242"
+            column="25"
+            startOffset="12233"
+            endLine="242"
+            endColumn="57"
+            endOffset="12265"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Cari barang...&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_sell.xml"
+            line="32"
+            column="13"
+            startOffset="1257"
+            endLine="32"
+            endColumn="42"
+            endOffset="1286"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;0 Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_sell.xml"
+            line="99"
+            column="21"
+            startOffset="4053"
+            endLine="99"
+            endColumn="44"
+            endOffset="4076"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_sell.xml"
+            line="107"
+            column="21"
+            startOffset="4425"
+            endLine="107"
+            endColumn="40"
+            endOffset="4444"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;JUAL&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_sell.xml"
+            line="116"
+            column="17"
+            startOffset="4799"
+            endLine="116"
+            endColumn="36"
+            endOffset="4818"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Berdasarkan barang yang paling laku&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_shopping_list.xml"
+            line="18"
+            column="9"
+            startOffset="672"
+            endLine="18"
+            endColumn="59"
+            endOffset="722"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Tambah Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_stock.xml"
+            line="50"
+            column="9"
+            startOffset="1957"
+            endLine="50"
+            endColumn="51"
+            endOffset="1999"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;0 Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_stock.xml"
+            line="91"
+            column="21"
+            startOffset="3714"
+            endLine="91"
+            endColumn="44"
+            endOffset="3737"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_stock.xml"
+            line="99"
+            column="21"
+            startOffset="4086"
+            endLine="99"
+            endColumn="40"
+            endOffset="4105"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;JUAL&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_stock.xml"
+            line="108"
+            column="17"
+            startOffset="4460"
+            endLine="108"
+            endColumn="36"
+            endOffset="4479"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Hari Ini&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="61"
+            column="25"
+            startOffset="2698"
+            endLine="61"
+            endColumn="48"
+            endOffset="2721"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Minggu Ini&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="68"
+            column="25"
+            startOffset="3103"
+            endLine="68"
+            endColumn="50"
+            endOffset="3128"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Bulan Ini&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="74"
+            column="25"
+            startOffset="3464"
+            endLine="74"
+            endColumn="49"
+            endOffset="3488"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Tahun Ini&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="80"
+            column="25"
+            startOffset="3823"
+            endLine="80"
+            endColumn="49"
+            endOffset="3847"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Tracking Pengembalian Modal (Opsional)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="103"
+            column="25"
+            startOffset="4917"
+            endLine="103"
+            endColumn="78"
+            endOffset="4970"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Isi modal awal untuk melacak progress pengembalian modal Anda. Fitur ini opsional dan tidak wajib diisi.&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="111"
+            column="25"
+            startOffset="5367"
+            endLine="111"
+            endColumn="144"
+            endOffset="5486"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Lewati&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="125"
+            column="29"
+            startOffset="6299"
+            endLine="125"
+            endColumn="50"
+            endOffset="6320"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;ISI MODAL&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="133"
+            column="29"
+            startOffset="6822"
+            endLine="133"
+            endColumn="53"
+            endOffset="6846"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;LABA BERSIH&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="161"
+            column="25"
+            startOffset="8208"
+            endLine="161"
+            endColumn="51"
+            endOffset="8234"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="170"
+            column="25"
+            startOffset="8673"
+            endLine="170"
+            endColumn="44"
+            endOffset="8692"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Modal Awal&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="201"
+            column="29"
+            startOffset="10202"
+            endLine="201"
+            endColumn="54"
+            endOffset="10227"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="208"
+            column="29"
+            startOffset="10606"
+            endLine="208"
+            endColumn="48"
+            endOffset="10625"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Ubah&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="218"
+            column="25"
+            startOffset="11183"
+            endLine="218"
+            endColumn="44"
+            endOffset="11202"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Total Belanja Stok&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="238"
+            column="25"
+            startOffset="12126"
+            endLine="238"
+            endColumn="58"
+            endOffset="12159"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="246"
+            column="25"
+            startOffset="12572"
+            endLine="246"
+            endColumn="44"
+            endOffset="12591"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Total uang yang dipakai untuk membeli barang dagangan&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="253"
+            column="25"
+            startOffset="12930"
+            endLine="253"
+            endColumn="93"
+            endOffset="12998"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Total Pemasukan&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="283"
+            column="29"
+            startOffset="14420"
+            endLine="283"
+            endColumn="59"
+            endOffset="14450"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="290"
+            column="29"
+            startOffset="14826"
+            endLine="290"
+            endColumn="48"
+            endOffset="14845"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Total Pengeluaran&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="313"
+            column="29"
+            startOffset="15999"
+            endLine="313"
+            endColumn="61"
+            endOffset="16031"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="320"
+            column="29"
+            startOffset="16408"
+            endLine="320"
+            endColumn="48"
+            endOffset="16427"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;🎉 SELAMAT! 🎉&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="351"
+            column="25"
+            startOffset="17933"
+            endLine="351"
+            endColumn="54"
+            endOffset="17962"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Anda telah balik modal!&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="359"
+            column="25"
+            startOffset="18360"
+            endLine="359"
+            endColumn="63"
+            endOffset="18398"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Sembunyikan Progress Bar&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="369"
+            column="25"
+            startOffset="18973"
+            endLine="369"
+            endColumn="64"
+            endOffset="19012"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Perkembangan Modal&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="393"
+            column="25"
+            startOffset="20143"
+            endLine="393"
+            endColumn="58"
+            endOffset="20176"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="402"
+            column="25"
+            startOffset="20631"
+            endLine="402"
+            endColumn="44"
+            endOffset="20650"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Progress Pengembalian Modal&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="412"
+            column="25"
+            startOffset="21106"
+            endLine="412"
+            endColumn="67"
+            endOffset="21148"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;0%&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="430"
+            column="25"
+            startOffset="22138"
+            endLine="430"
+            endColumn="42"
+            endOffset="22155"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Total keuntungan dari modal awal&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="437"
+            column="25"
+            startOffset="22500"
+            endLine="437"
+            endColumn="72"
+            endOffset="22547"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;📊 LAPORAN&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="474"
+            column="29"
+            startOffset="24378"
+            endLine="474"
+            endColumn="54"
+            endOffset="24403"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Lihat laporan penjualan, produk terlaris, dan grafik trend&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="482"
+            column="29"
+            startOffset="24833"
+            endLine="482"
+            endColumn="102"
+            endOffset="24906"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;→&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="490"
+            column="25"
+            startOffset="25289"
+            endLine="490"
+            endColumn="41"
+            endOffset="25305"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;💾 Backup &amp; Restore Data&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="513"
+            column="25"
+            startOffset="26385"
+            endLine="513"
+            endColumn="68"
+            endOffset="26428"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Backup data ke file untuk keamanan atau restore dari backup sebelumnya&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="521"
+            column="25"
+            startOffset="26825"
+            endLine="521"
+            endColumn="110"
+            endOffset="26910"/>
+    </incident>
+
+    <incident
+        id="ButtonStyle"
+        severity="warning"
+        message="Buttons in button bars should be borderless; use `style=&quot;?android:attr/buttonBarButtonStyle&quot;` (and `?android:attr/buttonBarStyle` on the parent)">
+        <fix-composite
+            description="Make borderless">
+            <fix-attribute
+                description="Set style=&quot;?android:attr/buttonBarStyle&quot;"
+                attribute="style"
+                value="?android:attr/buttonBarStyle">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+                    startOffset="27106"
+                    endOffset="28722"/>
+            </fix-attribute>
+            <fix-attribute
+                description="Set style=&quot;?android:attr/buttonBarButtonStyle&quot;"
+                attribute="style"
+                value="?android:attr/buttonBarButtonStyle">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+                    startOffset="27323"
+                    endOffset="27990"/>
+            </fix-attribute>
+            <fix-attribute
+                description="Set style=&quot;?android:attr/buttonBarButtonStyle&quot;"
+                attribute="style"
+                value="?android:attr/buttonBarButtonStyle">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+                    startOffset="28015"
+                    endOffset="28686"/>
+            </fix-attribute>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="529"
+            column="26"
+            startOffset="27324"
+            endLine="529"
+            endColumn="32"
+            endOffset="27330"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Backup Data&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="535"
+            column="29"
+            startOffset="27648"
+            endLine="535"
+            endColumn="55"
+            endOffset="27674"/>
+    </incident>
+
+    <incident
+        id="ButtonStyle"
+        severity="warning"
+        message="Buttons in button bars should be borderless; use `style=&quot;?android:attr/buttonBarButtonStyle&quot;` (and `?android:attr/buttonBarStyle` on the parent)">
+        <fix-composite
+            description="Make borderless">
+            <fix-attribute
+                description="Set style=&quot;?android:attr/buttonBarStyle&quot;"
+                attribute="style"
+                value="?android:attr/buttonBarStyle">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+                    startOffset="27106"
+                    endOffset="28722"/>
+            </fix-attribute>
+            <fix-attribute
+                description="Set style=&quot;?android:attr/buttonBarButtonStyle&quot;"
+                attribute="style"
+                value="?android:attr/buttonBarButtonStyle">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+                    startOffset="27323"
+                    endOffset="27990"/>
+            </fix-attribute>
+            <fix-attribute
+                description="Set style=&quot;?android:attr/buttonBarButtonStyle&quot;"
+                attribute="style"
+                value="?android:attr/buttonBarButtonStyle">
+                <range
+                    file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+                    startOffset="28015"
+                    endOffset="28686"/>
+            </fix-attribute>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="541"
+            column="26"
+            startOffset="28016"
+            endLine="541"
+            endColumn="32"
+            endOffset="28022"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Restore Data&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="547"
+            column="29"
+            startOffset="28343"
+            endLine="547"
+            endColumn="56"
+            endOffset="28370"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;0 Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="599"
+            column="21"
+            startOffset="30601"
+            endLine="599"
+            endColumn="44"
+            endOffset="30624"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="607"
+            column="21"
+            startOffset="30973"
+            endLine="607"
+            endColumn="40"
+            endOffset="30992"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;JUAL&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="616"
+            column="17"
+            startOffset="31347"
+            endLine="616"
+            endColumn="36"
+            endOffset="31366"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Deskripsi&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_history.xml"
+            line="29"
+            column="17"
+            startOffset="1135"
+            endLine="29"
+            endColumn="41"
+            endOffset="1159"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Tanggal&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_history.xml"
+            line="36"
+            column="17"
+            startOffset="1444"
+            endLine="36"
+            endColumn="39"
+            endOffset="1466"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_history.xml"
+            line="45"
+            column="13"
+            startOffset="1733"
+            endLine="45"
+            endColumn="32"
+            endOffset="1752"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Nama Produk&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_report.xml"
+            line="25"
+            column="13"
+            startOffset="929"
+            endLine="25"
+            endColumn="39"
+            endOffset="955"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_report.xml"
+            line="39"
+            column="17"
+            startOffset="1483"
+            endLine="39"
+            endColumn="36"
+            endOffset="1502"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Info&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_report.xml"
+            line="46"
+            column="17"
+            startOffset="1770"
+            endLine="46"
+            endColumn="36"
+            endOffset="1789"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Nama Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_sell.xml"
+            line="34"
+            column="17"
+            startOffset="1348"
+            endLine="34"
+            endColumn="43"
+            endOffset="1374"/>
+    </incident>
+
+    <incident
+        id="UseAppTint"
+        severity="error"
+        message="Must use `app:tint` instead of `android:tint`">
+        <fix-composite
+            description="Set tint=&quot;@color/warning&quot; and Delete tint">
+            <fix-attribute
+                description="Set tint=&quot;@color/warning&quot;"
+                namespace="http://schemas.android.com/apk/res-auto"
+                attribute="tint"
+                value="@color/warning"/>
+            <fix-attribute
+                description="Delete tint"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="tint"/>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_sell.xml"
+            line="42"
+            column="17"
+            startOffset="1709"
+            endLine="42"
+            endColumn="46"
+            endOffset="1738"/>
+    </incident>
+
+    <incident
+        id="ContentDescription"
+        severity="warning"
+        message="Missing `contentDescription` attribute on image">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set contentDescription"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="contentDescription"
+                value="TODO"
+                point="4"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAccessibility=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAccessibility"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_sell.xml"
+            line="35"
+            column="14"
+            startOffset="1390"
+            endLine="35"
+            endColumn="23"
+            endOffset="1399"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_sell.xml"
+            line="52"
+            column="13"
+            startOffset="2066"
+            endLine="52"
+            endColumn="32"
+            endOffset="2085"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Stok: 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_sell.xml"
+            line="60"
+            column="13"
+            startOffset="2346"
+            endLine="60"
+            endColumn="35"
+            endOffset="2368"/>
+    </incident>
+
+    <incident
+        id="DisableBaselineAlignment"
+        severity="warning"
+        message="Set `android:baselineAligned=&quot;false&quot;` on this element for better performance">
+        <fix-attribute
+            description="Set baselineAligned=&quot;false&quot;"
+            robot="true"
+            independent="true"
+            namespace="http://schemas.android.com/apk/res/android"
+            attribute="baselineAligned"
+            value="false"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_stock.xml"
+            line="11"
+            column="6"
+            startOffset="439"
+            endLine="11"
+            endColumn="18"
+            endOffset="451"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Nama Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_stock.xml"
+            line="30"
+            column="17"
+            startOffset="1170"
+            endLine="30"
+            endColumn="43"
+            endOffset="1196"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_stock.xml"
+            line="37"
+            column="17"
+            startOffset="1482"
+            endLine="37"
+            endColumn="36"
+            endOffset="1501"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_stock.xml"
+            line="52"
+            column="17"
+            startOffset="2048"
+            endLine="52"
+            endColumn="33"
+            endOffset="2064"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Hampir habis&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_product_stock.xml"
+            line="62"
+            column="17"
+            startOffset="2485"
+            endLine="62"
+            endColumn="44"
+            endOffset="2512"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Nama Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_shopping.xml"
+            line="41"
+            column="21"
+            startOffset="1677"
+            endLine="41"
+            endColumn="47"
+            endOffset="1703"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Sisa stok: 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_shopping.xml"
+            line="48"
+            column="21"
+            startOffset="2012"
+            endLine="48"
+            endColumn="48"
+            endOffset="2039"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Sering laku&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_shopping.xml"
+            line="58"
+            column="17"
+            startOffset="2397"
+            endLine="58"
+            endColumn="43"
+            endOffset="2423"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Pembayaran&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="13"
+            column="9"
+            startOffset="467"
+            endLine="13"
+            endColumn="34"
+            endOffset="492"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Total Belanja&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="36"
+            column="17"
+            startOffset="1401"
+            endLine="36"
+            endColumn="45"
+            endOffset="1429"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="44"
+            column="17"
+            startOffset="1744"
+            endLine="44"
+            endColumn="36"
+            endOffset="1763"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Metode Pembayaran&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="56"
+            column="9"
+            startOffset="2162"
+            endLine="56"
+            endColumn="41"
+            endOffset="2194"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Tunai&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="75"
+            column="13"
+            startOffset="2975"
+            endLine="75"
+            endColumn="33"
+            endOffset="2995"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;QRIS&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="83"
+            column="13"
+            startOffset="3336"
+            endLine="83"
+            endColumn="32"
+            endOffset="3355"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Uang Bayar&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="97"
+            column="13"
+            startOffset="3872"
+            endLine="97"
+            endColumn="38"
+            endOffset="3897"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;5rb&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="115"
+            column="17"
+            startOffset="4657"
+            endLine="115"
+            endColumn="35"
+            endOffset="4675"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;10rb&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="125"
+            column="17"
+            startOffset="5147"
+            endLine="125"
+            endColumn="36"
+            endOffset="5166"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;100rb&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="134"
+            column="17"
+            startOffset="5592"
+            endLine="134"
+            endColumn="37"
+            endOffset="5612"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Masukkan Uang Bayar (Rp)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="142"
+            column="13"
+            startOffset="5899"
+            endLine="142"
+            endColumn="52"
+            endOffset="5938"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Uang Kembalian&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="176"
+            column="17"
+            startOffset="7365"
+            endLine="176"
+            endColumn="46"
+            endOffset="7394"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="183"
+            column="17"
+            startOffset="7681"
+            endLine="183"
+            endColumn="36"
+            endOffset="7700"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Uang bayar kurang!&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="211"
+            column="17"
+            startOffset="8810"
+            endLine="211"
+            endColumn="50"
+            endOffset="8843"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="219"
+            column="17"
+            startOffset="9164"
+            endLine="219"
+            endColumn="36"
+            endOffset="9183"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;KONFIRMASI PEMBAYARAN&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="231"
+            column="9"
+            startOffset="9582"
+            endLine="231"
+            endColumn="45"
+            endOffset="9618"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Nama Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_quantity.xml"
+            line="14"
+            column="9"
+            startOffset="513"
+            endLine="14"
+            endColumn="35"
+            endOffset="539"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Rp 10.000&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_quantity.xml"
+            line="24"
+            column="9"
+            startOffset="848"
+            endLine="24"
+            endColumn="33"
+            endOffset="872"/>
+    </incident>
+
+    <incident
+        id="UseAppTint"
+        severity="error"
+        message="Must use `app:tint` instead of `android:tint`">
+        <fix-composite
+            description="Set tint=&quot;@color/primary&quot; and Delete tint">
+            <fix-attribute
+                description="Set tint=&quot;@color/primary&quot;"
+                namespace="http://schemas.android.com/apk/res-auto"
+                attribute="tint"
+                value="@color/primary"/>
+            <fix-attribute
+                description="Delete tint"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="tint"/>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_quantity.xml"
+            line="48"
+            column="17"
+            startOffset="1729"
+            endLine="48"
+            endColumn="46"
+            endOffset="1758"/>
+    </incident>
+
+    <incident
+        id="ContentDescription"
+        severity="warning"
+        message="Missing `contentDescription` attribute on image">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set contentDescription"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="contentDescription"
+                value="TODO"
+                point="4"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAccessibility=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAccessibility"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_quantity.xml"
+            line="44"
+            column="14"
+            startOffset="1565"
+            endLine="44"
+            endColumn="23"
+            endOffset="1574"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;1&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_quantity.xml"
+            line="56"
+            column="13"
+            startOffset="1998"
+            endLine="56"
+            endColumn="29"
+            endOffset="2014"/>
+    </incident>
+
+    <incident
+        id="UseAppTint"
+        severity="error"
+        message="Must use `app:tint` instead of `android:tint`">
+        <fix-composite
+            description="Set tint=&quot;@android:color/white&quot; and Delete tint">
+            <fix-attribute
+                description="Set tint=&quot;@android:color/white&quot;"
+                namespace="http://schemas.android.com/apk/res-auto"
+                attribute="tint"
+                value="@android:color/white"/>
+            <fix-attribute
+                description="Delete tint"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="tint"/>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_quantity.xml"
+            line="75"
+            column="17"
+            startOffset="2741"
+            endLine="75"
+            endColumn="52"
+            endOffset="2776"/>
+    </incident>
+
+    <incident
+        id="ContentDescription"
+        severity="warning"
+        message="Missing `contentDescription` attribute on image">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set contentDescription"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="contentDescription"
+                value="TODO"
+                point="4"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAccessibility=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAccessibility"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_quantity.xml"
+            line="71"
+            column="14"
+            startOffset="2565"
+            endLine="71"
+            endColumn="23"
+            endOffset="2574"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;TAMBAH KE KERANJANG&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_quantity.xml"
+            line="84"
+            column="9"
+            startOffset="3010"
+            endLine="84"
+            endColumn="43"
+            endOffset="3044"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Restock Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_restock.xml"
+            line="14"
+            column="9"
+            startOffset="522"
+            endLine="14"
+            endColumn="38"
+            endOffset="551"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Jumlah (Qty)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_restock.xml"
+            line="23"
+            column="9"
+            startOffset="867"
+            endLine="23"
+            endColumn="36"
+            endOffset="894"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;1&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_restock.xml"
+            line="31"
+            column="13"
+            startOffset="1244"
+            endLine="31"
+            endColumn="29"
+            endOffset="1260"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Tipe Harga:&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_restock.xml"
+            line="37"
+            column="9"
+            startOffset="1436"
+            endLine="37"
+            endColumn="35"
+            endOffset="1462"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Per Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_restock.xml"
+            line="53"
+            column="13"
+            startOffset="2003"
+            endLine="53"
+            endColumn="38"
+            endOffset="2028"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Total Harga&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_restock.xml"
+            line="60"
+            column="13"
+            startOffset="2263"
+            endLine="60"
+            endColumn="39"
+            endOffset="2289"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Harga Beli Per Barang (Rp)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_restock.xml"
+            line="67"
+            column="9"
+            startOffset="2505"
+            endLine="67"
+            endColumn="50"
+            endOffset="2546"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Total: Rp 0&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_restock.xml"
+            line="82"
+            column="9"
+            startOffset="3126"
+            endLine="82"
+            endColumn="35"
+            endOffset="3152"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;SIMPAN&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_restock.xml"
+            line="92"
+            column="9"
+            startOffset="3449"
+            endLine="92"
+            endColumn="30"
+            endOffset="3470"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Nama Barang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_stock_action.xml"
+            line="14"
+            column="9"
+            startOffset="515"
+            endLine="14"
+            endColumn="35"
+            endOffset="541"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Restock&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_stock_action.xml"
+            line="24"
+            column="9"
+            startOffset="847"
+            endLine="24"
+            endColumn="31"
+            endOffset="869"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Penyesuaian Stock (Override)&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_stock_action.xml"
+            line="42"
+            column="9"
+            startOffset="1531"
+            endLine="42"
+            endColumn="52"
+            endOffset="1574"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Hapus&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_stock_action.xml"
+            line="60"
+            column="9"
+            startOffset="2230"
+            endLine="60"
+            endColumn="29"
+            endOffset="2250"/>
+    </incident>
+
+    <incident
+        id="UseAppTint"
+        severity="error"
+        message="Must use `app:tint` instead of `android:tint`">
+        <fix-composite
+            description="Set tint=&quot;@android:color/white&quot; and Delete tint">
+            <fix-attribute
+                description="Set tint=&quot;@android:color/white&quot;"
+                namespace="http://schemas.android.com/apk/res-auto"
+                attribute="tint"
+                value="@android:color/white"/>
+            <fix-attribute
+                description="Delete tint"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="tint"/>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_offline_indicator.xml"
+            line="24"
+            column="13"
+            startOffset="894"
+            endLine="24"
+            endColumn="48"
+            endOffset="929"/>
+    </incident>
+
+    <incident
+        id="ContentDescription"
+        severity="warning"
+        message="Missing `contentDescription` attribute on image">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set contentDescription"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="contentDescription"
+                value="TODO"
+                point="4"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAccessibility=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAccessibility"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_offline_indicator.xml"
+            line="20"
+            column="10"
+            startOffset="731"
+            endLine="20"
+            endColumn="19"
+            endOffset="740"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Mode Offline: Fitur pencarian produk eksternal tidak tersedia&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_offline_indicator.xml"
+            line="32"
+            column="13"
+            startOffset="1180"
+            endLine="32"
+            endColumn="89"
+            endOffset="1256"/>
+    </incident>
+
+    <incident
+        id="UseAppTint"
+        severity="error"
+        message="Must use `app:tint` instead of `android:tint`">
+        <fix-composite
+            description="Set tint=&quot;@android:color/white&quot; and Delete tint">
+            <fix-attribute
+                description="Set tint=&quot;@android:color/white&quot;"
+                namespace="http://schemas.android.com/apk/res-auto"
+                attribute="tint"
+                value="@android:color/white"/>
+            <fix-attribute
+                description="Delete tint"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="tint"/>
+        </fix-composite>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_offline_indicator.xml"
+            line="42"
+            column="13"
+            startOffset="1626"
+            endLine="42"
+            endColumn="48"
+            endOffset="1661"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Tutup&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_offline_indicator.xml"
+            line="44"
+            column="13"
+            startOffset="1748"
+            endLine="44"
+            endColumn="47"
+            endOffset="1782"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Home&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/bottom_nav_menu.xml"
+            line="6"
+            column="9"
+            startOffset="199"
+            endLine="6"
+            endColumn="29"
+            endOffset="219"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Stok&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/bottom_nav_menu.xml"
+            line="10"
+            column="9"
+            startOffset="319"
+            endLine="10"
+            endColumn="29"
+            endOffset="339"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Jual&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/bottom_nav_menu.xml"
+            line="14"
+            column="9"
+            startOffset="437"
+            endLine="14"
+            endColumn="29"
+            endOffset="457"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Uang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/bottom_nav_menu.xml"
+            line="18"
+            column="9"
+            startOffset="557"
+            endLine="18"
+            endColumn="29"
+            endOffset="577"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Ringkasan&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/bottom_nav_menu.xml"
+            line="22"
+            column="9"
+            startOffset="681"
+            endLine="22"
+            endColumn="34"
+            endOffset="706"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Scan barcode untuk menambahkan produk ke keranjang&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/sell_toolbar_menu.xml"
+            line="8"
+            column="9"
+            startOffset="316"
+            endLine="8"
+            endColumn="88"
+            endOffset="395"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Scan Barcode&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/sell_toolbar_menu.xml"
+            line="7"
+            column="9"
+            startOffset="279"
+            endLine="7"
+            endColumn="37"
+            endOffset="307"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Export Produk&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/stock_toolbar_menu.xml"
+            line="6"
+            column="9"
+            startOffset="217"
+            endLine="6"
+            endColumn="38"
+            endOffset="246"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Import Produk&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/stock_toolbar_menu.xml"
+            line="11"
+            column="9"
+            startOffset="395"
+            endLine="11"
+            endColumn="38"
+            endOffset="424"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Download Template&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/stock_toolbar_menu.xml"
+            line="16"
+            column="9"
+            startOffset="575"
+            endLine="16"
+            endColumn="42"
+            endOffset="608"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Generate Test Data&quot;, should use `@string` resource">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/menu/summary_toolbar_menu.xml"
+            line="6"
+            column="9"
+            startOffset="229"
+            endLine="6"
+            endColumn="43"
+            endOffset="263"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/AddProductActivity.java"
+            line="288"
+            column="44"
+            startOffset="13162"
+            endLine="288"
+            endColumn="69"
+            endOffset="13187"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/AddProductActivity.java"
+            line="300"
+            column="44"
+            startOffset="13756"
+            endLine="300"
+            endColumn="72"
+            endOffset="13784"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/HistoryActivity.java"
+            line="73"
+            column="45"
+            startOffset="3075"
+            endLine="73"
+            endColumn="65"
+            endOffset="3095"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/HistoryActivity.java"
+            line="73"
+            column="56"
+            startOffset="3086"
+            endLine="73"
+            endColumn="65"
+            endOffset="3095"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/HistoryActivity.java"
+            line="252"
+            column="37"
+            startOffset="11586"
+            endLine="252"
+            endColumn="43"
+            endOffset="11592"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/HistoryActivity.java"
+            line="257"
+            column="37"
+            startOffset="11776"
+            endLine="257"
+            endColumn="44"
+            endOffset="11783"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/HistoryActivity.java"
+            line="262"
+            column="37"
+            startOffset="11968"
+            endLine="262"
+            endColumn="45"
+            endOffset="11976"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/MainActivity.java"
+            line="135"
+            column="45"
+            startOffset="5292"
+            endLine="135"
+            endColumn="65"
+            endOffset="5312"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/MainActivity.java"
+            line="135"
+            column="56"
+            startOffset="5303"
+            endLine="135"
+            endColumn="65"
+            endOffset="5312"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/MainActivity.java"
+            line="336"
+            column="37"
+            startOffset="14771"
+            endLine="336"
+            endColumn="43"
+            endOffset="14777"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/MainActivity.java"
+            line="341"
+            column="37"
+            startOffset="14961"
+            endLine="341"
+            endColumn="44"
+            endOffset="14968"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/MainActivity.java"
+            line="346"
+            column="37"
+            startOffset="15153"
+            endLine="346"
+            endColumn="45"
+            endOffset="15161"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SellActivity.java"
+            line="217"
+            column="45"
+            startOffset="8762"
+            endLine="217"
+            endColumn="65"
+            endOffset="8782"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SellActivity.java"
+            line="217"
+            column="56"
+            startOffset="8773"
+            endLine="217"
+            endColumn="65"
+            endOffset="8782"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SellActivity.java"
+            line="264"
+            column="29"
+            startOffset="10848"
+            endLine="264"
+            endColumn="106"
+            endOffset="10925"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SellActivity.java"
+            line="264"
+            column="67"
+            startOffset="10886"
+            endLine="264"
+            endColumn="77"
+            endOffset="10896"/>
+    </incident>
+
+    <incident
+        id="DefaultLocale"
+        severity="warning"
+        message="Implicitly using the default locale is a common source of bugs: Use `toLowerCase(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SellActivity.java"
+            line="305"
+            column="51"
+            startOffset="12487"
+            endLine="305"
+            endColumn="62"
+            endOffset="12498"/>
+    </incident>
+
+    <incident
+        id="DefaultLocale"
+        severity="warning"
+        message="Implicitly using the default locale is a common source of bugs: Use `toLowerCase(Locale)` instead. For strings meant to be internal use `Locale.ROOT`, otherwise `Locale.getDefault()`.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SellActivity.java"
+            line="322"
+            column="34"
+            startOffset="12986"
+            endLine="322"
+            endColumn="45"
+            endOffset="12997"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SellActivity.java"
+            line="591"
+            column="37"
+            startOffset="25110"
+            endLine="591"
+            endColumn="43"
+            endOffset="25116"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SellActivity.java"
+            line="596"
+            column="37"
+            startOffset="25300"
+            endLine="596"
+            endColumn="44"
+            endOffset="25307"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SellActivity.java"
+            line="601"
+            column="37"
+            startOffset="25492"
+            endLine="601"
+            endColumn="45"
+            endOffset="25500"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="87"
+            column="45"
+            startOffset="3578"
+            endLine="87"
+            endColumn="65"
+            endOffset="3598"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="87"
+            column="56"
+            startOffset="3589"
+            endLine="87"
+            endColumn="65"
+            endOffset="3598"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="465"
+            column="31"
+            startOffset="19979"
+            endLine="465"
+            endColumn="57"
+            endOffset="20005"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="465"
+            column="31"
+            startOffset="19979"
+            endLine="465"
+            endColumn="42"
+            endOffset="19990"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="490"
+            column="46"
+            startOffset="21433"
+            endLine="490"
+            endColumn="59"
+            endOffset="21446"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="498"
+            column="46"
+            startOffset="21721"
+            endLine="498"
+            endColumn="59"
+            endOffset="21734"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="509"
+            column="42"
+            startOffset="22047"
+            endLine="509"
+            endColumn="77"
+            endOffset="22082"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="509"
+            column="42"
+            startOffset="22047"
+            endLine="509"
+            endColumn="51"
+            endOffset="22056"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="511"
+            column="42"
+            startOffset="22166"
+            endLine="511"
+            endColumn="55"
+            endOffset="22179"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="704"
+            column="37"
+            startOffset="31263"
+            endLine="704"
+            endColumn="43"
+            endOffset="31269"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="709"
+            column="37"
+            startOffset="31453"
+            endLine="709"
+            endColumn="44"
+            endOffset="31460"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="714"
+            column="37"
+            startOffset="31645"
+            endLine="714"
+            endColumn="45"
+            endOffset="31653"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SummaryActivity.java"
+            line="310"
+            column="37"
+            startOffset="13060"
+            endLine="310"
+            endColumn="57"
+            endOffset="13080"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SummaryActivity.java"
+            line="310"
+            column="48"
+            startOffset="13071"
+            endLine="310"
+            endColumn="57"
+            endOffset="13080"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SummaryActivity.java"
+            line="764"
+            column="37"
+            startOffset="33486"
+            endLine="764"
+            endColumn="43"
+            endOffset="33492"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SummaryActivity.java"
+            line="769"
+            column="37"
+            startOffset="33676"
+            endLine="769"
+            endColumn="44"
+            endOffset="33683"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SummaryActivity.java"
+            line="774"
+            column="37"
+            startOffset="33868"
+            endLine="774"
+            endColumn="45"
+            endOffset="33876"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/HistoryAdapter.java"
+            line="28"
+            column="9"
+            startOffset="1052"
+            endLine="28"
+            endColumn="31"
+            endOffset="1074"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/HistoryAdapter.java"
+            line="46"
+            column="45"
+            startOffset="1747"
+            endLine="46"
+            endColumn="81"
+            endOffset="1783"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/HistoryAdapter.java"
+            line="49"
+            column="45"
+            startOffset="1968"
+            endLine="49"
+            endColumn="81"
+            endOffset="2004"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ProductReportAdapter.java"
+            line="32"
+            column="9"
+            startOffset="1115"
+            endLine="32"
+            endColumn="31"
+            endOffset="1137"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ProductReportAdapter.java"
+            line="51"
+            column="35"
+            startOffset="1816"
+            endLine="51"
+            endColumn="77"
+            endOffset="1858"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ProductReportAdapter.java"
+            line="51"
+            column="35"
+            startOffset="1816"
+            endLine="51"
+            endColumn="46"
+            endOffset="1827"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ProductReportAdapter.java"
+            line="51"
+            column="70"
+            startOffset="1851"
+            endLine="51"
+            endColumn="77"
+            endOffset="1858"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ProductReportAdapter.java"
+            line="55"
+            column="35"
+            startOffset="2063"
+            endLine="55"
+            endColumn="66"
+            endOffset="2094"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ProductReportAdapter.java"
+            line="55"
+            column="35"
+            startOffset="2063"
+            endLine="55"
+            endColumn="43"
+            endOffset="2071"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ProductSellAdapter.java"
+            line="34"
+            column="9"
+            startOffset="1129"
+            endLine="34"
+            endColumn="31"
+            endOffset="1151"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ProductSellAdapter.java"
+            line="50"
+            column="47"
+            startOffset="1796"
+            endLine="50"
+            endColumn="78"
+            endOffset="1827"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ProductSellAdapter.java"
+            line="50"
+            column="47"
+            startOffset="1796"
+            endLine="50"
+            endColumn="55"
+            endOffset="1804"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ProductStockAdapter.java"
+            line="34"
+            column="9"
+            startOffset="1164"
+            endLine="34"
+            endColumn="31"
+            endOffset="1186"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ProductStockAdapter.java"
+            line="55"
+            column="45"
+            startOffset="2049"
+            endLine="55"
+            endColumn="52"
+            endOffset="2056"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ProductStockAdapter.java"
+            line="60"
+            column="45"
+            startOffset="2411"
+            endLine="60"
+            endColumn="59"
+            endOffset="2425"/>
+    </incident>
+
+    <incident
+        id="NotifyDataSetChanged"
+        severity="warning"
+        message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ShoppingAdapter.java"
+            line="19"
+            column="9"
+            startOffset="622"
+            endLine="19"
+            endColumn="31"
+            endOffset="644"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ShoppingAdapter.java"
+            line="34"
+            column="44"
+            startOffset="1189"
+            endLine="34"
+            endColumn="80"
+            endOffset="1225"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ShoppingAdapter.java"
+            line="34"
+            column="44"
+            startOffset="1189"
+            endLine="34"
+            endColumn="57"
+            endOffset="1202"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ShoppingAdapter.java"
+            line="35"
+            column="45"
+            startOffset="1272"
+            endLine="35"
+            endColumn="81"
+            endOffset="1308"/>
+    </incident>
+
+    <incident
+        id="SetTextI18n"
+        severity="warning"
+        message="String literal in `setText` can not be translated. Use Android resources instead.">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/adapters/ShoppingAdapter.java"
+            line="35"
+            column="66"
+            startOffset="1293"
+            endLine="35"
+            endColumn="81"
+            endOffset="1308"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 26">
+        <fix-data conditional="true"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/utils/NetworkUtils.java"
+            line="23"
+            column="13"
+            startOffset="757"
+            endLine="23"
+            endColumn="59"
+            endOffset="803"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 26">
+        <fix-data conditional="true"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/utils/NetworkUtils.java"
+            line="49"
+            column="13"
+            startOffset="1992"
+            endLine="49"
+            endColumn="59"
+            endOffset="2038"/>
+    </incident>
+
+    <incident
+        id="ObsoleteSdkInt"
+        severity="warning"
+        message="Unnecessary; SDK_INT is always >= 26">
+        <fix-data conditional="true"/>
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/utils/NetworkUtils.java"
+            line="73"
+            column="13"
+            startOffset="3094"
+            endLine="73"
+            endColumn="59"
+            endOffset="3140"/>
+    </incident>
+
+    <incident
+        id="TrustAllX509TrustManager"
+        severity="warning"
+        message="`checkClientTrusted` is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers">
+        <location
+            file="$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.apache.poi/poi-ooxml/5.2.3/2efd11c940adb18c03eb9ce7ad88fc40ee6a196/poi-ooxml-5.2.3.jar"/>
+    </incident>
+
+    <incident
+        id="TrustAllX509TrustManager"
+        severity="warning"
+        message="`checkServerTrusted` is empty, which could cause insecure network traffic due to trusting arbitrary TLS/SSL certificates presented by peers">
+        <location
+            file="$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.apache.poi/poi-ooxml/5.2.3/2efd11c940adb18c03eb9ce7ad88fc40ee6a196/poi-ooxml-5.2.3.jar"/>
+    </incident>
+
+    <incident
+        id="OldTargetApi"
+        severity="warning"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the `android.os.Build.VERSION_CODES` javadoc for details.">
+        <fix-replace
+            description="Update targetSdkVersion to 36"
+            oldString="34"
+            replacement="36"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="13"
+            column="9"
+            startOffset="259"
+            endLine="13"
+            endColumn="21"
+            endOffset="271"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.1">
+        <fix-replace
+            description="Change to 1.7.1"
+            family="Update versions"
+            oldString="1.6.1"
+            replacement="1.7.1"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="36"
+            column="20"
+            startOffset="808"
+            endLine="36"
+            endColumn="56"
+            endOffset="844"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of com.google.android.material:material than 1.9.0 is available: 1.13.0">
+        <fix-replace
+            description="Change to 1.13.0"
+            family="Update versions"
+            oldString="1.9.0"
+            replacement="1.13.0"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="37"
+            column="20"
+            startOffset="864"
+            endLine="37"
+            endColumn="64"
+            endOffset="908"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.1">
+        <fix-replace
+            description="Change to 2.2.1"
+            family="Update versions"
+            oldString="2.1.4"
+            replacement="2.2.1"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="38"
+            column="20"
+            startOffset="928"
+            endLine="38"
+            endColumn="70"
+            endOffset="978"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.room:room-runtime than 2.5.2 is available: 2.8.4">
+        <fix-replace
+            description="Change to 2.8.4"
+            family="Update versions"
+            oldString="2.5.2"
+            replacement="2.8.4"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="41"
+            column="20"
+            startOffset="1026"
+            endLine="41"
+            endColumn="54"
+            endOffset="1060"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.room:room-compiler than 2.5.2 is available: 2.8.4">
+        <fix-replace
+            description="Change to 2.8.4"
+            family="Update versions"
+            oldString="2.5.2"
+            replacement="2.8.4"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="42"
+            column="25"
+            startOffset="1085"
+            endLine="42"
+            endColumn="60"
+            endOffset="1120"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of com.google.firebase:firebase-bom than 32.7.0 is available: 34.7.0">
+        <fix-replace
+            description="Change to 34.7.0"
+            family="Update versions"
+            oldString="32.7.0"
+            replacement="34.7.0"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="62"
+            column="20"
+            startOffset="1817"
+            endLine="62"
+            endColumn="71"
+            endOffset="1868"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0">
+        <fix-replace
+            description="Change to 1.3.0"
+            family="Update versions"
+            oldString="1.1.5"
+            replacement="1.3.0"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="68"
+            column="31"
+            startOffset="2119"
+            endLine="68"
+            endColumn="62"
+            endOffset="2150"/>
+    </incident>
+
+    <incident
+        id="GradleDependency"
+        severity="warning"
+        message="A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0">
+        <fix-replace
+            description="Change to 3.7.0"
+            family="Update versions"
+            oldString="3.5.1"
+            replacement="3.7.0"
+            priority="0"/>
+        <location
+            file="${:app*projectDir}/build.gradle"
+            line="69"
+            column="31"
+            startOffset="2181"
+            endLine="69"
+            endColumn="75"
+            endOffset="2225"/>
+    </incident>
+
+    <incident
+        id="InflateParams"
+        severity="warning"
+        message="Avoid passing `null` as the view root (needed to resolve layout parameters on the inflated layout&apos;s root element)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/HistoryActivity.java"
+            line="200"
+            column="100"
+            startOffset="8576"
+            endLine="200"
+            endColumn="104"
+            endOffset="8580"/>
+    </incident>
+
+    <incident
+        id="InflateParams"
+        severity="warning"
+        message="Avoid passing `null` as the view root (needed to resolve layout parameters on the inflated layout&apos;s root element)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/MainActivity.java"
+            line="282"
+            column="100"
+            startOffset="11559"
+            endLine="282"
+            endColumn="104"
+            endOffset="11563"/>
+    </incident>
+
+    <incident
+        id="InflateParams"
+        severity="warning"
+        message="Avoid passing `null` as the view root (needed to resolve layout parameters on the inflated layout&apos;s root element)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SellActivity.java"
+            line="244"
+            column="105"
+            startOffset="9727"
+            endLine="244"
+            endColumn="109"
+            endOffset="9731"/>
+    </incident>
+
+    <incident
+        id="InflateParams"
+        severity="warning"
+        message="Avoid passing `null` as the view root (needed to resolve layout parameters on the inflated layout&apos;s root element)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SellActivity.java"
+            line="539"
+            column="100"
+            startOffset="22100"
+            endLine="539"
+            endColumn="104"
+            endOffset="22104"/>
+    </incident>
+
+    <incident
+        id="InflateParams"
+        severity="warning"
+        message="Avoid passing `null` as the view root (needed to resolve layout parameters on the inflated layout&apos;s root element)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="435"
+            column="105"
+            startOffset="18785"
+            endLine="435"
+            endColumn="109"
+            endOffset="18789"/>
+    </incident>
+
+    <incident
+        id="InflateParams"
+        severity="warning"
+        message="Avoid passing `null` as the view root (needed to resolve layout parameters on the inflated layout&apos;s root element)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="461"
+            column="100"
+            startOffset="19810"
+            endLine="461"
+            endColumn="104"
+            endOffset="19814"/>
+    </incident>
+
+    <incident
+        id="InflateParams"
+        severity="warning"
+        message="Avoid passing `null` as the view root (needed to resolve layout parameters on the inflated layout&apos;s root element)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/StockActivity.java"
+            line="652"
+            column="100"
+            startOffset="28253"
+            endLine="652"
+            endColumn="104"
+            endOffset="28257"/>
+    </incident>
+
+    <incident
+        id="InflateParams"
+        severity="warning"
+        message="Avoid passing `null` as the view root (needed to resolve layout parameters on the inflated layout&apos;s root element)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*javaDir*0}/com/zanjaprogrammer/warungku/SummaryActivity.java"
+            line="712"
+            column="100"
+            startOffset="30558"
+            endLine="712"
+            endColumn="104"
+            endOffset="30562"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `@color/background_off_white` with a theme that also paints a background (inferred theme is `@style/Theme.WarungKu`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_login.xml"
+            line="6"
+            column="5"
+            startOffset="292"
+            endLine="6"
+            endColumn="53"
+            endOffset="340"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `@color/background_off_white` with a theme that also paints a background (inferred theme is `@style/Theme.WarungKu`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_main.xml"
+            line="6"
+            column="5"
+            startOffset="292"
+            endLine="6"
+            endColumn="53"
+            endOffset="340"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `@color/background_off_white` with a theme that also paints a background (inferred theme is `@style/Theme.WarungKu`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_report.xml"
+            line="6"
+            column="5"
+            startOffset="292"
+            endLine="6"
+            endColumn="53"
+            endOffset="340"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `@color/background_off_white` with a theme that also paints a background (inferred theme is `@style/Theme.WarungKu`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/activity_summary.xml"
+            line="6"
+            column="5"
+            startOffset="292"
+            endLine="6"
+            endColumn="53"
+            endOffset="340"/>
+    </incident>
+
+    <incident
+        id="Overdraw"
+        severity="warning"
+        message="Possible overdraw: Root element paints background `@color/background` with a theme that also paints a background (inferred theme is `@style/Theme.WarungKu`)">
+        <location
+            file="${:app*debug*MAIN*sourceProvider*0*resDir*0}/layout/layout_bottom_sheet_payment.xml"
+            line="8"
+            column="5"
+            startOffset="315"
+            endLine="8"
+            endColumn="43"
+            endOffset="353"/>
+    </incident>
+
+</incidents>
