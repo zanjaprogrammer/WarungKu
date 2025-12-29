@@ -5,7 +5,7 @@ public class Invite {
     public String warungId;
     public String ownerId;
     public String email;
-    public String role; // "manager", "cashier", "staff"
+    public String role; // "manager", "cashier" (staff dihapus)
     public String status; // "pending", "accepted", "expired"
     public long createdAt;
     public long expiresAt;

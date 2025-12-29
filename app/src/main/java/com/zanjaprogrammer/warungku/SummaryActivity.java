@@ -56,19 +56,6 @@ public class SummaryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Check authentication (optional - guest mode allowed)
-        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
-            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
-        
-        // Try load from cache, but don't redirect if not logged in
-        if (!authManager.isLoggedIn()) {
-            authManager.loadUserFromCache();
-        }
-        
-        // Permission check removed - guest mode allowed for all features
-        // canAccessSummary() returns true for guest mode (role == null), so no need to check
-        String role = authManager.getCurrentUserRole();
-        
         Log.d("WarungKu", "SummaryActivity onCreate started");
         setContentView(R.layout.activity_summary);
 
@@ -186,12 +173,18 @@ public class SummaryActivity extends AppCompatActivity {
             } else if (id == R.id.menu_restore) {
                 showRestoreDialog();
                 return true;
+            } else if (id == R.id.menu_generate_dummy) {
+                generateDummyData();
+                return true;
             }
             return false;
         });
         
-        // Setup Login/Logout button
-        setupAuthButton();
+        // Hide auth button (feature removed)
+        com.google.android.material.button.MaterialButton btnAuth = findViewById(R.id.btnAuth);
+        if (btnAuth != null) {
+            btnAuth.setVisibility(View.GONE);
+        }
 
         // Tombol laporan di card
         findViewById(R.id.cardReport).setOnClickListener(v -> {
@@ -233,41 +226,33 @@ public class SummaryActivity extends AppCompatActivity {
             btnRestore.setOnClickListener(v -> showRestoreDialog());
         }
         
-        // Setup Manage Employees card (always visible, but requires login)
-        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
-            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
+        // Hide manage employees card (feature removed)
         MaterialCardView cardManageEmployees = findViewById(R.id.cardManageEmployees);
         if (cardManageEmployees != null) {
-            // Card selalu visible (guest mode allowed)
-            cardManageEmployees.setVisibility(View.VISIBLE);
-            View btnManageEmployees = findViewById(R.id.btnManageEmployees);
-            if (btnManageEmployees != null) {
-                btnManageEmployees.setOnClickListener(v -> {
-                    // Check if logged in
-                    if (!authManager.isLoggedIn()) {
-                        // Tampilkan peringatan dan redirect ke LoginActivity
-                        Toast.makeText(this, "Anda harus login terlebih dahulu untuk mengelola karyawan", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(this, LoginActivity.class));
-                        return;
-                    }
-                    
-                    // Check permission: only owner can manage employees
-                    String role = authManager.getCurrentUserRole();
-                    if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canManageEmployees(role)) {
-                        Toast.makeText(this, "Hanya owner yang dapat mengelola karyawan", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    
-                    // User sudah login dan adalah owner, buka ManageEmployeesActivity
-                    startActivity(new Intent(this, ManageEmployeesActivity.class));
-                });
-            }
+            cardManageEmployees.setVisibility(View.GONE);
         }
         
     }
     
     private void showRestoreDialog() {
         restoreFileLauncher.launch("application/octet-stream");
+    }
+    
+    private void generateDummyData() {
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("Generate Dummy Data")
+            .setMessage("Ini akan membuat data dummy untuk testing:\n\n" +
+                       "• 30 produk\n" +
+                       "• Riwayat penjualan 30 hari terakhir\n" +
+                       "• Data pengeluaran\n\n" +
+                       "Data existing akan tetap ada. Lanjutkan?")
+            .setPositiveButton("Generate", (dialog, which) -> {
+                android.widget.Toast.makeText(this, "Generating dummy data...", android.widget.Toast.LENGTH_SHORT).show();
+                com.zanjaprogrammer.warungku.utils.DummyDataGenerator.generateAllDummyData(getApplication());
+                android.widget.Toast.makeText(this, "Dummy data generated! Refresh halaman untuk melihat hasil.", android.widget.Toast.LENGTH_LONG).show();
+            })
+            .setNegativeButton("Batal", null)
+            .show();
     }
     
     private void performBackup() {
@@ -904,83 +889,14 @@ public class SummaryActivity extends AppCompatActivity {
         dialog.show();
     }
     
-    private void setupAuthButton() {
-        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
-            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
-        
-        com.google.android.material.button.MaterialButton btnAuth = findViewById(R.id.btnAuth);
-        if (btnAuth != null) {
-            updateAuthButton(btnAuth, authManager);
-            
-            btnAuth.setOnClickListener(v -> {
-                if (authManager.isLoggedIn()) {
-                    // Logout
-                    new androidx.appcompat.app.AlertDialog.Builder(this)
-                        .setTitle("Logout")
-                        .setMessage("Apakah Anda yakin ingin logout?")
-                        .setPositiveButton("Ya", (dialog, which) -> {
-                            authManager.logout();
-                            updateAuthButton(btnAuth, authManager);
-                            Toast.makeText(this, "Berhasil logout", Toast.LENGTH_SHORT).show();
-                        })
-                        .setNegativeButton("Batal", null)
-                        .show();
-                } else {
-                    // Login
-                    startActivity(new Intent(this, LoginActivity.class));
-                }
-            });
-        }
-    }
-    
-    private void updateAuthButton(com.google.android.material.button.MaterialButton btnAuth, com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager) {
-        if (authManager.isLoggedIn()) {
-            String email = authManager.getCurrentUser() != null ? authManager.getCurrentUser().email : "User";
-            // Shorten email if too long
-            String displayText = email.length() > 12 ? email.substring(0, 10) + ".." : email;
-            btnAuth.setText(displayText);
-            btnAuth.setIconResource(R.drawable.ic_logout);
-        } else {
-            btnAuth.setText("Login");
-            btnAuth.setIconResource(R.drawable.ic_account);
-        }
-    }
-    
     @Override
     protected void onResume() {
         super.onResume();
-        
-        // Update auth button state
-        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
-            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
-        
-        // Try load from cache
-        if (!authManager.isLoggedIn()) {
-            authManager.loadUserFromCache();
-        }
-        
-        com.google.android.material.button.MaterialButton btnAuth = findViewById(R.id.btnAuth);
-        if (btnAuth != null) {
-            updateAuthButton(btnAuth, authManager);
-        }
-        
-        // Update Manage Employees card visibility
-        updateManageEmployeesCard();
         
         // Check if day has changed and refresh data
         checkAndRefreshDailyData();
         
         // Check network status
         setupOfflineIndicator();
-    }
-    
-    private void updateManageEmployeesCard() {
-        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
-            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
-        MaterialCardView cardManageEmployees = findViewById(R.id.cardManageEmployees);
-        if (cardManageEmployees != null) {
-            // Card selalu visible (guest mode allowed)
-            cardManageEmployees.setVisibility(View.VISIBLE);
-        }
     }
 }

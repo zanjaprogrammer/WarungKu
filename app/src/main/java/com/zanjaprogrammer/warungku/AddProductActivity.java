@@ -35,19 +35,6 @@ public class AddProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Check authentication (optional - guest mode allowed)
-        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
-            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
-        
-        // Try load from cache, but don't redirect if not logged in (guest mode)
-        if (!authManager.isLoggedIn()) {
-            authManager.loadUserFromCache();
-        }
-        
-        // Permission check removed - guest mode allowed for all features
-        // canAddProduct() returns true for guest mode (role == null), so no need to check
-        String role = authManager.getCurrentUserRole();
-        
         binding = ActivityAddProductBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -128,12 +115,12 @@ public class AddProductActivity extends AppCompatActivity {
             Toast.makeText(this, "Produk berhasil diupdate", Toast.LENGTH_SHORT).show();
         } else {
             // Insert new product
-            Product product = new Product(name, sellPrice, buyPrice, stock, minStock);
+        Product product = new Product(name, sellPrice, buyPrice, stock, minStock);
             product.barcode = barcode.isEmpty() ? null : barcode;
-            viewModel.insertProduct(product);
+        viewModel.insertProduct(product);
             Toast.makeText(this, "Barang berhasil disimpan", Toast.LENGTH_SHORT).show();
         }
-        
+
         finish();
     }
     

@@ -11,5 +11,9 @@
         android:title="Restore Data"
         android:icon="@drawable/ic_restore"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_generate_dummy"
+        android:title="Generate Dummy Data"
+        app:showAsAction="never" />
 </menu>
 

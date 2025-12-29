@@ -28,7 +28,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".OnboardingActivity" />
-        <activity android:name=".LoginActivity" />
         <activity android:name=".SellActivity" />
         <activity android:name=".StockActivity" />
         <activity android:name=".AddProductActivity" />
@@ -38,7 +37,6 @@
             android:name=".SummaryActivity"
             android:exported="true" />
         <activity android:name=".ReportActivity" />
-        <activity android:name=".ManageEmployeesActivity" />
         <activity 
             android:name=".PortraitCaptureActivity"
             android:screenOrientation="portrait"
@@ -46,12 +44,6 @@
             android:stateNotNeeded="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         
-        <service
-            android:name=".sync.FirestoreSyncService"
-            android:exported="false" />
-        <service
-            android:name=".supabase.SupabaseSyncService"
-            android:exported="false" />
         
         <provider
             android:name="androidx.core.content.FileProvider"

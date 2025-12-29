@@ -17,11 +17,6 @@ public class Product {
     public boolean isFavorite; // Favorite flag
     public long lastSoldTimestamp; // Last sold timestamp
     public String barcode; // Barcode for scanning (nullable)
-    
-    // Sync fields
-    public boolean synced; // Whether this product has been synced to Firestore
-    public long lastSyncedAt; // Last sync timestamp
-    public String cloudId; // Firestore document ID (nullable)
 
     public Product(String name, double sellPrice, Double buyPrice, int currentStock, int minStock) {
         this.name = name;
@@ -33,8 +28,5 @@ public class Product {
         this.isFavorite = false;
         this.lastSoldTimestamp = 0;
         this.barcode = null;
-        this.synced = false;
-        this.lastSyncedAt = 0;
-        this.cloudId = null;
     }
 }

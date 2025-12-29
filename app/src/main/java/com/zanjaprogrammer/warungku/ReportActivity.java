@@ -1,5 +1,6 @@
 package com.zanjaprogrammer.warungku;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -44,29 +45,16 @@ public class ReportActivity extends AppCompatActivity {
     
     private long currentStart, currentEnd;
     private LiveData<List<CashFlow>> cashFlowLive;
-    private LiveData<Double> incomeLive, expenseLive, profitLive;
+    private LiveData<Double> incomeLive, expenseLive;
     private LiveData<List<Product>> topSellingLive, unsoldLive;
 
     private enum PeriodType {
-        DAY, WEEK, MONTH
+        DAY, WEEK, MONTH, YEAR
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        // Check authentication (optional - guest mode allowed)
-        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
-            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
-        
-        // Try load from cache, but don't redirect if not logged in (guest mode)
-        if (!authManager.isLoggedIn()) {
-            authManager.loadUserFromCache();
-        }
-        
-        // Permission check removed - guest mode allowed for all features
-        // canViewReports() returns true for guest mode (role == null), so no need to check
-        String role = authManager.getCurrentUserRole();
         
         setContentView(R.layout.activity_report);
 
@@ -90,7 +78,15 @@ public class ReportActivity extends AppCompatActivity {
         rvUnsold = findViewById(R.id.rvUnsold);
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationOnClickListener(v -> finish());
+        // Set navigation icon (back arrow)
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        toolbar.setNavigationOnClickListener(v -> {
+            // Navigate to SummaryActivity
+            Intent intent = new Intent(this, SummaryActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void setupFilters() {
@@ -104,6 +100,8 @@ public class ReportActivity extends AppCompatActivity {
                 updatePeriod(PeriodType.WEEK);
             } else if (id == R.id.chipMonth) {
                 updatePeriod(PeriodType.MONTH);
+            } else if (id == R.id.chipYear) {
+                updatePeriod(PeriodType.YEAR);
             }
         });
     }
@@ -129,6 +127,10 @@ public class ReportActivity extends AppCompatActivity {
                 cal.set(Calendar.DAY_OF_MONTH, 1);
                 currentStart = cal.getTimeInMillis();
                 break;
+            case YEAR:
+                cal.set(Calendar.DAY_OF_YEAR, 1);
+                currentStart = cal.getTimeInMillis();
+                break;
         }
 
         observeData();
@@ -138,7 +140,6 @@ public class ReportActivity extends AppCompatActivity {
         // Remove old observers
         if (incomeLive != null) incomeLive.removeObservers(this);
         if (expenseLive != null) expenseLive.removeObservers(this);
-        if (profitLive != null) profitLive.removeObservers(this);
         if (cashFlowLive != null) cashFlowLive.removeObservers(this);
         if (topSellingLive != null) topSellingLive.removeObservers(this);
         if (unsoldLive != null) unsoldLive.removeObservers(this);
@@ -146,12 +147,12 @@ public class ReportActivity extends AppCompatActivity {
         // Observe financial data
         incomeLive = viewModel.getIncomeInRange(currentStart, currentEnd);
         expenseLive = viewModel.getExpenseInRange(currentStart, currentEnd);
-        profitLive = viewModel.getProfitInRange(currentStart, currentEnd);
+        // profitLive tidak digunakan lagi karena keuntungan = income - expense
         cashFlowLive = viewModel.getCashFlowInRange(currentStart, currentEnd);
 
         incomeLive.observe(this, income -> updateFinancialSummary());
         expenseLive.observe(this, expense -> updateFinancialSummary());
-        profitLive.observe(this, profit -> updateFinancialSummary());
+        // profitLive observer dihapus karena keuntungan dihitung dari income - expense
         cashFlowLive.observe(this, cashFlows -> updateChart(cashFlows));
 
         // Observe product data (tidak tergantung periode, selalu real-time)
@@ -174,7 +175,8 @@ public class ReportActivity extends AppCompatActivity {
     private void updateFinancialSummary() {
         double income = incomeLive.getValue() != null ? incomeLive.getValue() : 0.0;
         double expense = expenseLive.getValue() != null ? expenseLive.getValue() : 0.0;
-        double profit = profitLive.getValue() != null ? profitLive.getValue() : 0.0;
+        // Keuntungan = Pendapatan - Pengeluaran (bukan dari profitLive yang hanya margin penjualan)
+        double profit = income - expense;
 
         NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("id-ID"));
         tvIncome.setText(formatter.format(income));

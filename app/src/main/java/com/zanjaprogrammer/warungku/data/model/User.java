@@ -4,7 +4,7 @@ public class User {
     public String userId;
     public String email;
     public String name;
-    public String role; // "owner", "manager", "cashier", "staff"
+    public String role; // "owner", "manager", "cashier" (staff dihapus)
     public String warungId;
     public long createdAt;
     public boolean isActive;
@@ -33,10 +33,6 @@ public class User {
 
     public boolean isCashier() {
         return "cashier".equals(role);
-    }
-
-    public boolean isStaff() {
-        return "staff".equals(role);
     }
 }
 

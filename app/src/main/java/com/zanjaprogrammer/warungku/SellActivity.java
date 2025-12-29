@@ -46,18 +46,6 @@ public class SellActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Check authentication (optional - guest mode allowed)
-        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
-            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
-        
-        // Try load from cache, but don't redirect if not logged in (guest mode)
-        if (!authManager.isLoggedIn()) {
-            authManager.loadUserFromCache();
-        }
-        
-        // Permission check removed - guest mode allowed for all features
-        // canSell() returns true for guest mode (role == null), so no need to check
-        
         binding = ActivitySellBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

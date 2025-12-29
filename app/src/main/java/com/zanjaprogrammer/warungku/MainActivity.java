@@ -36,15 +36,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // Check authentication (optional - guest mode allowed)
-        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
-            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
-        
-        // Try load from cache, but don't redirect if not logged in
-        if (!authManager.isLoggedIn()) {
-            authManager.loadUserFromCache();
-        }
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -101,9 +92,6 @@ public class MainActivity extends AppCompatActivity {
         
         // Check if day has changed and refresh data
         checkAndRefreshDailyData();
-        
-        // Trigger sync if online
-        com.zanjaprogrammer.warungku.sync.SyncManager.triggerSync(this);
         
         // Check stock and send notifications if needed
         com.zanjaprogrammer.warungku.utils.StockNotificationHelper notificationHelper = 

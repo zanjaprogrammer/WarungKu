@@ -6,7 +6,6 @@ import com.zanjaprogrammer.warungku.data.dao.CashFlowDao;
 import com.zanjaprogrammer.warungku.data.dao.ProductDao;
 import com.zanjaprogrammer.warungku.data.entity.CashFlow;
 import com.zanjaprogrammer.warungku.data.entity.Product;
-import com.zanjaprogrammer.warungku.sync.SyncManager;
 
 import java.util.List;
 
@@ -97,9 +96,6 @@ public class DataRepository {
                 }
             }
             
-            // Trigger sync
-            SyncManager.triggerSync(application);
-            
             // Check stock notifications
             checkStockNotifications();
         });
@@ -108,8 +104,6 @@ public class DataRepository {
     public void updateProduct(Product product) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             productDao.update(product);
-            // Trigger sync
-            SyncManager.triggerSync(application);
             // Check stock notifications
             checkStockNotifications();
         });
@@ -119,20 +113,9 @@ public class DataRepository {
         AppDatabase.databaseWriteExecutor.execute(() -> cashFlowDao.update(cashFlow));
     }
     
-    // Sync methods
-    public List<Product> getUnsyncedProducts() {
-        return productDao.getUnsyncedProducts();
-    }
-    
-    public List<CashFlow> getUnsyncedCashFlows() {
-        return cashFlowDao.getUnsyncedCashFlows();
-    }
-
     public void insertCashFlow(CashFlow cashFlow) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             cashFlowDao.insert(cashFlow);
-            // Trigger sync
-            SyncManager.triggerSync(application);
         });
     }
 
@@ -149,8 +132,6 @@ public class DataRepository {
             CashFlow flow = new CashFlow("IN", amount, "Jual " + product.name + " (" + quantity + ")",
                     System.currentTimeMillis(), product.id, profit);
             cashFlowDao.insert(flow);
-            // Trigger sync
-            SyncManager.triggerSync(application);
             // Check stock notifications
             checkStockNotifications();
         });
@@ -170,8 +151,6 @@ public class DataRepository {
                 CashFlow flow = new CashFlow("OUT", cost, "Tambah Stok: " + product.name + " (" + quantity + ")",
                         System.currentTimeMillis(), product.id, 0.0);
                 cashFlowDao.insert(flow);
-                // Trigger sync
-                SyncManager.triggerSync(application);
             }
             // Check stock notifications (stok mungkin sudah kembali normal)
             checkStockNotifications();
@@ -244,8 +223,6 @@ public class DataRepository {
             CashFlow flow = new CashFlow("IN", totalAmount, finalDesc,
                     System.currentTimeMillis(), null, totalProfit);
             cashFlowDao.insert(flow);
-            // Trigger sync
-            SyncManager.triggerSync(application);
             // Check stock notifications
             checkStockNotifications();
         });

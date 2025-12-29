@@ -32,27 +32,12 @@ public class StockActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Check authentication (optional - guest mode allowed)
-        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
-            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
-        
-        // Try load from cache, but don't redirect if not logged in (guest mode)
-        if (!authManager.isLoggedIn()) {
-            authManager.loadUserFromCache();
-        }
-        
-        // Permission check removed - guest mode allowed for all features
-        // canViewStock() always returns true, so no need to check
-        
         binding = ActivityStockBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Use singleton instance untuk persist cart across activities
         viewModel = AppViewModel.getInstance(getApplication());
         
-        // Get role for FAB visibility (guest mode allowed, so FAB always visible)
-        String role = authManager.getCurrentUserRole();
-        // FAB always visible in guest mode (canAddProduct returns true for null role)
         setupRecyclerView();
         setupFilePickers();
         setupToolbarMenu();
@@ -89,14 +74,8 @@ public class StockActivity extends AppCompatActivity {
         });
 
         binding.fabAdd.setOnClickListener(v -> {
-            // Double check permission before opening AddProductActivity
-            String currentRole = authManager.getCurrentUserRole();
-            if (com.zanjaprogrammer.warungku.auth.PermissionManager.canAddProduct(currentRole)) {
-                Intent intent = new Intent(this, AddProductActivity.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "Anda tidak memiliki izin untuk menambah produk", Toast.LENGTH_SHORT).show();
-            }
+            Intent intent = new Intent(this, AddProductActivity.class);
+            startActivity(intent);
         });
 
         binding.bottomNavigation.setSelectedItemId(R.id.nav_stock);
@@ -194,43 +173,16 @@ public class StockActivity extends AppCompatActivity {
     }
     
     private void setupToolbarMenu() {
-        // Hide export/import menu if user doesn't have permission
-        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
-            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
-        String role = authManager.getCurrentUserRole();
-        
-        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canExportImport(role)) {
-            // Hide export/import menu items
-            binding.toolbar.getMenu().findItem(R.id.menu_export).setVisible(false);
-            binding.toolbar.getMenu().findItem(R.id.menu_import).setVisible(false);
-            binding.toolbar.getMenu().findItem(R.id.menu_template).setVisible(false);
-        }
-        
         binding.toolbar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menu_export) {
-                // Double check permission
-                if (com.zanjaprogrammer.warungku.auth.PermissionManager.canExportImport(role)) {
-                    exportProducts();
-                } else {
-                    Toast.makeText(this, "Anda tidak memiliki izin untuk export produk", Toast.LENGTH_SHORT).show();
-                }
+                exportProducts();
                 return true;
             } else if (id == R.id.menu_import) {
-                // Double check permission
-                if (com.zanjaprogrammer.warungku.auth.PermissionManager.canExportImport(role)) {
-                    importProducts();
-                } else {
-                    Toast.makeText(this, "Anda tidak memiliki izin untuk import produk", Toast.LENGTH_SHORT).show();
-                }
+                importProducts();
                 return true;
             } else if (id == R.id.menu_template) {
-                // Double check permission
-                if (com.zanjaprogrammer.warungku.auth.PermissionManager.canExportImport(role)) {
-                    generateTemplate();
-                } else {
-                    Toast.makeText(this, "Anda tidak memiliki izin untuk download template", Toast.LENGTH_SHORT).show();
-                }
+                generateTemplate();
                 return true;
             }
             return false;
@@ -447,16 +399,6 @@ public class StockActivity extends AppCompatActivity {
     }
     
     private void editProduct(com.zanjaprogrammer.warungku.data.entity.Product product) {
-        // Check permission: canEditProduct (same as canAddProduct)
-        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
-            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
-        String role = authManager.getCurrentUserRole();
-        
-        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canAddProduct(role)) {
-            Toast.makeText(this, "Anda tidak memiliki izin untuk mengedit produk", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        
         Intent intent = new Intent(this, AddProductActivity.class);
         intent.putExtra("product_id", product.id);
         intent.putExtra("edit_mode", true);

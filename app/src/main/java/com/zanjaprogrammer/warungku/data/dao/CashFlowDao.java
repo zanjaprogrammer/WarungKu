@@ -54,7 +54,6 @@ public interface CashFlowDao {
     @Query("SELECT * FROM cash_flow WHERE timestamp BETWEEN :start AND :end ORDER BY timestamp ASC")
     LiveData<List<CashFlow>> getCashFlowInRange(long start, long end);
     
-    // Query untuk sync: Get unsynced cash flows
-    @Query("SELECT * FROM cash_flow WHERE synced = 0")
-    List<CashFlow> getUnsyncedCashFlows();
+    @Query("DELETE FROM cash_flow")
+    void deleteAll();
 }
