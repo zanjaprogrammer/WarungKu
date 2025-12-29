@@ -98,72 +98,85 @@ public class ProductApiResponse {
      * Get product name (prioritize Indonesian name, fallback to English)
      */
     public String getName() {
-        if (product != null) {
-            // Prioritize product_name (bisa bahasa lokal)
-            if (product.productName != null && !product.productName.isEmpty()) {
-                return product.productName;
+        try {
+            if (product != null) {
+                // Prioritas: productName (biasanya bahasa lokal) -> productNameEn
+                if (product.productName != null && !product.productName.trim().isEmpty()) {
+                    return product.productName.trim();
+                } else if (product.productNameEn != null && !product.productNameEn.trim().isEmpty()) {
+                    return product.productNameEn.trim();
+                }
             }
-            // Fallback to English
-            if (product.productNameEn != null && !product.productNameEn.isEmpty()) {
-                return product.productNameEn;
-            }
+            return null;
+        } catch (Exception e) {
+            return null;
         }
-        return null;
     }
     
     /**
-     * Get product brand (ambil brand pertama jika multiple)
+     * Get brand name
      */
     public String getBrand() {
-        if (product != null) {
-            if (product.brands != null && !product.brands.isEmpty()) {
-                // Jika multiple brands (dipisah koma), ambil yang pertama
-                String[] brandArray = product.brands.split(",");
-                if (brandArray.length > 0) {
-                    return brandArray[0].trim();
-                }
-                return product.brands.trim();
+        try {
+            if (product != null && product.brands != null && !product.brands.trim().isEmpty()) {
+                // Ambil brand pertama jika ada multiple (dipisah koma)
+                String[] brands = product.brands.split(",");
+                return brands[0].trim();
             }
+            return null;
+        } catch (Exception e) {
+            return null;
         }
-        return null;
     }
     
     /**
-     * Get product price as double
-     * Note: Open Food Facts biasanya tidak menyediakan harga
-     * Return null karena harga tidak tersedia di API ini
-     */
-    public Double getPrice() {
-        // Open Food Facts tidak menyediakan data harga
-        // User harus input manual
-        return null;
-    }
-    
-    /**
-     * Get product category (ambil kategori pertama jika multiple)
+     * Get category
      */
     public String getCategory() {
-        if (product != null) {
-            if (product.categories != null && !product.categories.isEmpty()) {
-                // Jika multiple categories (dipisah koma), ambil yang pertama
-                String[] categoryArray = product.categories.split(",");
-                if (categoryArray.length > 0) {
-                    return categoryArray[0].trim();
-                }
-                return product.categories.trim();
+        try {
+            if (product != null && product.categories != null && !product.categories.trim().isEmpty()) {
+                // Ambil kategori pertama jika ada multiple (dipisah koma)
+                String[] categories = product.categories.split(",");
+                return categories[0].trim();
             }
+            return null;
+        } catch (Exception e) {
+            return null;
         }
-        return null;
     }
     
     /**
-     * Get product quantity (misal: "330ml", "500g")
+     * Get quantity/size
      */
     public String getQuantity() {
-        if (product != null && product.quantity != null) {
-            return product.quantity;
+        try {
+            if (product != null && product.quantity != null && !product.quantity.trim().isEmpty()) {
+                return product.quantity.trim();
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
         }
-        return null;
+    }
+    
+    /**
+     * Get best available image URL (prioritize front image, fallback to general image)
+     */
+    public String getImageUrl() {
+        try {
+            if (product != null) {
+                // Priority: imageFrontUrl -> imageUrl -> imageSmallUrl
+                if (product.imageFrontUrl != null && !product.imageFrontUrl.trim().isEmpty()) {
+                    return product.imageFrontUrl.trim();
+                } else if (product.imageUrl != null && !product.imageUrl.trim().isEmpty()) {
+                    return product.imageUrl.trim();
+                } else if (product.imageSmallUrl != null && !product.imageSmallUrl.trim().isEmpty()) {
+                    return product.imageSmallUrl.trim();
+                }
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
-

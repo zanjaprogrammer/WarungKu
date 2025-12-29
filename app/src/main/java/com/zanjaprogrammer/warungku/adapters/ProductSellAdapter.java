@@ -5,6 +5,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
+import com.zanjaprogrammer.warungku.R;
 import com.zanjaprogrammer.warungku.data.entity.Product;
 import com.zanjaprogrammer.warungku.databinding.ItemProductSellBinding;
 
@@ -48,6 +52,19 @@ public class ProductSellAdapter extends RecyclerView.Adapter<ProductSellAdapter.
         holder.binding.tvProductName.setText(product.name);
         holder.binding.tvProductPrice.setText(formatter.format(product.sellPrice));
         holder.binding.tvProductStock.setText("Stok: " + product.currentStock);
+        
+        // Load product image
+        if (product.imageUrl != null && !product.imageUrl.isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(product.imageUrl)
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.ic_image_placeholder)
+                            .error(R.drawable.ic_image_placeholder)
+                            .transform(new RoundedCorners(16)))
+                    .into(holder.binding.ivProductImage);
+        } else {
+            holder.binding.ivProductImage.setImageResource(R.drawable.ic_image_placeholder);
+        }
         
         // Show/hide favorite icon
         if (holder.binding.ivFavorite != null) {

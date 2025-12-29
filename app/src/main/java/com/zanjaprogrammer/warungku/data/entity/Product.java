@@ -17,6 +17,7 @@ public class Product {
     public boolean isFavorite; // Favorite flag
     public long lastSoldTimestamp; // Last sold timestamp
     public String barcode; // Barcode for scanning (nullable)
+    public String imageUrl; // Product image URL (nullable)
 
     public Product(String name, double sellPrice, Double buyPrice, int currentStock, int minStock) {
         this.name = name;
@@ -28,5 +29,6 @@ public class Product {
         this.isFavorite = false;
         this.lastSoldTimestamp = 0;
         this.barcode = null;
+        this.imageUrl = null;
     }
 }

@@ -74,25 +74,53 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Hari Ini"
+                        android:textColor="@color/chip_text_color"
+                        app:chipBackgroundColor="@color/chip_background_color"
+                        app:chipStrokeColor="@color/chip_stroke_color"
+                        app:chipStrokeWidth="1dp"
+                        app:checkedIconEnabled="false"
+                        app:checkedIconVisible="false"
+                        app:chipMinHeight="36dp"
                         android:checked="true"/>
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipWeek"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Minggu Ini"/>
+                        android:text="Minggu Ini"
+                        android:textColor="@color/chip_text_color"
+                        app:chipBackgroundColor="@color/chip_background_color"
+                        app:chipStrokeColor="@color/chip_stroke_color"
+                        app:chipStrokeWidth="1dp"
+                        app:checkedIconEnabled="false"
+                        app:checkedIconVisible="false"
+                        app:chipMinHeight="36dp"/>
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipMonth"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bulan Ini"/>
+                        android:text="Bulan Ini"
+                        android:textColor="@color/chip_text_color"
+                        app:chipBackgroundColor="@color/chip_background_color"
+                        app:chipStrokeColor="@color/chip_stroke_color"
+                        app:chipStrokeWidth="1dp"
+                        app:checkedIconEnabled="false"
+                        app:checkedIconVisible="false"
+                        app:chipMinHeight="36dp"/>
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipYear"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tahun Ini"/>
+                        android:text="Tahun Ini"
+                        android:textColor="@color/chip_text_color"
+                        app:chipBackgroundColor="@color/chip_background_color"
+                        app:chipStrokeColor="@color/chip_stroke_color"
+                        app:chipStrokeWidth="1dp"
+                        app:checkedIconEnabled="false"
+                        app:checkedIconVisible="false"
+                        app:chipMinHeight="36dp"/>
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
 

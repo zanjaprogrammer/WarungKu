@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import com.journeyapps.barcodescanner.ScanOptions;
 import com.journeyapps.barcodescanner.ScanContract;
 import androidx.activity.result.ActivityResultLauncher;
@@ -191,7 +192,7 @@ public class SellActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             }
         });
-        binding.rvProducts.setLayoutManager(new GridLayoutManager(this, 3));
+        binding.rvProducts.setLayoutManager(new LinearLayoutManager(this));
         binding.rvProducts.setAdapter(adapter);
 
         // Observe Cart

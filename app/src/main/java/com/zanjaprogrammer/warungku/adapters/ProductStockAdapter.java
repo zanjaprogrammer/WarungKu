@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.zanjaprogrammer.warungku.R;
 import com.zanjaprogrammer.warungku.data.entity.Product;
 import com.zanjaprogrammer.warungku.databinding.ItemProductStockBinding;
@@ -48,6 +51,19 @@ public class ProductStockAdapter extends RecyclerView.Adapter<ProductStockAdapte
         holder.binding.tvName.setText(product.name);
         holder.binding.tvPrice.setText(formatter.format(product.sellPrice));
         holder.binding.tvStock.setText(String.valueOf(product.currentStock));
+
+        // Load product image
+        if (product.imageUrl != null && !product.imageUrl.isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(product.imageUrl)
+                    .apply(new RequestOptions()
+                            .placeholder(R.drawable.ic_image_placeholder)
+                            .error(R.drawable.ic_image_placeholder)
+                            .transform(new RoundedCorners(16)))
+                    .into(holder.binding.ivProductImage);
+        } else {
+            holder.binding.ivProductImage.setImageResource(R.drawable.ic_image_placeholder);
+        }
 
         if (product.currentStock == 0) {
             // Stok habis - MERAH

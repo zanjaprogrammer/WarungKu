@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.zanjaprogrammer.warungku.databinding.ActivityMainBinding;
 import com.zanjaprogrammer.warungku.viewmodel.AppViewModel;
+import com.zanjaprogrammer.warungku.utils.CurrencyFormatter;
 
 import java.text.NumberFormat;
 import java.util.Calendar;
@@ -92,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
         
         // Check if day has changed and refresh data
         checkAndRefreshDailyData();
+        
+        // Force refresh daily data to ensure accuracy after transactions
+        updateDailyDataObservers();
         
         // Check stock and send notifications if needed
         com.zanjaprogrammer.warungku.utils.StockNotificationHelper notificationHelper = 
@@ -261,12 +265,17 @@ public class MainActivity extends AppCompatActivity {
         dailyExpenseLive = viewModel.getExpenseInRange(todayStart, todayEnd);
         
         dailyIncomeLive.observe(this, income -> {
-            binding.tvIncome.setText(formatter.format(income != null ? income : 0));
+            binding.tvIncome.setText(CurrencyFormatter.format(income != null ? income : 0));
         });
 
         dailyExpenseLive.observe(this, expense -> {
-            binding.tvExpense.setText(formatter.format(expense != null ? expense : 0));
+            binding.tvExpense.setText(CurrencyFormatter.format(expense != null ? expense : 0));
         });
+    }
+    
+    // Method to force refresh daily data after transactions
+    public void refreshDailyData() {
+        updateDailyDataObservers();
     }
 
     private void showExpenseDialog() {
@@ -294,7 +303,11 @@ public class MainActivity extends AppCompatActivity {
                                 "OUT", price, desc,
                                 System.currentTimeMillis(), null, 0.0);
                         viewModel.insertCashFlow(flow);
-                        android.widget.Toast.makeText(this, "Pengeluaran catat", android.widget.Toast.LENGTH_SHORT)
+                        
+                        // Refresh daily data after recording expense
+                        refreshDailyData();
+                        
+                        android.widget.Toast.makeText(this, "Pengeluaran dicatat", android.widget.Toast.LENGTH_SHORT)
                                 .show();
                     }
                 })
@@ -435,6 +448,9 @@ public class MainActivity extends AppCompatActivity {
                 // QRIS: langsung checkout tanpa perlu input uang
                 viewModel.checkout();
                 dialog.dismiss();
+                
+                // Refresh daily data after successful checkout
+                refreshDailyData();
                 android.widget.Toast.makeText(this, "Transaksi Berhasil! (QRIS)", android.widget.Toast.LENGTH_SHORT).show();
             } else {
                 // Tunai: perlu validasi uang bayar
@@ -456,9 +472,12 @@ public class MainActivity extends AppCompatActivity {
                     viewModel.checkout();
                     dialog.dismiss();
                     
+                    // Refresh daily data after successful checkout
+                    refreshDailyData();
+                    
                     String message = "Transaksi Berhasil!";
                     if (change > 0) {
-                        message += "\nKembalian: " + formatter.format(change);
+                        message += "\nKembalian: " + CurrencyFormatter.format(change);
                     }
                     android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show();
                 } catch (NumberFormatException e) {

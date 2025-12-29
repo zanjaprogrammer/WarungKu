@@ -16,7 +16,7 @@ import com.zanjaprogrammer.warungku.data.entity.Product;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = { Product.class, CashFlow.class }, version = 6, exportSchema = false)
+@Database(entities = { Product.class, CashFlow.class }, version = 7, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ProductDao productDao();
@@ -121,6 +121,15 @@ public abstract class AppDatabase extends RoomDatabase {
             database.execSQL("DROP TABLE IF EXISTS local_users");
         }
     };
+    
+    // Migration from version 6 to 7: Add imageUrl column to products
+    static final Migration MIGRATION_6_7 = new Migration(6, 7) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            // Add imageUrl column (nullable TEXT)
+            database.execSQL("ALTER TABLE products ADD COLUMN imageUrl TEXT");
+        }
+    };
 
     public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -128,7 +137,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "warungku_db")
-                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6)
+                            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5, MIGRATION_5_6, MIGRATION_6_7)
                             .fallbackToDestructiveMigration() // For development: drop and recreate if migration fails
                             .build();
                 }

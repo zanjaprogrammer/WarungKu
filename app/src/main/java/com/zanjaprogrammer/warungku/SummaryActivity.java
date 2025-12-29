@@ -176,6 +176,12 @@ public class SummaryActivity extends AppCompatActivity {
             } else if (id == R.id.menu_generate_dummy) {
                 generateDummyData();
                 return true;
+            } else if (id == R.id.menu_generate_profitable_year) {
+                generateProfitableYearData();
+                return true;
+            } else if (id == R.id.menu_generate_simple_test) {
+                generateSimpleTestData();
+                return true;
             }
             return false;
         });
@@ -250,6 +256,44 @@ public class SummaryActivity extends AppCompatActivity {
                 android.widget.Toast.makeText(this, "Generating dummy data...", android.widget.Toast.LENGTH_SHORT).show();
                 com.zanjaprogrammer.warungku.utils.DummyDataGenerator.generateAllDummyData(getApplication());
                 android.widget.Toast.makeText(this, "Dummy data generated! Refresh halaman untuk melihat hasil.", android.widget.Toast.LENGTH_LONG).show();
+            })
+            .setNegativeButton("Batal", null)
+            .show();
+    }
+    
+    private void generateProfitableYearData() {
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("Generate Data Tahun Super Menguntungkan")
+            .setMessage("Ini akan membuat data dummy yang sangat menguntungkan:\n\n" +
+                       "• Hapus semua data existing\n" +
+                       "• 35 produk dengan margin 40-70%\n" +
+                       "• 10-25 transaksi per hari sepanjang tahun\n" +
+                       "• Pengeluaran sangat minimal (hanya 10% hari)\n" +
+                       "• Grafik akan menunjukkan pendapatan JAUH lebih tinggi\n\n" +
+                       "PERINGATAN: Data existing akan dihapus! Lanjutkan?")
+            .setPositiveButton("Generate", (dialog, which) -> {
+                android.widget.Toast.makeText(this, "Generating super profitable data...", android.widget.Toast.LENGTH_SHORT).show();
+                com.zanjaprogrammer.warungku.utils.DummyDataGeneratorFixed.generateSuperProfitableYearData(getApplication());
+                android.widget.Toast.makeText(this, "Data super menguntungkan berhasil dibuat! Tunggu 10 detik lalu buka Laporan > Tahun Ini", android.widget.Toast.LENGTH_LONG).show();
+            })
+            .setNegativeButton("Batal", null)
+            .show();
+    }
+    
+    private void generateSimpleTestData() {
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("Generate Simple Test Chart")
+            .setMessage("Ini akan membuat data test sederhana:\n\n" +
+                       "• Hapus semua data existing\n" +
+                       "• 1.000.000 total pendapatan\n" +
+                       "• 300.000 total pengeluaran\n" +
+                       "• Data selama 7 hari terakhir\n" +
+                       "• Hanya untuk test grafik trend\n\n" +
+                       "Lanjutkan?")
+            .setPositiveButton("Generate", (dialog, which) -> {
+                android.widget.Toast.makeText(this, "Generating simple test data...", android.widget.Toast.LENGTH_SHORT).show();
+                com.zanjaprogrammer.warungku.utils.DummyDataGenerator.generateSimpleTestData(getApplication());
+                android.widget.Toast.makeText(this, "Test data berhasil dibuat! Buka Laporan > Minggu Ini untuk melihat grafik.", android.widget.Toast.LENGTH_LONG).show();
             })
             .setNegativeButton("Batal", null)
             .show();

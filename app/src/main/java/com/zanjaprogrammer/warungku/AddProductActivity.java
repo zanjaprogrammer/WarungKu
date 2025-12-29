@@ -1,7 +1,9 @@
 package com.zanjaprogrammer.warungku;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -9,6 +11,8 @@ import com.journeyapps.barcodescanner.ScanOptions;
 import com.journeyapps.barcodescanner.ScanContract;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zanjaprogrammer.warungku.data.entity.Product;
 import com.zanjaprogrammer.warungku.data.DataRepository;
 import com.zanjaprogrammer.warungku.databinding.ActivityAddProductBinding;
@@ -27,9 +31,12 @@ public class AddProductActivity extends AppCompatActivity {
     private ActivityAddProductBinding binding;
     private AppViewModel viewModel;
     private ActivityResultLauncher<ScanOptions> barcodeLauncher;
+    private ActivityResultLauncher<String> galleryLauncher;
     private boolean isEditMode = false;
     private int productId = -1;
     private com.zanjaprogrammer.warungku.data.entity.Product productToEdit;
+    private String currentImageUrl = null;
+    private String apiImageUrl = null; // Store API image URL separately
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +59,73 @@ public class AddProductActivity extends AppCompatActivity {
             binding.toolbar.setTitle("Tambah Produk");
         }
 
+        setupImageHandling();
+        setupBarcodeScanner();
+        
         binding.btnSave.setOnClickListener(v -> saveProduct());
         binding.toolbar.setNavigationOnClickListener(v -> finish());
+        
+        // Handle barcode dari intent (jika dibuka dari SellActivity)
+        String barcodeFromIntent = getIntent().getStringExtra("barcode");
+        if (barcodeFromIntent != null && !barcodeFromIntent.isEmpty()) {
+            binding.etBarcode.setText(barcodeFromIntent);
+            lookupProductByBarcode(barcodeFromIntent);
+        }
+    }
 
+    private void setupImageHandling() {
+        // Gallery launcher
+        galleryLauncher = registerForActivityResult(
+            new ActivityResultContracts.GetContent(),
+            uri -> {
+                if (uri != null) {
+                    currentImageUrl = uri.toString();
+                    loadImageIntoView(currentImageUrl);
+                    binding.btnRemoveImage.setVisibility(android.view.View.VISIBLE);
+                    binding.btnUseApiImage.setVisibility(android.view.View.GONE);
+                }
+            }
+        );
+
+        // Button listeners
+        binding.btnSelectFromGallery.setOnClickListener(v -> {
+            galleryLauncher.launch("image/*");
+        });
+
+        binding.btnUseApiImage.setOnClickListener(v -> {
+            if (apiImageUrl != null && !apiImageUrl.isEmpty()) {
+                currentImageUrl = apiImageUrl;
+                loadImageIntoView(currentImageUrl);
+                binding.btnRemoveImage.setVisibility(android.view.View.VISIBLE);
+                binding.btnUseApiImage.setVisibility(android.view.View.GONE);
+                Toast.makeText(this, "Gambar dari API digunakan", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.btnRemoveImage.setOnClickListener(v -> {
+            currentImageUrl = null;
+            binding.ivProductImage.setImageResource(R.drawable.ic_image_placeholder);
+            binding.btnRemoveImage.setVisibility(android.view.View.GONE);
+            if (apiImageUrl != null && !apiImageUrl.isEmpty()) {
+                binding.btnUseApiImage.setVisibility(android.view.View.VISIBLE);
+            }
+        });
+    }
+
+    private void loadImageIntoView(String imageUrl) {
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Glide.with(this)
+                .load(imageUrl)
+                .placeholder(R.drawable.ic_image_placeholder)
+                .error(R.drawable.ic_image_placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(binding.ivProductImage);
+        } else {
+            binding.ivProductImage.setImageResource(R.drawable.ic_image_placeholder);
+        }
+    }
+
+    private void setupBarcodeScanner() {
         // Setup barcode scanner - find TextInputLayout and set end icon click listener
         android.view.ViewParent parent = binding.etBarcode.getParent();
         if (parent != null) {
@@ -75,13 +146,6 @@ public class AddProductActivity extends AppCompatActivity {
                 lookupProductByBarcode(barcode);
             }
         });
-        
-        // Handle barcode dari intent (jika dibuka dari SellActivity)
-        String barcodeFromIntent = getIntent().getStringExtra("barcode");
-        if (barcodeFromIntent != null && !barcodeFromIntent.isEmpty()) {
-            binding.etBarcode.setText(barcodeFromIntent);
-            lookupProductByBarcode(barcodeFromIntent);
-        }
     }
 
     private void saveProduct() {
@@ -110,15 +174,18 @@ public class AddProductActivity extends AppCompatActivity {
             productToEdit.currentStock = stock;
             productToEdit.minStock = minStock;
             productToEdit.barcode = barcode.isEmpty() ? null : barcode;
+            productToEdit.imageUrl = currentImageUrl; // Save image URL
             
             viewModel.updateProduct(productToEdit);
             Toast.makeText(this, "Produk berhasil diupdate", Toast.LENGTH_SHORT).show();
         } else {
-            // Insert new product
-        Product product = new Product(name, sellPrice, buyPrice, stock, minStock);
+            // Create new product
+            Product product = new Product(name, sellPrice, buyPrice, stock, minStock);
             product.barcode = barcode.isEmpty() ? null : barcode;
-        viewModel.insertProduct(product);
-            Toast.makeText(this, "Barang berhasil disimpan", Toast.LENGTH_SHORT).show();
+            product.imageUrl = currentImageUrl; // Save image URL
+            
+            viewModel.addProduct(product);
+            Toast.makeText(this, "Produk berhasil ditambahkan", Toast.LENGTH_SHORT).show();
         }
 
         finish();
@@ -308,6 +375,13 @@ public class AddProductActivity extends AppCompatActivity {
         }
         binding.etStock.setText(String.valueOf(product.currentStock));
         binding.etMinStock.setText(String.valueOf(product.minStock));
+        
+        // Load existing image if available
+        if (product.imageUrl != null && !product.imageUrl.isEmpty()) {
+            currentImageUrl = product.imageUrl;
+            loadImageIntoView(currentImageUrl);
+            binding.btnRemoveImage.setVisibility(android.view.View.VISIBLE);
+        }
     }
     
     /**
@@ -340,6 +414,18 @@ public class AddProductActivity extends AppCompatActivity {
                 if (!currentName.contains(quantity)) {
                     binding.etName.setText(currentName + " " + quantity);
                 }
+            }
+            
+            // Handle product image from API
+            String imageUrl = apiProduct.getImageUrl();
+            if (imageUrl != null && !imageUrl.isEmpty()) {
+                apiImageUrl = imageUrl;
+                binding.btnUseApiImage.setVisibility(android.view.View.VISIBLE);
+                // Auto-load API image
+                currentImageUrl = apiImageUrl;
+                loadImageIntoView(currentImageUrl);
+                binding.btnRemoveImage.setVisibility(android.view.View.VISIBLE);
+                binding.btnUseApiImage.setVisibility(android.view.View.GONE);
             }
             
             // Note: Open Food Facts tidak menyediakan data harga

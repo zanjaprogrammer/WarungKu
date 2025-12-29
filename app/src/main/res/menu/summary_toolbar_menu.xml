@@ -15,5 +15,13 @@
         android:id="@+id/menu_generate_dummy"
         android:title="Generate Dummy Data"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_generate_profitable_year"
+        android:title="Generate Data Tahun Menguntungkan"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_generate_simple_test"
+        android:title="Generate Simple Test Chart"
+        app:showAsAction="never" />
 </menu>
 
