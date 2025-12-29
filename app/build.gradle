@@ -20,18 +20,16 @@ android {
 
     signingConfigs {
         release {
-            // Codemagic will provide these via environment variables
-            def keystorePath = System.getenv("CM_KEYSTORE_PATH") ?: project.findProperty("CM_KEYSTORE_PATH")
-            def keystorePassword = System.getenv("CM_KEYSTORE_PASSWORD") ?: project.findProperty("CM_KEYSTORE_PASSWORD")
-            def keyAliasValue = System.getenv("CM_KEY_ALIAS") ?: project.findProperty("CM_KEY_ALIAS")
-            def keyPasswordValue = System.getenv("CM_KEY_PASSWORD") ?: project.findProperty("CM_KEY_PASSWORD")
+            // Use local keystore for development, Codemagic env vars for CI/CD
+            def keystorePath = System.getenv("CM_KEYSTORE_PATH") ?: project.findProperty("CM_KEYSTORE_PATH") ?: "alkahf.jks"
+            def keystorePassword = System.getenv("CM_KEYSTORE_PASSWORD") ?: project.findProperty("CM_KEYSTORE_PASSWORD") ?: "123456789"
+            def keyAliasValue = System.getenv("CM_KEY_ALIAS") ?: project.findProperty("CM_KEY_ALIAS") ?: "alkahf"
+            def keyPasswordValue = System.getenv("CM_KEY_PASSWORD") ?: project.findProperty("CM_KEY_PASSWORD") ?: "123456789"
             
-            if (keystorePath && keystorePassword && keyAliasValue && keyPasswordValue) {
-                storeFile file(keystorePath)
-                storePassword keystorePassword
-                keyAlias keyAliasValue
-                keyPassword keyPasswordValue
-            }
+            storeFile file(keystorePath)
+            storePassword keystorePassword
+            keyAlias keyAliasValue
+            keyPassword keyPasswordValue
         }
     }
     
@@ -39,10 +37,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            def keystorePath = System.getenv("CM_KEYSTORE_PATH") ?: project.findProperty("CM_KEYSTORE_PATH")
-            if (keystorePath) {
-                signingConfig signingConfigs.release
-            }
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
