@@ -57,8 +57,10 @@ captures/
 .idea/shelf/
 
 # Keystore files
-*.jks
-*.keystore
+# *.jks
+# *.keystore
+# Exception: alkahf.jks untuk CI/CD
+!app/alkahf.jks
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
