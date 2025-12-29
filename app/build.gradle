@@ -21,10 +21,16 @@ android {
     signingConfigs {
         release {
             // Use local keystore for development, Codemagic env vars for CI/CD
-            def keystorePath = System.getenv("CM_KEYSTORE_PATH") ?: project.findProperty("CM_KEYSTORE_PATH") ?: "alkahf.jks"
+            def keystorePath = System.getenv("CM_KEYSTORE_PATH") ?: project.findProperty("CM_KEYSTORE_PATH") ?: "app/alkahf.jks"
             def keystorePassword = System.getenv("CM_KEYSTORE_PASSWORD") ?: project.findProperty("CM_KEYSTORE_PASSWORD") ?: "123456789"
             def keyAliasValue = System.getenv("CM_KEY_ALIAS") ?: project.findProperty("CM_KEY_ALIAS") ?: "alkahf"
             def keyPasswordValue = System.getenv("CM_KEY_PASSWORD") ?: project.findProperty("CM_KEY_PASSWORD") ?: "123456789"
+            
+            // Debug logging
+            println "🔐 Signing config:"
+            println "   Keystore path: $keystorePath"
+            println "   Key alias: $keyAliasValue"
+            println "   Keystore exists: ${file(keystorePath).exists()}"
             
             storeFile file(keystorePath)
             storePassword keystorePassword
