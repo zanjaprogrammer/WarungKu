@@ -57,9 +57,19 @@ workflows:
           # Keystore will be set up from Codemagic UI environment variables
           if [ -n "$CM_KEYSTORE" ]; then
             echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH
-            echo "✅ Keystore file created"
+            echo "✅ Keystore file created at $CM_KEYSTORE_PATH"
+            ls -lh $CM_KEYSTORE_PATH
           else
-            echo "⚠️ Warning: Keystore not configured. Building unsigned APK."
+            echo "⚠️ Warning: CM_KEYSTORE not set. Checking for local keystore..."
+            if [ -f "app/alkahf.jks" ]; then
+              echo "✅ Found local keystore, copying to $CM_KEYSTORE_PATH"
+              cp app/alkahf.jks $CM_KEYSTORE_PATH
+              ls -lh $CM_KEYSTORE_PATH
+            else
+              echo "❌ Error: No keystore found. Cannot build release."
+              echo "Please set CM_KEYSTORE environment variable in Codemagic UI"
+              exit 1
+            fi
           fi
       
       - name: Build Android App Bundle (AAB) Release
