@@ -1,0 +1,92 @@
+workflows:
+  android-workflow:
+    name: Android Build Workflow - WarungKu
+    max_build_duration: 120
+    instance_type: mac_mini_m1
+    environment:
+      groups:
+        - codemagic_android_keystore # Add keystore credentials in Codemagic UI
+        - supabase_config # Add Supabase config in Codemagic UI
+      vars:
+        PACKAGE_NAME: "com.zanjaprogrammer.warungku"
+        CM_KEYSTORE_PATH: "/tmp/keystore.jks"
+        CM_KEYSTORE_PASSWORD: $CM_KEYSTORE_PASSWORD
+        CM_KEY_ALIAS: $CM_KEY_ALIAS
+        CM_KEY_PASSWORD: $CM_KEY_PASSWORD
+        # Supabase Configuration (set these in Codemagic UI as environment variables)
+        SUPABASE_URL: $SUPABASE_URL
+        SUPABASE_PUBLISHABLE_KEY: $SUPABASE_PUBLISHABLE_KEY  
+        SUPABASE_SECRET_KEY: $SUPABASE_SECRET_KEY
+      java: 17
+      gradle: 8.11
+    scripts:
+      - name: Set up local.properties
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+      
+      - name: Set up Supabase config
+        script: |
+          # Create Supabase config file from environment variables
+          mkdir -p app/src/main/res/raw
+          cat > app/src/main/res/raw/supabase_config.properties << EOF
+          # Supabase Configuration
+          # DO NOT COMMIT THIS FILE TO GIT!
+          
+          # Project URL
+          SUPABASE_URL=$SUPABASE_URL
+          
+          # Publishable Key (Safe untuk client-side)
+          SUPABASE_PUBLISHABLE_KEY=$SUPABASE_PUBLISHABLE_KEY
+          
+          # Secret Key (Hanya untuk server-side, JANGAN expose di client!)
+          SUPABASE_SECRET_KEY=$SUPABASE_SECRET_KEY
+          EOF
+          echo "✅ Supabase config created"
+      
+      - name: Set up Google Services (if needed)
+        script: |
+          # google-services.json should be committed to repo or added via environment variable
+          if [ ! -f "app/google-services.json" ]; then
+            echo "⚠️ Warning: google-services.json not found"
+            echo "If using Firebase, add google-services.json to the repository"
+          fi
+      
+      - name: Set up keystore
+        script: |
+          # Keystore will be set up from Codemagic UI environment variables
+          if [ -n "$CM_KEYSTORE" ]; then
+            echo $CM_KEYSTORE | base64 --decode > $CM_KEYSTORE_PATH
+            echo "✅ Keystore file created"
+          else
+            echo "⚠️ Warning: Keystore not configured. Building unsigned APK."
+          fi
+      
+      - name: Build Android App (Debug)
+        script: |
+          ./gradlew assembleDebug
+      
+      - name: Build Android App (Release)
+        script: |
+          if [ -n "$CM_KEYSTORE" ]; then
+            ./gradlew assembleRelease
+          else
+            echo "⚠️ Skipping release build - keystore not configured"
+          fi
+    artifacts:
+      - app/build/outputs/**/*.apk
+      - app/build/outputs/**/*.aab
+      - app/build/outputs/**/mapping.txt
+    publishing:
+      email:
+        recipients:
+          - ekowibowo@Alkahfs-MacBook-Air.local
+        notify:
+          success: true
+          failure: true
+      scripts:
+        - name: Publish to Google Play (optional)
+          script: |
+            # Uncomment dan configure jika ingin auto-publish ke Play Store
+            # fastlane android deploy
+            echo "📦 Build artifacts ready for download"
+
