@@ -24,6 +24,9 @@ public interface ProductDao {
 
     @Query("SELECT * FROM products ORDER BY name ASC")
     LiveData<List<Product>> getAllProducts();
+    
+    @Query("SELECT * FROM products ORDER BY name ASC")
+    List<Product> getAllProductsSync();
 
     @Query("SELECT * FROM products WHERE currentStock <= minStock ORDER BY salesCount DESC")
     LiveData<List<Product>> getShoppingList();

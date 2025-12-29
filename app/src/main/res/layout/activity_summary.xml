@@ -24,7 +24,22 @@
             android:background="@color/background"
             app:title="Ringkasan"
             app:titleTextColor="@color/text_primary"
-            app:menu="@menu/summary_toolbar_menu" />
+            app:menu="@menu/summary_toolbar_menu">
+            <!-- Login/Logout Button (Simple Icon Button) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAuth"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                app:icon="@drawable/ic_account"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                android:text="Login"
+                android:textSize="14sp"/>
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -417,11 +432,10 @@
                         android:id="@+id/progressBarCapitalReturn"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="24dp"
+                        android:layout_height="8dp"
                         android:max="100"
                         android:progress="0"
-                        android:progressDrawable="@drawable/bg_progress_gradient"
-                        android:progressTint="@color/primary"
+                        android:progressDrawable="@drawable/bg_progress_bar"
                         android:layout_marginBottom="8dp"/>
                     <TextView
                         android:id="@+id/tvProgressPercentage"
@@ -494,11 +508,13 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Card Backup & Restore -->
+            <!-- Card Backup & Restore (Hidden - using toolbar menu instead) -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardBackupRestore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:visibility="gone"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp"
                 app:cardBackgroundColor="@color/background">
@@ -526,30 +542,36 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-                        <Button
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnBackup"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginEnd="8dp"
-                            android:text="Backup Data"
-                            android:background="@drawable/bg_button_tonal_gradient"
-                            android:textColor="@color/primary"
-                            android:elevation="4dp"
-                            android:stateListAnimator="@null"
-                            android:minHeight="48dp"/>
-                        <Button
+                            android:text="Backup"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:minHeight="56dp"
+                            app:icon="@drawable/ic_backup"
+                            app:iconGravity="textStart"
+                            app:iconPadding="8dp"
+                            app:strokeWidth="2dp"/>
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnRestore"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginStart="8dp"
-                            android:text="Restore Data"
-                            android:background="@drawable/bg_button_tonal_gradient"
-                            android:textColor="@color/primary"
-                            android:elevation="4dp"
-                            android:stateListAnimator="@null"
-                            android:minHeight="48dp"/>
+                            android:text="Restore"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:minHeight="56dp"
+                            app:icon="@drawable/ic_restore"
+                            app:iconGravity="textStart"
+                            app:iconPadding="8dp"
+                            app:strokeWidth="2dp"/>
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

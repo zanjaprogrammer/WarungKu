@@ -16,21 +16,34 @@
             app:title="Tambah Barang Baru"
             app:navigationIcon="@android:drawable/ic_menu_revert" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:hint="Barcode (Opsional)"
-            app:endIconMode="custom"
-            app:endIconDrawable="@android:drawable/ic_menu_camera"
-            app:endIconContentDescription="Scan Barcode">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etBarcode"
+            android:orientation="vertical"
+            android:layout_marginBottom="8dp">
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:imeOptions="actionNext"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="Barcode (Opsional)"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_barcode"
+                app:endIconContentDescription="Scan Barcode">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBarcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Klik icon barcode untuk scan"
+                android:textSize="11sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

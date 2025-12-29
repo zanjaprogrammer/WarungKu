@@ -172,10 +172,6 @@ public class AppViewModel extends AndroidViewModel {
         repository.deleteProduct(product);
     }
 
-    public void adjustProductStock(Product product, int newStock) {
-        repository.adjustProductStock(product, newStock);
-    }
-
     public void getProductByBarcode(String barcode, DataRepository.ProductCallback callback) {
         repository.getProductByBarcode(barcode, callback);
     }

@@ -9,9 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.zanjaprogrammer.warungku.auth.AuthManager;
+import com.zanjaprogrammer.warungku.supabase.api.SupabasePostgrestApi;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager;
 import com.zanjaprogrammer.warungku.adapters.EmployeeAdapter;
 import com.zanjaprogrammer.warungku.data.model.User;
 import com.zanjaprogrammer.warungku.databinding.ActivityManageEmployeesBinding;
@@ -21,8 +29,9 @@ import java.util.List;
 public class ManageEmployeesActivity extends AppCompatActivity {
     
     private ActivityManageEmployeesBinding binding;
-    private AuthManager authManager;
-    private FirebaseFirestore firestore;
+    private SupabaseAuthManager authManager;
+    private com.zanjaprogrammer.warungku.supabase.SupabaseClient supabaseClient;
+    private com.zanjaprogrammer.warungku.supabase.api.SupabasePostgrestApi postgrestApi;
     private List<User> employees = new ArrayList<>();
     private EmployeeAdapter adapter;
     
@@ -30,11 +39,13 @@ public class ManageEmployeesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Check authentication
-        authManager = AuthManager.getInstance(getApplication());
+        // Check authentication - Manage Employees REQUIRES login
+        authManager = SupabaseAuthManager.getInstance(getApplication());
         if (!authManager.isLoggedIn()) {
             authManager.loadUserFromCache();
             if (!authManager.isLoggedIn()) {
+                // Tampilkan peringatan dan redirect ke LoginActivity
+                Toast.makeText(this, "Anda harus login terlebih dahulu untuk mengelola karyawan", Toast.LENGTH_LONG).show();
                 startActivity(new android.content.Intent(this, LoginActivity.class));
                 finish();
                 return;
@@ -44,7 +55,7 @@ public class ManageEmployeesActivity extends AppCompatActivity {
         // Check permission: only owner can manage employees
         String role = authManager.getCurrentUserRole();
         if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canManageEmployees(role)) {
-            Toast.makeText(this, "Anda tidak memiliki izin untuk mengakses halaman ini", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Hanya owner yang dapat mengelola karyawan", Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -52,7 +63,8 @@ public class ManageEmployeesActivity extends AppCompatActivity {
         binding = ActivityManageEmployeesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         
-        firestore = FirebaseFirestore.getInstance();
+        supabaseClient = com.zanjaprogrammer.warungku.supabase.SupabaseClient.getInstance(getApplication());
+        postgrestApi = supabaseClient.getPostgrestApi();
         
         setupToolbar();
         setupRecyclerView();
@@ -83,30 +95,58 @@ public class ManageEmployeesActivity extends AppCompatActivity {
         
         binding.progressBar.setVisibility(View.VISIBLE);
         
-        firestore.collection("users")
-            .whereEqualTo("warungId", warungId)
-            .get()
-            .addOnSuccessListener(querySnapshot -> {
-                employees.clear();
-                for (QueryDocumentSnapshot document : querySnapshot) {
-                    User user = document.toObject(User.class);
-                    if (user != null && !user.role.equals("owner")) {
-                        employees.add(user);
-                    }
-                }
-                adapter.notifyDataSetChanged();
+        String authHeader = "Bearer " + authManager.getAccessToken();
+        Call<List<Map<String, Object>>> call = postgrestApi.getUsers(
+            supabaseClient.getSupabaseKey(),
+            authHeader,
+            null, // id filter
+            "eq." + warungId, // warung_id filter
+            "*"
+        );
+        
+        call.enqueue(new Callback<List<Map<String, Object>>>() {
+            @Override
+            public void onResponse(Call<List<Map<String, Object>>> call, Response<List<Map<String, Object>>> response) {
                 binding.progressBar.setVisibility(View.GONE);
                 
-                if (employees.isEmpty()) {
-                    binding.tvEmpty.setVisibility(View.VISIBLE);
+                if (response.isSuccessful() && response.body() != null) {
+                    employees.clear();
+                    for (Map<String, Object> userData : response.body()) {
+                        String userWarungId = userData.get("warung_id") != null ? 
+                            userData.get("warung_id").toString() : null;
+                        String role = (String) userData.get("role");
+                        
+                        if (userWarungId != null && userWarungId.equals(warungId) && 
+                            role != null && !role.equals("owner")) {
+                            User user = new User();
+                            user.userId = (String) userData.get("id");
+                            user.email = (String) userData.get("email");
+                            user.name = (String) userData.get("name");
+                            user.role = role;
+                            user.warungId = userWarungId;
+                            employees.add(user);
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                    
+                    if (employees.isEmpty()) {
+                        binding.tvEmpty.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.tvEmpty.setVisibility(View.GONE);
+                    }
                 } else {
-                    binding.tvEmpty.setVisibility(View.GONE);
+                    Toast.makeText(ManageEmployeesActivity.this, 
+                        "Error memuat data karyawan: " + response.code(), Toast.LENGTH_LONG).show();
                 }
-            })
-            .addOnFailureListener(e -> {
+            }
+
+            @Override
+            public void onFailure(Call<List<Map<String, Object>>> call, Throwable t) {
                 binding.progressBar.setVisibility(View.GONE);
-                Toast.makeText(this, "Error memuat data karyawan: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            });
+                Toast.makeText(ManageEmployeesActivity.this, 
+                    "Error memuat data karyawan: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
     
     private void showInviteDialog() {
@@ -150,22 +190,56 @@ public class ManageEmployeesActivity extends AppCompatActivity {
             return;
         }
         
-        String inviteId = java.util.UUID.randomUUID().toString();
-        com.zanjaprogrammer.warungku.data.model.Invite invite = 
-            new com.zanjaprogrammer.warungku.data.model.Invite(inviteId, warungId, ownerId, email, role);
+        String inviteId = UUID.randomUUID().toString();
+        long now = System.currentTimeMillis();
+        long expiresAt = now + (7 * 24 * 60 * 60 * 1000); // 7 days
         
-        firestore.collection("invites").document(inviteId)
-            .set(invite)
-            .addOnSuccessListener(aVoid -> {
-                // Generate invite code (simple: first 8 chars of inviteId)
-                String inviteCode = inviteId.substring(0, 8).toUpperCase();
-                
-                // Show dialog with invite code and share options
-                showInviteSuccessDialog(email, inviteCode, inviteId);
-            })
-            .addOnFailureListener(e -> {
-                Toast.makeText(this, "Error mengirim invite: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            });
+        Map<String, Object> invite = new HashMap<>();
+        invite.put("id", inviteId);
+        invite.put("warung_id", warungId);
+        invite.put("owner_id", ownerId);
+        invite.put("email", email);
+        invite.put("role", role);
+        invite.put("status", "pending");
+        invite.put("created_at", now);
+        invite.put("expires_at", expiresAt);
+        
+        String authHeader = "Bearer " + authManager.getAccessToken();
+        Call<List<Map<String, Object>>> call = postgrestApi.insertInvite(
+            supabaseClient.getSupabaseKey(),
+            authHeader,
+            "return=representation",
+            invite
+        );
+        
+        call.enqueue(new Callback<List<Map<String, Object>>>() {
+            @Override
+            public void onResponse(Call<List<Map<String, Object>>> call, Response<List<Map<String, Object>>> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    // Generate invite code (simple: first 8 chars of inviteId)
+                    String inviteCode = inviteId.substring(0, 8).toUpperCase();
+                    
+                    // Show dialog with invite code and share options
+                    showInviteSuccessDialog(email, inviteCode, inviteId);
+                } else {
+                    String errorMsg = "Error mengirim invite: " + response.code();
+                    if (response.errorBody() != null) {
+                        try {
+                            errorMsg = response.errorBody().string();
+                        } catch (Exception e) {
+                            // Ignore
+                        }
+                    }
+                    Toast.makeText(ManageEmployeesActivity.this, errorMsg, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Map<String, Object>>> call, Throwable t) {
+                Toast.makeText(ManageEmployeesActivity.this, 
+                    "Error mengirim invite: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
     
     private void showInviteSuccessDialog(String email, String inviteCode, String inviteId) {

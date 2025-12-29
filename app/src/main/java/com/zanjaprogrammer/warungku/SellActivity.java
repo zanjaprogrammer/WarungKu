@@ -46,26 +46,17 @@ public class SellActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Check authentication
-        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
-            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        // Check authentication (optional - guest mode allowed)
+        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
+            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
         
+        // Try load from cache, but don't redirect if not logged in (guest mode)
         if (!authManager.isLoggedIn()) {
             authManager.loadUserFromCache();
-            if (!authManager.isLoggedIn()) {
-                startActivity(new Intent(this, LoginActivity.class));
-                finish();
-                return;
-            }
         }
         
-        // Check permission: canSell
-        String role = authManager.getCurrentUserRole();
-        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canSell(role)) {
-            Toast.makeText(this, "Anda tidak memiliki izin untuk mengakses halaman ini", Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
+        // Permission check removed - guest mode allowed for all features
+        // canSell() returns true for guest mode (role == null), so no need to check
         
         binding = ActivitySellBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -101,13 +92,25 @@ public class SellActivity extends AppCompatActivity {
         setupBarcodeScanner();
         setupOfflineIndicator();
         
-        // Setup toolbar menu
+        // Setup toolbar menu dengan custom view
         binding.toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menu_scan_barcode) {
                 scanBarcode();
                 return true;
             }
             return false;
+        });
+        
+        // Setup click listener untuk custom view barcode scanner
+        // Gunakan post() untuk memastikan menu sudah di-inflate
+        binding.toolbar.post(() -> {
+            android.view.MenuItem menuItem = binding.toolbar.getMenu().findItem(R.id.menu_scan_barcode);
+            if (menuItem != null) {
+                android.view.View actionView = menuItem.getActionView();
+                if (actionView != null) {
+                    actionView.setOnClickListener(v -> scanBarcode());
+                }
+            }
         });
 
         viewModel.getAllProducts().observe(this, products -> {
@@ -368,7 +371,10 @@ public class SellActivity extends AppCompatActivity {
             options.setCameraId(0);
             options.setBeepEnabled(true);
             options.setBarcodeImageEnabled(false);
-            options.setOrientationLocked(false);
+            // Lock orientasi ke portrait, tapi tetap bisa detect barcode landscape
+            options.setOrientationLocked(true);
+            // Set custom capture activity untuk portrait mode
+            options.setCaptureActivity(PortraitCaptureActivity.class);
 
             barcodeLauncher.launch(options);
         } catch (Exception e) {

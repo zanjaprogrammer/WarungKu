@@ -88,85 +88,99 @@ public class PermissionManager {
     }
     
     // Methods dengan role string (new, preferred)
+    // GUEST MODE: Semua fitur bisa digunakan tanpa login, kecuali Manage Employees
     public static boolean canSell(String role) {
-        if (role == null) return false;
+        // Guest mode: bisa jual tanpa login
+        if (role == null) return true;
         return isOwner(role) || isManager(role) || isCashier(role);
     }
 
     public static boolean canAddProduct(String role) {
-        if (role == null) return false;
+        // Guest mode: bisa tambah produk tanpa login
+        if (role == null) return true;
         return isOwner(role) || isManager(role);
     }
 
     public static boolean canEditProduct(String role) {
-        if (role == null) return false;
+        // Guest mode: bisa edit produk tanpa login
+        if (role == null) return true;
         return isOwner(role) || isManager(role);
     }
 
     public static boolean canDeleteProduct(String role) {
-        if (role == null) return false;
+        // Guest mode: bisa hapus produk tanpa login
+        if (role == null) return true;
         return isOwner(role);
     }
 
     public static boolean canRestock(String role) {
-        if (role == null) return false;
+        // Guest mode: bisa restock tanpa login
+        if (role == null) return true;
         return isOwner(role) || isManager(role);
     }
 
     public static boolean canViewStock(String role) {
-        if (role == null) return false;
-        return true; // Semua role bisa lihat stok
+        // Guest mode: bisa lihat stok tanpa login
+        return true; // Semua bisa lihat stok
     }
 
     public static boolean canViewReports(String role) {
-        if (role == null) return false;
+        // Guest mode: bisa lihat laporan tanpa login
+        if (role == null) return true;
         return isOwner(role) || isManager(role);
     }
 
     public static boolean canExportImport(String role) {
-        if (role == null) return false;
+        // Guest mode: bisa export/import tanpa login
+        if (role == null) return true;
         return isOwner(role) || isManager(role);
     }
 
     public static boolean canManageEmployees(String role) {
+        // HANYA INI YANG MEMBUTUHKAN LOGIN - return false jika role null
         if (role == null) return false;
         return isOwner(role);
     }
 
     public static boolean canChangePrice(String role) {
-        if (role == null) return false;
+        // Guest mode: bisa ubah harga tanpa login
+        if (role == null) return true;
         return isOwner(role) || isManager(role);
     }
 
     public static boolean canAddExpense(String role) {
-        if (role == null) return false;
+        // Guest mode: bisa tambah pengeluaran tanpa login
+        if (role == null) return true;
         return isOwner(role) || isManager(role);
     }
 
     public static boolean canBackupRestore(String role) {
-        if (role == null) return false;
+        // Guest mode: bisa backup/restore tanpa login
+        if (role == null) return true;
         return isOwner(role);
     }
 
     public static boolean canAccessSettings(String role) {
-        if (role == null) return false;
+        // Guest mode: bisa akses settings tanpa login
+        if (role == null) return true;
         return isOwner(role);
     }
     
     // Additional permission checks
     public static boolean canAccessMoney(String role) {
-        if (role == null) return false;
-        return true; // Semua role bisa akses halaman uang
+        // Guest mode: bisa akses halaman uang tanpa login
+        return true; // Semua bisa akses halaman uang
     }
     
     public static boolean canAccessSummary(String role) {
-        if (role == null) return false;
+        // Guest mode: bisa akses ringkasan tanpa login
+        if (role == null) return true;
         return isOwner(role) || isManager(role);
     }
     
     public static boolean canAccessShoppingList(String role) {
-        if (role == null) return false;
-        return true; // Semua role bisa akses shopping list
+        // Guest mode: bisa akses shopping list tanpa login
+        return true; // Semua bisa akses shopping list
     }
 }
 

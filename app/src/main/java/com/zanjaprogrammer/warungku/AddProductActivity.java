@@ -27,37 +27,43 @@ public class AddProductActivity extends AppCompatActivity {
     private ActivityAddProductBinding binding;
     private AppViewModel viewModel;
     private ActivityResultLauncher<ScanOptions> barcodeLauncher;
+    private boolean isEditMode = false;
+    private int productId = -1;
+    private com.zanjaprogrammer.warungku.data.entity.Product productToEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Check authentication
-        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
-            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        // Check authentication (optional - guest mode allowed)
+        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
+            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
         
+        // Try load from cache, but don't redirect if not logged in (guest mode)
         if (!authManager.isLoggedIn()) {
             authManager.loadUserFromCache();
-            if (!authManager.isLoggedIn()) {
-                startActivity(new android.content.Intent(this, LoginActivity.class));
-                finish();
-                return;
-            }
         }
         
-        // Check permission: canAddProduct
+        // Permission check removed - guest mode allowed for all features
+        // canAddProduct() returns true for guest mode (role == null), so no need to check
         String role = authManager.getCurrentUserRole();
-        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canAddProduct(role)) {
-            android.widget.Toast.makeText(this, "Anda tidak memiliki izin untuk menambah produk", android.widget.Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
         
         binding = ActivityAddProductBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Use singleton instance untuk persist cart across activities
         viewModel = AppViewModel.getInstance(getApplication());
+        
+        // Check if edit mode
+        productId = getIntent().getIntExtra("product_id", -1);
+        isEditMode = getIntent().getBooleanExtra("edit_mode", false) && productId > 0;
+        
+        if (isEditMode) {
+            binding.toolbar.setTitle("Edit Produk");
+            loadProductForEdit();
+        } else {
+            binding.toolbar.setTitle("Tambah Produk");
+        }
 
         binding.btnSave.setOnClickListener(v -> saveProduct());
         binding.toolbar.setNavigationOnClickListener(v -> finish());
@@ -109,12 +115,57 @@ public class AddProductActivity extends AppCompatActivity {
         int stock = Integer.parseInt(sStock);
         int minStock = Integer.parseInt(sMinStock);
 
-        Product product = new Product(name, sellPrice, buyPrice, stock, minStock);
-        product.barcode = barcode.isEmpty() ? null : barcode;
-        viewModel.insertProduct(product);
-
-        Toast.makeText(this, "Barang berhasil disimpan", Toast.LENGTH_SHORT).show();
+        if (isEditMode && productToEdit != null) {
+            // Update existing product
+            productToEdit.name = name;
+            productToEdit.sellPrice = sellPrice;
+            productToEdit.buyPrice = buyPrice;
+            productToEdit.currentStock = stock;
+            productToEdit.minStock = minStock;
+            productToEdit.barcode = barcode.isEmpty() ? null : barcode;
+            
+            viewModel.updateProduct(productToEdit);
+            Toast.makeText(this, "Produk berhasil diupdate", Toast.LENGTH_SHORT).show();
+        } else {
+            // Insert new product
+            Product product = new Product(name, sellPrice, buyPrice, stock, minStock);
+            product.barcode = barcode.isEmpty() ? null : barcode;
+            viewModel.insertProduct(product);
+            Toast.makeText(this, "Barang berhasil disimpan", Toast.LENGTH_SHORT).show();
+        }
+        
         finish();
+    }
+    
+    /**
+     * Load product data for editing
+     */
+    private void loadProductForEdit() {
+        if (productId <= 0) {
+            Toast.makeText(this, "Product ID tidak valid", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+        
+        // Get product from database
+        viewModel.getAllProducts().observe(this, products -> {
+            if (products != null) {
+                for (Product product : products) {
+                    if (product.id == productId) {
+                        productToEdit = product;
+                        fillFormWithProduct(product);
+                        // Remove observer after loading
+                        viewModel.getAllProducts().removeObservers(this);
+                        break;
+                    }
+                }
+                
+                if (productToEdit == null) {
+                    Toast.makeText(this, "Produk tidak ditemukan", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+        });
     }
 
     private void scanBarcode() {
@@ -129,7 +180,10 @@ public class AddProductActivity extends AppCompatActivity {
         options.setCameraId(0);
         options.setBeepEnabled(true);
         options.setBarcodeImageEnabled(false);
-        options.setOrientationLocked(false);
+        // Lock orientasi ke portrait, tapi tetap bisa detect barcode landscape
+        options.setOrientationLocked(true);
+        // Set custom capture activity untuk portrait mode
+        options.setCaptureActivity(com.zanjaprogrammer.warungku.PortraitCaptureActivity.class);
 
         barcodeLauncher.launch(options);
     }

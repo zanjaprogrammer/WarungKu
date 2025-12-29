@@ -10,13 +10,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.zanjaprogrammer.warungku.auth.AuthManager;
+import com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager;
+import com.zanjaprogrammer.warungku.supabase.SupabaseClient;
+import com.zanjaprogrammer.warungku.supabase.api.SupabasePostgrestApi;
 import com.zanjaprogrammer.warungku.data.model.User;
 import com.zanjaprogrammer.warungku.data.model.Warung;
-import java.util.UUID;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -24,18 +30,17 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText etEmail, etPassword;
     private MaterialButton btnLogin, btnRegister;
     private ProgressBar progressBar;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore firestore;
-    private AuthManager authManager;
+    private SupabaseAuthManager authManager;
+    private SupabasePostgrestApi postgrestApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        firestore = FirebaseFirestore.getInstance();
-        authManager = AuthManager.getInstance(getApplication());
+        authManager = SupabaseAuthManager.getInstance(getApplication());
+        SupabaseClient supabaseClient = SupabaseClient.getInstance(getApplication());
+        postgrestApi = supabaseClient.getPostgrestApi();
 
         initViews();
         setupListeners();
@@ -49,8 +54,8 @@ public class LoginActivity extends AppCompatActivity {
         // Try load from cache
         authManager.loadUserFromCache();
         if (authManager.isLoggedIn()) {
-            // Load fresh data from Firestore
-            authManager.loadUserFromFirestore(authManager.getCurrentUserId(), new AuthManager.LoadUserCallback() {
+            // Load fresh data from Supabase
+            authManager.loadUserFromSupabase(authManager.getCurrentUserId(), new SupabaseAuthManager.LoadUserCallback() {
                 @Override
                 public void onSuccess() {
                     navigateToMain();
@@ -102,44 +107,22 @@ public class LoginActivity extends AppCompatActivity {
 
         showLoading(true);
         
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-            .addOnSuccessListener(authResult -> {
-                FirebaseUser firebaseUser = authResult.getUser();
-                if (firebaseUser != null) {
-                    // Load user data from Firestore
-                    Log.d(TAG, "Loading user from Firestore: " + firebaseUser.getUid());
-                    authManager.loadUserFromFirestore(firebaseUser.getUid(), new AuthManager.LoadUserCallback() {
-                        @Override
-                        public void onSuccess() {
-                            showLoading(false);
-                            Log.d(TAG, "User loaded successfully");
-                            navigateToMain();
-                        }
-
-                        @Override
-                        public void onError(String error) {
-                            showLoading(false);
-                            String errorMsg = "Error: " + error;
-                            Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_LONG).show();
-                            Log.e(TAG, "Error loading user: " + error);
-                            Log.e(TAG, "User ID: " + firebaseUser.getUid());
-                            Log.e(TAG, "Firebase Auth user exists: " + (firebaseUser != null));
-                            
-                            // If user not found, suggest to register
-                            if (error.contains("not found")) {
-                                Toast.makeText(LoginActivity.this, 
-                                    "User tidak ditemukan. Silakan daftar terlebih dahulu.", 
-                                    Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-                }
-            })
-            .addOnFailureListener(e -> {
+        authManager.login(email, password, new SupabaseAuthManager.LoginCallback() {
+            @Override
+            public void onSuccess() {
                 showLoading(false);
-                Toast.makeText(this, "Login gagal: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                Log.e(TAG, "Login error", e);
-            });
+                Log.d(TAG, "User logged in successfully");
+                navigateToMain();
+            }
+
+            @Override
+            public void onError(String error) {
+                showLoading(false);
+                // Error message sudah di-parse oleh SupabaseAuthManager
+                Toast.makeText(LoginActivity.this, error, Toast.LENGTH_LONG).show();
+                Log.e(TAG, "Login error: " + error);
+            }
+        });
     }
 
     private void performRegister() {
@@ -163,178 +146,279 @@ public class LoginActivity extends AppCompatActivity {
 
         showLoading(true);
 
-        // Check if email has pending invite OR if invite code is provided
-        // For now, we'll check by email. Invite code can be added later via deep link
-        firestore.collection("invites")
-            .whereEqualTo("email", email)
-            .whereEqualTo("status", "pending")
-            .limit(1)
-            .get()
-            .addOnSuccessListener(inviteQuery -> {
-                if (!inviteQuery.isEmpty()) {
+        // Check if email has pending invite via Supabase
+        checkInviteAndRegister(email, password);
+    }
+    
+    private void checkInviteAndRegister(String email, String password) {
+        // Check invite via Supabase PostgREST API
+        // Note: We need to use anon key for this check since user is not authenticated yet
+        SupabaseClient supabaseClient = SupabaseClient.getInstance(getApplication());
+        String apiKey = supabaseClient.getSupabaseKey();
+        
+        Call<List<Map<String, Object>>> call = postgrestApi.getInvites(
+            apiKey,
+            "Bearer " + apiKey, // Use anon key for unauthenticated access
+            "eq." + email,
+            "eq.pending",
+            "*"
+        );
+        
+        call.enqueue(new Callback<List<Map<String, Object>>>() {
+            @Override
+            public void onResponse(Call<List<Map<String, Object>>> call, Response<List<Map<String, Object>>> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
                     // Email has pending invite - register as employee
-                    com.zanjaprogrammer.warungku.data.model.Invite invite = 
-                        inviteQuery.getDocuments().get(0).toObject(com.zanjaprogrammer.warungku.data.model.Invite.class);
+                    Map<String, Object> inviteData = response.body().get(0);
+                    com.zanjaprogrammer.warungku.data.model.Invite invite = parseInvite(inviteData);
                     
                     if (invite != null && invite.isPending() && !invite.isExpired()) {
                         registerAsEmployee(email, password, invite);
-                        return;
                     } else if (invite != null && invite.isExpired()) {
-                        Toast.makeText(this, "Invite sudah kadaluarsa. Silakan minta invite baru.", Toast.LENGTH_LONG).show();
                         showLoading(false);
-                        return;
+                        Toast.makeText(LoginActivity.this, "Invite sudah kadaluarsa. Silakan minta invite baru.", Toast.LENGTH_LONG).show();
+                    } else {
+                        // No valid invite - register as owner
+                        registerAsOwner(email, password);
                     }
+                } else {
+                    // No invite found - register as owner
+                    registerAsOwner(email, password);
                 }
-                
-                // No invite found - register as owner
-                registerAsOwner(email, password);
-            })
-            .addOnFailureListener(e -> {
-                Log.e(TAG, "Error checking invite", e);
+            }
+
+            @Override
+            public void onFailure(Call<List<Map<String, Object>>> call, Throwable t) {
+                Log.e(TAG, "Error checking invite", t);
                 // Continue with owner registration if invite check fails
                 registerAsOwner(email, password);
-            });
+            }
+        });
+    }
+    
+    private com.zanjaprogrammer.warungku.data.model.Invite parseInvite(Map<String, Object> data) {
+        try {
+            com.zanjaprogrammer.warungku.data.model.Invite invite = new com.zanjaprogrammer.warungku.data.model.Invite();
+            invite.inviteId = (String) data.get("id");
+            invite.warungId = data.get("warung_id") != null ? data.get("warung_id").toString() : null;
+            invite.ownerId = data.get("owner_id") != null ? data.get("owner_id").toString() : null;
+            invite.email = (String) data.get("email");
+            invite.role = (String) data.get("role");
+            invite.status = (String) data.get("status");
+            
+            Object createdAt = data.get("created_at");
+            if (createdAt instanceof Number) {
+                invite.createdAt = ((Number) createdAt).longValue();
+            } else if (createdAt instanceof String) {
+                // Try to parse if it's a string
+                try {
+                    invite.createdAt = Long.parseLong((String) createdAt);
+                } catch (NumberFormatException e) {
+                    invite.createdAt = System.currentTimeMillis();
+                }
+            } else {
+                invite.createdAt = System.currentTimeMillis();
+            }
+            
+            Object expiresAt = data.get("expires_at");
+            if (expiresAt instanceof Number) {
+                invite.expiresAt = ((Number) expiresAt).longValue();
+            } else if (expiresAt instanceof String) {
+                try {
+                    invite.expiresAt = Long.parseLong((String) expiresAt);
+                } catch (NumberFormatException e) {
+                    invite.expiresAt = System.currentTimeMillis() + (7 * 24 * 60 * 60 * 1000); // 7 days default
+                }
+            } else {
+                invite.expiresAt = System.currentTimeMillis() + (7 * 24 * 60 * 60 * 1000);
+            }
+            
+            return invite;
+        } catch (Exception e) {
+            Log.e(TAG, "Error parsing invite", e);
+            return null;
+        }
     }
     
     private void registerAsOwner(String email, String password) {
-        // Register with Firebase Auth
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnSuccessListener(authResult -> {
-                FirebaseUser firebaseUser = authResult.getUser();
-                if (firebaseUser != null) {
-                    // Create warung first
-                    String warungId = UUID.randomUUID().toString();
-                    String warungName = "Warung " + email.split("@")[0]; // Default name
-                    
-                    Warung warung = new Warung(warungId, warungName, firebaseUser.getUid());
-                    
-                    // Save warung to Firestore
-                    Log.d(TAG, "Creating warung: " + warungId);
-                    firestore.collection("warungs").document(warungId)
-                        .set(warung)
-                        .addOnSuccessListener(aVoid -> {
-                            Log.d(TAG, "Warung document created successfully: " + warungId);
-                            // Create user document
-                            User user = new User(
-                                firebaseUser.getUid(),
-                                email,
-                                warungName.split(" ")[1], // Use email username as name
-                                "owner",
-                                warungId
-                            );
-
-                            // Save user to Firestore
-                            firestore.collection("users").document(firebaseUser.getUid())
-                                .set(user)
-                                .addOnSuccessListener(aVoid2 -> {
-                                    Log.d(TAG, "User document created successfully: " + firebaseUser.getUid());
-                                    Log.d(TAG, "User data: " + user.userId + ", " + user.email + ", " + user.role + ", " + user.warungId);
-                                    
-                                    // Set current user and warung
-                                    authManager.currentUser = user;
-                                    authManager.currentWarung = warung;
-                                    authManager.saveUserToCache();
-                                    
-                                    showLoading(false);
-                                    Toast.makeText(this, "Registrasi berhasil!", Toast.LENGTH_SHORT).show();
-                                    navigateToMain();
-                                })
-                                .addOnFailureListener(e -> {
-                                    showLoading(false);
-                                    String errorMsg = "Error membuat user: " + e.getMessage();
-                                    Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
-                                    Log.e(TAG, "Error creating user document", e);
-                                    Log.e(TAG, "User ID: " + firebaseUser.getUid());
-                                    Log.e(TAG, "Warung ID: " + warungId);
-                                    
-                                    // Sign out user jika gagal create user document
-                                    firebaseUser.delete().addOnCompleteListener(task -> {
-                                        Log.d(TAG, "Cleaned up Firebase Auth user after failed user document creation");
-                                    });
-                                });
-                        })
-                        .addOnFailureListener(e -> {
-                            showLoading(false);
-                            Toast.makeText(this, "Error membuat warung: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                            Log.e(TAG, "Error creating warung", e);
-                        });
-                }
-            })
-            .addOnFailureListener(e -> {
+        String name = email.split("@")[0]; // Default name from email
+        
+        authManager.register(email, password, name, new SupabaseAuthManager.RegisterCallback() {
+            @Override
+            public void onSuccess() {
                 showLoading(false);
-                Toast.makeText(this, "Registrasi gagal: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                Log.e(TAG, "Register error", e);
-            });
+                Toast.makeText(LoginActivity.this, "Registrasi berhasil! Menyinkronkan data lokal ke Supabase...", Toast.LENGTH_SHORT).show();
+                
+                // Sync data lokal ke Supabase setelah register berhasil
+                syncLocalDataToSupabase();
+                
+                navigateToMain();
+            }
+
+            @Override
+            public void onError(String error) {
+                showLoading(false);
+                // Error message sudah di-parse oleh SupabaseAuthManager
+                Toast.makeText(LoginActivity.this, error, Toast.LENGTH_LONG).show();
+                Log.e(TAG, "Register error: " + error);
+            }
+        });
+    }
+    
+    /**
+     * Sync data lokal (SQLite) ke Supabase setelah user register
+     */
+    private void syncLocalDataToSupabase() {
+        Log.d(TAG, "Starting sync of local data to Supabase after registration...");
+        
+        // Trigger sync service untuk sync semua data lokal ke Supabase
+        com.zanjaprogrammer.warungku.sync.SyncManager.triggerSync(getApplication());
+        
+        Toast.makeText(this, "Data lokal sedang disinkronkan ke Supabase", Toast.LENGTH_SHORT).show();
     }
     
     private void registerAsEmployee(String email, String password, com.zanjaprogrammer.warungku.data.model.Invite invite) {
-        // Register with Firebase Auth
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnSuccessListener(authResult -> {
-                FirebaseUser firebaseUser = authResult.getUser();
-                if (firebaseUser != null) {
-                    // Get warung data
-                    firestore.collection("warungs").document(invite.warungId)
-                        .get()
-                        .addOnSuccessListener(warungSnapshot -> {
-                            if (!warungSnapshot.exists()) {
-                                showLoading(false);
-                                Toast.makeText(this, "Data warung tidak ditemukan", Toast.LENGTH_LONG).show();
-                                firebaseUser.delete();
-                                return;
-                            }
-                            
-                            Warung warung = warungSnapshot.toObject(Warung.class);
-                            
-                            // Create user document with invite role
-                            User user = new User(
-                                firebaseUser.getUid(),
-                                email,
-                                email.split("@")[0], // Use email username as name
-                                invite.role,
-                                invite.warungId
-                            );
-
-                            // Save user to Firestore
-                            firestore.collection("users").document(firebaseUser.getUid())
-                                .set(user)
-                                .addOnSuccessListener(aVoid -> {
-                                    // Update invite status
-                                    firestore.collection("invites").document(invite.inviteId)
-                                        .update("status", "accepted", 
-                                                "acceptedAt", System.currentTimeMillis(),
-                                                "acceptedBy", firebaseUser.getUid())
-                                        .addOnCompleteListener(task -> {
-                                            // Set current user and warung
-                                            authManager.currentUser = user;
-                                            authManager.currentWarung = warung;
-                                            authManager.saveUserToCache();
-                                            
-                                            showLoading(false);
-                                            Toast.makeText(this, "Registrasi berhasil! Selamat bergabung!", Toast.LENGTH_SHORT).show();
-                                            navigateToMain();
-                                        });
-                                })
-                                .addOnFailureListener(e -> {
-                                    showLoading(false);
-                                    Toast.makeText(this, "Error membuat user: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                                    Log.e(TAG, "Error creating user document", e);
-                                    firebaseUser.delete();
-                                });
-                        })
-                        .addOnFailureListener(e -> {
-                            showLoading(false);
-                            Toast.makeText(this, "Error memuat data warung: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                            Log.e(TAG, "Error loading warung", e);
-                            firebaseUser.delete();
-                        });
+        String name = email.split("@")[0]; // Default name from email
+        
+        // Register with Supabase Auth
+        authManager.register(email, password, name, new SupabaseAuthManager.RegisterCallback() {
+            @Override
+            public void onSuccess() {
+                // After successful registration, update user role and warung_id
+                String userId = authManager.getCurrentUserId();
+                if (userId != null) {
+                    updateUserAsEmployee(userId, invite);
+                } else {
+                    showLoading(false);
+                    Toast.makeText(LoginActivity.this, "Error: User ID tidak ditemukan", Toast.LENGTH_LONG).show();
                 }
-            })
-            .addOnFailureListener(e -> {
+            }
+
+            @Override
+            public void onError(String error) {
                 showLoading(false);
-                Toast.makeText(this, "Registrasi gagal: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                Log.e(TAG, "Register error", e);
-            });
+                // Error message sudah di-parse oleh SupabaseAuthManager
+                Toast.makeText(LoginActivity.this, error, Toast.LENGTH_LONG).show();
+                Log.e(TAG, "Register error: " + error);
+            }
+        });
+    }
+    
+    private void updateUserAsEmployee(String userId, com.zanjaprogrammer.warungku.data.model.Invite invite) {
+        // Get warung data first
+        String authHeader = "Bearer " + authManager.getAccessToken();
+        SupabaseClient supabaseClient = SupabaseClient.getInstance(getApplication());
+        
+        Call<List<Map<String, Object>>> warungCall = postgrestApi.getWarungs(
+            supabaseClient.getSupabaseKey(),
+            authHeader,
+            "eq." + invite.warungId,
+            "*"
+        );
+        
+        warungCall.enqueue(new Callback<List<Map<String, Object>>>() {
+            @Override
+            public void onResponse(Call<List<Map<String, Object>>> call, Response<List<Map<String, Object>>> response) {
+                if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                    Map<String, Object> warungData = response.body().get(0);
+                    Warung warung = new Warung();
+                    warung.warungId = (String) warungData.get("id");
+                    warung.name = (String) warungData.get("name");
+                    warung.ownerId = warungData.get("owner_id") != null ? 
+                        warungData.get("owner_id").toString() : null;
+                    
+                    // Update user with invite role and warung_id
+                    Map<String, Object> userUpdate = new HashMap<>();
+                    userUpdate.put("role", invite.role);
+                    userUpdate.put("warung_id", invite.warungId);
+                    
+                    Call<List<Map<String, Object>>> userCall = postgrestApi.updateUser(
+                        supabaseClient.getSupabaseKey(),
+                        authHeader,
+                        "return=representation",
+                        "eq." + userId,
+                        userUpdate
+                    );
+                    
+                    userCall.enqueue(new Callback<List<Map<String, Object>>>() {
+                        @Override
+                        public void onResponse(Call<List<Map<String, Object>>> call, Response<List<Map<String, Object>>> response) {
+                            if (response.isSuccessful() && response.body() != null && !response.body().isEmpty()) {
+                                // Update invite status
+                                Map<String, Object> inviteUpdate = new HashMap<>();
+                                inviteUpdate.put("status", "accepted");
+                                inviteUpdate.put("accepted_at", System.currentTimeMillis());
+                                inviteUpdate.put("accepted_by", userId);
+                                
+                                Call<List<Map<String, Object>>> inviteCall = postgrestApi.updateInvite(
+                                    supabaseClient.getSupabaseKey(),
+                                    authHeader,
+                                    "return=representation",
+                                    "eq." + invite.inviteId,
+                                    inviteUpdate
+                                );
+                                
+                                inviteCall.enqueue(new Callback<List<Map<String, Object>>>() {
+                                    @Override
+                                    public void onResponse(Call<List<Map<String, Object>>> call, Response<List<Map<String, Object>>> response) {
+                                        // Reload user data
+                                        authManager.loadUserFromSupabase(userId, new SupabaseAuthManager.LoadUserCallback() {
+                                            @Override
+                                            public void onSuccess() {
+                                                authManager.currentWarung = warung;
+                                                authManager.saveUserToCache();
+                                                
+                                                showLoading(false);
+                                                Toast.makeText(LoginActivity.this, "Registrasi berhasil! Selamat bergabung!", Toast.LENGTH_SHORT).show();
+                                                navigateToMain();
+                                            }
+
+                                            @Override
+                                            public void onError(String error) {
+                                                showLoading(false);
+                                                Toast.makeText(LoginActivity.this, "Error memuat data user: " + error, Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<List<Map<String, Object>>> call, Throwable t) {
+                                        Log.e(TAG, "Error updating invite status", t);
+                                        // Continue anyway - user is registered
+                                        authManager.currentWarung = warung;
+                                        authManager.saveUserToCache();
+                                        
+                                        showLoading(false);
+                                        Toast.makeText(LoginActivity.this, "Registrasi berhasil! Selamat bergabung!", Toast.LENGTH_SHORT).show();
+                                        navigateToMain();
+                                    }
+                                });
+                            } else {
+                                showLoading(false);
+                                Toast.makeText(LoginActivity.this, "Error mengupdate data user: " + response.code(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<Map<String, Object>>> call, Throwable t) {
+                            showLoading(false);
+                            Toast.makeText(LoginActivity.this, "Error mengupdate data user: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e(TAG, "Error updating user", t);
+                        }
+                    });
+                } else {
+                    showLoading(false);
+                    Toast.makeText(LoginActivity.this, "Data warung tidak ditemukan", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Map<String, Object>>> call, Throwable t) {
+                showLoading(false);
+                Toast.makeText(LoginActivity.this, "Error memuat data warung: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.e(TAG, "Error loading warung", t);
+            }
+        });
     }
 
     private void showLoading(boolean show) {

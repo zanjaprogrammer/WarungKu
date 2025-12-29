@@ -1,5 +1,6 @@
 package com.zanjaprogrammer.warungku;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,24 +19,30 @@ public class MainActivity extends AppCompatActivity {
     private final NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("id-ID"));
     private androidx.lifecycle.LiveData<Double> dailyIncomeLive, dailyExpenseLive;
     private int lastCheckedDay = -1;
+    private androidx.activity.result.ActivityResultLauncher<String> requestPermissionLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Check authentication
-        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
-            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        // FOR TESTING: Force show onboarding (uncomment untuk testing)
+        // OnboardingActivity.resetOnboarding(this);
+
+        // Check if first launch - show onboarding
+        if (OnboardingActivity.isFirstLaunch(this)) {
+            Intent intent = new Intent(this, OnboardingActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
+        // Check authentication (optional - guest mode allowed)
+        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
+            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
         
+        // Try load from cache, but don't redirect if not logged in
         if (!authManager.isLoggedIn()) {
-            // Try load from cache
             authManager.loadUserFromCache();
-            if (!authManager.isLoggedIn()) {
-                // Not logged in, redirect to login
-                startActivity(new android.content.Intent(this, LoginActivity.class));
-                finish();
-                return;
-            }
         }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -48,6 +55,60 @@ public class MainActivity extends AppCompatActivity {
         setupListeners();
         checkAndRefreshDailyData();
         setupOfflineIndicator();
+        setupNotificationPermission();
+        requestNotificationPermission();
+    }
+    
+    private void setupNotificationPermission() {
+        requestPermissionLauncher = registerForActivityResult(
+            new androidx.activity.result.contract.ActivityResultContracts.RequestPermission(),
+            isGranted -> {
+                if (isGranted) {
+                    Log.d("MainActivity", "Notification permission granted");
+                } else {
+                    Log.d("MainActivity", "Notification permission denied");
+                }
+            }
+        );
+    }
+    
+    private void requestNotificationPermission() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            if (androidx.core.content.ContextCompat.checkSelfPermission(this, 
+                    android.Manifest.permission.POST_NOTIFICATIONS) != 
+                    android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                if (requestPermissionLauncher != null) {
+                    requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS);
+                }
+            }
+        }
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        
+        // Check network status setiap kali resume
+        setupOfflineIndicator();
+        
+        // Ensure home icon is selected when returning to MainActivity
+        // Use post() to ensure the view is fully laid out
+        if (binding != null) {
+            binding.bottomNavigation.post(() -> {
+                binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
+            });
+        }
+        
+        // Check if day has changed and refresh data
+        checkAndRefreshDailyData();
+        
+        // Trigger sync if online
+        com.zanjaprogrammer.warungku.sync.SyncManager.triggerSync(this);
+        
+        // Check stock and send notifications if needed
+        com.zanjaprogrammer.warungku.utils.StockNotificationHelper notificationHelper = 
+            new com.zanjaprogrammer.warungku.utils.StockNotificationHelper(this);
+        notificationHelper.checkAndNotify();
     }
     
     private void setupOfflineIndicator() {
@@ -87,27 +148,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             cardOffline.setVisibility(android.view.View.GONE);
         }
-    }
-    
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Check network status setiap kali resume
-        setupOfflineIndicator();
-        
-        // Ensure home icon is selected when returning to MainActivity
-        // Use post() to ensure the view is fully laid out
-        if (binding != null) {
-            binding.bottomNavigation.post(() -> {
-                binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
-            });
-        }
-        
-        // Check if day has changed and refresh data
-        checkAndRefreshDailyData();
-        
-        // Trigger sync if online
-        com.zanjaprogrammer.warungku.sync.SyncManager.triggerSync(this);
     }
 
     private void observeData() {

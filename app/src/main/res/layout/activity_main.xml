@@ -44,26 +44,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="24dp"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="UANG SEKARANG"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white"
-                        android:alpha="0.9"/>
-                    <TextView
-                        android:id="@+id/tvBalance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Rp 1.500.000"
-                        android:textSize="36sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white"
-                        android:layout_marginTop="4dp"/>
-                </LinearLayout>
+                    android:gravity="center"
+                    android:padding="24dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="UANG SEKARANG"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white"
+                            android:alpha="0.9"/>
+                        <TextView
+                            android:id="@+id/tvBalance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp 1.500.000"
+                            android:textSize="36sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white"
+                            android:layout_marginTop="4dp"/>
+                    </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
             
 

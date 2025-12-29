@@ -55,26 +55,18 @@ public class ReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Check authentication
-        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
-            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        // Check authentication (optional - guest mode allowed)
+        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
+            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
         
+        // Try load from cache, but don't redirect if not logged in (guest mode)
         if (!authManager.isLoggedIn()) {
             authManager.loadUserFromCache();
-            if (!authManager.isLoggedIn()) {
-                startActivity(new android.content.Intent(this, LoginActivity.class));
-                finish();
-                return;
-            }
         }
         
-        // Check permission: canViewReports
+        // Permission check removed - guest mode allowed for all features
+        // canViewReports() returns true for guest mode (role == null), so no need to check
         String role = authManager.getCurrentUserRole();
-        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canViewReports(role)) {
-            android.widget.Toast.makeText(this, "Anda tidak memiliki izin untuk mengakses halaman ini", android.widget.Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
         
         setContentView(R.layout.activity_report);
 

@@ -32,26 +32,17 @@ public class StockActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Check authentication
-        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
-            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        // Check authentication (optional - guest mode allowed)
+        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
+            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
         
+        // Try load from cache, but don't redirect if not logged in (guest mode)
         if (!authManager.isLoggedIn()) {
             authManager.loadUserFromCache();
-            if (!authManager.isLoggedIn()) {
-                startActivity(new Intent(this, LoginActivity.class));
-                finish();
-                return;
-            }
         }
         
-        // Check permission: canViewStock
-        String role = authManager.getCurrentUserRole();
-        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canViewStock(role)) {
-            Toast.makeText(this, "Anda tidak memiliki izin untuk mengakses halaman ini", Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
+        // Permission check removed - guest mode allowed for all features
+        // canViewStock() always returns true, so no need to check
         
         binding = ActivityStockBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -59,10 +50,9 @@ public class StockActivity extends AppCompatActivity {
         // Use singleton instance untuk persist cart across activities
         viewModel = AppViewModel.getInstance(getApplication());
         
-        // Hide/Show FAB based on permission
-        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canAddProduct(role)) {
-            binding.fabAdd.setVisibility(android.view.View.GONE);
-        }
+        // Get role for FAB visibility (guest mode allowed, so FAB always visible)
+        String role = authManager.getCurrentUserRole();
+        // FAB always visible in guest mode (canAddProduct returns true for null role)
         setupRecyclerView();
         setupFilePickers();
         setupToolbarMenu();
@@ -205,8 +195,8 @@ public class StockActivity extends AppCompatActivity {
     
     private void setupToolbarMenu() {
         // Hide export/import menu if user doesn't have permission
-        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
-            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
+            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
         String role = authManager.getCurrentUserRole();
         
         if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canExportImport(role)) {
@@ -438,14 +428,14 @@ public class StockActivity extends AppCompatActivity {
         android.widget.TextView tvProductName = view.findViewById(R.id.tvProductName);
         tvProductName.setText(product.name);
 
+        view.findViewById(R.id.btnEdit).setOnClickListener(v -> {
+            dialog.dismiss();
+            editProduct(product);
+        });
+
         view.findViewById(R.id.btnRestock).setOnClickListener(v -> {
             dialog.dismiss();
             showRestockBottomSheet(product);
-        });
-
-        view.findViewById(R.id.btnAdjustStock).setOnClickListener(v -> {
-            dialog.dismiss();
-            showAdjustStockDialog(product);
         });
 
         view.findViewById(R.id.btnDelete).setOnClickListener(v -> {
@@ -454,6 +444,23 @@ public class StockActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+    
+    private void editProduct(com.zanjaprogrammer.warungku.data.entity.Product product) {
+        // Check permission: canEditProduct (same as canAddProduct)
+        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
+            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
+        String role = authManager.getCurrentUserRole();
+        
+        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canAddProduct(role)) {
+            Toast.makeText(this, "Anda tidak memiliki izin untuk mengedit produk", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        Intent intent = new Intent(this, AddProductActivity.class);
+        intent.putExtra("product_id", product.id);
+        intent.putExtra("edit_mode", true);
+        startActivity(intent);
     }
 
     private void showRestockBottomSheet(com.zanjaprogrammer.warungku.data.entity.Product product) {
@@ -622,24 +629,6 @@ public class StockActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void showAdjustStockDialog(com.zanjaprogrammer.warungku.data.entity.Product product) {
-        android.widget.EditText input = new android.widget.EditText(this);
-        input.setInputType(android.text.InputType.TYPE_CLASS_NUMBER);
-        input.setText(String.valueOf(product.currentStock));
-        input.setHint("Stok baru");
-
-        new androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle("Sesuaikan Stok: " + product.name)
-                .setView(input)
-                .setPositiveButton("Simpan", (dialog, which) -> {
-                    String val = input.getText().toString();
-                    if (!val.isEmpty()) {
-                        viewModel.adjustProductStock(product, Integer.parseInt(val));
-                    }
-                })
-                .setNegativeButton("Batal", null)
-                .show();
-    }
     
     private void showPaymentBottomSheet() {
         Double cartTotal = viewModel.getCartTotal().getValue();

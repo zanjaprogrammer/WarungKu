@@ -18,26 +18,17 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        // Check authentication
-        com.zanjaprogrammer.warungku.auth.AuthManager authManager = 
-            com.zanjaprogrammer.warungku.auth.AuthManager.getInstance(getApplication());
+        // Check authentication (optional - guest mode allowed)
+        com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager authManager = 
+            com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager.getInstance(getApplication());
         
+        // Try load from cache, but don't redirect if not logged in (guest mode)
         if (!authManager.isLoggedIn()) {
             authManager.loadUserFromCache();
-            if (!authManager.isLoggedIn()) {
-                startActivity(new android.content.Intent(this, LoginActivity.class));
-                finish();
-                return;
-            }
         }
         
-        // Check permission: canAccessMoney
-        String role = authManager.getCurrentUserRole();
-        if (!com.zanjaprogrammer.warungku.auth.PermissionManager.canAccessMoney(role)) {
-            android.widget.Toast.makeText(this, "Anda tidak memiliki izin untuk mengakses halaman ini", android.widget.Toast.LENGTH_LONG).show();
-            finish();
-            return;
-        }
+        // Permission check removed - guest mode allowed for all features
+        // canAccessMoney() always returns true, so no need to check
         
         binding = ActivityHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

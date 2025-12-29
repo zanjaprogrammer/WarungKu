@@ -99,6 +99,9 @@ public class DataRepository {
             
             // Trigger sync
             SyncManager.triggerSync(application);
+            
+            // Check stock notifications
+            checkStockNotifications();
         });
     }
 
@@ -107,6 +110,8 @@ public class DataRepository {
             productDao.update(product);
             // Trigger sync
             SyncManager.triggerSync(application);
+            // Check stock notifications
+            checkStockNotifications();
         });
     }
     
@@ -124,7 +129,11 @@ public class DataRepository {
     }
 
     public void insertCashFlow(CashFlow cashFlow) {
-        AppDatabase.databaseWriteExecutor.execute(() -> cashFlowDao.insert(cashFlow));
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            cashFlowDao.insert(cashFlow);
+            // Trigger sync
+            SyncManager.triggerSync(application);
+        });
     }
 
     public void sellProduct(Product product, int quantity) {
@@ -140,6 +149,10 @@ public class DataRepository {
             CashFlow flow = new CashFlow("IN", amount, "Jual " + product.name + " (" + quantity + ")",
                     System.currentTimeMillis(), product.id, profit);
             cashFlowDao.insert(flow);
+            // Trigger sync
+            SyncManager.triggerSync(application);
+            // Check stock notifications
+            checkStockNotifications();
         });
     }
 
@@ -157,18 +170,27 @@ public class DataRepository {
                 CashFlow flow = new CashFlow("OUT", cost, "Tambah Stok: " + product.name + " (" + quantity + ")",
                         System.currentTimeMillis(), product.id, 0.0);
                 cashFlowDao.insert(flow);
+                // Trigger sync
+                SyncManager.triggerSync(application);
             }
+            // Check stock notifications (stok mungkin sudah kembali normal)
+            checkStockNotifications();
         });
     }
 
     public void deleteProduct(Product product) {
         AppDatabase.databaseWriteExecutor.execute(() -> productDao.delete(product));
     }
-
-    public void adjustProductStock(Product product, int newStock) {
+    
+    /**
+     * Check stock and send notifications if needed
+     */
+    private void checkStockNotifications() {
+        // Run in background thread to avoid blocking
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            product.currentStock = newStock;
-            productDao.update(product);
+            com.zanjaprogrammer.warungku.utils.StockNotificationHelper notificationHelper = 
+                new com.zanjaprogrammer.warungku.utils.StockNotificationHelper(application);
+            notificationHelper.checkAndNotify();
         });
     }
 
@@ -222,6 +244,10 @@ public class DataRepository {
             CashFlow flow = new CashFlow("IN", totalAmount, finalDesc,
                     System.currentTimeMillis(), null, totalProfit);
             cashFlowDao.insert(flow);
+            // Trigger sync
+            SyncManager.triggerSync(application);
+            // Check stock notifications
+            checkStockNotifications();
         });
     }
 }

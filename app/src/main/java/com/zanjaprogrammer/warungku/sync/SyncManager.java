@@ -3,7 +3,7 @@ package com.zanjaprogrammer.warungku.sync;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import com.zanjaprogrammer.warungku.auth.AuthManager;
+import com.zanjaprogrammer.warungku.supabase.SupabaseAuthManager;
 import com.zanjaprogrammer.warungku.utils.NetworkUtils;
 
 /**
@@ -17,7 +17,7 @@ public class SyncManager {
      */
     public static void triggerSync(Context context) {
         android.app.Application app = (android.app.Application) context.getApplicationContext();
-        AuthManager authManager = AuthManager.getInstance(app);
+        SupabaseAuthManager authManager = SupabaseAuthManager.getInstance(app);
         
         if (!authManager.isLoggedIn()) {
             Log.d(TAG, "User not logged in, skipping sync");
@@ -30,7 +30,7 @@ public class SyncManager {
         }
         
         Log.d(TAG, "Triggering sync...");
-        Intent syncIntent = new Intent(context, FirestoreSyncService.class);
+        Intent syncIntent = new Intent(context, com.zanjaprogrammer.warungku.supabase.SupabaseSyncService.class);
         context.startService(syncIntent);
     }
 }
