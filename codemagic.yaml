@@ -15,10 +15,11 @@ workflows:
         CM_KEY_PASSWORD: $CM_KEY_PASSWORD
         # Supabase Configuration (set these in Codemagic UI as environment variables)
         SUPABASE_URL: $SUPABASE_URL
-        SUPABASE_PUBLISHABLE_KEY: $SUPABASE_PUBLISHABLE_KEY  
+        SUPABASE_PUBLISHABLE_KEY: $SUPABASE_PUBLISHABLE_KEY
         SUPABASE_SECRET_KEY: $SUPABASE_SECRET_KEY
+        # Email recipient for notifications
+        EMAIL_RECIPIENT: $EMAIL_RECIPIENT
       java: 17
-      gradle: 8.11
     scripts:
       - name: Set up local.properties
         script: |
@@ -79,7 +80,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - ekowibowo@Alkahfs-MacBook-Air.local
+          - $EMAIL_RECIPIENT
         notify:
           success: true
           failure: true
