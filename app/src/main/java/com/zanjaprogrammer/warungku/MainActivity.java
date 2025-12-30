@@ -55,11 +55,7 @@ public class MainActivity extends AppCompatActivity {
         requestPermissionLauncher = registerForActivityResult(
             new androidx.activity.result.contract.ActivityResultContracts.RequestPermission(),
             isGranted -> {
-                if (isGranted) {
-                    Log.d("MainActivity", "Notification permission granted");
-                } else {
-                    Log.d("MainActivity", "Notification permission denied");
-                }
+                // Permission result handled silently
             }
         );
     }
@@ -114,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
         // Find the include view
         android.view.View includeView = findViewById(R.id.offlineIndicator);
         if (includeView == null) {
-            android.util.Log.d("WarungKu", "offlineIndicator include view is null");
             return;
         }
         
@@ -123,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
         
         // Check network status
         boolean isOnline = com.zanjaprogrammer.warungku.utils.NetworkUtils.isNetworkAvailable(this);
-        android.util.Log.d("WarungKu", "Network available: " + isOnline);
         
         if (!isOnline) {
             cardOffline.setVisibility(android.view.View.VISIBLE);
@@ -182,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
         binding.bottomNavigation.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-            Log.d("WarungKu", "Nav item clicked: " + id);
             if (id == R.id.nav_sell) {
                 startActivity(new android.content.Intent(this, SellActivity.class));
                 overridePendingTransition(0, 0);
@@ -196,7 +189,6 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_summary) {
-                Log.d("WarungKu", "Navigating to SummaryActivity");
                 startActivity(new android.content.Intent(this, SummaryActivity.class));
                 overridePendingTransition(0, 0);
                 return true;

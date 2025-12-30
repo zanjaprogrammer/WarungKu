@@ -2,7 +2,6 @@ package com.zanjaprogrammer.warungku;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
@@ -23,6 +22,7 @@ import com.zanjaprogrammer.warungku.data.AppDatabase;
 import com.zanjaprogrammer.warungku.viewmodel.AppViewModel;
 import com.zanjaprogrammer.warungku.utils.DatabaseBackupUtils;
 import com.zanjaprogrammer.warungku.utils.DatabaseRestoreUtils;
+import com.zanjaprogrammer.warungku.utils.CurrencyFormatter;
 import android.content.Intent;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -56,16 +56,12 @@ public class SummaryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        Log.d("WarungKu", "SummaryActivity onCreate started");
         setContentView(R.layout.activity_summary);
 
         repository = new DataRepository(getApplication());
         viewModel = AppViewModel.getInstance(getApplication());
         prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         
-        // Untuk testing: uncomment baris di bawah untuk auto-generate test data saat pertama kali buka
-        // generateTestData();
-
         initViews();
         setupFilters();
         loadInitialCapital();
@@ -173,15 +169,6 @@ public class SummaryActivity extends AppCompatActivity {
             } else if (id == R.id.menu_restore) {
                 showRestoreDialog();
                 return true;
-            } else if (id == R.id.menu_generate_dummy) {
-                generateDummyData();
-                return true;
-            } else if (id == R.id.menu_generate_profitable_year) {
-                generateProfitableYearData();
-                return true;
-            } else if (id == R.id.menu_generate_simple_test) {
-                generateSimpleTestData();
-                return true;
             }
             return false;
         });
@@ -242,61 +229,6 @@ public class SummaryActivity extends AppCompatActivity {
     
     private void showRestoreDialog() {
         restoreFileLauncher.launch("application/octet-stream");
-    }
-    
-    private void generateDummyData() {
-        new androidx.appcompat.app.AlertDialog.Builder(this)
-            .setTitle("Generate Dummy Data")
-            .setMessage("Ini akan membuat data dummy untuk testing:\n\n" +
-                       "• 30 produk\n" +
-                       "• Riwayat penjualan 30 hari terakhir\n" +
-                       "• Data pengeluaran\n\n" +
-                       "Data existing akan tetap ada. Lanjutkan?")
-            .setPositiveButton("Generate", (dialog, which) -> {
-                android.widget.Toast.makeText(this, "Generating dummy data...", android.widget.Toast.LENGTH_SHORT).show();
-                com.zanjaprogrammer.warungku.utils.DummyDataGenerator.generateAllDummyData(getApplication());
-                android.widget.Toast.makeText(this, "Dummy data generated! Refresh halaman untuk melihat hasil.", android.widget.Toast.LENGTH_LONG).show();
-            })
-            .setNegativeButton("Batal", null)
-            .show();
-    }
-    
-    private void generateProfitableYearData() {
-        new androidx.appcompat.app.AlertDialog.Builder(this)
-            .setTitle("Generate Data Tahun Super Menguntungkan")
-            .setMessage("Ini akan membuat data dummy yang sangat menguntungkan:\n\n" +
-                       "• Hapus semua data existing\n" +
-                       "• 35 produk dengan margin 40-70%\n" +
-                       "• 10-25 transaksi per hari sepanjang tahun\n" +
-                       "• Pengeluaran sangat minimal (hanya 10% hari)\n" +
-                       "• Grafik akan menunjukkan pendapatan JAUH lebih tinggi\n\n" +
-                       "PERINGATAN: Data existing akan dihapus! Lanjutkan?")
-            .setPositiveButton("Generate", (dialog, which) -> {
-                android.widget.Toast.makeText(this, "Generating super profitable data...", android.widget.Toast.LENGTH_SHORT).show();
-                com.zanjaprogrammer.warungku.utils.DummyDataGeneratorFixed.generateSuperProfitableYearData(getApplication());
-                android.widget.Toast.makeText(this, "Data super menguntungkan berhasil dibuat! Tunggu 10 detik lalu buka Laporan > Tahun Ini", android.widget.Toast.LENGTH_LONG).show();
-            })
-            .setNegativeButton("Batal", null)
-            .show();
-    }
-    
-    private void generateSimpleTestData() {
-        new androidx.appcompat.app.AlertDialog.Builder(this)
-            .setTitle("Generate Simple Test Chart")
-            .setMessage("Ini akan membuat data test sederhana:\n\n" +
-                       "• Hapus semua data existing\n" +
-                       "• 1.000.000 total pendapatan\n" +
-                       "• 300.000 total pengeluaran\n" +
-                       "• Data selama 7 hari terakhir\n" +
-                       "• Hanya untuk test grafik trend\n\n" +
-                       "Lanjutkan?")
-            .setPositiveButton("Generate", (dialog, which) -> {
-                android.widget.Toast.makeText(this, "Generating simple test data...", android.widget.Toast.LENGTH_SHORT).show();
-                com.zanjaprogrammer.warungku.utils.DummyDataGenerator.generateSimpleTestData(getApplication());
-                android.widget.Toast.makeText(this, "Test data berhasil dibuat! Buka Laporan > Minggu Ini untuk melihat grafik.", android.widget.Toast.LENGTH_LONG).show();
-            })
-            .setNegativeButton("Batal", null)
-            .show();
     }
     
     private void performBackup() {
@@ -684,87 +616,7 @@ public class SummaryActivity extends AppCompatActivity {
     }
 
     private String formatCurrency(double amount) {
-        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
-        return format.format(amount);
-    }
-    
-    /**
-     * Generate test data dengan timestamp berbeda untuk testing filter waktu
-     * Hanya untuk development/testing
-     */
-    private void generateTestData() {
-        Calendar cal = Calendar.getInstance();
-        long now = System.currentTimeMillis();
-        
-        // Clear existing test data (optional - bisa di-comment jika ingin keep data)
-        // repository.deleteTestData(); // Jika ada method ini
-        
-        // Data untuk hari ini
-        cal.setTimeInMillis(now);
-        cal.set(Calendar.HOUR_OF_DAY, 10);
-        cal.set(Calendar.MINUTE, 30);
-        repository.insertCashFlow(new com.zanjaprogrammer.warungku.data.entity.CashFlow(
-            "IN", 50000, "Test: Jual Hari Ini", cal.getTimeInMillis(), null, 10000.0));
-        
-        // Data untuk 2 hari lalu
-        cal.setTimeInMillis(now);
-        cal.add(Calendar.DAY_OF_MONTH, -2);
-        cal.set(Calendar.HOUR_OF_DAY, 14);
-        repository.insertCashFlow(new com.zanjaprogrammer.warungku.data.entity.CashFlow(
-            "IN", 30000, "Test: Jual 2 Hari Lalu", cal.getTimeInMillis(), null, 5000.0));
-        
-        // Data untuk 1 minggu lalu (7 hari)
-        cal.setTimeInMillis(now);
-        cal.add(Calendar.DAY_OF_MONTH, -7);
-        cal.set(Calendar.HOUR_OF_DAY, 9);
-        repository.insertCashFlow(new com.zanjaprogrammer.warungku.data.entity.CashFlow(
-            "IN", 40000, "Test: Jual 1 Minggu Lalu", cal.getTimeInMillis(), null, 8000.0));
-        
-        // Data untuk 2 minggu lalu (14 hari)
-        cal.setTimeInMillis(now);
-        cal.add(Calendar.DAY_OF_MONTH, -14);
-        cal.set(Calendar.HOUR_OF_DAY, 11);
-        repository.insertCashFlow(new com.zanjaprogrammer.warungku.data.entity.CashFlow(
-            "IN", 35000, "Test: Jual 2 Minggu Lalu", cal.getTimeInMillis(), null, 7000.0));
-        
-        // Data untuk 1 bulan lalu (30 hari)
-        cal.setTimeInMillis(now);
-        cal.add(Calendar.DAY_OF_MONTH, -30);
-        cal.set(Calendar.HOUR_OF_DAY, 15);
-        repository.insertCashFlow(new com.zanjaprogrammer.warungku.data.entity.CashFlow(
-            "IN", 60000, "Test: Jual 1 Bulan Lalu", cal.getTimeInMillis(), null, 12000.0));
-        
-        // Data untuk 2 bulan lalu (60 hari)
-        cal.setTimeInMillis(now);
-        cal.add(Calendar.DAY_OF_MONTH, -60);
-        cal.set(Calendar.HOUR_OF_DAY, 13);
-        repository.insertCashFlow(new com.zanjaprogrammer.warungku.data.entity.CashFlow(
-            "IN", 45000, "Test: Jual 2 Bulan Lalu", cal.getTimeInMillis(), null, 9000.0));
-        
-        // Data untuk 1 tahun lalu (365 hari)
-        cal.setTimeInMillis(now);
-        cal.add(Calendar.DAY_OF_YEAR, -365);
-        cal.set(Calendar.HOUR_OF_DAY, 10);
-        repository.insertCashFlow(new com.zanjaprogrammer.warungku.data.entity.CashFlow(
-            "IN", 70000, "Test: Jual 1 Tahun Lalu", cal.getTimeInMillis(), null, 14000.0));
-        
-        // Data pengeluaran untuk hari ini
-        cal.setTimeInMillis(now);
-        cal.set(Calendar.HOUR_OF_DAY, 8);
-        repository.insertCashFlow(new com.zanjaprogrammer.warungku.data.entity.CashFlow(
-            "OUT", 20000, "Test: Pengeluaran Hari Ini", cal.getTimeInMillis(), null, 0.0));
-        
-        // Data pengeluaran untuk 1 minggu lalu
-        cal.setTimeInMillis(now);
-        cal.add(Calendar.DAY_OF_MONTH, -7);
-        cal.set(Calendar.HOUR_OF_DAY, 8);
-        repository.insertCashFlow(new com.zanjaprogrammer.warungku.data.entity.CashFlow(
-            "OUT", 15000, "Test: Pengeluaran 1 Minggu Lalu", cal.getTimeInMillis(), null, 0.0));
-        
-        Toast.makeText(this, "Test data berhasil dibuat!", Toast.LENGTH_LONG).show();
-        
-        // Refresh data
-        observeData();
+        return CurrencyFormatter.format(amount);
     }
     
     private void showPaymentBottomSheet() {

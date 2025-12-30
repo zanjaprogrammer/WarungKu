@@ -1,8 +1,6 @@
 package com.zanjaprogrammer.warungku.api;
 
-import android.util.Log;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import java.util.concurrent.TimeUnit;
@@ -34,13 +32,8 @@ public class ProductApiClient {
      */
     public static ProductApiService getApiService() {
         if (apiService == null) {
-            // Setup logging interceptor untuk debugging
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-            
             // Setup OkHttp client
             OkHttpClient client = new OkHttpClient.Builder()
-                    .addInterceptor(logging)
                     .connectTimeout(10, TimeUnit.SECONDS)
                     .readTimeout(10, TimeUnit.SECONDS)
                     .writeTimeout(10, TimeUnit.SECONDS)
