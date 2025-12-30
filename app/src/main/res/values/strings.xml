@@ -8,14 +8,14 @@
     
     <!-- Onboarding Strings -->
     <string name="onboarding_welcome_title">Selamat Datang di WarungKu</string>
-    <string name="onboarding_welcome_desc">Aplikasi manajemen warung yang mudah digunakan untuk mengelola stok, penjualan, dan keuangan bisnis Anda. Semua fitur penting dalam satu aplikasi.</string>
+    <string name="onboarding_welcome_desc">Aplikasi kasir digital terlengkap untuk UMKM Indonesia. Kelola toko Anda dengan mudah, dari penjualan hingga laporan keuangan lengkap.</string>
     
-    <string name="onboarding_features_title">Fitur Lengkap</string>
-    <string name="onboarding_features_desc">• Manajemen Stok Barang\n• Sistem Penjualan (POS)\n• Tracking Cash Flow\n• Laporan Keuangan\n• Barcode Scanner\n• Backup &amp; Restore Data\n• Multi-User Support</string>
+    <string name="onboarding_features_title">Fitur Unggulan</string>
+    <string name="onboarding_features_desc">Kasir Digital Modern\nManajemen Stok Cerdas\nBarcode Scanner\nLaporan Bisnis Real-time\nGambar Produk Otomatis\nBackup dan Restore Data</string>
     
-    <string name="onboarding_tips_title">Tips Penggunaan</string>
-    <string name="onboarding_tips_desc">• Gunakan barcode scanner untuk input produk lebih cepat\n• Set minimum stok untuk mendapatkan notifikasi\n• Backup data secara berkala untuk keamanan\n• Login untuk sync data antar device\n• Gunakan filter waktu di Ringkasan untuk analisis</string>
+    <string name="onboarding_scanner_title">Barcode Scanner Canggih</string>
+    <string name="onboarding_scanner_desc">Scan barcode untuk tambah produk instan dengan database Open Food Facts. Dapatkan informasi lengkap produk termasuk nama, harga, dan gambar secara otomatis.</string>
     
-    <string name="onboarding_about_title">Tentang WarungKu</string>
-    <string name="onboarding_about_desc">WarungKu adalah aplikasi manajemen warung yang dirancang khusus untuk UMKM kecil. Fokus pada kemudahan penggunaan dan fitur praktis yang benar-benar dibutuhkan untuk mengelola bisnis sehari-hari.</string>
+    <string name="onboarding_start_title">Siap Memulai?</string>
+    <string name="onboarding_start_desc">Setup toko dalam 2 menit dengan interface yang mudah digunakan. Data aman tersimpan lokal dan pantau perkembangan bisnis secara real-time.</string>
 </resources>

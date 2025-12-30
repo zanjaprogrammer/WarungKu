@@ -37,19 +37,19 @@ Testing filter waktu (Hari Ini, Minggu Ini, Bulan Ini, Tahun Ini) di halaman Rin
 
 ```bash
 # Insert transaksi untuk hari ini
-adb shell "sqlite3 /data/data/com.zanjaprogrammer.warungku/databases/warungku_db.db \"INSERT INTO cash_flow (type, amount, description, timestamp, product_id, profit) VALUES ('IN', 50000, 'Test Hari Ini', $(date +%s)000, NULL, 0);\""
+adb shell "sqlite3 /data/data/com.alkahfprogrammer.warungku/databases/warungku_db.db \"INSERT INTO cash_flow (type, amount, description, timestamp, product_id, profit) VALUES ('IN', 50000, 'Test Hari Ini', $(date +%s)000, NULL, 0);\""
 
 # Insert transaksi untuk 3 hari lalu
-adb shell "sqlite3 /data/data/com.zanjaprogrammer.warungku/databases/warungku_db.db \"INSERT INTO cash_flow (type, amount, description, timestamp, product_id, profit) VALUES ('IN', 30000, 'Test 3 Hari Lalu', $(($(date +%s) - 259200))000, NULL, 0);\""
+adb shell "sqlite3 /data/data/com.alkahfprogrammer.warungku/databases/warungku_db.db \"INSERT INTO cash_flow (type, amount, description, timestamp, product_id, profit) VALUES ('IN', 30000, 'Test 3 Hari Lalu', $(($(date +%s) - 259200))000, NULL, 0);\""
 
 # Insert transaksi untuk 2 minggu lalu
-adb shell "sqlite3 /data/data/com.zanjaprogrammer.warungku/databases/warungku_db.db \"INSERT INTO cash_flow (type, amount, description, timestamp, product_id, profit) VALUES ('IN', 40000, 'Test 2 Minggu Lalu', $(($(date +%s) - 1209600))000, NULL, 0);\""
+adb shell "sqlite3 /data/data/com.alkahfprogrammer.warungku/databases/warungku_db.db \"INSERT INTO cash_flow (type, amount, description, timestamp, product_id, profit) VALUES ('IN', 40000, 'Test 2 Minggu Lalu', $(($(date +%s) - 1209600))000, NULL, 0);\""
 
 # Insert transaksi untuk 2 bulan lalu
-adb shell "sqlite3 /data/data/com.zanjaprogrammer.warungku/databases/warungku_db.db \"INSERT INTO cash_flow (type, amount, description, timestamp, product_id, profit) VALUES ('IN', 60000, 'Test 2 Bulan Lalu', $(($(date +%s) - 5184000))000, NULL, 0);\""
+adb shell "sqlite3 /data/data/com.alkahfprogrammer.warungku/databases/warungku_db.db \"INSERT INTO cash_flow (type, amount, description, timestamp, product_id, profit) VALUES ('IN', 60000, 'Test 2 Bulan Lalu', $(($(date +%s) - 5184000))000, NULL, 0);\""
 
 # Insert transaksi untuk tahun lalu
-adb shell "sqlite3 /data/data/com.zanjaprogrammer.warungku/databases/warungku_db.db \"INSERT INTO cash_flow (type, amount, description, timestamp, product_id, profit) VALUES ('IN', 70000, 'Test Tahun Lalu', $(($(date +%s) - 31536000))000, NULL, 0);\""
+adb shell "sqlite3 /data/data/com.alkahfprogrammer.warungku/databases/warungku_db.db \"INSERT INTO cash_flow (type, amount, description, timestamp, product_id, profit) VALUES ('IN', 70000, 'Test Tahun Lalu', $(($(date +%s) - 31536000))000, NULL, 0);\""
 ```
 
 **Catatan:** 
