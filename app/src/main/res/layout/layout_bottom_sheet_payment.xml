@@ -103,36 +103,102 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginBottom="8dp">
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnQuick5k"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="0dp"
+            
+            <!-- Baris pertama: denominasi kecil -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="4dp"
-                android:text="5rb"
-                android:textSize="12sp"/>
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnQuick10k"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="0dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="4dp">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuick1k"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    android:text="1rb"
+                    android:textSize="12sp"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuick2k"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="2rb"
+                    android:textSize="12sp"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuick5k"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="5rb"
+                    android:textSize="12sp"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuick10k"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:text="10rb"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+            
+            <!-- Baris kedua: denominasi besar -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:text="10rb"
-                android:textSize="12sp"/>
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnQuick100k"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="4dp"
-                android:text="100rb"
-                android:textSize="12sp"/>
+                android:orientation="horizontal">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuick20k"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    android:text="20rb"
+                    android:textSize="12sp"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuick50k"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="50rb"
+                    android:textSize="12sp"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnQuick100k"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="100rb"
+                    android:textSize="12sp"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnClearAmount"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:text="Clear"
+                    android:textSize="12sp"
+                    app:iconTint="@color/error"
+                    android:textColor="@color/error"
+                    app:strokeColor="@color/error"/>
+            </LinearLayout>
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout

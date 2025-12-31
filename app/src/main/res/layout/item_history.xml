@@ -19,14 +19,33 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/tvDescription"
+            
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:text="Deskripsi"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:text="Deskripsi"/>
+                
+                <ImageView
+                    android:id="@+id/ivPaymentProof"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_payment_proof"
+                    android:visibility="gone"
+                    android:contentDescription="Payment proof available"/>
+                    
+            </LinearLayout>
+            
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"

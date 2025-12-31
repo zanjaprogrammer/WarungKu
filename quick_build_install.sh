@@ -49,7 +49,7 @@ echo -e "${GREEN}✅ App installed successfully!${NC}"
 
 # Launch the app
 echo -e "${BLUE}🚀 Launching WarungKu app...${NC}"
-if ! "$ADB_PATH" shell am start -n com.alkahfprogrammer.warungku/.MainActivity; then
+if ! "$ADB_PATH" shell am start -n com.zanjaprogrammer.warungku/.MainActivity; then
     echo -e "${RED}❌ Failed to launch app${NC}"
     exit 1
 fi

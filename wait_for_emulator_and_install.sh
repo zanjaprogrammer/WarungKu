@@ -13,7 +13,7 @@ while true; do
     ./gradlew installDebug --no-daemon
     echo ""
     echo "=== Launching app ==="
-    adb shell am start -n com.alkahfprogrammer.warungku/.LoginActivity
+    adb shell am start -n com.zanjaprogrammer.warungku/.LoginActivity
     echo ""
     echo "✅ App installed and launched!"
     echo "📱 Silakan test authentication flow (register & login)"

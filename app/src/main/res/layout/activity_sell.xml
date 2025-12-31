@@ -22,8 +22,47 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="Jual Barang"
-            app:menu="@menu/sell_toolbar_menu" />
+            app:title="Jual Barang">
+            
+            <!-- Custom Barcode Scanner Button in Toolbar -->
+            <LinearLayout
+                android:id="@+id/btnScanBarcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_barcode_button"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:elevation="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless">
+                
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_barcode"
+                    app:tint="@android:color/white"
+                    android:layout_marginBottom="2dp" />
+                    
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Barcode Scanner"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:maxLines="1" />
+                    
+            </LinearLayout>
+            
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/searchLayout"
@@ -52,6 +91,56 @@
             android:paddingBottom="80dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2" />
+
+        <!-- Empty State -->
+        <LinearLayout
+            android:id="@+id/layoutEmptyState"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_sell"
+                app:tint="@color/text_secondary"
+                android:alpha="0.5"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Belum Ada Produk untuk Dijual"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:textAlignment="center"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tambahkan produk ke stok terlebih dahulu untuk mulai berjualan"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:textAlignment="center"
+                android:layout_marginBottom="24dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGoToStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kelola Stok"
+                android:backgroundTint="@color/primary"
+                app:icon="@drawable/ic_stock"
+                app:iconTint="@android:color/white"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
 
 
     </LinearLayout>

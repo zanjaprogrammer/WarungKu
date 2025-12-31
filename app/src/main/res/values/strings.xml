@@ -18,4 +18,38 @@
     
     <string name="onboarding_start_title">Siap Memulai?</string>
     <string name="onboarding_start_desc">Setup toko dalam 2 menit dengan interface yang mudah digunakan. Data aman tersimpan lokal dan pantau perkembangan bisnis secara real-time.</string>
+    
+    <!-- Payment Proof Strings -->
+    <string name="payment_proof_capture_title">Foto Bukti Pembayaran</string>
+    <string name="payment_proof_instruction">Arahkan kamera ke bukti pembayaran QRIS</string>
+    <string name="payment_proof_preview_title">Preview Foto</string>
+    <string name="payment_proof_capture_button">Ambil Foto</string>
+    <string name="payment_proof_retake_button">Ambil Ulang</string>
+    <string name="payment_proof_save_button">Simpan</string>
+    <string name="payment_proof_discard_button">Buang</string>
+    <string name="payment_proof_cancel_button">Batal</string>
+    <string name="payment_proof_saving">Menyimpan foto...</string>
+    <string name="payment_proof_saved_success">Foto bukti pembayaran berhasil disimpan</string>
+    <string name="payment_proof_save_failed">Gagal menyimpan foto bukti pembayaran</string>
+    <string name="payment_proof_camera_error">Terjadi kesalahan pada kamera</string>
+    <string name="payment_proof_permission_denied">Izin kamera diperlukan untuk mengambil foto</string>
+    
+    <!-- Payment Proof View Strings -->
+    <string name="payment_proof_view_title">Bukti Pembayaran</string>
+    <string name="payment_proof_loading">Memuat foto...</string>
+    <string name="payment_proof_error_load">Foto tidak dapat dimuat</string>
+    <string name="payment_proof_error_corrupted">File mungkin rusak atau telah dihapus</string>
+    <string name="payment_proof_transaction_details">Detail Transaksi</string>
+    <string name="payment_proof_transaction_id">ID Transaksi</string>
+    <string name="payment_proof_amount">Jumlah</string>
+    <string name="payment_proof_payment_method">Metode Pembayaran</string>
+    <string name="payment_proof_transaction_date">Tanggal Transaksi</string>
+    <string name="payment_proof_capture_date">Foto Diambil</string>
+    <string name="payment_proof_description">Deskripsi</string>
+    <string name="payment_proof_export">Ekspor</string>
+    <string name="payment_proof_share">Bagikan Foto</string>
+    <string name="payment_proof_share_success">Foto berhasil dibagikan</string>
+    <string name="payment_proof_export_success">Foto berhasil diekspor ke galeri</string>
+    <string name="payment_proof_export_failed">Gagal mengekspor foto</string>
+    <string name="payment_proof_share_failed">Gagal membagikan foto</string>
 </resources>

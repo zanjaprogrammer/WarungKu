@@ -116,7 +116,7 @@ Icon WarungKu yang Anda berikan sudah sangat bagus dan siap digunakan! 🎉
 
 ## 🔍 Troubleshooting
 Jika icon tidak berubah setelah install:
-1. Uninstall aplikasi lama: `adb uninstall com.alkahfprogrammer.warungku`
+1. Uninstall aplikasi lama: `adb uninstall com.zanjaprogrammer.warungku`
 2. Clean build: `./gradlew clean`
 3. Build ulang: `./gradlew assembleDebug`
 4. Install fresh: `adb install app/build/outputs/apk/debug/app-debug.apk`
