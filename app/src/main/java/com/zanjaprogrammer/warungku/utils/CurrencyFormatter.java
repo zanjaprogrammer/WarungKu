@@ -31,4 +31,18 @@ public class CurrencyFormatter {
         formatted = formatted.replace(',', '.');
         return "Rp " + formatted;
     }
+    
+    public static String formatPlain(double amount) {
+        String formatted = formatter.format(amount);
+        // Replace comma with dot for Indonesian format
+        formatted = formatted.replace(',', '.');
+        return formatted;
+    }
+    
+    public static String formatPlain(int amount) {
+        String formatted = formatter.format(amount);
+        // Replace comma with dot for Indonesian format  
+        formatted = formatted.replace(',', '.');
+        return formatted;
+    }
 }

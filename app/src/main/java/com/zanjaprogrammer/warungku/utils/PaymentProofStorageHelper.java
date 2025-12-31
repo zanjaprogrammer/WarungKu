@@ -270,4 +270,70 @@ public class PaymentProofStorageHelper {
         String name = file.getName().toLowerCase();
         return name.endsWith(".jpg") || name.endsWith(".jpeg") || name.endsWith(".png");
     }
+    
+    /**
+     * Restore a photo from backup to the payment proof directory
+     * @param backupPhotoFile The backup photo file (temporary)
+     * @param originalFileName The original filename to restore
+     * @return The restored file path if successful, null if failed
+     */
+    public String restorePhotoFromBackup(File backupPhotoFile, String originalFileName) {
+        if (backupPhotoFile == null || !backupPhotoFile.exists() || 
+            originalFileName == null || originalFileName.trim().isEmpty()) {
+            return null;
+        }
+        
+        // Check available storage space
+        if (!hasEnoughStorageSpace()) {
+            return null;
+        }
+        
+        File targetFile = new File(paymentProofDir, originalFileName);
+        
+        try {
+            // Copy backup file to payment proof directory
+            FileInputStream fis = new FileInputStream(backupPhotoFile);
+            FileOutputStream fos = new FileOutputStream(targetFile);
+            
+            byte[] buffer = new byte[8192];
+            int length;
+            while ((length = fis.read(buffer)) > 0) {
+                fos.write(buffer, 0, length);
+            }
+            
+            fis.close();
+            fos.close();
+            
+            // Verify the restored file is valid
+            Bitmap testBitmap = loadPhotoFromInternalStorage(targetFile.getAbsolutePath());
+            if (testBitmap != null) {
+                testBitmap.recycle();
+                return targetFile.getAbsolutePath();
+            } else {
+                // Delete invalid file
+                targetFile.delete();
+                return null;
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Clean up target file if it was created
+            if (targetFile.exists()) {
+                targetFile.delete();
+            }
+            return null;
+        }
+    }
+    
+    /**
+     * Get the expected file path for a payment proof photo
+     * @param filename The filename
+     * @return The full file path
+     */
+    public String getPaymentProofPath(String filename) {
+        if (filename == null || filename.trim().isEmpty()) {
+            return null;
+        }
+        return new File(paymentProofDir, filename).getAbsolutePath();
+    }
 }

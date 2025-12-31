@@ -416,7 +416,7 @@ public class PaymentProofViewActivity extends AppCompatActivity {
      */
     private void exportPaymentProof() {
         if (currentBitmap == null || currentPaymentProof == null) {
-            CustomToast.showError(this, "Tidak ada foto untuk diekspor");
+            CustomToast.showError(this, "Tidak ada foto untuk didownload");
             return;
         }
         
@@ -432,14 +432,14 @@ public class PaymentProofViewActivity extends AppCompatActivity {
             );
             
             if (savedImageURL != null) {
-                CustomToast.showSuccess(this, "Foto berhasil diekspor ke galeri");
+                CustomToast.showSuccess(this, "Foto berhasil didownload ke galeri");
             } else {
-                CustomToast.showError(this, "Gagal mengekspor foto");
+                CustomToast.showError(this, "Gagal mendownload foto");
             }
             
         } catch (Exception e) {
             Log.e(TAG, "Error exporting payment proof", e);
-            CustomToast.showError(this, "Gagal mengekspor foto");
+            CustomToast.showError(this, "Gagal mendownload foto");
         }
     }
     

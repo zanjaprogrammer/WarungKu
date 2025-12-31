@@ -54,6 +54,11 @@
             android:screenOrientation="portrait"
             android:exported="false"
             android:theme="@style/Theme.WarungKu" />
+        <activity 
+            android:name=".PaymentProofManagementActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            android:theme="@style/Theme.WarungKu" />
         
         
         <provider

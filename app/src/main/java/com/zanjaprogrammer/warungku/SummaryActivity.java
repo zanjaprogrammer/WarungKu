@@ -183,6 +183,11 @@ public class SummaryActivity extends AppCompatActivity {
         findViewById(R.id.cardReport).setOnClickListener(v -> {
             startActivity(new Intent(this, ReportActivity.class));
         });
+        
+        // Tombol kelola bukti pembayaran di card
+        findViewById(R.id.cardPaymentProofManagement).setOnClickListener(v -> {
+            startActivity(new Intent(this, PaymentProofManagementActivity.class));
+        });
         // Toolbar back button removed per user request
 
         findViewById(R.id.btnSetCapital).setOnClickListener(v -> showCapitalDialog());

@@ -602,6 +602,50 @@ public class PaymentProofManager {
     }
     
     /**
+     * Bulk load payment proof photos for sharing
+     * @param paymentProofs List of PaymentProof objects to load photos for
+     * @return CompletableFuture with list of Bitmap objects (null entries for failed loads)
+     */
+    public CompletableFuture<List<Bitmap>> bulkLoadPaymentProofPhotos(List<PaymentProof> paymentProofs) {
+        return CompletableFuture.supplyAsync(() -> {
+            List<Bitmap> bitmaps = new java.util.ArrayList<>();
+            
+            try {
+                for (PaymentProof proof : paymentProofs) {
+                    try {
+                        if (proof.isCorrupted() || proof.getFilePath() == null) {
+                            bitmaps.add(null);
+                            continue;
+                        }
+                        
+                        java.io.File file = new java.io.File(proof.getFilePath());
+                        if (!file.exists()) {
+                            bitmaps.add(null);
+                            continue;
+                        }
+                        
+                        Bitmap bitmap = storageHelper.loadPhotoFromInternalStorage(proof.getFilePath());
+                        if (bitmap != null && ImageCompressionUtil.isImageReadable(bitmap)) {
+                            bitmaps.add(bitmap);
+                        } else {
+                            bitmaps.add(null);
+                        }
+                        
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        bitmaps.add(null);
+                    }
+                }
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            return bitmaps;
+        }, executorService);
+    }
+    
+    /**
      * Helper method to copy files
      * @param source Source file
      * @param destination Destination file
