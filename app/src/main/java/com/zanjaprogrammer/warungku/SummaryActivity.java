@@ -3,6 +3,7 @@ package com.zanjaprogrammer.warungku;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -17,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.zanjaprogrammer.warungku.ads.AdManager;
 import com.zanjaprogrammer.warungku.data.DataRepository;
 import com.zanjaprogrammer.warungku.utils.CurrencyFormatter;
 import com.zanjaprogrammer.warungku.data.AppDatabase;
@@ -40,6 +42,7 @@ public class SummaryActivity extends AppCompatActivity {
     private ProgressBar progressBarCapitalReturn;
     private DataRepository repository;
     private AppViewModel viewModel;
+    private AdManager adManager;
     private SharedPreferences prefs;
     private static final String PREF_NAME = "WarungKuPrefs";
     private static final String KEY_CAPITAL = "initial_capital";
@@ -68,6 +71,9 @@ public class SummaryActivity extends AppCompatActivity {
         setupCartObserver();
         updateProgressBarVisibility(); // Check visibility preference
         setupOfflineIndicator();
+        
+        // Initialize AdManager
+        initializeAdManager();
 
         // Default filter: Today
         updateTimeRange(RangeType.DAY);
@@ -102,6 +108,35 @@ public class SummaryActivity extends AppCompatActivity {
             }
         } else {
             cardOffline.setVisibility(android.view.View.GONE);
+        }
+    }
+    
+    private void initializeAdManager() {
+        try {
+            adManager = AdManager.getInstance(this);
+            adManager.initialize();
+        } catch (Exception e) {
+            Log.e("SummaryActivity", "Failed to initialize AdManager", e);
+        }
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        
+        // Notify AdManager about activity resume
+        if (adManager != null) {
+            adManager.onActivityResumed("SummaryActivity");
+        }
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        
+        // Notify AdManager about activity pause
+        if (adManager != null) {
+            adManager.onActivityPaused("SummaryActivity");
         }
     }
     
@@ -181,7 +216,30 @@ public class SummaryActivity extends AppCompatActivity {
 
         // Tombol laporan di card
         findViewById(R.id.cardReport).setOnClickListener(v -> {
-            startActivity(new Intent(this, ReportActivity.class));
+            // Check if we should show interstitial ad for navigation to ReportActivity
+            if (adManager != null && adManager.isInitialized()) {
+                if (adManager.getInterstitialAdController().shouldShowForNavigation("SummaryActivity", "ReportActivity")) {
+                    // Show interstitial ad first, then navigate
+                    boolean adShown = adManager.getInterstitialAdController().showInterstitialAd(this, "navigation_to_report");
+                    if (!adShown) {
+                        // If ad failed to show, navigate immediately
+                        startActivity(new Intent(this, ReportActivity.class));
+                    } else {
+                        // Ad is shown, navigation will happen after ad is dismissed
+                        // We need to store the intent to execute after ad
+                        // For now, let's navigate after a short delay
+                        new android.os.Handler().postDelayed(() -> {
+                            startActivity(new Intent(this, ReportActivity.class));
+                        }, 1000);
+                    }
+                } else {
+                    // No ad to show, navigate directly
+                    startActivity(new Intent(this, ReportActivity.class));
+                }
+            } else {
+                // AdManager not available, navigate directly
+                startActivity(new Intent(this, ReportActivity.class));
+            }
         });
         
         // Tombol kelola bukti pembayaran di card
@@ -233,10 +291,56 @@ public class SummaryActivity extends AppCompatActivity {
     }
     
     private void showRestoreDialog() {
-        restoreFileLauncher.launch("application/octet-stream");
+        // Check if we should show interstitial ad for backup/restore
+        if (adManager != null && adManager.isInitialized()) {
+            if (adManager.getInterstitialAdController().shouldShowForBackupRestore()) {
+                // Show interstitial ad first, then proceed
+                boolean adShown = adManager.getInterstitialAdController().showInterstitialAd(this, "backup_restore_access");
+                if (!adShown) {
+                    // If ad failed to show, proceed immediately
+                    restoreFileLauncher.launch("application/octet-stream");
+                } else {
+                    // Ad is shown, proceed after a short delay
+                    new android.os.Handler().postDelayed(() -> {
+                        restoreFileLauncher.launch("application/octet-stream");
+                    }, 1000);
+                }
+            } else {
+                // No ad to show, proceed directly
+                restoreFileLauncher.launch("application/octet-stream");
+            }
+        } else {
+            // AdManager not available, proceed directly
+            restoreFileLauncher.launch("application/octet-stream");
+        }
     }
     
     private void performBackup() {
+        // Check if we should show interstitial ad for backup/restore
+        if (adManager != null && adManager.isInitialized()) {
+            if (adManager.getInterstitialAdController().shouldShowForBackupRestore()) {
+                // Show interstitial ad first, then proceed
+                boolean adShown = adManager.getInterstitialAdController().showInterstitialAd(this, "backup_restore_access");
+                if (!adShown) {
+                    // If ad failed to show, proceed immediately
+                    executeBackup();
+                } else {
+                    // Ad is shown, proceed after a short delay
+                    new android.os.Handler().postDelayed(() -> {
+                        executeBackup();
+                    }, 1000);
+                }
+            } else {
+                // No ad to show, proceed directly
+                executeBackup();
+            }
+        } else {
+            // AdManager not available, proceed directly
+            executeBackup();
+        }
+    }
+    
+    private void executeBackup() {
         // Show loading
         Toast.makeText(this, "Membuat backup...", Toast.LENGTH_SHORT).show();
         

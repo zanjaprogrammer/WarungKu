@@ -2,7 +2,9 @@ package com.zanjaprogrammer.warungku;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.zanjaprogrammer.warungku.ads.AdManager;
 import com.zanjaprogrammer.warungku.utils.CurrencyFormatter;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -38,6 +41,7 @@ import java.util.Map;
 public class ReportActivity extends AppCompatActivity {
 
     private AppViewModel viewModel;
+    private AdManager adManager;
     private TextView tvIncome, tvExpense, tvProfit;
     private LineChart chartTrend;
     private RecyclerView rvTopSelling, rvUnsold;
@@ -64,6 +68,9 @@ public class ReportActivity extends AppCompatActivity {
         setupFilters();
         setupRecyclerViews();
         setupBottomNavigation();
+        
+        // Initialize AdManager
+        initializeAdManager();
         
         // Default: Hari Ini
         updatePeriod(PeriodType.DAY);
@@ -104,6 +111,64 @@ public class ReportActivity extends AppCompatActivity {
                 updatePeriod(PeriodType.YEAR);
             }
         });
+    }
+    
+    private void initializeAdManager() {
+        try {
+            adManager = AdManager.getInstance(this);
+            adManager.initialize();
+            
+            // Load banner ad for ReportActivity
+            FrameLayout bannerContainer = findViewById(R.id.bannerAdContainer);
+            if (adManager.isInitialized() && bannerContainer != null) {
+                adManager.getBannerAdController().loadBannerAd(bannerContainer, "ReportActivity");
+            }
+        } catch (Exception e) {
+            Log.e("ReportActivity", "Failed to initialize AdManager", e);
+        }
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        
+        // Notify AdManager about activity resume
+        if (adManager != null) {
+            adManager.onActivityResumed("ReportActivity");
+        }
+        
+        // Resume banner ads
+        if (adManager != null && adManager.isInitialized()) {
+            FrameLayout bannerContainer = findViewById(R.id.bannerAdContainer);
+            adManager.getBannerAdController().resumeBannerAd(bannerContainer);
+        }
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        
+        // Notify AdManager about activity pause
+        if (adManager != null) {
+            adManager.onActivityPaused("ReportActivity");
+        }
+        
+        // Pause banner ads
+        if (adManager != null && adManager.isInitialized()) {
+            FrameLayout bannerContainer = findViewById(R.id.bannerAdContainer);
+            adManager.getBannerAdController().pauseBannerAd(bannerContainer);
+        }
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        
+        // Destroy banner ads to free resources
+        if (adManager != null && adManager.isInitialized()) {
+            FrameLayout bannerContainer = findViewById(R.id.bannerAdContainer);
+            adManager.getBannerAdController().destroyBannerAd(bannerContainer);
+        }
     }
 
     private void updatePeriod(PeriodType type) {

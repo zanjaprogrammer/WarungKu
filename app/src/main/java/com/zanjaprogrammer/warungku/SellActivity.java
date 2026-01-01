@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import com.journeyapps.barcodescanner.ScanContract;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import com.zanjaprogrammer.warungku.adapters.ProductSellAdapter;
+import com.zanjaprogrammer.warungku.ads.AdManager;
 import com.zanjaprogrammer.warungku.data.entity.Product;
 import com.zanjaprogrammer.warungku.databinding.ActivitySellBinding;
 import com.zanjaprogrammer.warungku.utils.CurrencyFormatter;
@@ -38,6 +41,7 @@ public class SellActivity extends AppCompatActivity {
 
     private ActivitySellBinding binding;
     private AppViewModel viewModel;
+    private AdManager adManager;
     private ProductSellAdapter adapter;
     private List<Product> allProducts = new ArrayList<>();
     private String currentSearchQuery = "";
@@ -60,6 +64,11 @@ public class SellActivity extends AppCompatActivity {
         
         // Setup barcode launcher - HARUS diinisialisasi PERTAMA sebelum digunakan
         barcodeLauncher = registerForActivityResult(new ScanContract(), result -> {
+            // End scanning tracking regardless of result
+            if (adManager != null) {
+                adManager.getUserActivityTracker().endScanning();
+            }
+            
             if (result != null && result.getContents() != null) {
                 String barcode = result.getContents();
                 handleBarcodeScanned(barcode);
@@ -99,6 +108,9 @@ public class SellActivity extends AppCompatActivity {
         setupSearch();
         setupBarcodeScanner();
         setupOfflineIndicator();
+        
+        // Initialize AdManager
+        initializeAdManager();
 
         viewModel.getAllProducts().observe(this, products -> {
             allProducts = products != null ? products : new ArrayList<>();
@@ -142,6 +154,19 @@ public class SellActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        
+        // Notify AdManager about activity resume
+        if (adManager != null) {
+            adManager.onActivityResumed("SellActivity");
+            // Start selling session (critical operation)
+            adManager.getUserActivityTracker().startSellingSession();
+        }
+        
+        // Resume banner ads
+        if (adManager != null && adManager.isInitialized()) {
+            adManager.getBannerAdController().resumeBannerAd(binding.bannerAdContainer);
+        }
+        
         binding.bottomNavigation.setSelectedItemId(R.id.nav_sell);
         setupOfflineIndicator();
     }
@@ -173,6 +198,48 @@ public class SellActivity extends AppCompatActivity {
             }
         } else {
             cardOffline.setVisibility(android.view.View.GONE);
+        }
+    }
+    
+    private void initializeAdManager() {
+        try {
+            adManager = AdManager.getInstance(this);
+            adManager.initialize();
+            
+            // Load banner ad for SellActivity
+            FrameLayout bannerContainer = binding.bannerAdContainer;
+            if (adManager.isInitialized() && bannerContainer != null) {
+                adManager.getBannerAdController().loadBannerAd(bannerContainer, "SellActivity");
+            }
+        } catch (Exception e) {
+            Log.e("SellActivity", "Failed to initialize AdManager", e);
+        }
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        
+        // Notify AdManager about activity pause
+        if (adManager != null) {
+            adManager.onActivityPaused("SellActivity");
+            // End selling session when leaving
+            adManager.getUserActivityTracker().endSellingSession();
+        }
+        
+        // Pause banner ads
+        if (adManager != null && adManager.isInitialized()) {
+            adManager.getBannerAdController().pauseBannerAd(binding.bannerAdContainer);
+        }
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        
+        // Destroy banner ads to free resources
+        if (adManager != null && adManager.isInitialized()) {
+            adManager.getBannerAdController().destroyBannerAd(binding.bannerAdContainer);
         }
     }
 
@@ -367,6 +434,11 @@ public class SellActivity extends AppCompatActivity {
         }
 
         try {
+            // Start scanning tracking
+            if (adManager != null) {
+                adManager.getUserActivityTracker().startScanning();
+            }
+            
             ScanOptions options = new ScanOptions();
             options.setDesiredBarcodeFormats(ScanOptions.ALL_CODE_TYPES);
             options.setPrompt("Arahkan kamera ke barcode");
@@ -380,12 +452,21 @@ public class SellActivity extends AppCompatActivity {
 
             barcodeLauncher.launch(options);
         } catch (Exception e) {
+            // End scanning tracking on error
+            if (adManager != null) {
+                adManager.getUserActivityTracker().endScanning();
+            }
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
 
     private void handleBarcodeScanned(String barcode) {
+        // End scanning tracking
+        if (adManager != null) {
+            adManager.getUserActivityTracker().endScanning();
+        }
+        
         // 1. Cek database lokal dulu
         Product foundProduct = null;
         for (Product product : allProducts) {

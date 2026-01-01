@@ -3,8 +3,10 @@ package com.zanjaprogrammer.warungku;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.FrameLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import com.zanjaprogrammer.warungku.ads.AdManager;
 import com.zanjaprogrammer.warungku.databinding.ActivityMainBinding;
 import com.zanjaprogrammer.warungku.viewmodel.AppViewModel;
 import com.zanjaprogrammer.warungku.utils.CurrencyFormatter;
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private AppViewModel viewModel;
+    private AdManager adManager;
     private androidx.lifecycle.LiveData<Double> dailyIncomeLive, dailyExpenseLive;
     private int lastCheckedDay = -1;
     private androidx.activity.result.ActivityResultLauncher<String> requestPermissionLauncher;
@@ -44,12 +47,30 @@ public class MainActivity extends AppCompatActivity {
         // Use singleton instance untuk persist cart across activities
         viewModel = AppViewModel.getInstance(getApplication());
 
+        // Initialize AdManager
+        initializeAdManager();
+
         observeData();
         setupListeners();
         checkAndRefreshDailyData();
         setupOfflineIndicator();
         setupNotificationPermission();
         requestNotificationPermission();
+    }
+    
+    private void initializeAdManager() {
+        try {
+            adManager = AdManager.getInstance(this);
+            adManager.initialize();
+            
+            // Load banner ad for MainActivity
+            FrameLayout bannerContainer = binding.bannerAdContainer;
+            if (adManager.isInitialized() && bannerContainer != null) {
+                adManager.getBannerAdController().loadBannerAd(bannerContainer, "MainActivity");
+            }
+        } catch (Exception e) {
+            Log.e("MainActivity", "Failed to initialize AdManager", e);
+        }
     }
     
     private void setupNotificationPermission() {
@@ -77,6 +98,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         
+        // Notify AdManager about activity resume
+        if (adManager != null) {
+            adManager.onActivityResumed("MainActivity");
+        }
+        
+        // Resume banner ads
+        if (adManager != null && adManager.isInitialized()) {
+            adManager.getBannerAdController().resumeBannerAd(binding.bannerAdContainer);
+        }
+        
         // Check network status setiap kali resume
         setupOfflineIndicator();
         
@@ -98,6 +129,31 @@ public class MainActivity extends AppCompatActivity {
         com.zanjaprogrammer.warungku.utils.StockNotificationHelper notificationHelper = 
             new com.zanjaprogrammer.warungku.utils.StockNotificationHelper(this);
         notificationHelper.checkAndNotify();
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        
+        // Notify AdManager about activity pause
+        if (adManager != null) {
+            adManager.onActivityPaused("MainActivity");
+        }
+        
+        // Pause banner ads
+        if (adManager != null && adManager.isInitialized()) {
+            adManager.getBannerAdController().pauseBannerAd(binding.bannerAdContainer);
+        }
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        
+        // Destroy banner ads to free resources
+        if (adManager != null && adManager.isInitialized()) {
+            adManager.getBannerAdController().destroyBannerAd(binding.bannerAdContainer);
+        }
     }
     
     private void setupOfflineIndicator() {

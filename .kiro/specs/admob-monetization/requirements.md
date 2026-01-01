@@ -49,8 +49,8 @@ Implementasi monetisasi aplikasi WarungKu menggunakan Google AdMob dengan pendek
 
 #### Acceptance Criteria
 
-1. WHEN user completes 5 consecutive sales transactions, THE system SHALL display an interstitial ad
-2. WHEN user opens ReportActivity after completing daily sales, THE system SHALL display an interstitial ad
+1. WHEN user navigates from MainActivity to ReportActivity, THE system SHALL display an interstitial ad
+2. WHEN user opens StockActivity after being idle for more than 1 hour, THE system SHALL display an interstitial ad
 3. WHEN user accesses backup/restore functionality, THE system SHALL display an interstitial ad before the operation
 4. THE system SHALL NOT display interstitial ads during active selling process or product scanning
 5. WHEN interstitial ad is displayed, THE system SHALL provide a clear close button after 5 seconds

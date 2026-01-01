@@ -283,6 +283,16 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <!-- Banner Ad Container -->
+    <FrameLayout
+        android:id="@+id/bannerAdContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="56dp"
+        android:visibility="gone"
+        android:background="@color/background" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

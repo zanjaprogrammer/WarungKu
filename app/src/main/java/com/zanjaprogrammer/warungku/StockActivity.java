@@ -3,6 +3,8 @@ package com.zanjaprogrammer.warungku;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.zanjaprogrammer.warungku.adapters.ProductStockAdapter;
+import com.zanjaprogrammer.warungku.ads.AdManager;
 import com.zanjaprogrammer.warungku.databinding.ActivityStockBinding;
 import com.zanjaprogrammer.warungku.utils.ExcelExporter;
 import com.zanjaprogrammer.warungku.utils.ExcelImporter;
@@ -24,6 +27,7 @@ public class StockActivity extends AppCompatActivity {
 
     private ActivityStockBinding binding;
     private AppViewModel viewModel;
+    private AdManager adManager;
     private ProductStockAdapter adapter;
     private List<com.zanjaprogrammer.warungku.data.entity.Product> allProducts;
     private ActivityResultLauncher<String> filePickerLauncher;
@@ -43,6 +47,9 @@ public class StockActivity extends AppCompatActivity {
         setupFilePickers();
         setupToolbarMenu();
         setupOfflineIndicator();
+        
+        // Initialize AdManager
+        initializeAdManager();
 
         viewModel.getAllProducts().observe(this, products -> {
             allProducts = products;
@@ -122,6 +129,23 @@ public class StockActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        
+        // Notify AdManager about activity resume and check for idle-based interstitial
+        if (adManager != null) {
+            adManager.onActivityResumed("StockActivity");
+            
+            // Check if user has been idle for more than 1 hour and show interstitial ad
+            long idleTimeHours = adManager.getAdFrequencyManager().getIdleTimeHours();
+            if (adManager.getInterstitialAdController().shouldShowForIdleAccess("StockActivity", idleTimeHours)) {
+                adManager.getInterstitialAdController().showInterstitialAd(this, "idle_stock_access");
+            }
+        }
+        
+        // Resume banner ads
+        if (adManager != null && adManager.isInitialized()) {
+            adManager.getBannerAdController().resumeBannerAd(binding.bannerAdContainer);
+        }
+        
         binding.bottomNavigation.setSelectedItemId(R.id.nav_stock);
         setupOfflineIndicator();
     }
@@ -153,6 +177,46 @@ public class StockActivity extends AppCompatActivity {
             }
         } else {
             cardOffline.setVisibility(android.view.View.GONE);
+        }
+    }
+    
+    private void initializeAdManager() {
+        try {
+            adManager = AdManager.getInstance(this);
+            adManager.initialize();
+            
+            // Load banner ad for StockActivity
+            FrameLayout bannerContainer = binding.bannerAdContainer;
+            if (adManager.isInitialized() && bannerContainer != null) {
+                adManager.getBannerAdController().loadBannerAd(bannerContainer, "StockActivity");
+            }
+        } catch (Exception e) {
+            Log.e("StockActivity", "Failed to initialize AdManager", e);
+        }
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        
+        // Notify AdManager about activity pause
+        if (adManager != null) {
+            adManager.onActivityPaused("StockActivity");
+        }
+        
+        // Pause banner ads
+        if (adManager != null && adManager.isInitialized()) {
+            adManager.getBannerAdController().pauseBannerAd(binding.bannerAdContainer);
+        }
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        
+        // Destroy banner ads to free resources
+        if (adManager != null && adManager.isInitialized()) {
+            adManager.getBannerAdController().destroyBannerAd(binding.bannerAdContainer);
         }
     }
 
