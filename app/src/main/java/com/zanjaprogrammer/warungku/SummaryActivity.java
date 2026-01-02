@@ -6,6 +6,7 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -115,6 +116,12 @@ public class SummaryActivity extends AppCompatActivity {
         try {
             adManager = AdManager.getInstance(this);
             adManager.initialize();
+            
+            // Load banner ad for SummaryActivity
+            FrameLayout bannerContainer = findViewById(R.id.bannerAdContainer);
+            if (adManager.isInitialized() && bannerContainer != null) {
+                adManager.getBannerAdController().loadBannerAd(bannerContainer, "SummaryActivity");
+            }
         } catch (Exception e) {
             Log.e("SummaryActivity", "Failed to initialize AdManager", e);
         }
@@ -128,6 +135,12 @@ public class SummaryActivity extends AppCompatActivity {
         if (adManager != null) {
             adManager.onActivityResumed("SummaryActivity");
         }
+        
+        // Check if day has changed and refresh data
+        checkAndRefreshDailyData();
+        
+        // Check network status
+        setupOfflineIndicator();
     }
     
     @Override
@@ -913,16 +926,5 @@ public class SummaryActivity extends AppCompatActivity {
         int newAmount = currentAmount + amount;
         etPaymentAmount.setText(String.valueOf(newAmount));
         etPaymentAmount.setSelection(etPaymentAmount.getText().length());
-    }
-    
-    @Override
-    protected void onResume() {
-        super.onResume();
-        
-        // Check if day has changed and refresh data
-        checkAndRefreshDailyData();
-        
-        // Check network status
-        setupOfflineIndicator();
     }
 }

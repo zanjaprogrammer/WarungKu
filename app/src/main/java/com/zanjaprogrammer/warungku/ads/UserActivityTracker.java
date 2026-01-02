@@ -241,17 +241,67 @@ public class UserActivityTracker {
     }
     
     /**
-     * Check if navigation trigger should fire (MainActivity -> ReportActivity)
+     * Check if navigation trigger should fire
+     * Strategic timing for better user experience
      */
     public boolean shouldTriggerNavigationAd(String fromActivity, String toActivity) {
-        return "MainActivity".equals(fromActivity) && "ReportActivity".equals(toActivity);
+        // AGGRESSIVE STRATEGY: More navigation triggers for maximum revenue
+        
+        // 1. After completing sales (going to reports to check results)
+        if ("MainActivity".equals(fromActivity) && "ReportActivity".equals(toActivity)) {
+            return true;
+        }
+        
+        // 2. After stock management (going back to main dashboard)
+        if ("StockActivity".equals(fromActivity) && "MainActivity".equals(toActivity)) {
+            return true;
+        }
+        
+        // 3. After completing transactions (SellActivity -> MainActivity)
+        if ("SellActivity".equals(fromActivity) && "MainActivity".equals(toActivity)) {
+            return true;
+        }
+        
+        // NEW AGGRESSIVE TRIGGERS:
+        
+        // 4. Accessing financial data (MainActivity -> HistoryActivity)
+        if ("MainActivity".equals(fromActivity) && "HistoryActivity".equals(toActivity)) {
+            return true;
+        }
+        
+        // 5. Going to sell products (MainActivity -> SellActivity)
+        if ("MainActivity".equals(fromActivity) && "SellActivity".equals(toActivity)) {
+            return true;
+        }
+        
+        // 6. Checking reports from any activity
+        if ("ReportActivity".equals(toActivity)) {
+            return true;
+        }
+        
+        // 7. Adding new products (any activity -> AddProductActivity)
+        if ("AddProductActivity".equals(toActivity)) {
+            return true;
+        }
+        
+        // 8. Cross-navigation between core activities
+        if (("SellActivity".equals(fromActivity) && "StockActivity".equals(toActivity)) ||
+            ("StockActivity".equals(fromActivity) && "SellActivity".equals(toActivity))) {
+            return true;
+        }
+        
+        return false;
     }
     
     /**
-     * Check if idle trigger should fire for StockActivity
+     * Check if idle trigger should fire
+     * Shows ads when user returns after being idle
      */
     public boolean shouldTriggerIdleAd(String activityName, long idleThresholdHours) {
-        if (!"StockActivity".equals(activityName)) {
+        // Only trigger on main activities where user is likely to stay longer
+        if (!("MainActivity".equals(activityName) || 
+              "StockActivity".equals(activityName) || 
+              "ReportActivity".equals(activityName))) {
             return false;
         }
         
@@ -263,8 +313,47 @@ public class UserActivityTracker {
      * Check if backup/restore trigger should fire
      */
     public boolean shouldTriggerBackupRestoreAd() {
-        // This would be called when backup/restore functionality is accessed
+        // Show ad before accessing premium features like backup/restore
         return true; // Always show ad before backup/restore operations
+    }
+    
+    /**
+     * Check if session completion trigger should fire
+     * Shows ads after user completes significant actions
+     */
+    public boolean shouldTriggerSessionCompletionAd() {
+        // AGGRESSIVE STRATEGY: Reduced thresholds for more frequent ads
+        long sessionDuration = System.currentTimeMillis() - sessionStartTime;
+        long sessionMinutes = TimeUnit.MILLISECONDS.toMinutes(sessionDuration);
+        
+        // Show ad after 8+ minutes of active usage (reduced from 15 minutes)
+        // OR after 3+ navigations (reduced from 5 navigations)
+        return (sessionMinutes >= 8 && navigationCount >= 3) || 
+               (sessionMinutes >= 5 && navigationCount >= 5);
+    }
+    
+    /**
+     * NEW: Check if frequent activity trigger should fire
+     * Shows ads based on high activity patterns
+     */
+    public boolean shouldTriggerFrequentActivityAd() {
+        long timeSinceLastNavigation = System.currentTimeMillis() - lastNavigationTime;
+        long minutesSinceLastNav = TimeUnit.MILLISECONDS.toMinutes(timeSinceLastNavigation);
+        
+        // Show ad if user has been very active (many navigations in short time)
+        return navigationCount >= 8 && minutesSinceLastNav <= 20;
+    }
+    
+    /**
+     * NEW: Check if extended session trigger should fire
+     * Shows ads during long usage sessions
+     */
+    public boolean shouldTriggerExtendedSessionAd() {
+        long sessionDuration = System.currentTimeMillis() - sessionStartTime;
+        long sessionMinutes = TimeUnit.MILLISECONDS.toMinutes(sessionDuration);
+        
+        // Show ad every 12 minutes during extended sessions
+        return sessionMinutes > 0 && (sessionMinutes % 12 == 0) && navigationCount >= 2;
     }
     
     /**

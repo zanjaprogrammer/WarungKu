@@ -8,12 +8,16 @@ import com.zanjaprogrammer.warungku.adapters.HistoryAdapter;
 import com.zanjaprogrammer.warungku.databinding.ActivityHistoryBinding;
 import com.zanjaprogrammer.warungku.viewmodel.AppViewModel;
 import com.zanjaprogrammer.warungku.utils.CurrencyFormatter;
+import com.zanjaprogrammer.warungku.ads.AdManager;
+import android.widget.FrameLayout;
+import android.util.Log;
 
 public class HistoryActivity extends AppCompatActivity {
 
     private ActivityHistoryBinding binding;
     private AppViewModel viewModel;
     private HistoryAdapter adapter;
+    private AdManager adManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,7 @@ public class HistoryActivity extends AppCompatActivity {
         viewModel = AppViewModel.getInstance(getApplication());
         setupRecyclerView();
         setupOfflineIndicator();
+        initializeAdManager();
 
         viewModel.getAllHistory().observe(this, history -> {
             adapter.setItems(history);
@@ -367,5 +372,30 @@ public class HistoryActivity extends AppCompatActivity {
         int newAmount = currentAmount + amount;
         etPaymentAmount.setText(String.valueOf(newAmount));
         etPaymentAmount.setSelection(etPaymentAmount.getText().length());
+    }
+
+    private void initializeAdManager() {
+        try {
+            adManager = AdManager.getInstance(this);
+            adManager.initialize();
+            
+            // Load banner ad for HistoryActivity
+            FrameLayout bannerContainer = findViewById(R.id.bannerAdContainer);
+            if (adManager.isInitialized() && bannerContainer != null) {
+                adManager.getBannerAdController().loadBannerAd(bannerContainer, "HistoryActivity");
+            }
+        } catch (Exception e) {
+            Log.e("HistoryActivity", "Failed to initialize AdManager", e);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        
+        // Destroy banner ads to free resources
+        if (adManager != null && adManager.isInitialized()) {
+            adManager.getBannerAdController().destroyBannerAd(findViewById(R.id.bannerAdContainer));
+        }
     }
 }

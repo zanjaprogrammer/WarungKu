@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
+import com.zanjaprogrammer.warungku.R;
+
 /**
  * Utility class for smooth ad container animations
  */

@@ -24,17 +24,27 @@ public class AdConfiguration {
     
     public AdConfiguration() {
         this.bannerAdUnitIds = new HashMap<>();
-        // Use test ad unit IDs for all activities during development
+        
+        // BANNER STRATEGY: Show on ALL pages for maximum revenue
+        // Banner ads are less intrusive and can be shown everywhere
+        
         this.bannerAdUnitIds.put("MainActivity", TEST_BANNER_AD_UNIT_ID);
-        this.bannerAdUnitIds.put("SellActivity", TEST_BANNER_AD_UNIT_ID);
         this.bannerAdUnitIds.put("StockActivity", TEST_BANNER_AD_UNIT_ID);
+        this.bannerAdUnitIds.put("SellActivity", TEST_BANNER_AD_UNIT_ID);
         this.bannerAdUnitIds.put("ReportActivity", TEST_BANNER_AD_UNIT_ID);
+        this.bannerAdUnitIds.put("SummaryActivity", TEST_BANNER_AD_UNIT_ID);
+        this.bannerAdUnitIds.put("AddProductActivity", TEST_BANNER_AD_UNIT_ID);
+        this.bannerAdUnitIds.put("HistoryActivity", TEST_BANNER_AD_UNIT_ID);
+        this.bannerAdUnitIds.put("PaymentProofManagementActivity", TEST_BANNER_AD_UNIT_ID);
         
         this.interstitialAdUnitId = TEST_INTERSTITIAL_AD_UNIT_ID;
         this.refreshIntervalSeconds = 60;
-        this.maxInterstitialPerHour = 3;
-        this.interstitialCooldownMinutes = 30;
-        this.idleThresholdHours = 1;
+        
+        // INTERSTITIAL AD TIMING STRATEGY - AGGRESSIVE REVENUE OPTIMIZATION
+        // Maximize revenue while maintaining acceptable user experience
+        this.maxInterstitialPerHour = 6;        // Increased from 2 to 6 (1 every 10 minutes)
+        this.interstitialCooldownMinutes = 10;  // Reduced from 20 to 10 minutes
+        this.idleThresholdHours = 1;            // Reduced from 2 to 1 hour (faster idle detection)
     }
     
     public AdConfiguration(Map<String, String> bannerAdUnitIds, String interstitialAdUnitId,

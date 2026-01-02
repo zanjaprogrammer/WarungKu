@@ -180,6 +180,17 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <!-- Banner Ad Container -->
+    <FrameLayout
+        android:id="@+id/bannerAdContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        android:background="@color/background"
+        android:elevation="4dp" />
+
     <!-- Extended Floating Action Button -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabBulkActions"

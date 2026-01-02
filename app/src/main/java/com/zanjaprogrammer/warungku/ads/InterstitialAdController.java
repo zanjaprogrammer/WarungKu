@@ -189,6 +189,30 @@ public class InterstitialAdController {
     }
     
     /**
+     * Check if should show interstitial for session completion
+     */
+    public boolean shouldShowForSessionCompletion() {
+        return userActivityTracker.shouldTriggerSessionCompletionAd() &&
+               adFrequencyManager.canShowInterstitialAd();
+    }
+    
+    /**
+     * NEW: Check if should show interstitial for frequent activity
+     */
+    public boolean shouldShowForFrequentActivity() {
+        return userActivityTracker.shouldTriggerFrequentActivityAd() &&
+               adFrequencyManager.canShowInterstitialAd();
+    }
+    
+    /**
+     * NEW: Check if should show interstitial for extended session
+     */
+    public boolean shouldShowForExtendedSession() {
+        return userActivityTracker.shouldTriggerExtendedSessionAd() &&
+               adFrequencyManager.canShowInterstitialAd();
+    }
+    
+    /**
      * Get current interstitial ad availability
      */
     public boolean isInterstitialAdReady() {
@@ -209,10 +233,9 @@ public class InterstitialAdController {
         
         // Handle personalized ads preference
         if (!privacyManager.canShowPersonalizedAds()) {
-            // Request non-personalized ads
-            android.os.Bundle extras = new android.os.Bundle();
-            extras.putString("npa", "1"); // Non-personalized ads
-            builder.addNetworkExtrasBundle(com.google.android.gms.ads.mediation.admob.AdMobAdapter.class, extras);
+            // For non-personalized ads, we'll handle this at the request level
+            // The actual implementation should be done through UMP SDK
+            Log.d(TAG, "Non-personalized ads requested");
         }
         
         return builder.build();

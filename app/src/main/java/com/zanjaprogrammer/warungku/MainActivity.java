@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.zanjaprogrammer.warungku.ads.AdManager;
 import com.zanjaprogrammer.warungku.databinding.ActivityMainBinding;
 import com.zanjaprogrammer.warungku.viewmodel.AppViewModel;
 import com.zanjaprogrammer.warungku.utils.CurrencyFormatter;
+import com.zanjaprogrammer.warungku.utils.CustomToast;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -68,8 +70,92 @@ public class MainActivity extends AppCompatActivity {
             if (adManager.isInitialized() && bannerContainer != null) {
                 adManager.getBannerAdController().loadBannerAd(bannerContainer, "MainActivity");
             }
+            
+            // FOR TESTING: Force show ad container with placeholder (uncomment to test)
+            // testShowAdContainer();
+            
+            // FOR TESTING: Test fallback banner (uncomment to test)
+            // testFallbackBanner();
         } catch (Exception e) {
             Log.e("MainActivity", "Failed to initialize AdManager", e);
+        }
+    }
+    
+    /**
+     * Test method to force show ad container with placeholder
+     * Uncomment the call in initializeAdManager() to test
+     */
+    private void testShowAdContainer() {
+        FrameLayout bannerContainer = binding.bannerAdContainer;
+        if (bannerContainer != null) {
+            Log.d("MainActivity", "testShowAdContainer called - container found");
+            
+            // Create a test view to simulate an ad
+            TextView testAd = new TextView(this);
+            testAd.setText("TEST AD - AdMob Integration Working");
+            testAd.setBackgroundColor(0xFF4CAF50); // Green background
+            testAd.setTextColor(0xFFFFFFFF); // White text
+            testAd.setGravity(android.view.Gravity.CENTER);
+            testAd.setPadding(16, 16, 16, 16);
+            testAd.setTextSize(14);
+            
+            // Set layout params for banner size (320x50dp)
+            android.widget.FrameLayout.LayoutParams params = new android.widget.FrameLayout.LayoutParams(
+                android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
+                (int) (50 * getResources().getDisplayMetrics().density) // 50dp in pixels
+            );
+            testAd.setLayoutParams(params);
+            
+            // Add to container and show
+            bannerContainer.removeAllViews();
+            bannerContainer.addView(testAd);
+            bannerContainer.setVisibility(android.view.View.VISIBLE);
+            
+            Log.d("MainActivity", "Test ad container shown - visibility: " + bannerContainer.getVisibility());
+        } else {
+            Log.e("MainActivity", "Banner container is null!");
+        }
+    }
+    
+    /**
+     * Test fallback banner directly
+     */
+    private void testFallbackBanner() {
+        FrameLayout bannerContainer = binding.bannerAdContainer;
+        if (bannerContainer != null) {
+            Log.d("MainActivity", "testFallbackBanner called - container found");
+            
+            // Create a test banner view
+            TextView testBanner = new TextView(this);
+            testBanner.setText("🎯 FALLBACK TEST BANNER - MainActivity 🎯");
+            testBanner.setBackgroundColor(0xFF2196F3); // Blue background
+            testBanner.setTextColor(0xFFFFFFFF); // White text
+            testBanner.setGravity(android.view.Gravity.CENTER);
+            testBanner.setPadding(16, 16, 16, 16);
+            testBanner.setTextSize(12);
+            testBanner.setTypeface(null, android.graphics.Typeface.BOLD);
+            
+            // Set layout params for banner size (320x50dp)
+            android.widget.FrameLayout.LayoutParams params = new android.widget.FrameLayout.LayoutParams(
+                android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
+                (int) (50 * getResources().getDisplayMetrics().density) // 50dp in pixels
+            );
+            testBanner.setLayoutParams(params);
+            
+            // Add click listener for testing
+            testBanner.setOnClickListener(v -> {
+                Log.d("MainActivity", "Fallback test banner clicked!");
+                CustomToast.showSuccess(this, "Fallback Banner Clicked!");
+            });
+            
+            // Add to container and show
+            bannerContainer.removeAllViews();
+            bannerContainer.addView(testBanner);
+            bannerContainer.setVisibility(android.view.View.VISIBLE);
+            
+            Log.d("MainActivity", "Fallback test banner shown - visibility: " + bannerContainer.getVisibility());
+        } else {
+            Log.e("MainActivity", "Banner container is null for fallback test!");
         }
     }
     

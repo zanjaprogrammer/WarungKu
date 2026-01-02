@@ -218,6 +218,16 @@
                 android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Banner Ad Container -->
+        <FrameLayout
+            android:id="@+id/bannerAdContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            android:background="@color/background"
+            android:elevation="4dp" />
+
         <Button
             android:id="@+id/btnSave"
             android:layout_width="match_parent"

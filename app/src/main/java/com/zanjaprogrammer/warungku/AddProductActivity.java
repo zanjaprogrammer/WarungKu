@@ -23,6 +23,9 @@ import com.zanjaprogrammer.warungku.viewmodel.AppViewModel;
 import com.zanjaprogrammer.warungku.api.ProductApiClient;
 import com.zanjaprogrammer.warungku.api.ProductApiService;
 import com.zanjaprogrammer.warungku.api.ProductApiResponse;
+import com.zanjaprogrammer.warungku.ads.AdManager;
+import android.widget.FrameLayout;
+import android.util.Log;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,6 +34,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     private ActivityAddProductBinding binding;
     private AppViewModel viewModel;
+    private AdManager adManager;
     private ActivityResultLauncher<ScanOptions> barcodeLauncher;
     private ActivityResultLauncher<String> galleryLauncher;
     private ActivityResultLauncher<Uri> cameraLauncher;
@@ -66,6 +70,9 @@ public class AddProductActivity extends AppCompatActivity {
 
         setupImageHandling();
         setupBarcodeScanner();
+        
+        // Initialize AdManager
+        initializeAdManager();
         
         binding.btnSave.setOnClickListener(v -> saveProduct());
         binding.toolbar.setNavigationOnClickListener(v -> finish());
@@ -593,5 +600,20 @@ public class AddProductActivity extends AppCompatActivity {
             })
             .setNegativeButton("Batal", null)
             .show();
+    }
+    
+    private void initializeAdManager() {
+        try {
+            adManager = AdManager.getInstance(this);
+            adManager.initialize();
+            
+            // Load banner ad for AddProductActivity
+            FrameLayout bannerContainer = findViewById(R.id.bannerAdContainer);
+            if (adManager.isInitialized() && bannerContainer != null) {
+                adManager.getBannerAdController().loadBannerAd(bannerContainer, "AddProductActivity");
+            }
+        } catch (Exception e) {
+            Log.e("AddProductActivity", "Failed to initialize AdManager", e);
+        }
     }
 }
