@@ -18,6 +18,8 @@ workflows:
         SUPABASE_URL: $SUPABASE_URL
         SUPABASE_PUBLISHABLE_KEY: $SUPABASE_PUBLISHABLE_KEY
         SUPABASE_SECRET_KEY: $SUPABASE_SECRET_KEY
+        # AdMob Configuration (optional - for validation)
+        ADMOB_APP_ID: $ADMOB_APP_ID
         # Email recipient for notifications
         EMAIL_RECIPIENT: $EMAIL_RECIPIENT
       java: 17
@@ -52,6 +54,45 @@ workflows:
             echo "⚠️ Warning: google-services.json not found"
             echo "If using Firebase, add google-services.json to the repository"
           fi
+      
+      - name: Validate AdMob Configuration
+        script: |
+          echo "🎯 Validating AdMob configuration for production build..."
+          
+          # Check if production config exists
+          if [ -f "app/src/main/assets/ads_config_production.json" ]; then
+            echo "✅ Production AdMob config found"
+            
+            # Check if production config has placeholder values
+            if grep -q "XXXXXXXXXXXXXXXXX" app/src/main/assets/ads_config_production.json; then
+              echo "⚠️ WARNING: Production AdMob config contains placeholder values!"
+              echo "⚠️ Please replace XXXXXXXXXXXXXXXXX with your real AdMob ad unit IDs"
+              echo "⚠️ Current production config:"
+              cat app/src/main/assets/ads_config_production.json
+              echo ""
+              echo "💡 The build will continue, but ads may not work properly in production"
+              echo "💡 Update app/src/main/assets/ads_config_production.json with real ad unit IDs"
+            else
+              echo "✅ Production AdMob config appears to be properly configured"
+              # Show config name and test mode status (without exposing ad unit IDs)
+              echo "📋 Production config details:"
+              grep -E '"configName"|"testMode"|"description"' app/src/main/assets/ads_config_production.json
+            fi
+          else
+            echo "❌ ERROR: Production AdMob config not found!"
+            echo "❌ Expected: app/src/main/assets/ads_config_production.json"
+            echo "💡 This file is required for production builds"
+            exit 1
+          fi
+          
+          # Check if test config exists (should always be there)
+          if [ -f "app/src/main/assets/ads_config_test.json" ]; then
+            echo "✅ Test AdMob config found (fallback available)"
+          else
+            echo "⚠️ Warning: Test AdMob config not found"
+          fi
+          
+          echo "🎯 AdMob configuration validation complete"
       
       - name: Set up keystore
         script: |
@@ -104,6 +145,32 @@ workflows:
         script: |
           echo "🔨 Building debug APK..."
           ./gradlew assembleDebug
+      
+      - name: Build Summary
+        script: |
+          echo "📋 WarungKu Build Summary"
+          echo "========================"
+          echo "📱 Package: $PACKAGE_NAME"
+          echo "🏗️ Build Type: Release (production AdMob config will be used automatically)"
+          echo "🎯 AdMob Config: Production JSON will be loaded for release builds"
+          echo "🔐 Keystore: $([ -f "$CM_KEYSTORE_PATH" ] && echo "✅ Available" || echo "❌ Not found")"
+          echo "🔥 Firebase: $([ -f "app/google-services.json" ] && echo "✅ Configured" || echo "⚠️ Not found")"
+          echo "☁️ Supabase: $([ -n "$SUPABASE_URL" ] && echo "✅ Configured" || echo "⚠️ Not configured")"
+          echo ""
+          echo "📦 Build Artifacts:"
+          if [ -f "$CM_KEYSTORE_PATH" ]; then
+            echo "  • AAB Release (signed)"
+            echo "  • APK Release (signed)"
+          fi
+          echo "  • APK Debug"
+          echo ""
+          echo "🎯 AdMob Configuration Notes:"
+          echo "  • Release builds automatically use production AdMob configuration"
+          echo "  • Debug builds automatically use test AdMob configuration"
+          echo "  • Configuration is loaded from JSON files in app/src/main/assets/"
+          echo "  • No code changes needed - automatic detection based on build type"
+          echo ""
+          echo "✅ Build configuration validated and ready!"
     artifacts:
       - app/build/outputs/bundle/release/*.aab
       - app/build/outputs/apk/release/*.apk

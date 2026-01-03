@@ -25,7 +25,7 @@ public class AdManager {
     
     private AdManager(Context context) {
         this.context = context.getApplicationContext();
-        this.adConfiguration = new AdConfiguration();
+        this.adConfiguration = new AdConfiguration(this.context);
         this.userActivityTracker = new UserActivityTracker(this.context);
         this.revenueAnalytics = new RevenueAnalytics(this.context);
         this.systemMonitor = new SystemMonitor(this.context);
@@ -133,5 +133,28 @@ public class AdManager {
         Log.d(TAG, "Activity paused: " + activityName);
         userActivityTracker.onActivityPaused(activityName);
         adFrequencyManager.onActivityPaused(activityName);
+    }
+    
+    /**
+     * Get current ad configuration status for debugging
+     */
+    public String getConfigurationStatus() {
+        return adConfiguration.getConfigurationStatus();
+    }
+    
+    /**
+     * Force a specific ad configuration (for testing/debugging)
+     */
+    public void forceAdConfiguration(AdConfigLoader.ConfigType configType) {
+        Log.d(TAG, "Forcing ad configuration to: " + configType.name());
+        adConfiguration.forceConfiguration(configType);
+    }
+    
+    /**
+     * Clear manual configuration override
+     */
+    public void clearConfigurationOverride() {
+        Log.d(TAG, "Clearing ad configuration override");
+        adConfiguration.clearManualOverride();
     }
 }

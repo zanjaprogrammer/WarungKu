@@ -1,0 +1,23 @@
+{
+  "configName": "Production Configuration",
+  "appId": "ca-app-pub-XXXXXXXXXXXXXXXXX~XXXXXXXXXX",
+  "bannerAdUnits": {
+    "MainActivity": "ca-app-pub-XXXXXXXXXXXXXXXXX/XXXXXXXXXX",
+    "StockActivity": "ca-app-pub-XXXXXXXXXXXXXXXXX/XXXXXXXXXX",
+    "SellActivity": "ca-app-pub-XXXXXXXXXXXXXXXXX/XXXXXXXXXX",
+    "ReportActivity": "ca-app-pub-XXXXXXXXXXXXXXXXX/XXXXXXXXXX",
+    "SummaryActivity": "ca-app-pub-XXXXXXXXXXXXXXXXX/XXXXXXXXXX",
+    "AddProductActivity": "ca-app-pub-XXXXXXXXXXXXXXXXX/XXXXXXXXXX",
+    "HistoryActivity": "ca-app-pub-XXXXXXXXXXXXXXXXX/XXXXXXXXXX",
+    "PaymentProofManagementActivity": "ca-app-pub-XXXXXXXXXXXXXXXXX/XXXXXXXXXX"
+  },
+  "interstitialAdUnit": "ca-app-pub-XXXXXXXXXXXXXXXXX/XXXXXXXXXX",
+  "adSettings": {
+    "maxInterstitialPerHour": 4,
+    "interstitialCooldownMinutes": 15,
+    "refreshIntervalSeconds": 60,
+    "idleThresholdHours": 1
+  },
+  "testMode": false,
+  "description": "Real AdMob ad units for production release - REPLACE WITH YOUR ACTUAL AD UNIT IDs"
+}

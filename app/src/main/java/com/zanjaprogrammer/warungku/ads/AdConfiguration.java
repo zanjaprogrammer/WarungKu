@@ -1,92 +1,137 @@
 package com.zanjaprogrammer.warungku.ads;
 
+import android.content.Context;
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Configuration class for AdMob settings and ad unit IDs
+ * Now loads configuration from JSON files with flexible switching
  */
 public class AdConfiguration {
-    // Test AdMob App ID - replace with real ID in production
-    public static final String APP_ID = "ca-app-pub-3940256099942544~3347511713";
+    private static final String TAG = "AdConfiguration";
     
-    // Test Ad Unit IDs - replace with real IDs in production
-    public static final String TEST_BANNER_AD_UNIT_ID = "ca-app-pub-3940256099942544/6300978111";
-    public static final String TEST_INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712";
+    private final AdConfigLoader.AdConfig config;
+    private final AdConfigLoader configLoader;
     
-    // Banner ad unit IDs for different activities
-    private final Map<String, String> bannerAdUnitIds;
-    private final String interstitialAdUnitId;
-    private final int refreshIntervalSeconds;
-    private final int maxInterstitialPerHour;
-    private final int interstitialCooldownMinutes;
-    private final int idleThresholdHours;
-    
-    public AdConfiguration() {
-        this.bannerAdUnitIds = new HashMap<>();
+    public AdConfiguration(Context context) {
+        this.configLoader = new AdConfigLoader(context);
+        this.config = configLoader.loadConfiguration();
         
-        // BANNER STRATEGY: Show on ALL pages for maximum revenue
-        // Banner ads are less intrusive and can be shown everywhere
-        
-        this.bannerAdUnitIds.put("MainActivity", TEST_BANNER_AD_UNIT_ID);
-        this.bannerAdUnitIds.put("StockActivity", TEST_BANNER_AD_UNIT_ID);
-        this.bannerAdUnitIds.put("SellActivity", TEST_BANNER_AD_UNIT_ID);
-        this.bannerAdUnitIds.put("ReportActivity", TEST_BANNER_AD_UNIT_ID);
-        this.bannerAdUnitIds.put("SummaryActivity", TEST_BANNER_AD_UNIT_ID);
-        this.bannerAdUnitIds.put("AddProductActivity", TEST_BANNER_AD_UNIT_ID);
-        this.bannerAdUnitIds.put("HistoryActivity", TEST_BANNER_AD_UNIT_ID);
-        this.bannerAdUnitIds.put("PaymentProofManagementActivity", TEST_BANNER_AD_UNIT_ID);
-        
-        this.interstitialAdUnitId = TEST_INTERSTITIAL_AD_UNIT_ID;
-        this.refreshIntervalSeconds = 60;
-        
-        // INTERSTITIAL AD TIMING STRATEGY - AGGRESSIVE REVENUE OPTIMIZATION
-        // Maximize revenue while maintaining acceptable user experience
-        this.maxInterstitialPerHour = 6;        // Increased from 2 to 6 (1 every 10 minutes)
-        this.interstitialCooldownMinutes = 10;  // Reduced from 20 to 10 minutes
-        this.idleThresholdHours = 1;            // Reduced from 2 to 1 hour (faster idle detection)
+        Log.d(TAG, "AdConfiguration initialized with: " + config.configName);
+        Log.d(TAG, "Test mode: " + config.testMode);
+        Log.d(TAG, "Manual override: " + configLoader.getCurrentOverride());
     }
     
-    public AdConfiguration(Map<String, String> bannerAdUnitIds, String interstitialAdUnitId,
-                          int refreshIntervalSeconds, int maxInterstitialPerHour,
-                          int interstitialCooldownMinutes, int idleThresholdHours) {
-        this.bannerAdUnitIds = bannerAdUnitIds;
-        this.interstitialAdUnitId = interstitialAdUnitId;
-        this.refreshIntervalSeconds = refreshIntervalSeconds;
-        this.maxInterstitialPerHour = maxInterstitialPerHour;
-        this.interstitialCooldownMinutes = interstitialCooldownMinutes;
-        this.idleThresholdHours = idleThresholdHours;
+    // Legacy constructor for backward compatibility
+    public AdConfiguration() {
+        // Create default configuration for cases where context is not available
+        Map<String, String> defaultBannerUnits = new HashMap<>();
+        defaultBannerUnits.put("MainActivity", "ca-app-pub-3940256099942544/6300978111");
+        defaultBannerUnits.put("StockActivity", "ca-app-pub-3940256099942544/6300978111");
+        defaultBannerUnits.put("SellActivity", "ca-app-pub-3940256099942544/6300978111");
+        defaultBannerUnits.put("ReportActivity", "ca-app-pub-3940256099942544/6300978111");
+        defaultBannerUnits.put("SummaryActivity", "ca-app-pub-3940256099942544/6300978111");
+        defaultBannerUnits.put("AddProductActivity", "ca-app-pub-3940256099942544/6300978111");
+        defaultBannerUnits.put("HistoryActivity", "ca-app-pub-3940256099942544/6300978111");
+        defaultBannerUnits.put("PaymentProofManagementActivity", "ca-app-pub-3940256099942544/6300978111");
+        
+        this.config = new AdConfigLoader.AdConfig(
+            "Legacy Default Configuration",
+            "ca-app-pub-3940256099942544~3347511713",
+            defaultBannerUnits,
+            "ca-app-pub-3940256099942544/1033173712",
+            4, 15, 60, 1, true,
+            "Legacy fallback configuration"
+        );
+        this.configLoader = null;
+        
+        Log.w(TAG, "Using legacy constructor - JSON configuration not available");
     }
     
     public String getAppId() {
-        return APP_ID;
+        return config.appId;
     }
     
     public Map<String, String> getBannerAdUnitIds() {
-        return bannerAdUnitIds;
+        return config.bannerAdUnits;
     }
     
     public String getBannerAdUnitId(String activityName) {
-        return bannerAdUnitIds.get(activityName);
+        return config.bannerAdUnits.get(activityName);
     }
     
     public String getInterstitialAdUnitId() {
-        return interstitialAdUnitId;
+        return config.interstitialAdUnit;
     }
     
     public int getRefreshIntervalSeconds() {
-        return refreshIntervalSeconds;
+        return config.refreshIntervalSeconds;
     }
     
     public int getMaxInterstitialPerHour() {
-        return maxInterstitialPerHour;
+        return config.maxInterstitialPerHour;
     }
     
     public int getInterstitialCooldownMinutes() {
-        return interstitialCooldownMinutes;
+        return config.interstitialCooldownMinutes;
     }
     
     public int getIdleThresholdHours() {
-        return idleThresholdHours;
+        return config.idleThresholdHours;
+    }
+    
+    public boolean isTestMode() {
+        return config.testMode;
+    }
+    
+    public String getConfigName() {
+        return config.configName;
+    }
+    
+    public String getDescription() {
+        return config.description;
+    }
+    
+    /**
+     * Force a specific configuration (for testing/debugging)
+     */
+    public void forceConfiguration(AdConfigLoader.ConfigType configType) {
+        if (configLoader != null) {
+            configLoader.forceConfiguration(configType);
+            Log.d(TAG, "Configuration forced to: " + configType.name());
+        } else {
+            Log.w(TAG, "Cannot force configuration - configLoader not available");
+        }
+    }
+    
+    /**
+     * Clear manual override and use automatic detection
+     */
+    public void clearManualOverride() {
+        if (configLoader != null) {
+            configLoader.clearManualOverride();
+            Log.d(TAG, "Manual override cleared");
+        } else {
+            Log.w(TAG, "Cannot clear override - configLoader not available");
+        }
+    }
+    
+    /**
+     * Get configuration status for debugging
+     */
+    public String getConfigurationStatus() {
+        if (configLoader != null) {
+            return String.format("Config: %s | Override: %s | Test Mode: %s", 
+                config.configName, 
+                configLoader.getCurrentOverride(), 
+                config.testMode);
+        } else {
+            return String.format("Config: %s | Test Mode: %s (Legacy)", 
+                config.configName, 
+                config.testMode);
+        }
     }
 }

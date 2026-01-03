@@ -1,0 +1,23 @@
+{
+  "configName": "Test Configuration",
+  "appId": "ca-app-pub-3940256099942544~3347511713",
+  "bannerAdUnits": {
+    "MainActivity": "ca-app-pub-3940256099942544/6300978111",
+    "StockActivity": "ca-app-pub-3940256099942544/6300978111",
+    "SellActivity": "ca-app-pub-3940256099942544/6300978111",
+    "ReportActivity": "ca-app-pub-3940256099942544/6300978111",
+    "SummaryActivity": "ca-app-pub-3940256099942544/6300978111",
+    "AddProductActivity": "ca-app-pub-3940256099942544/6300978111",
+    "HistoryActivity": "ca-app-pub-3940256099942544/6300978111",
+    "PaymentProofManagementActivity": "ca-app-pub-3940256099942544/6300978111"
+  },
+  "interstitialAdUnit": "ca-app-pub-3940256099942544/1033173712",
+  "adSettings": {
+    "maxInterstitialPerHour": 4,
+    "interstitialCooldownMinutes": 15,
+    "refreshIntervalSeconds": 60,
+    "idleThresholdHours": 1
+  },
+  "testMode": true,
+  "description": "Google AdMob test ad units for development and testing"
+}

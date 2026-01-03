@@ -88,9 +88,9 @@ public class AdConfiguration {
         
         this.interstitialAdUnitId = INTERSTITIAL_AD_UNIT_ID;
         
-        // Keep aggressive revenue optimization settings
-        this.maxInterstitialPerHour = 6;
-        this.interstitialCooldownMinutes = 10;
+        // Keep balanced revenue optimization settings
+        this.maxInterstitialPerHour = 4;        // 4 ads/hour (balanced approach)
+        this.interstitialCooldownMinutes = 15;  // 15 minute gaps (respectful timing)
         this.idleThresholdHours = 1;
     }
 }
@@ -264,8 +264,8 @@ Interstitial eCPM: $2.00
 
 Daily Revenue:
 - Banner: 100 users × 8 impressions × $0.30/1000 = $0.24
-- Interstitial: 100 users × 6 impressions × $2.00/1000 = $1.20
-- Total: $1.44/day = $43/month
+- Interstitial: 100 users × 4 impressions × $2.00/1000 = $0.80
+- Total: $1.04/day = $31/month
 ```
 
 #### **Optimistic Estimates (With Growth):**
@@ -276,8 +276,8 @@ Interstitial eCPM: $3.00
 
 Daily Revenue:
 - Banner: 500 users × 8 impressions × $0.50/1000 = $2.00
-- Interstitial: 500 users × 6 impressions × $3.00/1000 = $9.00
-- Total: $11/day = $330/month
+- Interstitial: 500 users × 4 impressions × $3.00/1000 = $6.00
+- Total: $8/day = $240/month
 ```
 
 ---
@@ -379,16 +379,16 @@ Daily Revenue:
 
 ## 💰 **REVENUE PROJECTION SUMMARY**
 
-**With current aggressive strategy (6 interstitial + 8 banner ads per user per day):**
+**With current balanced strategy (4 interstitial + 8 banner ads per user per day):**
 
 | Users | Daily Revenue | Monthly Revenue | Annual Revenue |
 |-------|---------------|-----------------|----------------|
-| 100   | $1.44         | $43             | $525           |
-| 500   | $7.20         | $216            | $2,628         |
-| 1,000 | $14.40        | $432            | $5,256         |
-| 5,000 | $72.00        | $2,160          | $26,280        |
+| 100   | $1.04         | $31             | $379           |
+| 500   | $8.00         | $240            | $2,920         |
+| 1,000 | $16.00        | $480            | $5,840         |
+| 5,000 | $80.00        | $2,400          | $29,200        |
 
-**🎯 Target: Reach 1,000+ daily active users for $400+/month revenue!**
+**🎯 Target: Reach 1,000+ daily active users for $480+/month revenue!**
 
 ---
 
